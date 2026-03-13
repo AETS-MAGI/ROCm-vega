@@ -75,6 +75,8 @@
 - MIOpen 側 `ConvMlirIgemmFwd::IsApplicable()` に `gfx900` 明示拒否（issue #389 コメント付き）があり、
   最小再現ケースは未サポート solver を `-S 98` で強制実行している状態であることを確認。
 - 最小再現ケース（`vega64_int8_force_mlir_fwd`）は RockEnabled の layout/dtype 条件には合致しており、失敗要因は別分岐の可能性が高い。
+- 参照ソースと `/opt/rocm` 実ランタイムの差分可能性を考慮し、`miirCreateHandle` の最終分岐確定は
+  ランタイム実体での追加トレース（引数/分岐ログ）取得を完了条件とする。
 
 成果物:
 - `gfx900_related_nodes.md` への `rocMLIR` 節追加

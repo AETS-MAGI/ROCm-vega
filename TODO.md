@@ -342,10 +342,11 @@
 - [x] `convGenerator.isApplicable()` の実装位置を特定し、gfx900 の arch gate 条件を列挙する
 - [x] `RockEnabled` の layout/dtype gate と動的失敗ケース（`vega64_int8_force_mlir_fwd`）の対応を 1:1 で照合する
 - [x] `ConvMlirIgemmFwd::IsApplicable()` の `gfx900` 明示拒否（issue #389 コメント付き）を確認する
-- [ ] `miirCreateHandle` 内の `nullptr` 分岐を最終確定する（現状有力: `parseConvConfig` または `genConvModule`）
+- [ ] `miirCreateHandle` 内の `nullptr` 分岐を最終確定する（現状有力: `parseConvConfig`。ただし `/opt/rocm` 実ランタイム差分を要確認）
 
 補足:
 - `rocMLIR` は作業ツリー展開済み（`mlir/tools/rocmlir-lib/{Miir.h, rocmlir-lib.cpp}` を確認）。
 - `MIIR_INVALID_PARAM` 最小再現ケースは `vega64_int8_force_mlir_fwd`（`vega_path_check_logs/vega64_int8_force_mlir_fwd.log`）で固定。
 - `Code object build failed` は `hipoc_program.cpp` の `BuildCodeObjectInMemory` にて、拡張子分岐後 `binary.empty()` 判定で throw される。
 - `ConvMlirIgemmFwd` は通常経路では `gfx900` を `IsApplicable()` で reject するため、`-S 98` 強制実行は未サポート経路の検証になっている。
+- 参照ソース（`ROCm_AMD_Repo`）と実行実体（`/opt/rocm`）の差分可能性があるため、`nullptr` 分岐の最終確定はランタイム側の追加トレースで閉じる。
