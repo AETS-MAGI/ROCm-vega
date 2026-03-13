@@ -1,0 +1,8 @@
+timestamp=2026-03-13T11:27:53+09:00
+hostname=abyss-hbmx
+pwd=/home/limonene/ROCm-project/tank/lab_notebook/notes/vega_investigations
+case_id=vega64_int8_nchw_3x3_search1
+command=MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -s 1 -F 1 -t 1
+MIOPEN_ENABLE_LOGGING=1
+MIOPEN_ENABLE_LOGGING_CMD=1
+MIOPEN_LOG_LEVEL=6

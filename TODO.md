@@ -167,8 +167,8 @@
 - [x] dot4 非対応時に代替経路へ落ちるか確認する
 
 ### 成果物
-- [ ] `trace_map_dynamic.md`
-- [ ] `solver_observation_log.md`
+- [x] `trace_map_dynamic.md`
+- [x] `solver_observation_log.md`
 - [ ] `hsaco_disassembly_notes.md`
 - [ ] `gfx900_vs_other_gpu_diff.md`
 

@@ -1,12 +1,12 @@
 # TRACE MAP TEMPLATE
 
-- case_id: vega64_int8_3x3_s1_n32_c64_k64
+- case_id: vega64_int8_nhwc_3x3_search1
 - status: fallback_confirmed / fallback_not_confirmed / need_more_cases
 
 ## 1. Observed Lines
 
-- log: /home/limonene/vega_path_check_logs/vega64_int8_3x3_s1_n32_c64_k64.log
-- extract: /home/limonene/vega_path_check_logs/vega64_int8_3x3_s1_n32_c64_k64.trace_extract.log
+- log: /home/limonene/vega_path_check_logs/vega64_int8_nhwc_3x3_search1.log
+- extract: /home/limonene/vega_path_check_logs/vega64_int8_nhwc_3x3_search1.trace_extract.log
 
 ## 2. Log-to-Source Mapping
 

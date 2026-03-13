@@ -70,6 +70,9 @@ bash run_vega_path_case.sh vega64_fp32_nchw_1x1_fwd_n32 -- \
 - `vega64_int8_3x3_s2_n32_c64_k128`: `ConvDirectNaiveConvFwd`
 - `vega64_int8_1x1_group2_n32_c64_k64`: `ConvDirectNaiveConvFwd`
 - `vega64_int8_1x1_n16_c128_k128`: `ConvDirectNaiveConvFwd`
+- `vega64_int8_nchw_3x3_search1`: `ConvDirectNaiveConvFwd`
+- `vega64_int8_nhwc_1x1_s1`: `ConvDirectNaiveConvFwd`
+- `vega64_int8_nhwc_3x3_search1`: `ConvDirectNaiveConvFwd`
 - 追加した範囲では naive 以外の INT8 solver は観測できなかった
 
 ## 根拠リンク（ログ）
@@ -104,6 +107,15 @@ bash run_vega_path_case.sh vega64_fp32_nchw_1x1_fwd_n32 -- \
 - /home/limonene/vega_path_check_logs/vega64_int8_1x1_n16_c128_k128.log
 - /home/limonene/vega_path_check_logs/vega64_int8_1x1_n16_c128_k128.solver_extract.log
 - /home/limonene/vega_path_check_logs/vega64_int8_1x1_n16_c128_k128.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_int8_nchw_3x3_search1.log
+- /home/limonene/vega_path_check_logs/vega64_int8_nchw_3x3_search1.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_int8_nchw_3x3_search1.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_int8_nhwc_1x1_s1.log
+- /home/limonene/vega_path_check_logs/vega64_int8_nhwc_1x1_s1.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_int8_nhwc_1x1_s1.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_int8_nhwc_3x3_search1.log
+- /home/limonene/vega_path_check_logs/vega64_int8_nhwc_3x3_search1.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_int8_nhwc_3x3_search1.trace_map.md
 
 ## 判定
 

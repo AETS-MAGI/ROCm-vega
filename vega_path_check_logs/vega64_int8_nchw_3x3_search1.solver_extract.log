@@ -1,0 +1,2 @@
+180:MIOpen(HIP): Info [FindSolutionImpl] ConvDirectNaiveConvFwd (not searchable)
+201:MIOpen(HIP): Info2 [SetAsFound1_0] Solver ConvDirectNaiveConvFwd registered as find 1.0 best for miopenConvolutionFwdAlgoDirect in 64x56x56x3x3x64x56x56x32xNCHWxINT8x1x1x1x1x1x1x1xFxDefault
