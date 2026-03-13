@@ -138,6 +138,25 @@ bash run_vega_path_case.sh vega64_fp32_nchw_1x1_fwd_n32 -- \
   - elapsed: `5.411226 ms`
 - 解釈: 同一problemでも FP16/BFP16 で solver family が分岐した（Direct vs GEMM）。
 
+15. FP16/BFP16 強制HipImplicitGemm Xdlops（同形状 3x3）
+- `vega64_fp16_force_hipigemm_fwdxdlops_nchw_3x3`
+  - command: `convfp16 ... -S ConvHipImplicitGemmFwdXdlops`
+  - 観測: `CompileSolution` / `GetInvoker` / `FindSolutionImpl` までは進行
+  - 結果: `std::vector<...>::operator[]` assertion で abort (`__EXIT_CODE=134`)
+- `vega64_fp16_force_hipigemm_v4r5xdlops_nchw_3x3`
+  - command: `convfp16 ... -S ConvHipImplicitGemmForwardV4R5Xdlops`
+  - 観測: `CompileSolution` / `GetInvoker` / `FindSolutionImpl` までは進行
+  - 結果: `Code object build failed` -> `RunForwardGPU() FAILED, rc = 0x7` (`__EXIT_CODE=7`)
+- `vega64_bfp16_force_hipigemm_fwdxdlops_nchw_3x3`
+  - command: `convbfp16 ... -S ConvHipImplicitGemmFwdXdlops`
+  - 観測: `CompileSolution` / `GetInvoker` / `FindSolutionImpl` までは進行
+  - 結果: `std::vector<...>::operator[]` assertion で abort (`__EXIT_CODE=134`)
+- `vega64_bfp16_force_hipigemm_v4r5xdlops_nchw_3x3`
+  - command: `convbfp16 ... -S ConvHipImplicitGemmForwardV4R5Xdlops`
+  - 観測: `CompileSolution` / `GetInvoker` / `FindSolutionImpl` までは進行
+  - 結果: `Code object build failed` -> `RunForwardGPU() FAILED, rc = 0x7` (`__EXIT_CODE=7`)
+- 解釈: INT8 で観測した失敗様式（FwdXdlops=assertion abort, V4R5Xdlops=compile failure）が FP16/BFP16 でも再現し、問題はdtype依存よりsolver実装系に寄っている可能性が高い。
+
 ## 根拠リンク（ログ）
 
 - /home/limonene/vega_path_check_logs/vega64_fp32_nchw_3x3_fwd_n32.log
@@ -218,6 +237,18 @@ bash run_vega_path_case.sh vega64_fp32_nchw_1x1_fwd_n32 -- \
 - /home/limonene/vega_path_check_logs/vega64_bfp16_nchw_3x3_probe.log
 - /home/limonene/vega_path_check_logs/vega64_bfp16_nchw_3x3_probe.solver_extract.log
 - /home/limonene/vega_path_check_logs/vega64_bfp16_nchw_3x3_probe.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_fp16_force_hipigemm_fwdxdlops_nchw_3x3.log
+- /home/limonene/vega_path_check_logs/vega64_fp16_force_hipigemm_fwdxdlops_nchw_3x3.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_fp16_force_hipigemm_fwdxdlops_nchw_3x3.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_fp16_force_hipigemm_v4r5xdlops_nchw_3x3.log
+- /home/limonene/vega_path_check_logs/vega64_fp16_force_hipigemm_v4r5xdlops_nchw_3x3.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_fp16_force_hipigemm_v4r5xdlops_nchw_3x3.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_bfp16_force_hipigemm_fwdxdlops_nchw_3x3.log
+- /home/limonene/vega_path_check_logs/vega64_bfp16_force_hipigemm_fwdxdlops_nchw_3x3.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_bfp16_force_hipigemm_fwdxdlops_nchw_3x3.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_bfp16_force_hipigemm_v4r5xdlops_nchw_3x3.log
+- /home/limonene/vega_path_check_logs/vega64_bfp16_force_hipigemm_v4r5xdlops_nchw_3x3.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_bfp16_force_hipigemm_v4r5xdlops_nchw_3x3.trace_map.md
 
 ## 判定
 
@@ -267,3 +298,5 @@ rg -n "v_dot4_i32_i8|v_dot4c_i32_i8|sdot4|sudot4" /tmp/miopen_extract/naive_conv
 - `-S ConvHipImplicitGemmForwardV4R5Xdlops` の強制実行では xdlops kernel compile failure で `Code object build failed` -> `RunForwardGPU() FAILED (rc=0x7)`。
 - `-S ConvHipImplicitGemmGroupFwdXdlops` (`g=2`) の強制実行では `not applicable` で `RunForwardGPU() FAILED (rc=0x3)`。
 - 同形状 3x3 で dtype を FP16/BFP16 に変えると、FP16 は `ConvOclDirectFwd`、BFP16 は `GemmFwdRest` が選択された。
+- 同形状 3x3 で `-S ConvHipImplicitGemmFwdXdlops` を強制すると、FP16/BFP16ともに assertion abort (`__EXIT_CODE=134`)。
+- 同形状 3x3 で `-S ConvHipImplicitGemmForwardV4R5Xdlops` を強制すると、FP16/BFP16ともに `Code object build failed` -> `rc=0x7`。

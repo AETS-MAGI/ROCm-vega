@@ -148,3 +148,31 @@
   - elapsed: `5.411226 ms`
 
 - 解釈: 同一problemでも dtype により solver family が切り替わることを実測で確認。
+
+## 13. FP16/BFP16 強制HipImplicitGemm Xdlops (追加)
+
+- case: `vega64_fp16_force_hipigemm_fwdxdlops_nchw_3x3`
+- command: `convfp16 ... -S ConvHipImplicitGemmFwdXdlops`
+- log観測:
+  - `solver_id = ConvHipImplicitGemmFwdXdlops`
+  - `CompileSolution` -> `GetInvoker` -> `FindSolutionImpl`
+  - `std::vector<std::basic_string<char>>::operator[] ... Assertion '__n < this->size()' failed`
+  - `__EXIT_CODE=134`
+
+- case: `vega64_fp16_force_hipigemm_v4r5xdlops_nchw_3x3`
+- command: `convfp16 ... -S ConvHipImplicitGemmForwardV4R5Xdlops`
+- log観測:
+  - `solver_id = ConvHipImplicitGemmForwardV4R5Xdlops`
+  - `CompileSolution` -> `GetInvoker` -> `FindSolutionImpl`
+  - `Code object build failed` -> `RunForwardGPU() FAILED, rc = 0x7`
+  - `__EXIT_CODE=7`
+
+- case: `vega64_bfp16_force_hipigemm_fwdxdlops_nchw_3x3`
+- command: `convbfp16 ... -S ConvHipImplicitGemmFwdXdlops`
+- 結果: FP16同様に assertion abort (`__EXIT_CODE=134`)
+
+- case: `vega64_bfp16_force_hipigemm_v4r5xdlops_nchw_3x3`
+- command: `convbfp16 ... -S ConvHipImplicitGemmForwardV4R5Xdlops`
+- 結果: FP16同様に `Code object build failed` -> `rc=0x7` (`__EXIT_CODE=7`)
+
+- 解釈: FwdXdlops/V4R5Xdlops の失敗様式は FP16/BFP16 でもINT8と同型で、dtypeよりsolver実装系側の制約が支配的な可能性が高い。

@@ -1,0 +1,15 @@
+1:MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -s 1 -F 1 -t 1 -S ConvHipImplicitGemmForwardV4R5Xdlops
+178:MIOpen(HIP): Info [GetForwardSolutionWorkspaceSize] solver_id = ConvHipImplicitGemmForwardV4R5Xdlops
+187:MIOpen(HIP): Info [CompileSolution] solver_id = ConvHipImplicitGemmForwardV4R5Xdlops
+188:MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault and solver ConvHipImplicitGemmForwardV4R5Xdlops
+189:MIOpen(HIP): Info [FindSolutionImpl] ConvHipImplicitGemmForwardV4R5Xdlops
+208:MIOpen(HIP): Info [FindSolutionImpl] Perf Db: record not found for: ConvHipImplicitGemmForwardV4R5Xdlops
+229:   64 |         return intrin_mfma_f32_32x32x1f32<MPerXdlops, NPerXdlops, AStride, BStride>::run(
+232:  198 |         return intrin_mfma_f32_4x4x1f32<MPerXdlops, NPerXdlops>::run(p_a, p_b, reg_c);
+235:  231 |         return intrin_mfma_f32_32x32x4f16<MPerXdlops, NPerXdlops, AStride, BStride>::run(
+238:  364 |         return intrin_mfma_f32_4x4x4f16<MPerXdlops, NPerXdlops>::run(p_a, p_b, reg_c);
+241:  397 |         return intrin_mfma_f32_32x32x2bf16<MPerXdlops, NPerXdlops, AStride, BStride>::run(
+244:  530 |         return intrin_mfma_f32_4x4x2bf16<MPerXdlops, NPerXdlops>::run(p_a, p_b, reg_c);
+251:   36 |         gcnasm_mfma_f32_32x32x1f32<MPerXdlops, NPerXdlops, AStride, BStride>{}.run(p_a, p_b);
+260:  172 |         gcnasm_mfma_f32_32x32x4f16<MPerXdlops, NPerXdlops, AStride, BStride>{}.run(p_a, p_b);
+269:  307 |         gcnasm_mfma_f32_32x32x2bf16<MPerXdlops, NPerXdlops, AStride, BStride>{}.run(p_a, p_b);

@@ -54,6 +54,8 @@ Vega64(gfx900) 実機で、実行時にどの solver / kernel に落ちるかを
   - elapsed: `5.411226 ms`
 - 含意:
   - 同一problemでも dtype で solver family が分岐する。
+  - ただし `-S ConvHipImplicitGemmFwdXdlops` 強制時は FP16/BFP16 とも assertion abort (`EXIT=134`)。
+  - `-S ConvHipImplicitGemmForwardV4R5Xdlops` 強制時は FP16/BFP16 とも `Code object build failed` -> `rc=0x7`。
 
 ## 3. 補助観測
 
@@ -66,6 +68,8 @@ Vega64(gfx900) 実機で、実行時にどの solver / kernel に落ちるかを
 - 強制指定時は `ConvHipImplicitGemmFwdXdlops` を試行すると、適用判定の先で assertion abort に到達する。
 - 強制指定時は `ConvHipImplicitGemmForwardV4R5Xdlops` を試行すると、kernel compile失敗で `rc=0x7` に到達する。
 - 強制指定時は `ConvHipImplicitGemmGroupFwdXdlops` を試行すると、当該条件では `not applicable` で失敗する。
+- 強制指定時は `ConvHipImplicitGemmFwdXdlops` を FP16/BFP16 で試行しても assertion abort に到達する。
+- 強制指定時は `ConvHipImplicitGemmForwardV4R5Xdlops` を FP16/BFP16 で試行しても compile failure (`rc=0x7`) に到達する。
 
 ## 4. 判定
 

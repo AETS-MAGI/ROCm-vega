@@ -1,0 +1,211 @@
+MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -s 1 -F 1 -t 1 -S ConvHipImplicitGemmFwdXdlops
+MIOpen(HIP): Info [get_device_name] Raw device name: gfx900:xnack-
+MIOpen(HIP): Info [Handle] stream: 0x55d4d735b3b0, device_id: 0
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateConvolutionDescriptor(miopenConvolutionDescriptor_t *){
+MIOpen(HIP): 	convDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): Info [] MIOPEN_FIND_MODE = DYNAMIC_HYBRID(5)
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 5
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 16 64 56 56 }
+MIOpen(HIP): 	stride.values = { 200704 3136 56 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 5
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 64 64 3 3 }
+MIOpen(HIP): 	stride.values = { 576 9 3 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenInitConvolutionNdDescriptor(miopenConvolutionDescriptor_t, int, const int *, const int *, const int *, miopenConvolutionMode_t){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	spatialDim = 2
+MIOpen(HIP): 	pads = { 1 1 }
+MIOpen(HIP): 	strides = { 1 1 }
+MIOpen(HIP): 	dilations = { 1 1 }
+MIOpen(HIP): 	c_mode = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetConvolutionGroupCount(miopenConvolutionDescriptor_t, int){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	groupCount = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetConvolutionNdForwardOutputDim(miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, int *, int *){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	inputTensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	filterDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 5
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 16 64 56 56 }
+MIOpen(HIP): 	stride.values = { 200704 3136 56 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	n = 1601467759
+MIOpen(HIP): 	c = 1953718627
+MIOpen(HIP): 	h = 1887007839
+MIOpen(HIP): 	w = 101
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	vectorLength = 140727156342472
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	n = -506944680
+MIOpen(HIP): 	c = 32601
+MIOpen(HIP): 	h = 56
+MIOpen(HIP): 	w = 56
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	vectorLength = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	n = -506944680
+MIOpen(HIP): 	c = 32601
+MIOpen(HIP): 	h = 3
+MIOpen(HIP): 	w = 3
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	vectorLength = 1
+MIOpen(HIP): }
+PRNG seed: 12345678
+MIOpen(HIP): MIOpenDriver Info2 [GPUMem] hipMalloc 6422528 at 0x7f58b1200000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [GPUMem] hipMalloc 73728 at 0x7f58afc00000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [GPUMem] hipMalloc 6422528 at 0x7f58af200000 Ok
+Timestamp: 2026-03-13 03:06:21 UTC; Host Name: abyss-hbmx; Operating System: Linux 6.18.16-1-lts; ROCm: 7.2.26043; MIOpen Driver: 3.5.1; CPU Vendor: AMD; CPU Model: 1 x Ryzen Threadripper; RAM Size: 62 GB; GPU Model: 1 x AMD Radeon RX Vega; AMDGPU Driver: 0.0.0
+MIOpen(HIP): miopenStatus_t miopenConvolutionForwardGetSolutionCount(miopenHandle_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, const miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, size_t *){
+MIOpen(HIP): 	handle = stream: 0x55d4d735b3b0, device_id: 0
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): Info [AmdRocmMetadataVersionDetect] ROCm MD version AMDHSA_COv3, HIP version 7.2.26043, MIOpen version 3.5.1.5b515cf1bca-dirty
+MIOpen(HIP): Info [GetSolutionCount] 
+MIOpen(HIP): Info [IsNetworkedFilesystem] Filesystem type at '"/home/limonene/.config/miopen/"' is: 0x9123683e '<Unknown magic>'
+MIOpen(HIP): Info2 [GetLibPath] Lib Path: "/opt/rocm/lib/libMIOpen.so.1.0"
+MIOpen(HIP): Info2 [GetInstalledPathFile] Found exact find database file: "/opt/rocm/share/miopen/db/gfx900_64.HIP.fdb.txt"
+MIOpen(HIP): Info [Measure] ReadonlyRamDb::Prefetch time: 36.3548 ms
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info [Measure] RamDb::Prefetch time: 0.015289 ms
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.552543
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.552543
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.552543
+MIOpen(HIP): Info2 [ValidateUnsafe] DB file is older than cache: 561340469424929, 561978447058524
+MIOpen(HIP): Info2 [FindRecordUnsafe] Looking for key 64-56-56-3x3-64-56-56-16-1x1-1x1-1x1-0-NCHW-BF16-F in cache for file "/home/limonene/.config/miopen/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt"
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.552543
+MIOpen(HIP): Info2 [Measure] Db::FindRecord time: 0.323489 ms
+MIOpen(HIP): miopenStatus_t miopenConvolutionForwardGetSolution(miopenHandle_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, const miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, const size_t, size_t *, miopenConvSolution_t *){
+MIOpen(HIP): 	handle = stream: 0x55d4d735b3b0, device_id: 0
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	maxSolutionCount = 2
+MIOpen(HIP): }
+MIOpen(HIP): Info [GetSolutions] 
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [ValidateUnsafe] DB file is older than cache: 561340469424929, 561978447058524
+MIOpen(HIP): Info2 [FindRecordUnsafe] Looking for key 64-56-56-3x3-64-56-56-16-1x1-1x1-1x1-0-NCHW-BF16-F in cache for file "/home/limonene/.config/miopen/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt"
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.552543
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.552543
+MIOpen(HIP): Info2 [Measure] Db::FindRecord time: 0.149807 ms
+MIOpen(HIP): Info2 [GetSolutions] GemmFwdRest
+MIOpen(HIP): Info2 [GetSolutions] ConvDirectNaiveConvFwd
+Forward Conv solutions available: 2
+- id: 91 algo: 0, time: 5.35646 ms, ws: 3612672, name: GemmFwdRest
+- id: 85 algo: 1, time: 20.6628 ms, ws: 0, name: ConvDirectNaiveConvFwd
+Warning: Solution id (128) is not reported by the library. Trying it anyway...
+MIOpen(HIP): miopenStatus_t miopenConvolutionForwardGetSolutionWorkspaceSize(miopenHandle_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, const miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, const uint64_t, size_t *){
+MIOpen(HIP): 	handle = stream: 0x55d4d735b3b0, device_id: 0
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	solution_id = 128
+MIOpen(HIP): }
+MIOpen(HIP): Info [GetForwardSolutionWorkspaceSize] solver_id = ConvHipImplicitGemmFwdXdlops
+MIOpen(HIP): miopenStatus_t miopenConvolutionForwardCompileSolution(miopenHandle_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, const miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, const uint64_t){
+MIOpen(HIP): 	handle = stream: 0x55d4d735b3b0, device_id: 0
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	solution_id = 128
+MIOpen(HIP): }
+MIOpen(HIP): Info [CompileSolution] solver_id = ConvHipImplicitGemmFwdXdlops
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault and solver ConvHipImplicitGemmFwdXdlops
+MIOpen(HIP): Info [FindSolutionImpl] ConvHipImplicitGemmFwdXdlops
+MIOpen(HIP): Info2 [GetPerfDbPathFile] inexact perf database search
+MIOpen(HIP): Info2 [GetPerfDbPathFile] Iterating over perf db directory "/opt/rocm/share/miopen/db"
+MIOpen(HIP): Info [Measure] ReadonlyRamDb::Prefetch time: 3e-05 ms
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock
+MIOpen(HIP): Info [Prefetch] File is unreadable: "/home/limonene/.config/miopen/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt"
+MIOpen(HIP): Info [Measure] RamDb::Prefetch time: 0.005631 ms
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock.abyss-hbmx.552543
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock.abyss-hbmx.552543
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock
+MIOpen(HIP): Info2 [FindRecordUnsafe] Looking for key 2x64x56x56x1x3x3x1x64x16x1x1x0x1x1x0x1x1x0x0x1xNCHWxBF16xF in cache for file "/home/limonene/.config/miopen/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt"
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock.abyss-hbmx.552543
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock.abyss-hbmx.552543
+MIOpen(HIP): Info2 [FindRecord] Looking for key 2x64x56x56x1x3x3x1x64x16x1x1x0x1x1x0x1x1x0x0x1xNCHWxBF16xF in file ""
+MIOpen(HIP): Info2 [Measure] Db::Load time: 0.133225 ms
+MIOpen(HIP): Info [FindSolutionImpl] Perf Db: record not found for: ConvHipImplicitGemmFwdXdlops
+/usr/lib64/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../include/c++/15.2.1/bits/stl_vector.h:1263: reference std::vector<std::basic_string<char>>::operator[](size_type): Assertion '__n < this->size()' failed.
+bash: 1 行: 552543 中止                     (コアダンプ) MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -s 1 -F 1 -t 1 -S ConvHipImplicitGemmFwdXdlops
+__EXIT_CODE=134

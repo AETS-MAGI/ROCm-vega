@@ -1,0 +1,317 @@
+MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -s 1 -F 1 -t 1 -S ConvHipImplicitGemmForwardV4R5Xdlops
+MIOpen(HIP): Info [get_device_name] Raw device name: gfx900:xnack-
+MIOpen(HIP): Info [Handle] stream: 0x55e1af35f3b0, device_id: 0
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateConvolutionDescriptor(miopenConvolutionDescriptor_t *){
+MIOpen(HIP): 	convDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): Info [] MIOPEN_FIND_MODE = DYNAMIC_HYBRID(5)
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 5
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 16 64 56 56 }
+MIOpen(HIP): 	stride.values = { 200704 3136 56 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 5
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 64 64 3 3 }
+MIOpen(HIP): 	stride.values = { 576 9 3 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenInitConvolutionNdDescriptor(miopenConvolutionDescriptor_t, int, const int *, const int *, const int *, miopenConvolutionMode_t){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	spatialDim = 2
+MIOpen(HIP): 	pads = { 1 1 }
+MIOpen(HIP): 	strides = { 1 1 }
+MIOpen(HIP): 	dilations = { 1 1 }
+MIOpen(HIP): 	c_mode = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetConvolutionGroupCount(miopenConvolutionDescriptor_t, int){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	groupCount = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetConvolutionNdForwardOutputDim(miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, int *, int *){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	inputTensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	filterDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 5
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 16 64 56 56 }
+MIOpen(HIP): 	stride.values = { 200704 3136 56 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	n = 1601467759
+MIOpen(HIP): 	c = 1953718627
+MIOpen(HIP): 	h = 1887007839
+MIOpen(HIP): 	w = 101
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	vectorLength = 140726960218184
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	n = -630676648
+MIOpen(HIP): 	c = 32624
+MIOpen(HIP): 	h = 56
+MIOpen(HIP): 	w = 56
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	vectorLength = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	n = -630676648
+MIOpen(HIP): 	c = 32624
+MIOpen(HIP): 	h = 3
+MIOpen(HIP): 	w = 3
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	vectorLength = 1
+MIOpen(HIP): }
+PRNG seed: 12345678
+MIOpen(HIP): MIOpenDriver Info2 [GPUMem] hipMalloc 6422528 at 0x7f6fa9800000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [GPUMem] hipMalloc 73728 at 0x7f70b8200000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [GPUMem] hipMalloc 6422528 at 0x7f6fa7c00000 Ok
+Timestamp: 2026-03-13 03:06:22 UTC; Host Name: abyss-hbmx; Operating System: Linux 6.18.16-1-lts; ROCm: 7.2.26043; MIOpen Driver: 3.5.1; CPU Vendor: AMD; CPU Model: 1 x Ryzen Threadripper; RAM Size: 62 GB; GPU Model: 1 x AMD Radeon RX Vega; AMDGPU Driver: 0.0.0
+MIOpen(HIP): miopenStatus_t miopenConvolutionForwardGetSolutionCount(miopenHandle_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, const miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, size_t *){
+MIOpen(HIP): 	handle = stream: 0x55e1af35f3b0, device_id: 0
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): Info [AmdRocmMetadataVersionDetect] ROCm MD version AMDHSA_COv3, HIP version 7.2.26043, MIOpen version 3.5.1.5b515cf1bca-dirty
+MIOpen(HIP): Info [GetSolutionCount] 
+MIOpen(HIP): Info [IsNetworkedFilesystem] Filesystem type at '"/home/limonene/.config/miopen/"' is: 0x9123683e '<Unknown magic>'
+MIOpen(HIP): Info2 [GetLibPath] Lib Path: "/opt/rocm/lib/libMIOpen.so.1.0"
+MIOpen(HIP): Info2 [GetInstalledPathFile] Found exact find database file: "/opt/rocm/share/miopen/db/gfx900_64.HIP.fdb.txt"
+MIOpen(HIP): Info [Measure] ReadonlyRamDb::Prefetch time: 36.0623 ms
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info [Measure] RamDb::Prefetch time: 0.014768 ms
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.552665
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.552665
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [ValidateUnsafe] DB file is older than cache: 561340469424929, 561979836685376
+MIOpen(HIP): Info2 [FindRecordUnsafe] Looking for key 64-56-56-3x3-64-56-56-16-1x1-1x1-1x1-0-NCHW-BF16-F in cache for file "/home/limonene/.config/miopen/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt"
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.552665
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.552665
+MIOpen(HIP): Info2 [Measure] Db::FindRecord time: 0.330091 ms
+MIOpen(HIP): miopenStatus_t miopenConvolutionForwardGetSolution(miopenHandle_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, const miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, const size_t, size_t *, miopenConvSolution_t *){
+MIOpen(HIP): 	handle = stream: 0x55e1af35f3b0, device_id: 0
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	maxSolutionCount = 2
+MIOpen(HIP): }
+MIOpen(HIP): Info [GetSolutions] 
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [ValidateUnsafe] DB file is older than cache: 561340469424929, 561979836685376
+MIOpen(HIP): Info2 [FindRecordUnsafe] Looking for key 64-56-56-3x3-64-56-56-16-1x1-1x1-1x1-0-NCHW-BF16-F in cache for file "/home/limonene/.config/miopen/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt"
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.552665
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.552665
+MIOpen(HIP): Info2 [Measure] Db::FindRecord time: 0.328679 ms
+MIOpen(HIP): Info2 [GetSolutions] GemmFwdRest
+MIOpen(HIP): Info2 [GetSolutions] ConvDirectNaiveConvFwd
+Forward Conv solutions available: 2
+- id: 91 algo: 0, time: 5.35646 ms, ws: 3612672, name: GemmFwdRest
+- id: 85 algo: 1, time: 20.6628 ms, ws: 0, name: ConvDirectNaiveConvFwd
+Warning: Solution id (80) is not reported by the library. Trying it anyway...
+MIOpen(HIP): miopenStatus_t miopenConvolutionForwardGetSolutionWorkspaceSize(miopenHandle_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, const miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, const uint64_t, size_t *){
+MIOpen(HIP): 	handle = stream: 0x55e1af35f3b0, device_id: 0
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	solution_id = 80
+MIOpen(HIP): }
+MIOpen(HIP): Info [GetForwardSolutionWorkspaceSize] solver_id = ConvHipImplicitGemmForwardV4R5Xdlops
+MIOpen(HIP): miopenStatus_t miopenConvolutionForwardCompileSolution(miopenHandle_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, const miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, const uint64_t){
+MIOpen(HIP): 	handle = stream: 0x55e1af35f3b0, device_id: 0
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	solution_id = 80
+MIOpen(HIP): }
+MIOpen(HIP): Info [CompileSolution] solver_id = ConvHipImplicitGemmForwardV4R5Xdlops
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault and solver ConvHipImplicitGemmForwardV4R5Xdlops
+MIOpen(HIP): Info [FindSolutionImpl] ConvHipImplicitGemmForwardV4R5Xdlops
+MIOpen(HIP): Info2 [GetPerfDbPathFile] inexact perf database search
+MIOpen(HIP): Info2 [GetPerfDbPathFile] Iterating over perf db directory "/opt/rocm/share/miopen/db"
+MIOpen(HIP): Info [Measure] ReadonlyRamDb::Prefetch time: 4e-05 ms
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock
+MIOpen(HIP): Info [Prefetch] File is unreadable: "/home/limonene/.config/miopen/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt"
+MIOpen(HIP): Info [Measure] RamDb::Prefetch time: 0.005401 ms
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock.abyss-hbmx.552665
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock.abyss-hbmx.552665
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock
+MIOpen(HIP): Info2 [FindRecordUnsafe] Looking for key 2x64x56x56x1x3x3x1x64x16x1x1x0x1x1x0x1x1x0x0x1xNCHWxBF16xF in cache for file "/home/limonene/.config/miopen/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt"
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock.abyss-hbmx.552665
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.udb.txt.lock.fslock.abyss-hbmx.552665
+MIOpen(HIP): Info2 [FindRecord] Looking for key 2x64x56x56x1x3x3x1x64x16x1x1x0x1x1x0x1x1x0x0x1xNCHWxBF16xF in file ""
+MIOpen(HIP): Info2 [Measure] Db::Load time: 0.168953 ms
+MIOpen(HIP): Info [FindSolutionImpl] Perf Db: record not found for: ConvHipImplicitGemmForwardV4R5Xdlops
+MIOpen(HIP): Info [HeuristicInit] 64,256,2,64,128,8,0,1,8
+MIOpen(HIP): Info [GetDefaultPerformanceConfig] 64,256,2,64,128,8,0,1,8
+MIOpen(HIP): Info2 [PrepareInvoker] Preparing kernel: gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw
+MIOpen(HIP): Info [IsNetworkedFilesystem] Filesystem type at '"/home/limonene/.cache/miopen/3.5.1.5b515cf1bca-dirty"' is: 0x9123683e '<Unknown magic>'
+MIOpen(HIP): Info2 [SQLiteBase] Initializing system database file ""
+MIOpen(HIP): Info [KernDb] database not present
+MIOpen(HIP): Info2 [SQLiteBase] Initializing user database file "/home/limonene/.cache/miopen/3.5.1.5b515cf1bca-dirty/gfx900_64.ukdb"
+MIOpen(HIP): Info2 [KernDb] Database created successfully
+MIOpen(HIP): Info2 [LoadBinary] Loading binary for: "static_kernel_gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw.cpp.o"; args:  -DCK_PARAM_PROBLEM_G=1 -DCK_PARAM_PROBLEM_N=16 -DCK_PARAM_PROBLEM_K=64 -DCK_PARAM_PROBLEM_C=64 -DCK_PARAM_PROBLEM_HI=56 -DCK_PARAM_PROBLEM_WI=56 -DCK_PARAM_PROBLEM_HO=56 -DCK_PARAM_PROBLEM_WO=56 -DCK_PARAM_PROBLEM_Y=3 -DCK_PARAM_PROBLEM_X=3 -DCK_PARAM_PROBLEM_CONV_STRIDE_H=1 -DCK_PARAM_PROBLEM_CONV_STRIDE_W=1 -DCK_PARAM_PROBLEM_CONV_DILATION_H=1 -DCK_PARAM_PROBLEM_CONV_DILATION_W=1 -DCK_PARAM_PROBLEM_IN_LEFT_PAD_H=1 -DCK_PARAM_PROBLEM_IN_LEFT_PAD_W=1 -DCK_PARAM_PROBLEM_IN_RIGHT_PAD_H=1 -DCK_PARAM_PROBLEM_IN_RIGHT_PAD_W=1 -DCK_PARAM_TUNABLE_GEMM_M_PER_BLOCK=64 -DCK_PARAM_TUNABLE_GEMM_B_PER_BLOCK=128 -DCK_PARAM_TUNABLE_GEMM_K_PER_BLOCK=2 -DCK_PARAM_TUNABLE_GEMM_M_PER_WAVE=64 -DCK_PARAM_TUNABLE_GEMM_B_PER_WAVE=128 -DCK_PARAM_TUNABLE_NWAVES=2 -DCK_PARAM_TUNABLE_GEMM_KPACK=8 -DCK_PARAM_DEPENDENT_BLOCK_SIZE=128 -DCK_PARAM_DEPENDENT_GRID_SIZE=196 -DCK_PARAM_DEPENDENT_GEMM_A_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_K=2 -DCK_PARAM_DEPENDENT_GEMM_A_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_M=32 -DCK_PARAM_DEPENDENT_GEMM_A_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_KPACK=2 -DCK_PARAM_DEPENDENT_GEMM_A_BLOCK_COPY_SRC_DATA_PER_READ_GEMM_KPACK=4 -DCK_PARAM_DEPENDENT_GEMM_A_BLOCK_COPY_DST_DATA_PER_WRITE_GEMM_KPACK=4 -DCK_PARAM_DEPENDENT_GEMM_B_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_K=1 -DCK_PARAM_DEPENDENT_GEMM_B_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_B=128 -DCK_PARAM_DEPENDENT_GEMM_B_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_KPACK=1 -DCK_PARAM_DEPENDENT_GEMM_B_BLOCK_COPY_SRC_DATA_PER_READ_GEMM_N=1 -DCK_PARAM_DEPENDENT_GEMM_B_BLOCK_COPY_DST_DATA_PER_WRITE_GEMM_KPACK=8 -DCK_USE_AMD_XDLOPS=0 -DCK_USE_AMD_XDLOPS_INLINE_ASM=0 -DCK_USE_AMD_XDLOPS_EMULATE=0 -DCK_USE_AMD_BUFFER_PTR_TYPE=1 --std=c++14 -DCK_USE_AMD_BUFFER_ATOMIC_FADD=0 -DCK_BLOCK_SYNC_LDS_WITHOUT_SYNC_VMEM=1 -DCK_WORKAROUND_SWDEV_229564=1 -DCK_WORKAROUND_SWDEV_231101=1 -DCK_USE_AMD_BUFFER_ADDRESSING=1 -DCK_USE_AMD_V_FMAC_F32=0 -DMIOPEN_USE_FP16=0 -DMIOPEN_USE_FP16x4=0 -DMIOPEN_USE_FP16x8=0 -DMIOPEN_USE_FP32=0 -DMIOPEN_USE_INT8=0 -DMIOPEN_USE_BFP16=1 -DMIOPEN_USE_INT32=0 -DMIOPEN_USE_RNE_BFLOAT16=1 -DMIOPEN_FP8_IEEE_EXPONENT_BIAS=0 -DMIOPEN_FP8_CLIPPING=1 -DMIOPEN_USE_FP16=0 -DMIOPEN_USE_FP16x4=0 -DMIOPEN_USE_FP16x8=0 -DMIOPEN_USE_FP32=0 -DMIOPEN_USE_INT8=0 -DMIOPEN_USE_BFP16=1 -DMIOPEN_USE_INT32=0 -DMIOPEN_USE_RNE_BFLOAT16=1 -DMIOPEN_FP8_IEEE_EXPONENT_BIAS=0 -DMIOPEN_FP8_CLIPPING=1 --std=c++17 -mcpu=gfx900
+MIOpen(HIP): Info2 [Prepare] SELECT kernel_blob, kernel_hash, uncompressed_size FROM kern_db WHERE (kernel_name = 'static_kernel_gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw.cpp.o') AND (kernel_args = ' -DCK_PARAM_PROBLEM_G=1 -DCK_PARAM_PROBLEM_N=16 -DCK_PARAM_PROBLEM_K=64 -DCK_PARAM_PROBLEM_C=64 -DCK_PARAM_PROBLEM_HI=56 -DCK_PARAM_PROBLEM_WI=56 -DCK_PARAM_PROBLEM_HO=56 -DCK_PARAM_PROBLEM_WO=56 -DCK_PARAM_PROBLEM_Y=3 -DCK_PARAM_PROBLEM_X=3 -DCK_PARAM_PROBLEM_CONV_STRIDE_H=1 -DCK_PARAM_PROBLEM_CONV_STRIDE_W=1 -DCK_PARAM_PROBLEM_CONV_DILATION_H=1 -DCK_PARAM_PROBLEM_CONV_DILATION_W=1 -DCK_PARAM_PROBLEM_IN_LEFT_PAD_H=1 -DCK_PARAM_PROBLEM_IN_LEFT_PAD_W=1 -DCK_PARAM_PROBLEM_IN_RIGHT_PAD_H=1 -DCK_PARAM_PROBLEM_IN_RIGHT_PAD_W=1 -DCK_PARAM_TUNABLE_GEMM_M_PER_BLOCK=64 -DCK_PARAM_TUNABLE_GEMM_B_PER_BLOCK=128 -DCK_PARAM_TUNABLE_GEMM_K_PER_BLOCK=2 -DCK_PARAM_TUNABLE_GEMM_M_PER_WAVE=64 -DCK_PARAM_TUNABLE_GEMM_B_PER_WAVE=128 -DCK_PARAM_TUNABLE_NWAVES=2 -DCK_PARAM_TUNABLE_GEMM_KPACK=8 -DCK_PARAM_DEPENDENT_BLOCK_SIZE=128 -DCK_PARAM_DEPENDENT_GRID_SIZE=196 -DCK_PARAM_DEPENDENT_GEMM_A_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_K=2 -DCK_PARAM_DEPENDENT_GEMM_A_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_M=32 -DCK_PARAM_DEPENDENT_GEMM_A_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_KPACK=2 -DCK_PARAM_DEPENDENT_GEMM_A_BLOCK_COPY_SRC_DATA_PER_READ_GEMM_KPACK=4 -DCK_PARAM_DEPENDENT_GEMM_A_BLOCK_COPY_DST_DATA_PER_WRITE_GEMM_KPACK=4 -DCK_PARAM_DEPENDENT_GEMM_B_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_K=1 -DCK_PARAM_DEPENDENT_GEMM_B_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_B=128 -DCK_PARAM_DEPENDENT_GEMM_B_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_KPACK=1 -DCK_PARAM_DEPENDENT_GEMM_B_BLOCK_COPY_SRC_DATA_PER_READ_GEMM_N=1 -DCK_PARAM_DEPENDENT_GEMM_B_BLOCK_COPY_DST_DATA_PER_WRITE_GEMM_KPACK=8 -DCK_USE_AMD_XDLOPS=0 -DCK_USE_AMD_XDLOPS_INLINE_ASM=0 -DCK_USE_AMD_XDLOPS_EMULATE=0 -DCK_USE_AMD_BUFFER_PTR_TYPE=1 --std=c++14 -DCK_USE_AMD_BUFFER_ATOMIC_FADD=0 -DCK_BLOCK_SYNC_LDS_WITHOUT_SYNC_VMEM=1 -DCK_WORKAROUND_SWDEV_229564=1 -DCK_WORKAROUND_SWDEV_231101=1 -DCK_USE_AMD_BUFFER_ADDRESSING=1 -DCK_USE_AMD_V_FMAC_F32=0 -DMIOPEN_USE_FP16=0 -DMIOPEN_USE_FP16x4=0 -DMIOPEN_USE_FP16x8=0 -DMIOPEN_USE_FP32=0 -DMIOPEN_USE_INT8=0 -DMIOPEN_USE_BFP16=1 -DMIOPEN_USE_INT32=0 -DMIOPEN_USE_RNE_BFLOAT16=1 -DMIOPEN_FP8_IEEE_EXPONENT_BIAS=0 -DMIOPEN_FP8_CLIPPING=1 -DMIOPEN_USE_FP16=0 -DMIOPEN_USE_FP16x4=0 -DMIOPEN_USE_FP16x8=0 -DMIOPEN_USE_FP32=0 -DMIOPEN_USE_INT8=0 -DMIOPEN_USE_BFP16=1 -DMIOPEN_USE_INT32=0 -DMIOPEN_USE_RNE_BFLOAT16=1 -DMIOPEN_FP8_IEEE_EXPONENT_BIAS=0 -DMIOPEN_FP8_CLIPPING=1 --std=c++17 -mcpu=gfx900');
+MIOpen(HIP): Info2 [Measure] Db::FindRecord time: 0.05242 ms
+MIOpen(HIP): Info2 [LoadBinary] Unable to load binary for: "static_kernel_gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw.cpp.o"; args:  -DCK_PARAM_PROBLEM_G=1 -DCK_PARAM_PROBLEM_N=16 -DCK_PARAM_PROBLEM_K=64 -DCK_PARAM_PROBLEM_C=64 -DCK_PARAM_PROBLEM_HI=56 -DCK_PARAM_PROBLEM_WI=56 -DCK_PARAM_PROBLEM_HO=56 -DCK_PARAM_PROBLEM_WO=56 -DCK_PARAM_PROBLEM_Y=3 -DCK_PARAM_PROBLEM_X=3 -DCK_PARAM_PROBLEM_CONV_STRIDE_H=1 -DCK_PARAM_PROBLEM_CONV_STRIDE_W=1 -DCK_PARAM_PROBLEM_CONV_DILATION_H=1 -DCK_PARAM_PROBLEM_CONV_DILATION_W=1 -DCK_PARAM_PROBLEM_IN_LEFT_PAD_H=1 -DCK_PARAM_PROBLEM_IN_LEFT_PAD_W=1 -DCK_PARAM_PROBLEM_IN_RIGHT_PAD_H=1 -DCK_PARAM_PROBLEM_IN_RIGHT_PAD_W=1 -DCK_PARAM_TUNABLE_GEMM_M_PER_BLOCK=64 -DCK_PARAM_TUNABLE_GEMM_B_PER_BLOCK=128 -DCK_PARAM_TUNABLE_GEMM_K_PER_BLOCK=2 -DCK_PARAM_TUNABLE_GEMM_M_PER_WAVE=64 -DCK_PARAM_TUNABLE_GEMM_B_PER_WAVE=128 -DCK_PARAM_TUNABLE_NWAVES=2 -DCK_PARAM_TUNABLE_GEMM_KPACK=8 -DCK_PARAM_DEPENDENT_BLOCK_SIZE=128 -DCK_PARAM_DEPENDENT_GRID_SIZE=196 -DCK_PARAM_DEPENDENT_GEMM_A_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_K=2 -DCK_PARAM_DEPENDENT_GEMM_A_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_M=32 -DCK_PARAM_DEPENDENT_GEMM_A_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_KPACK=2 -DCK_PARAM_DEPENDENT_GEMM_A_BLOCK_COPY_SRC_DATA_PER_READ_GEMM_KPACK=4 -DCK_PARAM_DEPENDENT_GEMM_A_BLOCK_COPY_DST_DATA_PER_WRITE_GEMM_KPACK=4 -DCK_PARAM_DEPENDENT_GEMM_B_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_K=1 -DCK_PARAM_DEPENDENT_GEMM_B_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_B=128 -DCK_PARAM_DEPENDENT_GEMM_B_BLOCK_COPY_CLUSTER_LENGTHS_GEMM_KPACK=1 -DCK_PARAM_DEPENDENT_GEMM_B_BLOCK_COPY_SRC_DATA_PER_READ_GEMM_N=1 -DCK_PARAM_DEPENDENT_GEMM_B_BLOCK_COPY_DST_DATA_PER_WRITE_GEMM_KPACK=8 -DCK_USE_AMD_XDLOPS=0 -DCK_USE_AMD_XDLOPS_INLINE_ASM=0 -DCK_USE_AMD_XDLOPS_EMULATE=0 -DCK_USE_AMD_BUFFER_PTR_TYPE=1 --std=c++14 -DCK_USE_AMD_BUFFER_ATOMIC_FADD=0 -DCK_BLOCK_SYNC_LDS_WITHOUT_SYNC_VMEM=1 -DCK_WORKAROUND_SWDEV_229564=1 -DCK_WORKAROUND_SWDEV_231101=1 -DCK_USE_AMD_BUFFER_ADDRESSING=1 -DCK_USE_AMD_V_FMAC_F32=0 -DMIOPEN_USE_FP16=0 -DMIOPEN_USE_FP16x4=0 -DMIOPEN_USE_FP16x8=0 -DMIOPEN_USE_FP32=0 -DMIOPEN_USE_INT8=0 -DMIOPEN_USE_BFP16=1 -DMIOPEN_USE_INT32=0 -DMIOPEN_USE_RNE_BFLOAT16=1 -DMIOPEN_FP8_IEEE_EXPONENT_BIAS=0 -DMIOPEN_FP8_CLIPPING=1 -DMIOPEN_USE_FP16=0 -DMIOPEN_USE_FP16x4=0 -DMIOPEN_USE_FP16x8=0 -DMIOPEN_USE_FP32=0 -DMIOPEN_USE_INT8=0 -DMIOPEN_USE_BFP16=1 -DMIOPEN_USE_INT32=0 -DMIOPEN_USE_RNE_BFLOAT16=1 -DMIOPEN_FP8_IEEE_EXPONENT_BIAS=0 -DMIOPEN_FP8_CLIPPING=1 --std=c++17 -mcpu=gfx900
+MIOpen(HIP): Info [PrintVersion] HIPRTC v.9.0
+MIOpen(HIP): Error [Compile] 'hiprtcCompileProgram(prog.get(), c_options.size(), c_options.data())' static_kernel_gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw.cpp: HIPRTC_ERROR_COMPILATION (6)
+MIOpen(HIP): Error [BuildHip] HIPRTC status = HIPRTC_ERROR_COMPILATION (6), source file: static_kernel_gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw.cpp
+MIOpen(HIP): Warning [BuildHip] In file included from /tmp/comgr-552665-4-950548/input/static_kernel_gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw.cpp:2:
+In file included from /tmp/comgr-552665-4-950548/include/static_kernel_gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw.hpp:8:
+In file included from /tmp/comgr-552665-4-950548/include/static_kernel_gridwise_gemm_xdlops_fp16_bfp16.hpp:10:
+In file included from /tmp/comgr-552665-4-950548/include/static_kernel_blockwise_gemm_xdlops.hpp:6:
+/tmp/comgr-552665-4-950548/include/static_kernel_xdlops_gemm.hpp:64:16: error: no template named 'intrin_mfma_f32_32x32x1f32'
+   64 |         return intrin_mfma_f32_32x32x1f32<MPerXdlops, NPerXdlops, AStride, BStride>::run(
+      |                ^
+/tmp/comgr-552665-4-950548/include/static_kernel_xdlops_gemm.hpp:198:16: error: no template named 'intrin_mfma_f32_4x4x1f32'
+  198 |         return intrin_mfma_f32_4x4x1f32<MPerXdlops, NPerXdlops>::run(p_a, p_b, reg_c);
+      |                ^
+/tmp/comgr-552665-4-950548/include/static_kernel_xdlops_gemm.hpp:231:16: error: no template named 'intrin_mfma_f32_32x32x4f16'
+  231 |         return intrin_mfma_f32_32x32x4f16<MPerXdlops, NPerXdlops, AStride, BStride>::run(
+      |                ^
+/tmp/comgr-552665-4-950548/include/static_kernel_xdlops_gemm.hpp:364:16: error: no template named 'intrin_mfma_f32_4x4x4f16'
+  364 |         return intrin_mfma_f32_4x4x4f16<MPerXdlops, NPerXdlops>::run(p_a, p_b, reg_c);
+      |                ^
+/tmp/comgr-552665-4-950548/include/static_kernel_xdlops_gemm.hpp:397:16: error: no template named 'intrin_mfma_f32_32x32x2bf16'
+  397 |         return intrin_mfma_f32_32x32x2bf16<MPerXdlops, NPerXdlops, AStride, BStride>::run(
+      |                ^
+/tmp/comgr-552665-4-950548/include/static_kernel_xdlops_gemm.hpp:530:16: error: no template named 'intrin_mfma_f32_4x4x2bf16'
+  530 |         return intrin_mfma_f32_4x4x2bf16<MPerXdlops, NPerXdlops>::run(p_a, p_b, reg_c);
+      |                ^
+In file included from /tmp/comgr-552665-4-950548/input/static_kernel_gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw.cpp:2:
+In file included from /tmp/comgr-552665-4-950548/include/static_kernel_gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw.hpp:8:
+In file included from /tmp/comgr-552665-4-950548/include/static_kernel_gridwise_gemm_xdlops_fp16_bfp16.hpp:10:
+In file included from /tmp/comgr-552665-4-950548/include/static_kernel_blockwise_gemm_xdlops.hpp:7:
+/tmp/comgr-552665-4-950548/include/static_kernel_xdlops_gemm_inline_asm.hpp:36:9: error: use of undeclared identifier 'gcnasm_mfma_f32_32x32x1f32'
+   36 |         gcnasm_mfma_f32_32x32x1f32<MPerXdlops, NPerXdlops, AStride, BStride>{}.run(p_a, p_b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/tmp/comgr-552665-4-950548/include/static_kernel_xdlops_gemm_inline_asm.hpp:63:9: error: use of undeclared identifier 'gcnasm_mfma_f32_32x32x2f32'
+   63 |         gcnasm_mfma_f32_32x32x2f32(p_a, p_b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/tmp/comgr-552665-4-950548/include/static_kernel_xdlops_gemm_inline_asm.hpp:90:9: error: use of undeclared identifier 'gcnasm_mfma_f32_16x16x4f32'
+   90 |         gcnasm_mfma_f32_16x16x4f32(p_a, p_b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/tmp/comgr-552665-4-950548/include/static_kernel_xdlops_gemm_inline_asm.hpp:172:9: error: use of undeclared identifier 'gcnasm_mfma_f32_32x32x4f16'
+  172 |         gcnasm_mfma_f32_32x32x4f16<MPerXdlops, NPerXdlops, AStride, BStride>{}.run(p_a, p_b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/tmp/comgr-552665-4-950548/include/static_kernel_xdlops_gemm_inline_asm.hpp:199:9: error: use of undeclared identifier 'gcnasm_mfma_f32_32x32x8f16'
+  199 |         gcnasm_mfma_f32_32x32x8f16(p_a, p_b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/tmp/comgr-552665-4-950548/include/static_kernel_xdlops_gemm_inline_asm.hpp:226:9: error: use of undeclared identifier 'gcnasm_mfma_f32_16x16x16f16'
+  226 |         gcnasm_mfma_f32_16x16x16f16(p_a, p_b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/tmp/comgr-552665-4-950548/include/static_kernel_xdlops_gemm_inline_asm.hpp:307:9: error: use of undeclared identifier 'gcnasm_mfma_f32_32x32x2bf16'
+  307 |         gcnasm_mfma_f32_32x32x2bf16<MPerXdlops, NPerXdlops, AStride, BStride>{}.run(p_a, p_b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/tmp/comgr-552665-4-950548/include/static_kernel_xdlops_gemm_inline_asm.hpp:334:9: error: use of undeclared identifier 'gcnasm_mfma_f32_32x32x4bf16'
+  334 |         gcnasm_mfma_f32_32x32x4bf16(p_a, p_b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/tmp/comgr-552665-4-950548/include/static_kernel_xdlops_gemm_inline_asm.hpp:361:9: error: use of undeclared identifier 'gcnasm_mfma_f32_16x16x8bf16'
+  361 |         gcnasm_mfma_f32_16x16x8bf16(p_a, p_b);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+15 errors generated when compiling for gfx900.
+MIOpen Error: abyss-hbmx:/usr/src/debug/miopen-hip/rocm-libraries/projects/miopen/src/hipoc/hipoc_program.cpp:299: Code object build failed. Source: static_kernel_gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw.cpp
+RunForwardGPU() FAILED, rc = 0x7
+Forward Convolution FAILED: 1.79769e+308 > 0.0656
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyConvolutionDescriptor(miopenConvolutionDescriptor_t){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyConvolutionDescriptor(miopenConvolutionDescriptor_t){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): }
+MIOpen(HIP): MIOpenDriver Info2 [~GPUMem] hipFree 6422528 at 0x7f6fa7c00000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [~GPUMem] hipFree 73728 at 0x7f70b8200000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [~GPUMem] hipFree 6422528 at 0x7f6fa9800000 Ok
+__EXIT_CODE=7

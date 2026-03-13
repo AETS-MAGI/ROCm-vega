@@ -1,0 +1,7 @@
+1:MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -s 1 -F 1 -t 1 -S ConvHipImplicitGemmFwdXdlops
+178:MIOpen(HIP): Info [GetForwardSolutionWorkspaceSize] solver_id = ConvHipImplicitGemmFwdXdlops
+187:MIOpen(HIP): Info [CompileSolution] solver_id = ConvHipImplicitGemmFwdXdlops
+188:MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault and solver ConvHipImplicitGemmFwdXdlops
+189:MIOpen(HIP): Info [FindSolutionImpl] ConvHipImplicitGemmFwdXdlops
+208:MIOpen(HIP): Info [FindSolutionImpl] Perf Db: record not found for: ConvHipImplicitGemmFwdXdlops
+210:bash: 1 行: 552543 中止                     (コアダンプ) MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -s 1 -F 1 -t 1 -S ConvHipImplicitGemmFwdXdlops
