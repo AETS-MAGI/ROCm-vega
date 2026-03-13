@@ -17,10 +17,9 @@
 
 ```bash
 cd /home/limonene/ROCm-project/tank/lab_notebook/notes/vega_investigations
-chmod +x ./tools/build_miopen_debug_local.sh
 
 MIOPEN_PREFIX=$HOME/local/miopen-debug \
-./tools/build_miopen_debug_local.sh \
+bash ./tools/build_miopen_debug_local.sh \
   /path/to/rocm-libraries/projects/miopen
 ```
 
@@ -33,9 +32,8 @@ MIOPEN_PREFIX=$HOME/local/miopen-debug \
 
 ```bash
 cd /home/limonene/ROCm-project/tank/lab_notebook/notes/vega_investigations
-chmod +x ./tools/run_case_with_local_miopen.sh
 
-./tools/run_case_with_local_miopen.sh \
+bash ./tools/run_case_with_local_miopen.sh \
   $HOME/local/miopen-debug \
   vega64_int8_force_mlir_fwd_local_dbg -- \
   MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 \

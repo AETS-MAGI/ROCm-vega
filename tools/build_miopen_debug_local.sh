@@ -20,7 +20,7 @@ Optional environment variables:
 
 Example:
   MIOPEN_PREFIX=$HOME/local/miopen-debug \
-  ./tools/build_miopen_debug_local.sh \
+  bash ./tools/build_miopen_debug_local.sh \
   /path/to/rocm-libraries/projects/miopen
 USAGE
   exit 1
