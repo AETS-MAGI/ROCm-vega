@@ -92,6 +92,15 @@ bash run_vega_path_case.sh vega64_fp32_nchw_1x1_fwd_n32 -- \
   - `RunForwardGPU() FAILED, rc = 0x7` (`__EXIT_CODE=7`)
 - 解釈: `ConvMlirIgemm*` について「Skipped (non-dynamic)」だけでなく、強制実行時に実行失敗する直接証跡を取得。
 
+10. INT8 強制DLOPSケース (`vega64_int8_force_dlops_ck`)
+- command: `convint8 ... -S ConvCkIgemmFwdV6r1DlopsNchw`
+- library report: `ConvDirectNaiveConvFwd` (id 85)
+- forced path: `solution_id = 114` -> `GetForwardSolutionWorkspaceSize` (`solver_id = ConvCkIgemmFwdV6r1DlopsNchw`)
+- runtime result:
+  - `The supplied solution id: ConvCkIgemmFwdV6r1DlopsNchw is not applicable to the current problem`
+  - `RunForwardGPU() FAILED, rc = 0x3` (`__EXIT_CODE=3`)
+- 解釈: DLOPS系solverの「適用不可」を強制実行で直接確認。少なくともこのINT8 3x3条件では成立しない。
+
 ## 根拠リンク（ログ）
 
 - /home/limonene/vega_path_check_logs/vega64_fp32_nchw_3x3_fwd_n32.log
@@ -139,6 +148,9 @@ bash run_vega_path_case.sh vega64_fp32_nchw_1x1_fwd_n32 -- \
 - /home/limonene/vega_path_check_logs/vega64_int8_force_mlir_fwd.log
 - /home/limonene/vega_path_check_logs/vega64_int8_force_mlir_fwd.solver_extract.log
 - /home/limonene/vega_path_check_logs/vega64_int8_force_mlir_fwd.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_ck.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_ck.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_ck.trace_map.md
 
 ## 判定
 
@@ -183,3 +195,4 @@ rg -n "v_dot4_i32_i8|v_dot4c_i32_i8|sdot4|sudot4" /tmp/miopen_extract/naive_conv
 - 追加スイープでも INT8 はすべて `ConvDirectNaiveConvFwd` だったため、次は入力レイアウトや問題サイズの軸を広げる必要がある。
 - `-S ConvAsmImplicitGemmV4R1DynamicFwd_1x1` の強制実行では immediate まで進行したが、実行時に GPU memory access fault で停止した。
 - `-S ConvMlirIgemmFwd` の強制実行では `CompileSolution` まで進むが、`MIIR_INVALID_PARAM` により `RunForwardGPU()` が失敗した。
+- `-S ConvCkIgemmFwdV6r1DlopsNchw` の強制実行では `not applicable to the current problem` で `RunForwardGPU() FAILED (rc=0x3)` となった。

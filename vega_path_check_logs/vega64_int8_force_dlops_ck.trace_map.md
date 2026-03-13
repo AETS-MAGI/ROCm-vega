@@ -1,7 +1,7 @@
 # TRACE MAP TEMPLATE
 
 - case_id: vega64_int8_force_dlops_ck
-- status: fallback_confirmed / fallback_not_confirmed / need_more_cases
+- status: need_more_cases
 
 ## 1. Observed Lines
 
@@ -12,21 +12,22 @@
 
 | Observed log line | Log line number | Source file | Source line | Interpretation |
 |---|---:|---|---:|---|
-| ConvMlirIgemm*: Not applicable |  | conv_mlir_igemm_fwd.cpp / bwd.cpp / wrw.cpp | 188 / 68 / 69 | gfx900 exclusion |
-| ConvAsmImplicitGemm*: Not applicable |  | conv_asm_implicit_gemm_*_v4r1_dynamic.cpp | 293 / 343 / 142 / 306 | constraints not met, next solver tried |
-| hipBlasLT failed, falling back to tensile |  | rocblas/library/src/tensile_host.cpp | 1232 | runtime fallback to Tensile |
-| No Tensile solution found for XF32, fall back to FP32 |  | rocblas/library/src/tensile_host.cpp | 1161 | xF32 -> FP32 fallback |
-| Skipped (non-dynamic) |  | include/miopen/find_solution.hpp | 324 / 449 | dynamic-only filter skip |
+| GetSolutions: ConvDirectNaiveConvFwd | 164-166 | n/a (runtime selection result) | n/a | library report上はnaiveが候補 |
+| Warning: Solution id (114) is not reported by the library. Trying it anyway... | 167 | n/a (MIOpenDriver message) | n/a | `-S` 強制指定で未報告solverを試行 |
+| solver_id = ConvCkIgemmFwdV6r1DlopsNchw | 176 | n/a (runtime log) | n/a | DLOPS solverに進もうとした痕跡 |
+| supplied solution id ... is not applicable to the current problem | 177 | src/ocl/convolutionocl.cpp | 1057 | 当該問題に対してsolver適用不可 |
+| RunForwardGPU() FAILED, rc = 0x3 | 178 | MIOpenDriver runtime | n/a | 実行失敗を直接観測 |
+| __EXIT_CODE=3 | 216 | shell wrapper | n/a | コマンド失敗コードを保持 |
 
 ## 3. Decision
 
 - [ ] fallback_confirmed
 - [ ] fallback_not_confirmed
-- [ ] need_more_cases
+- [x] need_more_cases
 
 ## 4. Notes
 
-- solver selected:
-- kernel selected:
-- dot4 instruction present:
-- additional comments:
+- solver selected: ConvCkIgemmFwdV6r1DlopsNchw (`-S` 強制指定)
+- kernel selected: n/a (not applicableでkernel launch前に停止)
+- dot4 instruction present: n/a
+- additional comments: INT8 3x3 NCHW条件ではDLOPS solverは適用不可。DLOPS成立条件の切り分けは継続。
