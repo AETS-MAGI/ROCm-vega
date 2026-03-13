@@ -145,6 +145,12 @@
 - `miirCreateHandle` の `nullptr` 分岐については、Fwd/INT8 のコード経路上
   `getKernelCount` と `getWorkspaceSize` は失敗しにくいため、実質的には
   `parseConvConfig` または `genConvModule` 側の失敗が優先候補。
+- ただし、実行時にリンクされる `/opt/rocm` の実体が参照ソース（`ROCm_AMD_Repo`）と
+  完全一致する保証はないため、最終確定にはランタイム実体での分岐ログ取得が必要。
+
+補足（現時点の推定）:
+- 参照ソース上の `ConvGenerator::genConvModule` は Fwd/INT8 の最小再現条件で
+  failure しづらく、`nullptr` の主候補は `parseConvConfig` 側と見るのが自然。
 
 ---
 
