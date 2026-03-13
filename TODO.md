@@ -170,6 +170,7 @@
 - `-S ConvAsmImplicitGemmV4R1DynamicFwd_1x1` の強制実行で `CompileSolution` / `ConvolutionForwardImmediate` までは到達したが、GPU memory access fault が発生。自然選択での成立条件確認は未完。
 - `-S ConvMlirIgemmFwd` の強制実行で `MIIR_INVALID_PARAM` と `RunForwardGPU() FAILED, rc = 0x7` を確認。
 - `-S ConvCkIgemmFwdV6r1DlopsNchw` の強制実行で `not applicable to the current problem` と `RunForwardGPU() FAILED, rc = 0x3` を確認。
+- `ConvCkIgemmFwdV6r1DlopsNchw` の強制グリッド7ケース（NCHW/NHWC, 1x1/3x3, n=1/16/32, g=1/2）でも全件 `not applicable`（rc=0x3）。
 
 ### 成果物
 - [x] `trace_map_dynamic.md`

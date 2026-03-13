@@ -1,0 +1,8 @@
+timestamp=2026-03-13T11:50:52+09:00
+hostname=abyss-hbmx
+pwd=/home/limonene/ROCm-project/tank/lab_notebook/notes/vega_investigations
+case_id=vega64_int8_force_dlops_s1_nchw_1x1_n1_c128_k128
+command=bash -lc set +e; MIOpenDriver convint8 -n 1 -c 128 -H 56 -W 56 -k 128 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -s 1 -S ConvCkIgemmFwdV6r1DlopsNchw -F 1 -t 1; ec=$?; echo __EXIT_CODE=$ec; exit 0
+MIOPEN_ENABLE_LOGGING=1
+MIOPEN_ENABLE_LOGGING_CMD=1
+MIOPEN_LOG_LEVEL=6
