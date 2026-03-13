@@ -82,6 +82,16 @@ bash run_vega_path_case.sh vega64_fp32_nchw_1x1_fwd_n32 -- \
 - runtime result: `Memory access fault by GPU node-1`
 - 解釈: 自然選択ではnaive、強制指定では対象solverの実行に進むが、当該条件で実行時fault。
 
+9. INT8 強制MLIRケース (`vega64_int8_force_mlir_fwd`)
+- command: `convint8 ... -S ConvMlirIgemmFwd`
+- library report: `ConvDirectNaiveConvFwd` (id 85)
+- forced path: `solution_id = 98` -> `CompileSolution` (`solver_id = ConvMlirIgemmFwd`) -> `FindSolutionImpl`
+- runtime result:
+  - `Perf Db: record not found for: ConvMlirIgemmFwd`
+  - `miirLowerTuningParams MIIR_INVALID_PARAM`
+  - `RunForwardGPU() FAILED, rc = 0x7` (`__EXIT_CODE=7`)
+- 解釈: `ConvMlirIgemm*` について「Skipped (non-dynamic)」だけでなく、強制実行時に実行失敗する直接証跡を取得。
+
 ## 根拠リンク（ログ）
 
 - /home/limonene/vega_path_check_logs/vega64_fp32_nchw_3x3_fwd_n32.log
@@ -126,6 +136,9 @@ bash run_vega_path_case.sh vega64_fp32_nchw_1x1_fwd_n32 -- \
 - /home/limonene/vega_path_check_logs/vega64_int8_force_asm_v4r1_1x1.log
 - /home/limonene/vega_path_check_logs/vega64_int8_force_asm_v4r1_1x1.solver_extract.log
 - /home/limonene/vega_path_check_logs/vega64_int8_force_asm_v4r1_1x1.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_int8_force_mlir_fwd.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_mlir_fwd.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_mlir_fwd.trace_map.md
 
 ## 判定
 
@@ -169,3 +182,4 @@ rg -n "v_dot4_i32_i8|v_dot4c_i32_i8|sdot4|sudot4" /tmp/miopen_extract/naive_conv
 
 - 追加スイープでも INT8 はすべて `ConvDirectNaiveConvFwd` だったため、次は入力レイアウトや問題サイズの軸を広げる必要がある。
 - `-S ConvAsmImplicitGemmV4R1DynamicFwd_1x1` の強制実行では immediate まで進行したが、実行時に GPU memory access fault で停止した。
+- `-S ConvMlirIgemmFwd` の強制実行では `CompileSolution` まで進むが、`MIIR_INVALID_PARAM` により `RunForwardGPU()` が失敗した。
