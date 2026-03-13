@@ -146,6 +146,8 @@
 - 対応
 
 - detached 起動スクリプトを導入し、割り込み耐性を確保
+- detached 起動スクリプトの既定 generator を `Unix Makefiles` から `Ninja` に変更
+  - 理由: Makefiles 既定では `cmake -G Unix Makefiles` が長時間 configure に留まり、prefix 生成まで進まないケースを観測したため
 
 ---
 
@@ -153,9 +155,10 @@
 
 - `pybind11` は導入済み、rocMLIR configure で認識済み。
 - detached rocMLIR ビルドを起動済み。
-- PID: `594488`
-- ログ: `tmp/rocmlir_build_detached_20260313_165759.log`
-- Prefix: `tmp/rocmlir-prefix-detached-20260313_165759`
+- PID: `600370`
+- ログ: `tmp/rocmlir_build_detached_20260313_171509.log`
+- Prefix: `tmp/rocmlir-prefix-detached-20260313_171509`
+- 起動 generator: `Ninja`
 
 - 未確認: `rocMLIRConfig.cmake` 生成完了
 - 未確認: MIOpen debug ビルド再開

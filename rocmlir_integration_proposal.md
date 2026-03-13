@@ -123,6 +123,14 @@ if(StartsWith(device_name, "gfx900"))
   → 問題はさらに下の lowering/codegen 段階
 - 代替経路（`ConvHipImplicitGemmV4R1Fwd` 等の ASM 系 solver）は今のままで動作
 
+### rocMLIR 本体の gfx900 ゲート確認（2026-03-13 追記）
+
+- rocMLIR ソース内（`external/llvm-project` 以外）に gfx900 固有拒否コードは**存在しない**
+- `gfx900` という文字列は `external/llvm-project/mlir/` のテストと dialect の default chip 例として登場するのみ
+- `RockEnabled` / `ConvGenerator::isApplicable()` は gfx900 を特別扱いしていない
+- **MIOpen 側の `ConvMlirIgemmFwd::IsApplicable()` の if-check が唯一の除外点**
+- もし MIOpen のガードを外すと、rocMLIR は gfx900 向けに lowering を試み、`llvm-project-private/issues/389` のバグで `MIIR_INVALID_PARAM` になる
+
 成果物:
 - `gfx900_related_nodes.md` への `rocMLIR` 節追加
 - `support_boundary.md` への責務分担案追記
