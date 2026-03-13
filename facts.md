@@ -60,6 +60,29 @@
 - `RockEnabled` 側は layout と dtype (`bf16` reject) を見る。
 - `ConvGenerator::isApplicable()` は主に次元整合性（`hasValidDimension`）で、arch 固有 reject を明示していない。
 
+### 4.5 gfx900 MLIR iGEMM 除外の provenance（git blame 確定, code_verified）
+
+- 除外コミット: `2407d2f556c7635de3f4b3f009681bdd92ba82e2`
+- 作者: Zhuoran Yin (`zhuoryin@amd.com`, AMD 社員)
+- 日付: 2021-12-22
+- コミットメッセージ: `[MLIR] Disable gfx900 from non-xdlops solver (#1328)`
+- 対象: FWD / BWD / WRW 全3ファイルを同一コミットで同時除外
+  - `conv_mlir_igemm_fwd.cpp:188`
+  - `conv_mlir_igemm_bwd.cpp:68`
+  - `conv_mlir_igemm_wrw.cpp:69`
+- コメント参照先: `// Refer to https://github.com/ROCmSoftwarePlatform/llvm-project-private/issues/389`
+  - これは AMD 社内の非公開 LLVM リポジトリ (`llvm-project-private`) の issue
+  - 公開リポジトリの `ROCm/MIOpen #389`・`ROCm/rocMLIR #389` とは**無関係**
+- URL 修正コミット: `b0f912e5244b`（Artem Tamazov, 2023-12-13）
+  - 内容は `ROCmSoftwarePlatform` → `ROCm` 組織名書き換えのみ
+  - issue の参照先が非公開であるという事実は変わっていない
+
+**解釈**:
+- gfx900 除外は AMD 社員による意図的コミット（コミュニティパッチではない）
+- 問題根拠は LLVM/コンパイラバックエンドレベル（MIOpen や rocMLIR 本体の問題ではない）
+- `Disable` という動詞は `Remove` より「一時的/バグ回避的な無効化」ニュアンスが強いが、
+  private issue の内容が外部から確認不可のため「設計判断 vs バグ回避」は断定不可
+
 ---
 
 ## 5. runtime 観測で確定した事実
