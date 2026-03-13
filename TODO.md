@@ -205,16 +205,26 @@
 ## 6. 履歴層調査
 
 ### 6.1 blame / commit 調査
-- [ ] `gfx900` 関連行の `git blame` を取る
-- [ ] `vega` 関連行の `git blame` を取る
-- [ ] `fallback` 関連行の `git blame` を取る
-- [ ] `dot4` / `dp4a` 関連行の `git blame` を取る
-- [ ] `IsApplicable` 重要箇所の `git blame` を取る
+
+- [x] `conv_mlir_igemm_fwd.cpp` の gfx900 除外行の `git blame` を実施
+  - 結果: コミット `2407d2f`（Zhuoran Yin, AMD, 2021-12-22, PR #1328）
+  - 参照 issue: `llvm-project-private/issues/389`（AMD 社内非公開）
+- [x] `conv_mlir_igemm_bwd.cpp` / `conv_mlir_igemm_wrw.cpp` の除外行確認
+  - 結果: 全3ファイルが同一コミットで一括除外
+- [ ] `gfx900` 関連行の `git blame` を追加実施（MLIR 以外の箇所）
+- [ ] ASM v4r1 dynamic の gfx900/gfx906 許可行の `git blame`
+- [ ] Winograd / 旧 ASM の gfx900 条件行の `git blame`
+- [ ] `dot4` / `dp4a` 関連行の `git blame`
+- [ ] `IsApplicable` 重要箇所の `git blame`（主要 solver）
 
 ### 6.2 commit 意図調査
-- [ ] 対象 commit message を収集する
-- [ ] 各 commit の diff を読む
-- [ ] 各 commit を意図別に分類する
+
+- [x] コミット `2407d2f` の diff を確認
+  - 意図分類: **バグ回避（疑い）** / 設計判断（確定不可）
+  - 動詞 `Disable`（= `Remove` / `Drop` より一時的ニュアンス）
+  - 参照先が private であるため true reason は外部確認不可
+- [ ] 他の gfx900 関連コミットの diff を読む
+- [ ] commit を意図別に分類する
   - [ ] 互換維持
   - [ ] fallback 追加
   - [ ] 最適化追加
@@ -224,20 +234,35 @@
   - [ ] 不明
 
 ### 6.3 GitHub 調査
-- [ ] `gh search prs` で関連 PR を探す
-- [ ] `gh search issues` で関連 issue を探す
-- [ ] PR レビューコメントを読む
+
+**最優先**
+
+- [ ] **MIOpen PR #1328 のレビューコメントを確認**（`ROCm/MIOpen/pull/1328`）
+  - 目的: private #389 に替わる追加背景情報の取得
+  - コマンド: `gh pr view 1328 --repo ROCm/MIOpen --comments`
+- [ ] 公開 `llvm-project` で gfx900 / MLIR 関連 commit・issue を再探索
+  - 目的: private #389 と同系統の痕跡が外部に残っていないか確認
+  - コマンド: `gh search issues --repo llvm/llvm-project "gfx900 MLIR" --state all`
+
+**次点**
+
+- [ ] `MiirIsConfigApplicable` の内部チェックを掘る（MLIR ライブラリ側の直接制限）
+- [ ] `gh search prs` で gfx900 関連 PR を探す（MIOpen / rocBLAS / Tensile）
+- [ ] PR レビューコメントを読む（主要な gfx900 生存経路の変更点）
 - [ ] maintainer の stance を整理する
-- [ ] author が AMD 社員か外部貢献かを可能な範囲で分類する
+- [ ] author が AMD 社員か外部貢献かを可能な範囲で分類する（MLIR 除外以外も）
 
 ### 6.4 見たい問い
-- [ ] gfx900 経路は AMD 本流起源か
+
+- [x] gfx900 MLIR 除外は AMD 本流起源か → **Yes（AMD 社員 Zhuoran Yin）**
+- [ ] 他の gfx900 生存経路（ASM v4r1 dynamic 等）の出所確認
 - [ ] コミュニティ補修が入っているか
 - [ ] 削除提案があったか
 - [ ] 明示的な legacy support 意図があったか
 - [ ] 「残置」なのか「積極維持」なのか
 
 ### 成果物
+
 - [ ] `provenance_map.md`
 - [ ] `gfx900_history_timeline.md`
 - [ ] `support_intent_notes.md`
@@ -310,16 +335,45 @@
 
 ## 10. 優先度つき着手順
 
-### 最優先
-- [ ] 既存観測の canonical 化
-- [ ] `gfx900` / `fallback` / `dot4` / `IsApplicable` の静的経路整理
-- [ ] 実機での solver 選択確認
-- [ ] HSACO 逆アセンブルで命令確認
+### [完了済み（コード調査）]
+
+- [x] 既存観測の canonical 化（`vega-rocm.md` が真実源）
+- [x] `gfx900` / `fallback` / `dot4` / `IsApplicable` の静的経路整理（`trace_map_static.md`）
+- [x] 実機での solver 選択確認（FP32 `fallback_confirmed` 取得）
+- [x] HSACO 逆アセンブルで命令確認（`hsaco_disassembly_notes.md`）
+- [x] git blame: MLIR iGEMM gfx900 除外コミット `2407d2f` 確定
+
+### 最優先（まず動く）
+
+1. **MIOpen PR #1328 レビューコメント確認**
+   - `gh pr view 1328 --repo ROCm/MIOpen --comments`
+   - 意義: private issue `#389` の内容を外部から最も手早く類推できる手段
+   - 工数: 低（コマンド1本 + 読むだけ）
+
+2. **INT8 非 naive solver 自然選択の確認**
+   - 現状: 全形状で `ConvDirectNaiveConvFwd` のみ。naive 以外の条件を探索中。
+   - 意義: `runtime_verified` の INT8 経路確認が残っている
+   - やらないという選択肢: あり（FP32 で `fallback_confirmed` は達成済みのため）
+
+3. **rocMLIR Ninja ビルド完走 → `miirCreateHandle` nullptr 分岐確定**
+   - 意義: debug ビルドを使わないとこれ以上の MIIR 内部追跡ができない
+   - 工数: ビルドが完走すれば作業は少ない。ビルドが止まっている場合は代替検討が必要。
+   - やらないという選択肢: あり（`miirLowerTuningParams MIIR_INVALID_PARAM` = gfx900 では MLIR が動かないという結論は出ている。どの分岐で止まるかは追加情報）
 
 ### 次点
-- [ ] クラス構造 / 責務分離の可視化
-- [ ] `git blame` / PR / issue による provenance 調査
-- [ ] コミュニティ保守可能範囲の明確化
+
+4. **公開 `llvm-project` での gfx900 / MLIR issue 探索**
+   - `gh search issues --repo llvm/llvm-project "gfx900 MLIR" --state all`
+   - 意義: private #389 の外部相関を探す
+
+5. **クラス構造 / 責務分離の可視化**（`class_map.md` 等）
+   - 意義: 仮説B（capability-based 設計の副産物）の構造的証拠を整理
+   - 工数: 高（コード全体を読む必要あり）
+   - やらないという選択肢: 強くあり（仮説Bはすでにコードで十分支持されている）
+
+6. **コミュニティ保守可能範囲の明確化**（Section 7）
+   - 意義: Phase 7 の成果物。現状は仮説レベルで成立している。
+   - やらないという選択肢: 強くあり（現段階では「設計の自然な副産物として生存」が十分な結論）
 
 ### 参照先（クローン済みROCm公式リポジトリ）
 - root: `/home/limonene/ROCm-project/tank/docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo`
@@ -338,9 +392,10 @@
   - `00_DEPRECATED/MIOpen/src/...`（同名solver実装・旧registry・旧test）
 
 ### その次
-- [ ] 将来シナリオ整理
-- [ ] 再統合仮説の評価
-- [ ] 最終まとめ文書の作成
+
+7. 将来シナリオ整理
+8. 再統合仮説の評価
+9. 最終まとめ文書の作成
 
 ---
 

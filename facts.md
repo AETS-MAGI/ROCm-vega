@@ -178,44 +178,75 @@
 
 ---
 
-## 8. 現在ステータス（この更新時点）
+## 8. 現在ステータス（2026-03-13 更新）
 
-- `pybind11` は導入済み、rocMLIR configure で認識済み。
-- detached rocMLIR ビルドを起動済み。
-- PID: `604956`
-- ログ: `tmp/rocmlir_build_detached_20260313_172420.log`
-- Build root: `/tmp/rocmlir-build-detached-20260313_172420`
-- Prefix: `tmp/rocmlir-prefix-detached-20260313_172420`
-- 起動 generator: `Ninja`
+### 確定済み（code_verified）
 
-- 未確認: `rocMLIRConfig.cmake` 生成完了
-- 未確認: MIOpen debug ビルド再開
-- 未確認: `vega64_int8_force_mlir_fwd` の local-runtime 再実行
-- 未確認: `src/mlir_build.cpp` 一時ログで分岐最終確定
+- [x] MLIR iGEMM FWD/BWD/WRW の gfx900 除外コード確認
+- [x] ASM v4r1 dynamic / Winograd / DLOPS 登録の gfx900 生存確認
+- [x] rocBLAS/CK/Tensile の二段フォールバック・dot4代替確認
+- [x] git blame で gfx900 MLIR 除外コミット `2407d2f` を確定（Zhuoran Yin, AMD, 2021-12-22, PR #1328）
+- [x] `#389` が `llvm-project-private`（AMD 社内非公開）の issue であり、公開リポジトリの同番号とは無関係と確定
+
+### 確定済み（runtime_verified）
+
+- [x] FP32 自然選択で `ConvBinWinograd3x3U` / `ConvAsm1x1U` / `ConvHipImplicitGemmV4R1Fwd` が動作
+- [x] MLIR iGEMM 強制実行: `MIIR_INVALID_PARAM (rc=0x7)`
+- [x] DLOPS グリッド15ケース以上: 全件 `not applicable (rc=0x3)`
+- [x] XDLops 強制: build 失敗 / assertion abort
+
+### 未解決・未完了
+
+| 項目 | 状態 |
+|---|---|
+| rocMLIR Ninja ビルド完走 | 未確認（detached 起動後の確認待ち。workspace `noexec` 制約あり → `/tmp/` を build root に変更済み） |
+| MIOpen debug ビルド | `rocMLIRConfig.cmake` 待ちで停止中 |
+| `miirCreateHandle` の `nullptr` 分岐最終確定 | debug ビルド待ち |
+| INT8 非 naive solver 自然選択 | 未達成（全形状で `ConvDirectNaiveConvFwd` のみ） |
+| MIOpen PR #1328 レビューコメント | 未確認（GitHub: `ROCm/MIOpen/pull/1328`） |
+| 公開 `llvm-project` での同系統 issue 照合 | 未着手 |
 
 ---
 
-## 9. 未解決事項
+## 9. 未解決事項（詳細）
 
-- 未解決1: rocMLIR build/install の完走確認
-- 未解決2: MIOpen debug ビルド成功確認（`rocMLIR_DIR` 解決状態）
-- 未解決3: `miirCreateHandle` の `nullptr` 分岐を runtime ログで最終確定
+- **未解決1**: rocMLIR build/install の完走確認
+  - build root を workspace `tmp/` から `/tmp/` に変更した（`noexec` 制約回避）
+  - `rocMLIRConfig.cmake` 生成確認コマンド: `ls tmp/rocmlir-prefix-*/lib/cmake/rocMLIR/rocMLIRConfig.cmake 2>/dev/null`
+
+- **未解決2**: MIOpen debug ビルド成功確認（`rocMLIR_DIR` 解決状態）
+  - `ROCMLIR_PREFIX=<prefix> bash tools/build_miopen_debug_local.sh`
+
+- **未解決3**: `miirCreateHandle` の `nullptr` 分岐を runtime ログで最終確定
+  - 有力仮説: `parseConvConfig` での失敗
+  - 確定方法: `mlir_build.cpp` に一時ログを追加 → ローカル debug ビルドで再実行
 
 ---
 
 ## 10. 次に実行すべき最短手順
 
-- detached rocMLIR ログ監視
+**パスA（debug ビルド路線）**
 
-  `tail -f tmp/rocmlir_build_detached_20260313_165759.log`
+```bash
+# rocMLIR ビルド完走確認
+ls tmp/rocmlir-prefix-*/lib/cmake/rocMLIR/rocMLIRConfig.cmake
 
-- 生成物確認
+# MIOpen debug 再ビルド
+ROCMLIR_PREFIX=<detached prefix> bash tools/build_miopen_debug_local.sh
 
-  `tmp/rocmlir-prefix-detached-20260313_165759/lib/cmake/rocMLIR/rocMLIRConfig.cmake`
+# local runtime でケース再実行
+bash tools/run_case_with_local_miopen.sh vega64_int8_force_mlir_fwd_local_dbg
+```
 
-- MIOpen debug 再ビルド
+**パスB（履歴・外部調査路線）**
 
-  `ROCMLIR_PREFIX=<detached prefix>` を `build_miopen_debug_local.sh` に渡す
+```bash
+# MIOpen PR #1328 レビューコメント確認
+gh pr view 1328 --repo ROCm/MIOpen --comments
+
+# 公開 llvm-project での gfx900/MLIR issue 探索
+gh search issues --repo llvm/llvm-project "gfx900 MLIR" --state all
+```
 
 - local runtime でケース再実行
 

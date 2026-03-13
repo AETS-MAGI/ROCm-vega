@@ -238,13 +238,19 @@ tmp/rocmlir_build_*.log      # ビルドログ
 | 再試行 | `Unix Makefiles` | `pybind11` 不足で失敗 |
 | 再々試行 | `Unix Makefiles` | configure は通るが長時間化・割り込み終了 (`EXIT:130`) |
 | detached 起動 | `Unix Makefiles` | 割り込み耐性を `nohup` で確保。ただし Makefiles だと configure フェーズが極端に遅い |
-| 最終 detached 起動 | `Ninja`（導入後） | `start_rocmlir_build_detached.sh` で起動。完走確認は未完。 |
+| detached 起動（Ninja化） | `Ninja` | configure/generate までは到達したが、workspace 側 `tmp` を build root にしたため `llvm-min-tblgen: Permission denied (code=126)` で停止 |
+| 現行 detached 起動 | `Ninja` + build root=`/tmp` | noexec 回避のため build root を `/tmp` に変更して再起動。現在 build 進行中。 |
 
 **依存追加対応**
 
 - `pybind11`: `sudo pacman -S pybind11` → configure で `Found pybind11` を確認
 
-**現状**: detached Ninja ビルドの完走が未確認。`rocMLIRConfig.cmake` の生成を確認できれば MIOpen debug ビルドに繋げられる。
+**追加で判明したこと**
+
+- 調査ワークスペース配下の `tmp/` は noexec 相当で、rocMLIR/LLVM ビルド中に生成される補助実行ファイル（例: `llvm-min-tblgen`）を実行できない
+- そのため detached 起動スクリプト `tools/start_rocmlir_build_detached.sh` は、既定 generator を `Ninja`、既定 build root を `/tmp` に変更した
+
+**現状**: `/tmp/rocmlir-build-detached-20260313_172420` で rocMLIR build が進行中。workspace 側 prefix `tmp/rocmlir-prefix-detached-20260313_172420/` に `rocMLIRConfig.cmake` が生成されたら、待機中の監視ジョブから MIOpen debug ビルドへ自動接続する構成に切り替え済み。
 
 ---
 
