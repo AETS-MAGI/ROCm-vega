@@ -128,7 +128,8 @@
 1. 初回失敗: `nlohmann_json` 不足
 2. 対応: `nlohmann-json` 導入
 3. 次の失敗: `Could NOT find rocMLIR` / `Could not find LIBMLIRMIOpen`
-4. 結論:
+4. 結論
+
 - `/opt/rocm` には `rocMLIRConfig.cmake` / `libMLIRMIOpen` が入っていない
 - 先に rocMLIR をローカル install して `rocMLIR_DIR` を渡す必要がある
 
@@ -137,10 +138,13 @@
 1. 初回失敗: `Ninja` 未導入
 2. 再試行（Unix Makefiles）: 長時間 configure 後に進捗停止/割り込み終了が混在
 3. 依存対応: `pybind11` 導入
-4. その後:
+4. その後
+
 - configure ログで `Found pybind11` を確認
 - 完走前の割り込み (`EXIT:130`) が発生
-5. 対応:
+
+5. 対応
+
 - detached 起動スクリプトを導入し、割り込み耐性を確保
 
 ---
@@ -153,10 +157,10 @@
 - ログ: `tmp/rocmlir_build_detached_20260313_165759.log`
 - Prefix: `tmp/rocmlir-prefix-detached-20260313_165759`
 - 未確認:
-- `rocMLIRConfig.cmake` 生成完了
-- MIOpen debug ビルド再開
-- `vega64_int8_force_mlir_fwd` の local-runtime 再実行
-- `src/mlir_build.cpp` 一時ログで分岐最終確定
+	- `rocMLIRConfig.cmake` 生成完了
+	- MIOpen debug ビルド再開
+	- `vega64_int8_force_mlir_fwd` の local-runtime 再実行
+	- `src/mlir_build.cpp` 一時ログで分岐最終確定
 
 ---
 
@@ -171,13 +175,21 @@
 ## 10. 次に実行すべき最短手順
 
 1. detached rocMLIR ログ監視
-- `tail -f tmp/rocmlir_build_detached_20260313_165759.log`
+
+	`tail -f tmp/rocmlir_build_detached_20260313_165759.log`
+
 2. 生成物確認
-- `tmp/rocmlir-prefix-detached-20260313_165759/lib/cmake/rocMLIR/rocMLIRConfig.cmake`
+
+	`tmp/rocmlir-prefix-detached-20260313_165759/lib/cmake/rocMLIR/rocMLIRConfig.cmake`
+
 3. MIOpen debug 再ビルド
-- `ROCMLIR_PREFIX=<detached prefix>` を `build_miopen_debug_local.sh` に渡す
+
+	`ROCMLIR_PREFIX=<detached prefix>` を `build_miopen_debug_local.sh` に渡す
+
 4. local runtime でケース再実行
-- `run_case_with_local_miopen.sh` で `vega64_int8_force_mlir_fwd_local_dbg`
+
+	`run_case_with_local_miopen.sh` で `vega64_int8_force_mlir_fwd_local_dbg`
+
 5. 必要なら `src/mlir_build.cpp` に一時ログを入れて handle/status を採取
 
 ---
