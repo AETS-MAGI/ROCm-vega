@@ -15,10 +15,9 @@
 
 ## 3. Decision
 
-- [fallback_not_confirmed] fallback_confirmed
+- [ ] fallback_confirmed
 - [x] fallback_not_confirmed
-- [fallback_not_confirmed] need_more_cases
-
+- [ ] need_more_cases
 ## 4. Notes
 
 - kernel selected: see log/solver_extract

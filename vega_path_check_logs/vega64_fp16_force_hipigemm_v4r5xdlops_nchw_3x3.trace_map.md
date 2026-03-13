@@ -19,7 +19,6 @@
 - [ ] fallback_confirmed
 - [ ] fallback_not_confirmed
 - [x] need_more_cases
-
 ## 4. Notes
 
 - solver selected: ConvHipImplicitGemmForwardV4R5Xdlops

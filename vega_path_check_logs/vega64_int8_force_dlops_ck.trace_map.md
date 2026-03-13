@@ -23,7 +23,6 @@
 - [ ] fallback_confirmed
 - [ ] fallback_not_confirmed
 - [x] need_more_cases
-
 ## 4. Notes
 
 - solver selected: 強制指定 `ConvCkIgemmFwdV6r1DlopsNchw`（solution_id=114）
