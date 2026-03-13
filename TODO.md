@@ -162,17 +162,18 @@
 
 ### 5.4 重点確認項目
 - [ ] `ConvAsmImplicitGemmV4R1Dynamic*` が本当に選ばれるか確認する
-- [ ] `ConvMlirIgemm*` が実際に落ちるか確認する
+- [x] `ConvMlirIgemm*` が実際に落ちるか確認する
 - [ ] DLOPS 系がどの条件で通るか確認する
 - [x] dot4 非対応時に代替経路へ落ちるか確認する
 
 補足(2026-03-13):
 - `-S ConvAsmImplicitGemmV4R1DynamicFwd_1x1` の強制実行で `CompileSolution` / `ConvolutionForwardImmediate` までは到達したが、GPU memory access fault が発生。自然選択での成立条件確認は未完。
+- `-S ConvMlirIgemmFwd` の強制実行で `MIIR_INVALID_PARAM` と `RunForwardGPU() FAILED, rc = 0x7` を確認。
 
 ### 成果物
 - [x] `trace_map_dynamic.md`
 - [x] `solver_observation_log.md`
-- [ ] `hsaco_disassembly_notes.md`
+- [x] `hsaco_disassembly_notes.md`
 - [ ] `gfx900_vs_other_gpu_diff.md`
 
 ---

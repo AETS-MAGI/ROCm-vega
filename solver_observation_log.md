@@ -9,6 +9,7 @@
 - INT8 では探索した全ケースで `ConvDirectNaiveConvFwd` が選択された。
 - INT8 の検索ログでは `ConvAsmImplicitGemmV4R1Dynamic*` が `Not applicable`、`ConvMlirIgemm*` が `Skipped (non-dynamic)` を繰り返し観測。
 - `-S ConvAsmImplicitGemmV4R1DynamicFwd_1x1` の強制実行では compile/immediate まで進むが、実行時に GPU memory access fault を観測。
+- `-S ConvMlirIgemmFwd` の強制実行では compile/find まで進むが、`MIIR_INVALID_PARAM` で `RunForwardGPU() FAILED (rc=0x7)` を観測。
 
 ## 2. FP32 観測
 
@@ -51,7 +52,7 @@
 ## 5. 未解決
 
 - `ConvAsmImplicitGemmV4R1Dynamic*` が選択される INT8 条件は未発見。
-- `ConvMlirIgemm*` の実行時除外をより直接に示すケース整理が必要。
+- `ConvMlirIgemm*` の自然選択成立条件は未発見（強制実行失敗は確認済み）。
 - 比較GPUとの差分取得が未実施。
 
 ## 6. 強制solverケース (追加)
@@ -64,3 +65,15 @@
   - `ConvolutionForwardImmediate` (`solver_id = ConvAsmImplicitGemmV4R1DynamicFwd_1x1`) 実行
   - `Memory access fault by GPU node-1`
 - 解釈: 自然選択経路と強制実行経路を切り分けて記録できたが、実運用での成立条件は未確定。
+
+## 7. 強制MLIRケース (追加)
+
+- case: `vega64_int8_force_mlir_fwd`
+- command: `convint8 ... -S ConvMlirIgemmFwd`
+- log観測:
+  - `GetSolutions`: `ConvDirectNaiveConvFwd` (id 85)
+  - `solution_id = 98` 指定で `CompileSolution` 実行
+  - `FindSolutionImpl` 中に `Perf Db: record not found for: ConvMlirIgemmFwd`
+  - `miirLowerTuningParams MIIR_INVALID_PARAM`
+  - `RunForwardGPU() FAILED, rc = 0x7` (`__EXIT_CODE=7`)
+- 解釈: `ConvMlirIgemm*` は「skipされる」だけでなく、強制実行条件での実行失敗も直接観測できた。
