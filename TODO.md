@@ -306,6 +306,22 @@
 - [ ] `git blame` / PR / issue による provenance 調査
 - [ ] コミュニティ保守可能範囲の明確化
 
+### 参照先（クローン済みROCm公式リポジトリ）
+- root: `/home/limonene/ROCm-project/tank/docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo`
+- 主要調査対象（現行系）:
+  - `rocm-libraries/projects/miopen/src/solver/conv/conv_ck_igemm_fwd_v6r1_dlops_nchw.cpp`
+  - `rocm-libraries/projects/miopen/src/solver/conv/conv_hip_implicit_gemm_fwd_xdlops.cpp`
+  - `rocm-libraries/projects/miopen/src/solver/conv/conv_hip_implicit_gemm_fwd_v4r5_xdlops.cpp`
+  - `rocm-libraries/projects/miopen/src/hipoc/hipoc_program.cpp` （`Code object build failed`）
+  - `rocm-libraries/projects/miopen/src/mlir_build.cpp` （`MIIR_INVALID_PARAM`）
+  - `rocm-libraries/projects/miopen/src/fin/fin_interface.cpp` （solver id 80/114/128）
+  - `rocm-libraries/projects/miopen/src/include/miopen/conv/solvers.hpp`
+- 補助参照:
+  - `rocm-libraries/projects/miopen/docs/reference/env_variables.rst`
+  - `rocm-libraries/projects/miopen/docs/how-to/debug-log.rst`
+- 履歴比較用（旧実装）:
+  - `00_DEPRECATED/MIOpen/src/...`（同名solver実装・旧registry・旧test）
+
 ### その次
 - [ ] 将来シナリオ整理
 - [ ] 再統合仮説の評価
