@@ -6,6 +6,20 @@
 
 Vega64(gfx900) 実機で、実行時にどの solver / kernel に落ちるかを動的ログから確定する。
 
+## 1.1 失敗モード4分類（判定ヘッダ）
+
+- A: applicability reject
+  - 判定: `not applicable` かつ `rc = 0x3`
+- B: build failure
+  - 判定: `MIIR_INVALID_PARAM` または `Code object build failed` かつ `rc = 0x7`
+- C: runtime/assert abort
+  - 判定: assertion abort または `EXIT=134`
+- D: success
+  - 判定: `MIOpenDriver` 正常終了（失敗シグネチャなし）
+
+注記:
+- 同じ `rc = 0x7` でも、Bの内訳を `MIIR` 系と `code object` 系に分けて記録する。
+
 ## 2. 現時点の経路マップ
 
 ### 2.1 FP32

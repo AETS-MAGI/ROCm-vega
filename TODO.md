@@ -334,11 +334,13 @@
 - [x] 提案ドキュメント初版を作成する
   - [x] `rocmlir_integration_proposal.md`
 - [ ] `rocMLIR` 作業ツリーを展開し、読み取り可能状態を確認する
-- [ ] MIOpen 側の MLIR 接続点を `trace_map_static.md` へ追記する
-- [ ] solver id 80/114/128 の登録点と実装対応を 1 ページに集約する
-- [ ] `MIIR_INVALID_PARAM` 最小再現ケースを 1 ケース固定する
-- [ ] `Code object build failed` の入力ソース生成地点を特定する
-- [ ] 失敗モード4分類（`rc=0x3` / `rc=0x7` / `MIIR_INVALID_PARAM` / `EXIT=134`）を trace_map ヘッダ化する
+- [x] MIOpen 側の MLIR 接続点を `trace_map_static.md` へ追記する
+- [x] solver id 80/114/128 の登録点と実装対応を 1 ページに集約する
+- [x] `MIIR_INVALID_PARAM` 最小再現ケースを 1 ケース固定する
+- [x] `Code object build failed` の入力ソース生成地点を特定する
+- [x] 失敗モード4分類（`rc=0x3` / `rc=0x7` / `MIIR_INVALID_PARAM` / `EXIT=134`）を trace_map ヘッダ化する
 
 補足:
 - 現時点の `rocMLIR` は `.git` のみ確認でき、ソース未展開。展開後にフェーズB（静的結線確認）へ進む。
+- `MIIR_INVALID_PARAM` 最小再現ケースは `vega64_int8_force_mlir_fwd`（`vega_path_check_logs/vega64_int8_force_mlir_fwd.log`）で固定。
+- `Code object build failed` は `hipoc_program.cpp` の `BuildCodeObjectInMemory` にて、拡張子分岐後 `binary.empty()` 判定で throw される。
