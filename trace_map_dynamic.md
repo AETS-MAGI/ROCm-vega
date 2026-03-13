@@ -34,6 +34,26 @@ Vega64(gfx900) 実機で、実行時にどの solver / kernel に落ちるかを
   - `not applicable to the current problem` -> `RunForwardGPU() FAILED, rc = 0x3`
   - 追加グリッド7ケース（NCHW/NHWC, 1x1/3x3, n=1/16/32, g=1/2）でも全件 `not applicable`
   - 追加グリッド8ケース（`-s 1`, C/K=128/256, stride1/2, g=1/2）でも全件 `not applicable`
+- 強制solverケース (`-S ConvHipImplicitGemmFwdXdlops`) では:
+  - `CompileSolution` / `GetInvoker` / `FindSolutionImpl` まで進行
+  - `std::vector<...>::operator[]` assertion (`__n < this->size()`) で abort (`EXIT=134`)
+- 強制solverケース (`-S ConvHipImplicitGemmForwardV4R5Xdlops`) では:
+  - `CompileSolution` / `GetInvoker` / `FindSolutionImpl` まで進行
+  - xdlops kernel compile失敗 (`intrin_mfma_*` / `gcnasm_mfma_*` / `FLOAT`)
+  - `Code object build failed` -> `RunForwardGPU() FAILED, rc = 0x7`
+- 強制solverケース (`-S ConvHipImplicitGemmGroupFwdXdlops`, g=2) では:
+  - `not applicable to the current problem` -> `RunForwardGPU() FAILED, rc = 0x3`
+
+### 2.3 dtype 軸（同形状3x3）
+
+- FP16 (`convfp16`):
+  - `ConvOclDirectFwd` -> `miopenConvolutionFwdAlgoDirect`
+  - elapsed: `4.319100 ms`
+- BFP16 (`convbfp16`):
+  - `GemmFwdRest` -> `miopenConvolutionFwdAlgoGEMM`
+  - elapsed: `5.411226 ms`
+- 含意:
+  - 同一problemでも dtype で solver family が分岐する。
 
 ## 3. 補助観測
 
@@ -43,6 +63,9 @@ Vega64(gfx900) 実機で、実行時にどの solver / kernel に落ちるかを
 - 強制指定時は `solution_id=63` で `ConvAsmImplicitGemmV4R1DynamicFwd_1x1` の実行に進むが、当該条件では実行完了せずfaultで停止。
 - 強制指定時は `solution_id=98` で `ConvMlirIgemmFwd` の実行に進むが、当該条件では `MIIR_INVALID_PARAM` で失敗。
 - 強制指定時は `solution_id=114` で `ConvCkIgemmFwdV6r1DlopsNchw` を試行するが、当該条件では `not applicable` で失敗。
+- 強制指定時は `ConvHipImplicitGemmFwdXdlops` を試行すると、適用判定の先で assertion abort に到達する。
+- 強制指定時は `ConvHipImplicitGemmForwardV4R5Xdlops` を試行すると、kernel compile失敗で `rc=0x7` に到達する。
+- 強制指定時は `ConvHipImplicitGemmGroupFwdXdlops` を試行すると、当該条件では `not applicable` で失敗する。
 
 ## 4. 判定
 

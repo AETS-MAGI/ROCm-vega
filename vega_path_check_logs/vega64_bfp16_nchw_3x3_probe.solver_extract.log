@@ -1,0 +1,3 @@
+181:MIOpen(HIP): Info [FindSolutionImpl] GemmFwdRest (not searchable)
+183:MIOpen(HIP): Info2 [SetAsFound1_0] Solver GemmFwdRest registered as find 1.0 best for miopenConvolutionFwdAlgoGEMM in 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault
+220:MIOpen(HIP): Info2 [LoadBinary] Successfully loaded binary for: "MIOpenIm2d2Col.cpp.o"; args:  -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1 -DMIOPEN_USE_FP16=0 -DMIOPEN_USE_FP16x4=0 -DMIOPEN_USE_FP16x8=0 -DMIOPEN_USE_FP32=0 -DMIOPEN_USE_INT8=0 -DMIOPEN_USE_BFP16=1 -DMIOPEN_USE_INT32=0 -DMIOPEN_USE_RNE_BFLOAT16=1 -DMIOPEN_FP8_IEEE_EXPONENT_BIAS=0 -DMIOPEN_FP8_CLIPPING=1 -mcpu=gfx900

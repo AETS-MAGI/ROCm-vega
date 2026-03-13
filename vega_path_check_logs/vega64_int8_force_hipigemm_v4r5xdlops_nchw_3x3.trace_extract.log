@@ -1,0 +1,17 @@
+1:MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -s 1 -F 1 -t 1 -S ConvHipImplicitGemmForwardV4R5Xdlops
+176:MIOpen(HIP): Info [GetForwardSolutionWorkspaceSize] solver_id = ConvHipImplicitGemmForwardV4R5Xdlops
+185:MIOpen(HIP): Info [CompileSolution] solver_id = ConvHipImplicitGemmForwardV4R5Xdlops
+186:MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x3x3x64x56x56x32xNCHWxINT8x1x1x1x1x1x1x1xFxDefault and solver ConvHipImplicitGemmForwardV4R5Xdlops
+187:MIOpen(HIP): Info [FindSolutionImpl] ConvHipImplicitGemmForwardV4R5Xdlops
+206:MIOpen(HIP): Info [FindSolutionImpl] Perf Db: record not found for: ConvHipImplicitGemmForwardV4R5Xdlops
+231:   64 |         return intrin_mfma_f32_32x32x1f32<MPerXdlops, NPerXdlops, AStride, BStride>::run(
+234:  198 |         return intrin_mfma_f32_4x4x1f32<MPerXdlops, NPerXdlops>::run(p_a, p_b, reg_c);
+237:  231 |         return intrin_mfma_f32_32x32x4f16<MPerXdlops, NPerXdlops, AStride, BStride>::run(
+240:  364 |         return intrin_mfma_f32_4x4x4f16<MPerXdlops, NPerXdlops>::run(p_a, p_b, reg_c);
+243:  397 |         return intrin_mfma_f32_32x32x2bf16<MPerXdlops, NPerXdlops, AStride, BStride>::run(
+246:  530 |         return intrin_mfma_f32_4x4x2bf16<MPerXdlops, NPerXdlops>::run(p_a, p_b, reg_c);
+253:   36 |         gcnasm_mfma_f32_32x32x1f32<MPerXdlops, NPerXdlops, AStride, BStride>{}.run(p_a, p_b);
+262:  172 |         gcnasm_mfma_f32_32x32x4f16<MPerXdlops, NPerXdlops, AStride, BStride>{}.run(p_a, p_b);
+271:  307 |         gcnasm_mfma_f32_32x32x2bf16<MPerXdlops, NPerXdlops, AStride, BStride>{}.run(p_a, p_b);
+292:MIOpen Error: abyss-hbmx:/usr/src/debug/miopen-hip/rocm-libraries/projects/miopen/src/hipoc/hipoc_program.cpp:299: Code object build failed. Source: static_kernel_gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw.cpp
+293:RunForwardGPU() FAILED, rc = 0x7

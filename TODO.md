@@ -172,6 +172,10 @@
 - `-S ConvCkIgemmFwdV6r1DlopsNchw` の強制実行で `not applicable to the current problem` と `RunForwardGPU() FAILED, rc = 0x3` を確認。
 - `ConvCkIgemmFwdV6r1DlopsNchw` の強制グリッド7ケース（NCHW/NHWC, 1x1/3x3, n=1/16/32, g=1/2）でも全件 `not applicable`（rc=0x3）。
 - `ConvCkIgemmFwdV6r1DlopsNchw` の強制グリッド8ケース（`-s 1`, C/K=128/256, stride1/2, g=1/2）でも全件 `not applicable`（rc=0x3）。
+- `ConvHipImplicitGemmFwdXdlops` 強制実行では `CompileSolution`/`FindSolutionImpl` まで進むが、`std::vector::operator[]` assertion で abort (`EXIT=134`)。
+- `ConvHipImplicitGemmForwardV4R5Xdlops` 強制実行では xdlops kernel compile失敗 (`intrin_mfma_*` / `gcnasm_mfma_*` / `FLOAT`) で `Code object build failed` -> `RunForwardGPU() FAILED, rc = 0x7`。
+- `ConvHipImplicitGemmGroupFwdXdlops` (`g=2`) 強制実行では `not applicable` -> `RunForwardGPU() FAILED, rc = 0x3`。
+- dtype軸同形状（3x3, NCHW, n16/c64/k64）で、FP16は `ConvOclDirectFwd`、BFP16は `GemmFwdRest` に分岐することを確認。
 
 ### 成果物
 - [x] `trace_map_dynamic.md`

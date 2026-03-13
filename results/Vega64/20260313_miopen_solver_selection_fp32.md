@@ -113,6 +113,31 @@ bash run_vega_path_case.sh vega64_fp32_nchw_1x1_fwd_n32 -- \
 - 結果: 全件 `not applicable to the current problem` + `RunForwardGPU() FAILED, rc = 0x3`
 - 解釈: `-s 1` と C/K極値を入れても DLOPS 成立条件に到達できず、現状は適用不可が一貫。
 
+13. INT8 強制HipImplicitGemm Xdlops（solver family 切り分け）
+- `vega64_int8_force_hipigemm_fwdxdlops_nchw_3x3`
+  - command: `convint8 ... -S ConvHipImplicitGemmFwdXdlops`
+  - 観測: `CompileSolution` / `GetInvoker` / `FindSolutionImpl` までは進行
+  - 結果: `std::vector<...>::operator[]` assertion (`__n < this->size()`) で abort (`EXIT=134`)
+- `vega64_int8_force_hipigemm_v4r5xdlops_nchw_3x3`
+  - command: `convint8 ... -S ConvHipImplicitGemmForwardV4R5Xdlops`
+  - 観測: `CompileSolution` / `GetInvoker` / `FindSolutionImpl` までは進行
+  - 結果: xdlops kernel compile failure (`no template named intrin_mfma_*`, `gcnasm_mfma_* undeclared`, `FLOAT unknown`) -> `Code object build failed` -> `RunForwardGPU() FAILED, rc = 0x7`
+- `vega64_int8_force_hipigemm_groupfwdxdlops_nchw_g2_3x3`
+  - command: `convint8 ... -g 2 ... -S ConvHipImplicitGemmGroupFwdXdlops`
+  - 観測/結果: `not applicable to the current problem` -> `RunForwardGPU() FAILED, rc = 0x3`
+- 解釈: CK DLOPS とは異なる失敗モード（abort / compile失敗 / not applicable）が確認でき、solver familyごとに失敗境界が異なる。
+
+14. dtype 軸プローブ（同形状 3x3）
+- `vega64_fp16_nchw_3x3_probe`
+  - command: `convfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -s 1 -F 1 -t 1`
+  - solver: `ConvOclDirectFwd` (`miopenConvolutionFwdAlgoDirect`)
+  - elapsed: `4.319100 ms`
+- `vega64_bfp16_nchw_3x3_probe`
+  - command: `convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -s 1 -F 1 -t 1`
+  - solver: `GemmFwdRest` (`miopenConvolutionFwdAlgoGEMM`, Solution `91/GemmFwdRest`)
+  - elapsed: `5.411226 ms`
+- 解釈: 同一problemでも FP16/BFP16 で solver family が分岐した（Direct vs GEMM）。
+
 ## 根拠リンク（ログ）
 
 - /home/limonene/vega_path_check_logs/vega64_fp32_nchw_3x3_fwd_n32.log
@@ -178,6 +203,21 @@ bash run_vega_path_case.sh vega64_fp32_nchw_1x1_fwd_n32 -- \
 - /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_s1_nchw_3x3_n32_c128_k128_g2.log
 - /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_s1_nhwc_1x1_n16_c128_k128.log
 - /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_s1_nhwc_3x3_n16_c128_k128.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_hipigemm_fwdxdlops_nchw_3x3.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_hipigemm_fwdxdlops_nchw_3x3.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_hipigemm_fwdxdlops_nchw_3x3.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_int8_force_hipigemm_v4r5xdlops_nchw_3x3.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_hipigemm_v4r5xdlops_nchw_3x3.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_hipigemm_v4r5xdlops_nchw_3x3.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_int8_force_hipigemm_groupfwdxdlops_nchw_g2_3x3.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_hipigemm_groupfwdxdlops_nchw_g2_3x3.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_hipigemm_groupfwdxdlops_nchw_g2_3x3.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_fp16_nchw_3x3_probe.log
+- /home/limonene/vega_path_check_logs/vega64_fp16_nchw_3x3_probe.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_fp16_nchw_3x3_probe.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_bfp16_nchw_3x3_probe.log
+- /home/limonene/vega_path_check_logs/vega64_bfp16_nchw_3x3_probe.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_bfp16_nchw_3x3_probe.trace_map.md
 
 ## 判定
 
@@ -223,3 +263,7 @@ rg -n "v_dot4_i32_i8|v_dot4c_i32_i8|sdot4|sudot4" /tmp/miopen_extract/naive_conv
 - `-S ConvAsmImplicitGemmV4R1DynamicFwd_1x1` の強制実行では immediate まで進行したが、実行時に GPU memory access fault で停止した。
 - `-S ConvMlirIgemmFwd` の強制実行では `CompileSolution` まで進むが、`MIIR_INVALID_PARAM` により `RunForwardGPU()` が失敗した。
 - `-S ConvCkIgemmFwdV6r1DlopsNchw` の強制実行では `not applicable to the current problem` で `RunForwardGPU() FAILED (rc=0x3)` となった。
+- `-S ConvHipImplicitGemmFwdXdlops` の強制実行では `FindSolutionImpl` 後に `std::vector::operator[]` assertion で abort (`EXIT=134`)。
+- `-S ConvHipImplicitGemmForwardV4R5Xdlops` の強制実行では xdlops kernel compile failure で `Code object build failed` -> `RunForwardGPU() FAILED (rc=0x7)`。
+- `-S ConvHipImplicitGemmGroupFwdXdlops` (`g=2`) の強制実行では `not applicable` で `RunForwardGPU() FAILED (rc=0x3)`。
+- 同形状 3x3 で dtype を FP16/BFP16 に変えると、FP16 は `ConvOclDirectFwd`、BFP16 は `GemmFwdRest` が選択された。

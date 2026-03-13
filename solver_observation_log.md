@@ -107,3 +107,44 @@
   - `The supplied solution id ... is not applicable to the current problem`
   - `RunForwardGPU() FAILED, rc = 0x3`
 - 解釈: search有効化とC/K極値を加えても適用不可は不変。次は別DLOPS solver familyの切り分けが必要。
+
+## 11. 強制HipImplicitGemm Xdlops (追加)
+
+- case: `vega64_int8_force_hipigemm_fwdxdlops_nchw_3x3`
+- command: `convint8 ... -S ConvHipImplicitGemmFwdXdlops`
+- log観測:
+  - `GetForwardSolutionWorkspaceSize` (`solver_id = ConvHipImplicitGemmFwdXdlops`)
+  - `CompileSolution` -> `GetInvoker` -> `FindSolutionImpl`
+  - `std::vector<std::basic_string<char>>::operator[] ... Assertion '__n < this->size()' failed`
+  - 実行は abort (`EXIT=134`)
+
+- case: `vega64_int8_force_hipigemm_v4r5xdlops_nchw_3x3`
+- command: `convint8 ... -S ConvHipImplicitGemmForwardV4R5Xdlops`
+- log観測:
+  - `GetForwardSolutionWorkspaceSize` (`solver_id = ConvHipImplicitGemmForwardV4R5Xdlops`)
+  - `CompileSolution` -> `GetInvoker` -> `FindSolutionImpl`
+  - xdlops kernel compile失敗 (`intrin_mfma_*`/`gcnasm_mfma_*`/`FLOAT` 関連)
+  - `Code object build failed` -> `RunForwardGPU() FAILED, rc = 0x7`
+
+- case: `vega64_int8_force_hipigemm_groupfwdxdlops_nchw_g2_3x3`
+- command: `convint8 ... -g 2 ... -S ConvHipImplicitGemmGroupFwdXdlops`
+- log観測:
+  - `solver_id = ConvHipImplicitGemmGroupFwdXdlops`
+  - `The supplied solution id ... is not applicable to the current problem`
+  - `RunForwardGPU() FAILED, rc = 0x3`
+
+- 解釈: HipImplicitGemm系Xdlopsでは、`not applicable` だけでなく abort と compile failure も観測され、solver familyで失敗様式が分岐する。
+
+## 12. dtype 軸プローブ (追加)
+
+- case: `vega64_fp16_nchw_3x3_probe`
+  - solver: `ConvOclDirectFwd`
+  - algorithm: `miopenConvolutionFwdAlgoDirect` (Solution `11/ConvOclDirectFwd`)
+  - elapsed: `4.319100 ms`
+
+- case: `vega64_bfp16_nchw_3x3_probe`
+  - solver: `GemmFwdRest`
+  - algorithm: `miopenConvolutionFwdAlgoGEMM` (Solution `91/GemmFwdRest`)
+  - elapsed: `5.411226 ms`
+
+- 解釈: 同一problemでも dtype により solver family が切り替わることを実測で確認。

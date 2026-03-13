@@ -1,0 +1,38 @@
+1:MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -s 1 -F 1 -t 1 -S ConvHipImplicitGemmForwardV4R5Xdlops
+176:MIOpen(HIP): Info [GetForwardSolutionWorkspaceSize] solver_id = ConvHipImplicitGemmForwardV4R5Xdlops
+177:MIOpen(HIP): miopenStatus_t miopenConvolutionForwardCompileSolution(miopenHandle_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, const miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, const uint64_t){
+185:MIOpen(HIP): Info [CompileSolution] solver_id = ConvHipImplicitGemmForwardV4R5Xdlops
+186:MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x3x3x64x56x56x32xNCHWxINT8x1x1x1x1x1x1x1xFxDefault and solver ConvHipImplicitGemmForwardV4R5Xdlops
+187:MIOpen(HIP): Info [FindSolutionImpl] ConvHipImplicitGemmForwardV4R5Xdlops
+206:MIOpen(HIP): Info [FindSolutionImpl] Perf Db: record not found for: ConvHipImplicitGemmForwardV4R5Xdlops
+230:/tmp/comgr-551684-4-206abb/include/static_kernel_xdlops_gemm.hpp:64:16: error: no template named 'intrin_mfma_f32_32x32x1f32'
+231:   64 |         return intrin_mfma_f32_32x32x1f32<MPerXdlops, NPerXdlops, AStride, BStride>::run(
+233:/tmp/comgr-551684-4-206abb/include/static_kernel_xdlops_gemm.hpp:198:16: error: no template named 'intrin_mfma_f32_4x4x1f32'
+234:  198 |         return intrin_mfma_f32_4x4x1f32<MPerXdlops, NPerXdlops>::run(p_a, p_b, reg_c);
+236:/tmp/comgr-551684-4-206abb/include/static_kernel_xdlops_gemm.hpp:231:16: error: no template named 'intrin_mfma_f32_32x32x4f16'
+237:  231 |         return intrin_mfma_f32_32x32x4f16<MPerXdlops, NPerXdlops, AStride, BStride>::run(
+239:/tmp/comgr-551684-4-206abb/include/static_kernel_xdlops_gemm.hpp:364:16: error: no template named 'intrin_mfma_f32_4x4x4f16'
+240:  364 |         return intrin_mfma_f32_4x4x4f16<MPerXdlops, NPerXdlops>::run(p_a, p_b, reg_c);
+242:/tmp/comgr-551684-4-206abb/include/static_kernel_xdlops_gemm.hpp:397:16: error: no template named 'intrin_mfma_f32_32x32x2bf16'
+243:  397 |         return intrin_mfma_f32_32x32x2bf16<MPerXdlops, NPerXdlops, AStride, BStride>::run(
+245:/tmp/comgr-551684-4-206abb/include/static_kernel_xdlops_gemm.hpp:530:16: error: no template named 'intrin_mfma_f32_4x4x2bf16'
+246:  530 |         return intrin_mfma_f32_4x4x2bf16<MPerXdlops, NPerXdlops>::run(p_a, p_b, reg_c);
+252:/tmp/comgr-551684-4-206abb/include/static_kernel_xdlops_gemm_inline_asm.hpp:36:9: error: use of undeclared identifier 'gcnasm_mfma_f32_32x32x1f32'
+253:   36 |         gcnasm_mfma_f32_32x32x1f32<MPerXdlops, NPerXdlops, AStride, BStride>{}.run(p_a, p_b);
+255:/tmp/comgr-551684-4-206abb/include/static_kernel_xdlops_gemm_inline_asm.hpp:63:9: error: use of undeclared identifier 'gcnasm_mfma_f32_32x32x2f32'
+258:/tmp/comgr-551684-4-206abb/include/static_kernel_xdlops_gemm_inline_asm.hpp:90:9: error: use of undeclared identifier 'gcnasm_mfma_f32_16x16x4f32'
+261:/tmp/comgr-551684-4-206abb/include/static_kernel_xdlops_gemm_inline_asm.hpp:172:9: error: use of undeclared identifier 'gcnasm_mfma_f32_32x32x4f16'
+262:  172 |         gcnasm_mfma_f32_32x32x4f16<MPerXdlops, NPerXdlops, AStride, BStride>{}.run(p_a, p_b);
+264:/tmp/comgr-551684-4-206abb/include/static_kernel_xdlops_gemm_inline_asm.hpp:199:9: error: use of undeclared identifier 'gcnasm_mfma_f32_32x32x8f16'
+267:/tmp/comgr-551684-4-206abb/include/static_kernel_xdlops_gemm_inline_asm.hpp:226:9: error: use of undeclared identifier 'gcnasm_mfma_f32_16x16x16f16'
+270:/tmp/comgr-551684-4-206abb/include/static_kernel_xdlops_gemm_inline_asm.hpp:307:9: error: use of undeclared identifier 'gcnasm_mfma_f32_32x32x2bf16'
+271:  307 |         gcnasm_mfma_f32_32x32x2bf16<MPerXdlops, NPerXdlops, AStride, BStride>{}.run(p_a, p_b);
+273:/tmp/comgr-551684-4-206abb/include/static_kernel_xdlops_gemm_inline_asm.hpp:334:9: error: use of undeclared identifier 'gcnasm_mfma_f32_32x32x4bf16'
+276:/tmp/comgr-551684-4-206abb/include/static_kernel_xdlops_gemm_inline_asm.hpp:361:9: error: use of undeclared identifier 'gcnasm_mfma_f32_16x16x8bf16'
+279:/tmp/comgr-551684-4-206abb/input/static_kernel_gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw.cpp:7:15: error: unknown type name 'FLOAT'
+282:/tmp/comgr-551684-4-206abb/input/static_kernel_gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw.cpp:8:15: error: unknown type name 'FLOAT'
+285:/tmp/comgr-551684-4-206abb/input/static_kernel_gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw.cpp:9:9: error: unknown type name 'FLOAT'
+288:/tmp/comgr-551684-4-206abb/input/static_kernel_gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw.cpp:151:13: error: use of undeclared identifier 'FLOAT'
+292:MIOpen Error: abyss-hbmx:/usr/src/debug/miopen-hip/rocm-libraries/projects/miopen/src/hipoc/hipoc_program.cpp:299: Code object build failed. Source: static_kernel_gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw.cpp
+293:RunForwardGPU() FAILED, rc = 0x7
+294:Forward Convolution FAILED: 1.79769e+308 > 1.5e-06

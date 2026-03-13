@@ -1,0 +1,1249 @@
+MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -s 1 -F 1 -t 1
+MIOpen(HIP): Info [get_device_name] Raw device name: gfx900:xnack-
+MIOpen(HIP): Info [Handle] stream: 0x562dba1c4390, device_id: 0
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateConvolutionDescriptor(miopenConvolutionDescriptor_t *){
+MIOpen(HIP): 	convDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): Info [] MIOPEN_FIND_MODE = DYNAMIC_HYBRID(5)
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 5
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 16 64 56 56 }
+MIOpen(HIP): 	stride.values = { 200704 3136 56 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 5
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 64 64 3 3 }
+MIOpen(HIP): 	stride.values = { 576 9 3 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenInitConvolutionNdDescriptor(miopenConvolutionDescriptor_t, int, const int *, const int *, const int *, miopenConvolutionMode_t){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	spatialDim = 2
+MIOpen(HIP): 	pads = { 1 1 }
+MIOpen(HIP): 	strides = { 1 1 }
+MIOpen(HIP): 	dilations = { 1 1 }
+MIOpen(HIP): 	c_mode = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetConvolutionGroupCount(miopenConvolutionDescriptor_t, int){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	groupCount = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetConvolutionNdForwardOutputDim(miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, int *, int *){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	inputTensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	filterDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 5
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 16 64 56 56 }
+MIOpen(HIP): 	stride.values = { 200704 3136 56 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	n = 1601467759
+MIOpen(HIP): 	c = 1953718627
+MIOpen(HIP): 	h = 1887007839
+MIOpen(HIP): 	w = 101
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	vectorLength = 140720567103960
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	n = 1881711448
+MIOpen(HIP): 	c = 32715
+MIOpen(HIP): 	h = 56
+MIOpen(HIP): 	w = 56
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	vectorLength = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	n = 1881711448
+MIOpen(HIP): 	c = 32715
+MIOpen(HIP): 	h = 3
+MIOpen(HIP): 	w = 3
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	vectorLength = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenConvolutionForwardGetWorkSpaceSize(miopenHandle_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, const miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, size_t *){
+MIOpen(HIP): 	handle = stream: 0x562dba1c4390, device_id: 0
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): Info [AmdRocmMetadataVersionDetect] ROCm MD version AMDHSA_COv3, HIP version 7.2.26043, MIOpen version 3.5.1.5b515cf1bca-dirty
+MIOpen(HIP): Info2 [GetWorkSpaceSize] 
+MIOpen(HIP): Info [GetSolutions] 
+MIOpen(HIP): Info [IsNetworkedFilesystem] Filesystem type at '"/home/limonene/.config/miopen/"' is: 0x9123683e '<Unknown magic>'
+MIOpen(HIP): Info2 [GetLibPath] Lib Path: "/opt/rocm/lib/libMIOpen.so.1.0"
+MIOpen(HIP): Info2 [GetInstalledPathFile] Found exact find database file: "/opt/rocm/share/miopen/db/gfx900_64.HIP.fdb.txt"
+MIOpen(HIP): Info [Measure] ReadonlyRamDb::Prefetch time: 37.1463 ms
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info [Measure] RamDb::Prefetch time: 0.025619 ms
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.551295
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.551295
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [ValidateUnsafe] DB file is older than cache: 561340469424929, 561492717202002
+MIOpen(HIP): Info2 [FindRecordUnsafe] Looking for key 64-56-56-3x3-64-56-56-16-1x1-1x1-1x1-0-NCHW-BF16-F in cache for file "/home/limonene/.config/miopen/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt"
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.551295
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.551295
+MIOpen(HIP): Info2 [Measure] Db::FindRecord time: 0.18823 ms
+MIOpen(HIP): Info2 [GetSolutions] GemmFwdRest
+MIOpen(HIP): Info [GetWorkSpaceSize] 3612672
+PRNG seed: 12345678
+MIOpen(HIP): MIOpenDriver Info2 [GPUMem] hipMalloc 6422528 at 0x7fca3aa00000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [GPUMem] hipMalloc 73728 at 0x7fca40400000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [GPUMem] hipMalloc 6422528 at 0x7fca38e00000 Ok
+Timestamp: 2026-03-13 02:58:15 UTC; Host Name: abyss-hbmx; Operating System: Linux 6.18.16-1-lts; ROCm: 7.2.26043; MIOpen Driver: 3.5.1; CPU Vendor: AMD; CPU Model: 1 x Ryzen Threadripper; RAM Size: 62 GB; GPU Model: 1 x AMD Radeon RX Vega; AMDGPU Driver: 0.0.0
+MIOpen(HIP): MIOpenDriver Info2 [GPUMem] hipMalloc 3612672 at 0x7fca38800000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [DebugPrintWorkspaceDev] ptr=0x7fca38800000 size=3612672
+MIOpen(HIP): miopenStatus_t miopenFindConvolutionForwardAlgorithm(miopenHandle_t, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, void *, const int, int *, miopenConvAlgoPerf_t *, void *, size_t, bool){
+MIOpen(HIP): 	handle = stream: 0x562dba1c4390, device_id: 0
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7fca3aa00000
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7fca40400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7fca38e00000
+MIOpen(HIP): 	requestAlgoCount = 2
+MIOpen(HIP): 	returnedAlgoCount = 32764
+MIOpen(HIP): 	perfResults = 
+MIOpen(HIP): 	workSpace = 0x7fca38800000
+MIOpen(HIP): 	workSpaceSize = 3612672
+MIOpen(HIP): 	exhaustiveSearch = 1
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdFindConvolution] ./bin/MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [FindConvFwdAlgorithm] requestAlgoCount = 2, workspace = 3612672
+MIOpen(HIP): Info [GetSolutions] 
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [ValidateUnsafe] DB file is older than cache: 561340469424929, 561492717202002
+MIOpen(HIP): Info2 [FindRecordUnsafe] Looking for key 64-56-56-3x3-64-56-56-16-1x1-1x1-1x1-0-NCHW-BF16-F in cache for file "/home/limonene/.config/miopen/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt"
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.551295
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.551295
+MIOpen(HIP): Info2 [Measure] Db::FindRecord time: 0.411167 ms
+MIOpen(HIP): Info2 [GetSolutions] GemmFwdRest
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault and solver GemmFwdRest
+MIOpen(HIP): Info [FindSolutionImpl] GemmFwdRest (not searchable)
+MIOpen(HIP): Info2 [Register] Invoker registered for algorithm 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault and solver GemmFwdRest
+MIOpen(HIP): Info2 [SetAsFound1_0] Solver GemmFwdRest registered as find 1.0 best for miopenConvolutionFwdAlgoGEMM in 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault
+MIOpen(HIP): Info [FindConvolution] miopenConvolutionFwdAlgoGEMM	5.35646	3612672
+MIOpen(HIP): Info [FillFindReturnParameters] FW Chosen Algorithm: GemmFwdRest , 3612672, 5.35646
+MIOpen(HIP): MIOpenDriver Info2 [~GPUMem] hipFree 3612672 at 0x7fca38800000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [GPUMem] hipMalloc 3612672 at 0x7fca38800000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [DebugPrintWorkspaceDev] ptr=0x7fca38800000 size=3612672
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x562dba1c4390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffc0f6a3154
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7fca3aa00000
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7fca40400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 0
+MIOpen(HIP): 	beta = 0x7ffc0f6a3158
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7fca38e00000
+MIOpen(HIP): 	workSpace = 0x7fca38800000
+MIOpen(HIP): 	workSpaceSize = 3612672
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 0, workspace = 3612672
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoGEMM
+MIOpen(HIP): auto miopen::solver::conv::GemmFwdRest::GetSolution(const ExecutionContext &, const ProblemDescription &)::(anonymous class)::operator()(const std::vector<Kernel> &)::(anonymous class)::operator()(const Handle &, const AnyInvokeParams &) const{
+MIOpen(HIP): 	name + ", non 1x1" = convolution, non 1x1
+MIOpen(HIP): }
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info [IsNetworkedFilesystem] Filesystem type at '"/home/limonene/.cache/miopen/3.5.1.5b515cf1bca-dirty"' is: 0x9123683e '<Unknown magic>'
+MIOpen(HIP): Info2 [SQLiteBase] Initializing system database file ""
+MIOpen(HIP): Info [KernDb] database not present
+MIOpen(HIP): Info2 [SQLiteBase] Initializing user database file "/home/limonene/.cache/miopen/3.5.1.5b515cf1bca-dirty/gfx900_64.ukdb"
+MIOpen(HIP): Info2 [KernDb] Database created successfully
+MIOpen(HIP): Info2 [LoadBinary] Loading binary for: "MIOpenIm2d2Col.cpp.o"; args:  -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1 -DMIOPEN_USE_FP16=0 -DMIOPEN_USE_FP16x4=0 -DMIOPEN_USE_FP16x8=0 -DMIOPEN_USE_FP32=0 -DMIOPEN_USE_INT8=0 -DMIOPEN_USE_BFP16=1 -DMIOPEN_USE_INT32=0 -DMIOPEN_USE_RNE_BFLOAT16=1 -DMIOPEN_FP8_IEEE_EXPONENT_BIAS=0 -DMIOPEN_FP8_CLIPPING=1 -mcpu=gfx900
+MIOpen(HIP): Info2 [Prepare] SELECT kernel_blob, kernel_hash, uncompressed_size FROM kern_db WHERE (kernel_name = 'MIOpenIm2d2Col.cpp.o') AND (kernel_args = ' -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1 -DMIOPEN_USE_FP16=0 -DMIOPEN_USE_FP16x4=0 -DMIOPEN_USE_FP16x8=0 -DMIOPEN_USE_FP32=0 -DMIOPEN_USE_INT8=0 -DMIOPEN_USE_BFP16=1 -DMIOPEN_USE_INT32=0 -DMIOPEN_USE_RNE_BFLOAT16=1 -DMIOPEN_FP8_IEEE_EXPONENT_BIAS=0 -DMIOPEN_FP8_CLIPPING=1 -mcpu=gfx900');
+MIOpen(HIP): Info2 [Measure] Db::FindRecord time: 0.344539 ms
+MIOpen(HIP): Info2 [LoadBinary] Successfully loaded binary for: "MIOpenIm2d2Col.cpp.o"; args:  -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1 -DMIOPEN_USE_FP16=0 -DMIOPEN_USE_FP16x4=0 -DMIOPEN_USE_FP16x8=0 -DMIOPEN_USE_FP32=0 -DMIOPEN_USE_INT8=0 -DMIOPEN_USE_BFP16=1 -DMIOPEN_USE_INT32=0 -DMIOPEN_USE_RNE_BFLOAT16=1 -DMIOPEN_FP8_IEEE_EXPONENT_BIAS=0 -DMIOPEN_FP8_CLIPPING=1 -mcpu=gfx900
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x562dba1c4390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffc0f6a3154
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7fca3aa00000
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7fca40400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 0
+MIOpen(HIP): 	beta = 0x7ffc0f6a3158
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7fca38e00000
+MIOpen(HIP): 	workSpace = 0x7fca38800000
+MIOpen(HIP): 	workSpaceSize = 3612672
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 0, workspace = 3612672
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoGEMM
+MIOpen(HIP): auto miopen::solver::conv::GemmFwdRest::GetSolution(const ExecutionContext &, const ProblemDescription &)::(anonymous class)::operator()(const std::vector<Kernel> &)::(anonymous class)::operator()(const Handle &, const AnyInvokeParams &) const{
+MIOpen(HIP): 	name + ", non 1x1" = convolution, non 1x1
+MIOpen(HIP): }
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x562dba1c4390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffc0f6a3154
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7fca3aa00000
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7fca40400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 0
+MIOpen(HIP): 	beta = 0x7ffc0f6a3158
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7fca38e00000
+MIOpen(HIP): 	workSpace = 0x7fca38800000
+MIOpen(HIP): 	workSpaceSize = 3612672
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 0, workspace = 3612672
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoGEMM
+MIOpen(HIP): auto miopen::solver::conv::GemmFwdRest::GetSolution(const ExecutionContext &, const ProblemDescription &)::(anonymous class)::operator()(const std::vector<Kernel> &)::(anonymous class)::operator()(const Handle &, const AnyInvokeParams &) const{
+MIOpen(HIP): 	name + ", non 1x1" = convolution, non 1x1
+MIOpen(HIP): }
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x562dba1c4390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffc0f6a3154
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7fca3aa00000
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7fca40400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 0
+MIOpen(HIP): 	beta = 0x7ffc0f6a3158
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7fca38e00000
+MIOpen(HIP): 	workSpace = 0x7fca38800000
+MIOpen(HIP): 	workSpaceSize = 3612672
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 0, workspace = 3612672
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoGEMM
+MIOpen(HIP): auto miopen::solver::conv::GemmFwdRest::GetSolution(const ExecutionContext &, const ProblemDescription &)::(anonymous class)::operator()(const std::vector<Kernel> &)::(anonymous class)::operator()(const Handle &, const AnyInvokeParams &) const{
+MIOpen(HIP): 	name + ", non 1x1" = convolution, non 1x1
+MIOpen(HIP): }
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x562dba1c4390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffc0f6a3154
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7fca3aa00000
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7fca40400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 0
+MIOpen(HIP): 	beta = 0x7ffc0f6a3158
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7fca38e00000
+MIOpen(HIP): 	workSpace = 0x7fca38800000
+MIOpen(HIP): 	workSpaceSize = 3612672
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 0, workspace = 3612672
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoGEMM
+MIOpen(HIP): auto miopen::solver::conv::GemmFwdRest::GetSolution(const ExecutionContext &, const ProblemDescription &)::(anonymous class)::operator()(const std::vector<Kernel> &)::(anonymous class)::operator()(const Handle &, const AnyInvokeParams &) const{
+MIOpen(HIP): 	name + ", non 1x1" = convolution, non 1x1
+MIOpen(HIP): }
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x562dba1c4390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffc0f6a3154
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7fca3aa00000
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7fca40400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 0
+MIOpen(HIP): 	beta = 0x7ffc0f6a3158
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7fca38e00000
+MIOpen(HIP): 	workSpace = 0x7fca38800000
+MIOpen(HIP): 	workSpaceSize = 3612672
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 0, workspace = 3612672
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoGEMM
+MIOpen(HIP): auto miopen::solver::conv::GemmFwdRest::GetSolution(const ExecutionContext &, const ProblemDescription &)::(anonymous class)::operator()(const std::vector<Kernel> &)::(anonymous class)::operator()(const Handle &, const AnyInvokeParams &) const{
+MIOpen(HIP): 	name + ", non 1x1" = convolution, non 1x1
+MIOpen(HIP): }
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x562dba1c4390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffc0f6a3154
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7fca3aa00000
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7fca40400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 0
+MIOpen(HIP): 	beta = 0x7ffc0f6a3158
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7fca38e00000
+MIOpen(HIP): 	workSpace = 0x7fca38800000
+MIOpen(HIP): 	workSpaceSize = 3612672
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 0, workspace = 3612672
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoGEMM
+MIOpen(HIP): auto miopen::solver::conv::GemmFwdRest::GetSolution(const ExecutionContext &, const ProblemDescription &)::(anonymous class)::operator()(const std::vector<Kernel> &)::(anonymous class)::operator()(const Handle &, const AnyInvokeParams &) const{
+MIOpen(HIP): 	name + ", non 1x1" = convolution, non 1x1
+MIOpen(HIP): }
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x562dba1c4390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffc0f6a3154
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7fca3aa00000
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7fca40400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 0
+MIOpen(HIP): 	beta = 0x7ffc0f6a3158
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7fca38e00000
+MIOpen(HIP): 	workSpace = 0x7fca38800000
+MIOpen(HIP): 	workSpaceSize = 3612672
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 0, workspace = 3612672
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoGEMM
+MIOpen(HIP): auto miopen::solver::conv::GemmFwdRest::GetSolution(const ExecutionContext &, const ProblemDescription &)::(anonymous class)::operator()(const std::vector<Kernel> &)::(anonymous class)::operator()(const Handle &, const AnyInvokeParams &) const{
+MIOpen(HIP): 	name + ", non 1x1" = convolution, non 1x1
+MIOpen(HIP): }
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x562dba1c4390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffc0f6a3154
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7fca3aa00000
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7fca40400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 0
+MIOpen(HIP): 	beta = 0x7ffc0f6a3158
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7fca38e00000
+MIOpen(HIP): 	workSpace = 0x7fca38800000
+MIOpen(HIP): 	workSpaceSize = 3612672
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 0, workspace = 3612672
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoGEMM
+MIOpen(HIP): auto miopen::solver::conv::GemmFwdRest::GetSolution(const ExecutionContext &, const ProblemDescription &)::(anonymous class)::operator()(const std::vector<Kernel> &)::(anonymous class)::operator()(const Handle &, const AnyInvokeParams &) const{
+MIOpen(HIP): 	name + ", non 1x1" = convolution, non 1x1
+MIOpen(HIP): }
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x562dba1c4390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffc0f6a3154
+MIOpen(HIP): 	xDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7fca3aa00000
+MIOpen(HIP): 	wDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7fca40400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 0
+MIOpen(HIP): 	beta = 0x7ffc0f6a3158
+MIOpen(HIP): 	yDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7fca38e00000
+MIOpen(HIP): 	workSpace = 0x7fca38800000
+MIOpen(HIP): 	workSpaceSize = 3612672
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convbfp16 -n 16 -c 64 -H 56 -W 56 -k 64 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 0, workspace = 3612672
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x3x3x64x56x56x16xNCHWxBF16x1x1x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoGEMM
+MIOpen(HIP): auto miopen::solver::conv::GemmFwdRest::GetSolution(const ExecutionContext &, const ProblemDescription &)::(anonymous class)::operator()(const std::vector<Kernel> &)::(anonymous class)::operator()(const Handle &, const AnyInvokeParams &) const{
+MIOpen(HIP): 	name + ", non 1x1" = convolution, non 1x1
+MIOpen(HIP): }
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen(HIP): Info2 [GetKernels] 0 kernels for key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5"
+MIOpen(HIP): Info2 [AddKernel] Key: miopenIm2d2Col "c64i56_56w3_3p1_1s1_1d1_1t5 -DLOCAL_MEM_SIZE=340 -DSTRIDE_GT_1=0 -DNUM_IM_BLKS_EQ_1=0 -DUSE_IM_OFF_GUARD=1"
+MIOpen(HIP): Info2 [run] kernel_name = Im2d2Col_v2, global_work_dim = { 229376, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [CallGemm] gemm_desc: {isColMajor 0, transA 0, transB 0, m 64, n 3136, k 576, lda 576, ldb 3136, ldc 3136, batch_count 1, strideA 0, strideB 0, strideC 0, alpha 1, beta 0, dataType bfloat16, a_cast_type bfloat16, b_cast_type bfloat16} 
+MIOpen(HIP): Info2 [CallGemm] rocBLAS
+MIOpen Forward Conv. Algorithm: 0, Solution: 91/GemmFwdRest
+GPU Kernel Time Forward Conv. Elapsed: 5.411226 ms (average)
+stats: name, n, c, ho, wo, y, x, k, flopCnt, bytesRead, bytesWritten, GFLOPs, GB/s, timeMs
+stats: fwd-conv3x3u1, 16, 64, 56, 56, 3, 3, 64, 3699376128, 6496256, 6422528, 684, 2, 5.411226
+Forward Convolution Verifies OK on GPU reference (5.07959e-06 < 0.0656)
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {64, 64, 3, 3}, {576, 9, 3, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {16, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyConvolutionDescriptor(miopenConvolutionDescriptor_t){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyConvolutionDescriptor(miopenConvolutionDescriptor_t){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): }
+MIOpen(HIP): MIOpenDriver Info2 [~GPUMem] hipFree 3612672 at 0x7fca38800000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [~GPUMem] hipFree 6422528 at 0x7fca38e00000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [~GPUMem] hipFree 73728 at 0x7fca40400000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [~GPUMem] hipFree 6422528 at 0x7fca3aa00000 Ok
