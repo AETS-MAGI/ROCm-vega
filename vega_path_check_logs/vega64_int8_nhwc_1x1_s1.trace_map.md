@@ -1,32 +1,26 @@
-# TRACE MAP TEMPLATE
+# TRACE MAP
 
 - case_id: vega64_int8_nhwc_1x1_s1
-- status: fallback_confirmed / fallback_not_confirmed / need_more_cases
+- status: fallback_not_confirmed
 
 ## 1. Observed Lines
 
 - log: /home/limonene/vega_path_check_logs/vega64_int8_nhwc_1x1_s1.log
 - extract: /home/limonene/vega_path_check_logs/vega64_int8_nhwc_1x1_s1.trace_extract.log
 
-## 2. Log-to-Source Mapping
+## 2. Key Evidence
 
-| Observed log line | Log line number | Source file | Source line | Interpretation |
-|---|---:|---|---:|---|
-| ConvMlirIgemm*: Not applicable |  | conv_mlir_igemm_fwd.cpp / bwd.cpp / wrw.cpp | 188 / 68 / 69 | gfx900 exclusion |
-| ConvAsmImplicitGemm*: Not applicable |  | conv_asm_implicit_gemm_*_v4r1_dynamic.cpp | 293 / 343 / 142 / 306 | constraints not met, next solver tried |
-| hipBlasLT failed, falling back to tensile |  | rocblas/library/src/tensile_host.cpp | 1232 | runtime fallback to Tensile |
-| No Tensile solution found for XF32, fall back to FP32 |  | rocblas/library/src/tensile_host.cpp | 1161 | xF32 -> FP32 fallback |
-| Skipped (non-dynamic) |  | include/miopen/find_solution.hpp | 324 / 449 | dynamic-only filter skip |
+- solver selected: 85/ConvDirectNaiveConvFwd
+- lines: 124:MIOpen(HIP): Info [GetSolutions] ;151:MIOpen(HIP): Info2 [GetSolutionsFallback] Using WTI Fallback;152:MIOpen(HIP): Info2 [GetSolutionsFallback] ConvDirectNaiveConvFwd Estimated WTI = 0.01;153:MIOpen(HIP): Info2 [GetSolutionsFallback] maxSolutionCount = 1, available = 1;154:MIOpen(HIP): Info2 [GetSolutionsFallback] id: 85, algo: 1, time: 1000, ws: 0, name: ConvDirectNaiveConvFwd;248:MIOpen(HIP): Info [GetSolutions] ;265:MIOpen(HIP): Info2 [GetSolutionsFallback] Using WTI Fallback;266:MIOpen(HIP): Info2 [GetSolutionsFallback] ConvDirectNaiveConvFwd Estimated WTI = 0.01;267:MIOpen(HIP): Info2 [GetSolutionsFallback] maxSolutionCount = 1, available = 1;268:MIOpen(HIP): Info2 [GetSolutionsFallback] id: 85, algo: 1, time: 1000, ws: 0, name: ConvDirectNaiveConvFwd;580:MIOpen Forward Conv. Algorithm: 1, Solution: 85/ConvDirectNaiveConvFwd;
 
 ## 3. Decision
 
-- [ ] fallback_confirmed
-- [ ] fallback_not_confirmed
-- [ ] need_more_cases
+- [fallback_not_confirmed] fallback_confirmed
+- [x] fallback_not_confirmed
+- [fallback_not_confirmed] need_more_cases
 
 ## 4. Notes
 
-- solver selected:
-- kernel selected:
-- dot4 instruction present:
-- additional comments:
+- kernel selected: see log/solver_extract
+- dot4 instruction present: n/a
+- additional comments: auto-merged from runtime logs.

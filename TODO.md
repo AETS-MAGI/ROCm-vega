@@ -176,6 +176,8 @@
 - `ConvHipImplicitGemmForwardV4R5Xdlops` 強制実行では xdlops kernel compile失敗 (`intrin_mfma_*` / `gcnasm_mfma_*` / `FLOAT`) で `Code object build failed` -> `RunForwardGPU() FAILED, rc = 0x7`。
 - `ConvHipImplicitGemmGroupFwdXdlops` (`g=2`) 強制実行では `not applicable` -> `RunForwardGPU() FAILED, rc = 0x3`。
 - dtype軸同形状（3x3, NCHW, n16/c64/k64）で、FP16は `ConvOclDirectFwd`、BFP16は `GemmFwdRest` に分岐することを確認。
+- 同形状3x3で `ConvHipImplicitGemmFwdXdlops` を FP16/BFP16 に強制すると、両者とも assertion abort（`__EXIT_CODE=134`）。
+- 同形状3x3で `ConvHipImplicitGemmForwardV4R5Xdlops` を FP16/BFP16 に強制すると、両者とも `Code object build failed` -> `rc=0x7`（`__EXIT_CODE=7`）。
 
 ### 成果物
 - [x] `trace_map_dynamic.md`

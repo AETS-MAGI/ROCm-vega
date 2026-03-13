@@ -1,7 +1,7 @@
-# TRACE MAP TEMPLATE
+# TRACE MAP
 
 - case_id: vega64_int8_force_dlops_ck
-- status: fallback_confirmed / fallback_not_confirmed / need_more_cases
+- status: need_more_cases
 
 ## 1. Observed Lines
 
@@ -12,21 +12,21 @@
 
 | Observed log line | Log line number | Source file | Source line | Interpretation |
 |---|---:|---|---:|---|
-| ConvMlirIgemm*: Not applicable |  | conv_mlir_igemm_fwd.cpp / bwd.cpp / wrw.cpp | 188 / 68 / 69 | gfx900 exclusion |
-| ConvAsmImplicitGemm*: Not applicable |  | conv_asm_implicit_gemm_*_v4r1_dynamic.cpp | 293 / 343 / 142 / 306 | constraints not met, next solver tried |
-| hipBlasLT failed, falling back to tensile |  | rocblas/library/src/tensile_host.cpp | 1232 | runtime fallback to Tensile |
-| No Tensile solution found for XF32, fall back to FP32 |  | rocblas/library/src/tensile_host.cpp | 1161 | xF32 -> FP32 fallback |
-| Skipped (non-dynamic) |  | include/miopen/find_solution.hpp | 324 / 449 | dynamic-only filter skip |
+| `solution_id = 114` | 174 | n/a (runtime selection) | n/a | 強制指定した solution id が採用された。 |
+| `solver_id = ConvCkIgemmFwdV6r1DlopsNchw` | 176 | n/a (runtime selection) | n/a | CK DLOPS solver の workspace 判定フェーズに進行。 |
+| `The supplied solution id ... is not applicable to the current problem` | 177 | `src/ocl/convolutionocl.cpp` | 1057 | このproblem設定では CK DLOPS solver が適用不可。 |
+| `RunForwardGPU() FAILED, rc = 0x3` | 178 | n/a | n/a | 適用不可により forward 実行失敗で終了。 |
+| `__EXIT_CODE=3` | 216 | n/a | n/a | ラップ実行での最終終了コード。 |
 
 ## 3. Decision
 
 - [ ] fallback_confirmed
 - [ ] fallback_not_confirmed
-- [ ] need_more_cases
+- [x] need_more_cases
 
 ## 4. Notes
 
-- solver selected:
-- kernel selected:
-- dot4 instruction present:
-- additional comments:
+- solver selected: 強制指定 `ConvCkIgemmFwdV6r1DlopsNchw`（solution_id=114）
+- kernel selected: 実行前に適用不可判定となり未到達
+- dot4 instruction present: n/a
+- additional comments: 同系列のグリッド実験でも `not applicable` / `rc=0x3` が一貫しており、成立条件は未特定。

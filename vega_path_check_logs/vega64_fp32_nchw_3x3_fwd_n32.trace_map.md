@@ -1,32 +1,26 @@
-# TRACE MAP TEMPLATE
+# TRACE MAP
 
 - case_id: vega64_fp32_nchw_3x3_fwd_n32
-- status: need_more_cases
+- status: fallback_not_confirmed
 
 ## 1. Observed Lines
 
 - log: /home/limonene/vega_path_check_logs/vega64_fp32_nchw_3x3_fwd_n32.log
 - extract: /home/limonene/vega_path_check_logs/vega64_fp32_nchw_3x3_fwd_n32.trace_extract.log
 
-## 2. Log-to-Source Mapping
+## 2. Key Evidence
 
-| Observed log line | Log line number | Source file | Source line | Interpretation |
-|---|---:|---|---:|---|
-| ConvMlirIgemm*: Not applicable |  | conv_mlir_igemm_fwd.cpp / bwd.cpp / wrw.cpp | 188 / 68 / 69 | gfx900 exclusion |
-| ConvAsmImplicitGemm*: Not applicable |  | conv_asm_implicit_gemm_*_v4r1_dynamic.cpp | 293 / 343 / 142 / 306 | constraints not met, next solver tried |
-| hipBlasLT failed, falling back to tensile |  | rocblas/library/src/tensile_host.cpp | 1232 | runtime fallback to Tensile |
-| No Tensile solution found for XF32, fall back to FP32 |  | rocblas/library/src/tensile_host.cpp | 1161 | xF32 -> FP32 fallback |
-| Skipped (non-dynamic) |  | include/miopen/find_solution.hpp | 324 / 449 | dynamic-only filter skip |
+- solver selected: 14/ConvBinWinograd3x3U
+- lines: 124:MIOpen(HIP): Info [GetSolutions] ;146:MIOpen(HIP): Info2 [GetSolutions] ConvBinWinograd3x3U;172:MIOpen(HIP): Info [GetSolutions] ;184:MIOpen(HIP): Info2 [GetSolutions] ConvBinWinograd3x3U;393:MIOpen Forward Conv. Algorithm: 3, Solution: 14/ConvBinWinograd3x3U;
 
 ## 3. Decision
 
-- [ ] fallback_confirmed
-- [ ] fallback_not_confirmed
-- [x] need_more_cases
+- [fallback_not_confirmed] fallback_confirmed
+- [x] fallback_not_confirmed
+- [fallback_not_confirmed] need_more_cases
 
 ## 4. Notes
 
-- solver selected: ConvBinWinograd3x3U
-- kernel selected: miopenSp3AsmConv3x3F
-- dot4 instruction present: not checked in this case
-- additional comments: gfx900:xnack- detected; path is Winograd ASM kernel, not yet a fallback confirmation case
+- kernel selected: see log/solver_extract
+- dot4 instruction present: n/a
+- additional comments: auto-merged from runtime logs.

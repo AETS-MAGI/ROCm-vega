@@ -1,32 +1,28 @@
-# TRACE MAP TEMPLATE
+# TRACE MAP
 
 - case_id: vega64_fp16_force_hipigemm_v4r5xdlops_nchw_3x3
-- status: fallback_confirmed / fallback_not_confirmed / need_more_cases
+- status: need_more_cases
 
 ## 1. Observed Lines
 
 - log: /home/limonene/vega_path_check_logs/vega64_fp16_force_hipigemm_v4r5xdlops_nchw_3x3.log
 - extract: /home/limonene/vega_path_check_logs/vega64_fp16_force_hipigemm_v4r5xdlops_nchw_3x3.trace_extract.log
 
-## 2. Log-to-Source Mapping
+## 2. Key Evidence
 
-| Observed log line | Log line number | Source file | Source line | Interpretation |
-|---|---:|---|---:|---|
-| ConvMlirIgemm*: Not applicable |  | conv_mlir_igemm_fwd.cpp / bwd.cpp / wrw.cpp | 188 / 68 / 69 | gfx900 exclusion |
-| ConvAsmImplicitGemm*: Not applicable |  | conv_asm_implicit_gemm_*_v4r1_dynamic.cpp | 293 / 343 / 142 / 306 | constraints not met, next solver tried |
-| hipBlasLT failed, falling back to tensile |  | rocblas/library/src/tensile_host.cpp | 1232 | runtime fallback to Tensile |
-| No Tensile solution found for XF32, fall back to FP32 |  | rocblas/library/src/tensile_host.cpp | 1161 | xF32 -> FP32 fallback |
-| Skipped (non-dynamic) |  | include/miopen/find_solution.hpp | 324 / 449 | dynamic-only filter skip |
+- solver_id: ConvHipImplicitGemmForwardV4R5Xdlops
+- outcome: code object build failed
+- lines: 287:MIOpen Error: abyss-hbmx:/usr/src/debug/miopen-hip/rocm-libraries/projects/miopen/src/hipoc/hipoc_program.cpp:299: Code object build failed. Source: static_kernel_gridwise_convolution_forward_implicit_gemm_v4r5_xdlops_nchw_kcyx_nkhw.cpp;288:RunForwardGPU() FAILED, rc = 0x7;326:__EXIT_CODE=7;
 
 ## 3. Decision
 
 - [ ] fallback_confirmed
 - [ ] fallback_not_confirmed
-- [ ] need_more_cases
+- [x] need_more_cases
 
 ## 4. Notes
 
-- solver selected:
-- kernel selected:
-- dot4 instruction present:
-- additional comments:
+- solver selected: ConvHipImplicitGemmForwardV4R5Xdlops
+- kernel selected: n/a (forced solver path)
+- dot4 instruction present: n/a
+- additional comments: Forced HipImplicitGemm Xdlops probe for dtype-axis comparison.
