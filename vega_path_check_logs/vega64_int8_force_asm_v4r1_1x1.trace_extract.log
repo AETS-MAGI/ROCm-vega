@@ -1,0 +1,13 @@
+1:MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -S ConvAsmImplicitGemmV4R1DynamicFwd_1x1 -F 1 -t 1
+174:MIOpen(HIP): 	solution_id = 63
+176:MIOpen(HIP): Info [GetForwardSolutionWorkspaceSize] solver_id = ConvAsmImplicitGemmV4R1DynamicFwd_1x1
+183:MIOpen(HIP): 	solution_id = 63
+185:MIOpen(HIP): Info [CompileSolution] solver_id = ConvAsmImplicitGemmV4R1DynamicFwd_1x1
+186:MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x1x1x64x56x56x32xNCHWxINT8x0x0x1x1x1x1x1xFxDefault and solver ConvAsmImplicitGemmV4R1DynamicFwd_1x1
+187:MIOpen(HIP): Info [FindSolutionImpl] ConvAsmImplicitGemmV4R1DynamicFwd_1x1 (not searchable)
+213:MIOpen(HIP): Info2 [Register] Invoker registered for algorithm 64x56x56x1x1x64x56x56x32xNCHWxINT8x0x0x1x1x1x1x1xFxDefault and solver ConvAsmImplicitGemmV4R1DynamicFwd_1x1
+214:MIOpen(HIP): Info2 [SetAsFound1_0] Solver ConvAsmImplicitGemmV4R1DynamicFwd_1x1 registered as find 1.0 best for miopenConvolutionFwdAlgoImplicitGEMM in 64x56x56x1x1x64x56x56x32xNCHWxINT8x0x0x1x1x1x1x1xFxDefault
+226:MIOpen(HIP): 	solution_id = 63
+229:MIOpen(HIP): Info [ConvolutionForwardImmediate] solver_id = ConvAsmImplicitGemmV4R1DynamicFwd_1x1, workspace = 0
+230:MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x1x1x64x56x56x32xNCHWxINT8x0x0x1x1x1x1x1xFxDefault and solver ConvAsmImplicitGemmV4R1DynamicFwd_1x1
+233:Memory access fault by GPU node-1 (Agent handle: 0x55ddfc1287c0) on address 0x7f9e3486f000. Reason: Page not present or supervisor privilege.
