@@ -78,6 +78,51 @@
 - 参照ソースと `/opt/rocm` 実ランタイムの差分可能性を考慮し、`miirCreateHandle` の最終分岐確定は
   ランタイム実体での追加トレース（引数/分岐ログ）取得を完了条件とする。
 
+追記 (2026-03-13, git blame 調査完了):
+
+### gfx900 除外の provenance 確定
+
+`mlir_common.hpp: IsMlirSupportedHardware()` は `gfx900` を **明示リストに含む**（対応ハードとして認定済み）:
+```cpp
+// src/include/miopen/solver/mlir_common.hpp:44
+c.GetStream().GetDeviceName() == "gfx900"  // gfx900 はここで通る
+```
+→ MLIR対応ハードとして一度は位置付けられた世代。
+
+それにもかかわらず `conv_mlir_igemm_fwd.cpp` の `IsApplicable()` 内で個別除外:
+```cpp
+// 186: // Refer to https://github.com/ROCm/llvm-project-private/issues/389
+// 187-189:
+const auto device_name = ctx.GetStream().GetDeviceName();
+if(StartsWith(device_name, "gfx900"))
+    return false;
+```
+
+**git blame 結果（確定）:**
+- `lines 187-189` (除外コード本体): **Zhuoran Yin** (`zhuoryin@amd.com`, AMD) / **2021-12-22** / commit `2407d2f556c7`
+  - コミットタイトル: `[MLIR] Disable gfx900 from non-xdlops solver (#1328)`
+  - 元コメント URL: `github.com/ROCmSoftwarePlatform/llvm-project-private/issues/389`
+- `line 186` (コメントURL更新): **Artem Tamazov** / **2023-12-13** / commit `b0f912e5244b`
+  - タイトル: `[Doc] Fix URLs (ROCmSoftwarePlatform -> ROCm) in the doc, comments, and code.`
+  - → org名変更（`ROCmSoftwarePlatform` → `ROCm`）に伴う一括URL修正のみ
+
+**同一パターンが fwd/bwd/wrw すべてに存在** (同一コミット `2407d2f556c7` で一括投入)
+
+### issue #389 の性質
+
+参照先: `ROCm/llvm-project-**private**/issues/389`（非公開リポジトリ）
+- 非公開 → AMD社内的な LLVM/AMDGPU コードジェン上のバグ報告
+- `MIIR_INVALID_PARAM` が `miirLowerTuningParams` で発生するのはこのバグの症状
+- rocMLIR 単体の問題ではなく **LLVM バックエンド（amdgpu codegen）レベルの問題**
+
+### フォーク判断への含意
+
+- MIOpen のフォークだけでは MLIR iGEMM の gfx900 対応は修正不可
+- 修正ポイントは `llvm-project`（AMDGPU コードジェン）側にある
+- rocMLIR の `isApplicable`/`RockEnabled` は gfx900 自体は拒否していない
+  → 問題はさらに下の lowering/codegen 段階
+- 代替経路（`ConvHipImplicitGemmV4R1Fwd` 等の ASM 系 solver）は今のままで動作
+
 成果物:
 - `gfx900_related_nodes.md` への `rocMLIR` 節追加
 - `support_boundary.md` への責務分担案追記
