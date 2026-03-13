@@ -78,6 +78,7 @@
   - issue の参照先が非公開であるという事実は変わっていない
 
 **解釈**:
+
 - gfx900 除外は AMD 社員による意図的コミット（コミュニティパッチではない）
 - 問題根拠は LLVM/コンパイラバックエンドレベル（MIOpen や rocMLIR 本体の問題ではない）
 - `Disable` という動詞は `Remove` より「一時的/バグ回避的な無効化」ニュアンスが強いが、
@@ -171,6 +172,9 @@
 - detached 起動スクリプトを導入し、割り込み耐性を確保
 - detached 起動スクリプトの既定 generator を `Unix Makefiles` から `Ninja` に変更
   - 理由: Makefiles 既定では `cmake -G Unix Makefiles` が長時間 configure に留まり、prefix 生成まで進まないケースを観測したため
+- workspace 側 `tmp` を build root にすると、生成された `llvm-min-tblgen` 実行で `Permission denied` (`code=126`) となることを確認
+  - 原因: この調査ワークスペース配下は noexec 相当の制約があり、rocMLIR/LLVM ビルド中に生成される補助実行ファイルを実行できない
+  - 対応: detached 起動スクリプトの既定 `ROCMLIR_BUILD_ROOT` を workspace `tmp/` から `/tmp/` に変更
 
 ---
 
@@ -178,9 +182,10 @@
 
 - `pybind11` は導入済み、rocMLIR configure で認識済み。
 - detached rocMLIR ビルドを起動済み。
-- PID: `600370`
-- ログ: `tmp/rocmlir_build_detached_20260313_171509.log`
-- Prefix: `tmp/rocmlir-prefix-detached-20260313_171509`
+- PID: `604956`
+- ログ: `tmp/rocmlir_build_detached_20260313_172420.log`
+- Build root: `/tmp/rocmlir-build-detached-20260313_172420`
+- Prefix: `tmp/rocmlir-prefix-detached-20260313_172420`
 - 起動 generator: `Ninja`
 
 - 未確認: `rocMLIRConfig.cmake` 生成完了

@@ -23,7 +23,7 @@ SRC_DIR="$1"
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TS="$(date +%Y%m%d_%H%M%S)"
 
-ROCMLIR_BUILD_ROOT="${ROCMLIR_BUILD_ROOT:-$BASE_DIR/tmp/rocmlir-build-detached-$TS}"
+ROCMLIR_BUILD_ROOT="${ROCMLIR_BUILD_ROOT:-/tmp/rocmlir-build-detached-$TS}"
 ROCMLIR_PREFIX="${ROCMLIR_PREFIX:-$BASE_DIR/tmp/rocmlir-prefix-detached-$TS}"
 CMAKE_GENERATOR="${CMAKE_GENERATOR:-Ninja}"
 LOG_FILE="$BASE_DIR/tmp/rocmlir_build_detached_$TS.log"
