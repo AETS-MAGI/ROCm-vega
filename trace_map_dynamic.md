@@ -29,6 +29,10 @@ Vega64(gfx900) 実機で、実行時にどの solver / kernel に落ちるかを
 - 強制solverケース (`-S ConvMlirIgemmFwd`) では:
   - `CompileSolution` / `FindSolutionImpl` まで進行
   - `miirLowerTuningParams MIIR_INVALID_PARAM` -> `RunForwardGPU() FAILED, rc = 0x7`
+- 強制solverケース (`-S ConvCkIgemmFwdV6r1DlopsNchw`) では:
+  - `GetForwardSolutionWorkspaceSize` まで進行
+  - `not applicable to the current problem` -> `RunForwardGPU() FAILED, rc = 0x3`
+  - 追加グリッド7ケース（NCHW/NHWC, 1x1/3x3, n=1/16/32, g=1/2）でも全件 `not applicable`
 
 ## 3. 補助観測
 
@@ -37,6 +41,7 @@ Vega64(gfx900) 実機で、実行時にどの solver / kernel に落ちるかを
 - 抽出kernel逆アセンブルで dot4 命令は未検出。
 - 強制指定時は `solution_id=63` で `ConvAsmImplicitGemmV4R1DynamicFwd_1x1` の実行に進むが、当該条件では実行完了せずfaultで停止。
 - 強制指定時は `solution_id=98` で `ConvMlirIgemmFwd` の実行に進むが、当該条件では `MIIR_INVALID_PARAM` で失敗。
+- 強制指定時は `solution_id=114` で `ConvCkIgemmFwdV6r1DlopsNchw` を試行するが、当該条件では `not applicable` で失敗。
 
 ## 4. 判定
 

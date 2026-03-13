@@ -1,12 +1,12 @@
 # TRACE MAP TEMPLATE
 
-- case_id: vega64_int8_force_dlops_ck
+- case_id: vega64_int8_force_dlops_nchw_3x3_n32_c64_k64_g1
 - status: fallback_confirmed / fallback_not_confirmed / need_more_cases
 
 ## 1. Observed Lines
 
-- log: /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_ck.log
-- extract: /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_ck.trace_extract.log
+- log: /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_nchw_3x3_n32_c64_k64_g1.log
+- extract: /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_nchw_3x3_n32_c64_k64_g1.trace_extract.log
 
 ## 2. Log-to-Source Mapping
 

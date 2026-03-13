@@ -10,6 +10,7 @@
 - INT8 の検索ログでは `ConvAsmImplicitGemmV4R1Dynamic*` が `Not applicable`、`ConvMlirIgemm*` が `Skipped (non-dynamic)` を繰り返し観測。
 - `-S ConvAsmImplicitGemmV4R1DynamicFwd_1x1` の強制実行では compile/immediate まで進むが、実行時に GPU memory access fault を観測。
 - `-S ConvMlirIgemmFwd` の強制実行では compile/find まで進むが、`MIIR_INVALID_PARAM` で `RunForwardGPU() FAILED (rc=0x7)` を観測。
+- `-S ConvCkIgemmFwdV6r1DlopsNchw` の強制実行では `not applicable to the current problem` で `RunForwardGPU() FAILED (rc=0x3)` を観測。
 
 ## 2. FP32 観測
 
@@ -77,3 +78,23 @@
   - `miirLowerTuningParams MIIR_INVALID_PARAM`
   - `RunForwardGPU() FAILED, rc = 0x7` (`__EXIT_CODE=7`)
 - 解釈: `ConvMlirIgemm*` は「skipされる」だけでなく、強制実行条件での実行失敗も直接観測できた。
+
+## 8. 強制DLOPSケース (追加)
+
+- case: `vega64_int8_force_dlops_ck`
+- command: `convint8 ... -S ConvCkIgemmFwdV6r1DlopsNchw`
+- log観測:
+  - `GetSolutions`: `ConvDirectNaiveConvFwd` (id 85)
+  - `solution_id = 114` 指定で `GetForwardSolutionWorkspaceSize` まで進行
+  - `The supplied solution id: ConvCkIgemmFwdV6r1DlopsNchw is not applicable to the current problem`
+  - `RunForwardGPU() FAILED, rc = 0x3` (`__EXIT_CODE=3`)
+- 解釈: DLOPS系solverの実行不成立を強制実行で直接確認。成立条件の追加切り分けが必要。
+
+## 9. 強制DLOPSグリッド (追加)
+
+- 対象solver: `ConvCkIgemmFwdV6r1DlopsNchw`
+- 実施: 7ケース（NCHW/NHWC, 1x1/3x3, n=1/16/32, g=1/2）
+- 結果: 全ケースで
+  - `The supplied solution id ... is not applicable to the current problem`
+  - `RunForwardGPU() FAILED, rc = 0x3`
+- 解釈: 少なくとも今回の形状・layout・group範囲では DLOPS成立条件に到達していない。
