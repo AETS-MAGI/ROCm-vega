@@ -157,11 +157,10 @@
 - ログ: `tmp/rocmlir_build_detached_20260313_165759.log`
 - Prefix: `tmp/rocmlir-prefix-detached-20260313_165759`
 
-- 未確認:
-  - `rocMLIRConfig.cmake` 生成完了
-  - MIOpen debug ビルド再開
-  - `vega64_int8_force_mlir_fwd` の local-runtime 再実行
-  - `src/mlir_build.cpp` 一時ログで分岐最終確定
+- 未確認: `rocMLIRConfig.cmake` 生成完了
+- 未確認: MIOpen debug ビルド再開
+- 未確認: `vega64_int8_force_mlir_fwd` の local-runtime 再実行
+- 未確認: `src/mlir_build.cpp` 一時ログで分岐最終確定
 
 ---
 
@@ -214,13 +213,11 @@
 
 ### 12.2 発見まとめ（gfx900 MLIR除外の経路）
 
-|項目|内容|
-|---|---|
-|除外コミット|`2407d2f`|
-|作者|Zhuoran Yin (`zhuoryin@amd.com`)|
-|日付|2021-12-22|
-|コミットメッセージ|`[MLIR] Disable gfx900 from non-xdlops solver (#1328)`|
-|対象ファイル|FWD / BWD / WRW の全3ファイル同時|
+- 除外コミット: `2407d2f`
+- 作者: Zhuoran Yin (`zhuoryin@amd.com`)
+- 日付: 2021-12-22
+- コミットメッセージ: `[MLIR] Disable gfx900 from non-xdlops solver (#1328)`
+- 対象ファイル: FWD / BWD / WRW の全3ファイル同時
 
 ### 12.3 「#389 探し」が空振りだった理由
 
