@@ -71,6 +71,8 @@
 - `rocmlir-lib` の MIIR C API 実装（`miirCreateHandle`, `miirLowerTuningParams`, `miirLowerBin`, `miirBufferGet`）を確認。
 - `miirCreateHandle` の初期 gate として `parseConvConfig` / `isApplicable` / `RockEnabled` を確認。
 - `RockEnabled` で layout 制限と `bf16` 拒否（`inputDataTypeStr != "bf16"`）を確認。
+- `ConvGenerator::isApplicable()` は `hasValidDimension()` 中心で、arch 固有拒否は明示されていないことを確認。
+- 最小再現ケース（`vega64_int8_force_mlir_fwd`）は RockEnabled の layout/dtype 条件には合致しており、失敗要因は別分岐の可能性が高い。
 
 成果物:
 - `gfx900_related_nodes.md` への `rocMLIR` 節追加

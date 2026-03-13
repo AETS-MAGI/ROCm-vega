@@ -339,8 +339,9 @@
 - [x] `MIIR_INVALID_PARAM` 最小再現ケースを 1 ケース固定する
 - [x] `Code object build failed` の入力ソース生成地点を特定する
 - [x] 失敗モード4分類（`rc=0x3` / `rc=0x7` / `MIIR_INVALID_PARAM` / `EXIT=134`）を trace_map ヘッダ化する
-- [ ] `convGenerator.isApplicable()` の実装位置を特定し、gfx900 の arch gate 条件を列挙する
-- [ ] `RockEnabled` の layout/dtype gate と動的失敗ケース（`vega64_int8_force_mlir_fwd`）の対応を 1:1 で照合する
+- [x] `convGenerator.isApplicable()` の実装位置を特定し、gfx900 の arch gate 条件を列挙する
+- [x] `RockEnabled` の layout/dtype gate と動的失敗ケース（`vega64_int8_force_mlir_fwd`）の対応を 1:1 で照合する
+- [ ] `miirCreateHandle` 内の失敗分岐（`getKernelCount` / `getWorkspaceSize` / `genConvModule`）のどこで `nullptr` になるかを特定する
 
 補足:
 - `rocMLIR` は作業ツリー展開済み（`mlir/tools/rocmlir-lib/{Miir.h, rocmlir-lib.cpp}` を確認）。

@@ -98,6 +98,38 @@
   rocMLIR の handle 作成段階（parse/applicability/layout/dtype gate）で既に弾かれている可能性がある。
 - gfx900 特有の拒否条件は、`convGenerator.isApplicable()` 側の詳細（arch判定）を次段で追う必要がある。
 
+### 2.5 `ConvGenerator::isApplicable()` 実装の確認
+
+- 対象:
+  - `rocMLIR/mlir/lib/Dialect/Rock/Generator/ConvGenerator.cpp`
+- 観測:
+  - `ConvGenerator::isApplicable()` は `hasValidDimension()` の結果を返すだけ
+  - `hasValidDimension()` で見ているのは主に以下
+    - dilation/stride/padding の正当性
+    - tensor dimension の正値
+    - layout と次元対応の整合
+    - input/filter/output channel/group の整合
+    - output shape の算出整合
+  - `isApplicable()` 自体には `gfx900` など arch 固有の明示拒否条件は見当たらない
+
+含意:
+- `miirCreateHandle` 失敗のうち、`isApplicable()` 経由は「次元整合性NG」が中心であり、
+  arch 固有の拒否は別地点（`genConvModule` / pipeline）で起きる可能性が高い。
+
+### 2.6 最小再現ケースとの 1:1 照合（`vega64_int8_force_mlir_fwd`）
+
+- ケース条件（ログ観測）:
+  - `NCHW`, `INT8`, `group=1`, `1x1`, `stride=1`, `pad=0`
+- RockEnabled 条件との照合:
+  - layout: `NCHW` 系は `ngchw/gkcyx/ngkhw` に対応し許可集合内
+  - dtype: `INT8` であり `bf16` ではない
+  - 結果: RockEnabled 単独では reject 根拠を確認できない
+
+含意:
+- 当該 `MIIR_INVALID_PARAM` は RockEnabled ではなく、`miirCreateHandle` の他分岐
+  （`parseConvConfig` / `isApplicable` / `getKernelCount` / `getWorkspaceSize` / `genConvModule`）
+  または後段の pipeline 条件に起因している可能性が高い。
+
 ---
 
 ## 3. 失敗シグネチャ別の静的アンカー
