@@ -1,0 +1,1 @@
+igemm_v4r1_dynamic.s.o| -Wa,-defsym,ROCM_METADATA_VERSION=5 -mcpu=gfx900|14006|149120

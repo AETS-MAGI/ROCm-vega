@@ -23,12 +23,16 @@ Vega64(gfx900) 実機で、実行時にどの solver / kernel に落ちるかを
 
 - NCHW / NHWC / group / stride / search=1 を含む複数条件で:
   - `ConvDirectNaiveConvFwd` -> `naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t`
+- 強制solverケース (`-S ConvAsmImplicitGemmV4R1DynamicFwd_1x1`) では:
+  - `CompileSolution` / `ConvolutionForwardImmediate` まで進行
+  - その後 `Memory access fault by GPU node-1`
 
 ## 3. 補助観測
 
 - INT8ケースで `ConvAsmImplicitGemmV4R1Dynamic*` は `Not applicable` を繰り返し観測。
 - INT8ケースで `ConvMlirIgemm*` は `Skipped (non-dynamic)` を繰り返し観測。
 - 抽出kernel逆アセンブルで dot4 命令は未検出。
+- 強制指定時は `solution_id=63` で `ConvAsmImplicitGemmV4R1DynamicFwd_1x1` の実行に進むが、当該条件では実行完了せずfaultで停止。
 
 ## 4. 判定
 

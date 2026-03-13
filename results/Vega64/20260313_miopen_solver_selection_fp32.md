@@ -75,6 +75,13 @@ bash run_vega_path_case.sh vega64_fp32_nchw_1x1_fwd_n32 -- \
 - `vega64_int8_nhwc_3x3_search1`: `ConvDirectNaiveConvFwd`
 - 追加した範囲では naive 以外の INT8 solver は観測できなかった
 
+8. INT8 強制solverケース (`vega64_int8_force_asm_v4r1_1x1`)
+- command: `convint8 ... -S ConvAsmImplicitGemmV4R1DynamicFwd_1x1`
+- library report: `ConvDirectNaiveConvFwd` (id 85)
+- forced path: `solution_id = 63` -> `CompileSolution` -> `ConvolutionForwardImmediate` (`solver_id = ConvAsmImplicitGemmV4R1DynamicFwd_1x1`)
+- runtime result: `Memory access fault by GPU node-1`
+- 解釈: 自然選択ではnaive、強制指定では対象solverの実行に進むが、当該条件で実行時fault。
+
 ## 根拠リンク（ログ）
 
 - /home/limonene/vega_path_check_logs/vega64_fp32_nchw_3x3_fwd_n32.log
@@ -116,6 +123,9 @@ bash run_vega_path_case.sh vega64_fp32_nchw_1x1_fwd_n32 -- \
 - /home/limonene/vega_path_check_logs/vega64_int8_nhwc_3x3_search1.log
 - /home/limonene/vega_path_check_logs/vega64_int8_nhwc_3x3_search1.solver_extract.log
 - /home/limonene/vega_path_check_logs/vega64_int8_nhwc_3x3_search1.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_int8_force_asm_v4r1_1x1.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_asm_v4r1_1x1.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_asm_v4r1_1x1.trace_map.md
 
 ## 判定
 
@@ -158,3 +168,4 @@ rg -n "v_dot4_i32_i8|v_dot4c_i32_i8|sdot4|sudot4" /tmp/miopen_extract/naive_conv
 補足:
 
 - 追加スイープでも INT8 はすべて `ConvDirectNaiveConvFwd` だったため、次は入力レイアウトや問題サイズの軸を広げる必要がある。
+- `-S ConvAsmImplicitGemmV4R1DynamicFwd_1x1` の強制実行では immediate まで進行したが、実行時に GPU memory access fault で停止した。

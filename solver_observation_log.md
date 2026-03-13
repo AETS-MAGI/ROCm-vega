@@ -8,6 +8,7 @@
 - FP32 では Winograd / ASM 1x1 / ImplicitGEMM など複数solverが観測された。
 - INT8 では探索した全ケースで `ConvDirectNaiveConvFwd` が選択された。
 - INT8 の検索ログでは `ConvAsmImplicitGemmV4R1Dynamic*` が `Not applicable`、`ConvMlirIgemm*` が `Skipped (non-dynamic)` を繰り返し観測。
+- `-S ConvAsmImplicitGemmV4R1DynamicFwd_1x1` の強制実行では compile/immediate まで進むが、実行時に GPU memory access fault を観測。
 
 ## 2. FP32 観測
 
@@ -52,3 +53,14 @@
 - `ConvAsmImplicitGemmV4R1Dynamic*` が選択される INT8 条件は未発見。
 - `ConvMlirIgemm*` の実行時除外をより直接に示すケース整理が必要。
 - 比較GPUとの差分取得が未実施。
+
+## 6. 強制solverケース (追加)
+
+- case: `vega64_int8_force_asm_v4r1_1x1`
+- command: `convint8 ... -S ConvAsmImplicitGemmV4R1DynamicFwd_1x1`
+- log観測:
+  - `GetSolutions`: `ConvDirectNaiveConvFwd` (id 85)
+  - `solution_id = 63` 指定で `CompileSolution` 実行
+  - `ConvolutionForwardImmediate` (`solver_id = ConvAsmImplicitGemmV4R1DynamicFwd_1x1`) 実行
+  - `Memory access fault by GPU node-1`
+- 解釈: 自然選択経路と強制実行経路を切り分けて記録できたが、実運用での成立条件は未確定。

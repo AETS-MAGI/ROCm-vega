@@ -166,6 +166,9 @@
 - [ ] DLOPS 系がどの条件で通るか確認する
 - [x] dot4 非対応時に代替経路へ落ちるか確認する
 
+補足(2026-03-13):
+- `-S ConvAsmImplicitGemmV4R1DynamicFwd_1x1` の強制実行で `CompileSolution` / `ConvolutionForwardImmediate` までは到達したが、GPU memory access fault が発生。自然選択での成立条件確認は未完。
+
 ### 成果物
 - [x] `trace_map_dynamic.md`
 - [x] `solver_observation_log.md`
