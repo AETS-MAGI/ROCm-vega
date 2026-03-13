@@ -9,6 +9,7 @@ Usage:
 Optional environment variables:
   MIOPEN_BUILD_ROOT=/tmp/miopen-debug-build
   MIOPEN_PREFIX=$HOME/local/miopen-debug
+  HALF_INCLUDE_DIR=/usr/include
   ROCM_PATH=/opt/rocm
   ROCMLIR_PREFIX=$HOME/local/rocmlir
   rocMLIR_DIR=<path-to-rocMLIRConfig.cmake-directory>
@@ -35,8 +36,22 @@ if [[ ! -d "$SRC_DIR" ]]; then
 fi
 
 ROCM_PATH="${ROCM_PATH:-/opt/rocm}"
-MIOPEN_BUILD_ROOT="${MIOPEN_BUILD_ROOT:-/tmp/miopen-debug-build}"
-MIOPEN_PREFIX="${MIOPEN_PREFIX:-$HOME/local/miopen-debug}"
+WD_BLACK_ROOT="${WD_BLACK_ROOT:-/home/limonene/ROCm-project/WD-Black}"
+if [[ -z "${MIOPEN_BUILD_ROOT:-}" ]]; then
+  if mountpoint -q "$WD_BLACK_ROOT" && [[ -w "$WD_BLACK_ROOT" ]]; then
+    MIOPEN_BUILD_ROOT="$WD_BLACK_ROOT/rocm-builds/miopen-debug-build"
+  else
+    MIOPEN_BUILD_ROOT="/tmp/miopen-debug-build"
+  fi
+fi
+if [[ -z "${MIOPEN_PREFIX:-}" ]]; then
+  if mountpoint -q "$WD_BLACK_ROOT" && [[ -w "$WD_BLACK_ROOT" ]]; then
+    MIOPEN_PREFIX="$WD_BLACK_ROOT/rocm-builds/miopen-debug-prefix"
+  else
+    MIOPEN_PREFIX="$HOME/local/miopen-debug"
+  fi
+fi
+HALF_INCLUDE_DIR="${HALF_INCLUDE_DIR:-}"
 ROCMLIR_PREFIX="${ROCMLIR_PREFIX:-}"
 MIOPEN_USE_MLIR="${MIOPEN_USE_MLIR:-On}"
 MIOPEN_USE_COMPOSABLEKERNEL="${MIOPEN_USE_COMPOSABLEKERNEL:-Off}"
@@ -45,6 +60,22 @@ MIOPEN_USE_ROCBLAS="${MIOPEN_USE_ROCBLAS:-On}"
 CMAKE_BUILD_TYPE="${CMAKE_BUILD_TYPE:-Debug}"
 CMAKE_GENERATOR="${CMAKE_GENERATOR:-Ninja}"
 EXTRA_CMAKE_ARGS="${EXTRA_CMAKE_ARGS:-}"
+
+if [[ -z "$HALF_INCLUDE_DIR" ]]; then
+  for _half_base in \
+    "/usr/include" \
+    "/usr/local/include" \
+    "$ROCM_PATH/include"; do
+    if [[ -f "$_half_base/half/half.hpp" ]]; then
+      HALF_INCLUDE_DIR="$_half_base"
+      break
+    fi
+  done
+fi
+
+if [[ -z "$HALF_INCLUDE_DIR" ]]; then
+  echo "warning: half/half.hpp was not found automatically; cmake may fail with HALF_INCLUDE_DIR-NOTFOUND" >&2
+fi
 
 if [[ -z "${rocMLIR_DIR:-}" && -n "$ROCMLIR_PREFIX" ]]; then
   for _rocmlir_cmake_dir in \
@@ -74,6 +105,7 @@ cmake -G "$CMAKE_GENERATOR" \
   -DMIOPEN_USE_HIPBLASLT="$MIOPEN_USE_HIPBLASLT" \
   -DMIOPEN_USE_ROCBLAS="$MIOPEN_USE_ROCBLAS" \
   -DBUILD_DEV=On \
+  ${HALF_INCLUDE_DIR:+-DHALF_INCLUDE_DIR=$HALF_INCLUDE_DIR} \
   ${rocMLIR_DIR:+-DrocMLIR_DIR=$rocMLIR_DIR} \
   $EXTRA_CMAKE_ARGS \
   "$SRC_DIR"
@@ -84,5 +116,6 @@ cmake --build . --target install
 echo "done: local debug MIOpen installed"
 echo "  build:  $MIOPEN_BUILD_ROOT"
 echo "  prefix: $MIOPEN_PREFIX"
+echo "  HALF_INCLUDE_DIR: ${HALF_INCLUDE_DIR:-<auto-not-found>}"
 echo "  rocMLIR_DIR: ${rocMLIR_DIR:-<auto-not-found>}"
 echo "  driver: $MIOPEN_BUILD_ROOT/bin/MIOpenDriver"
