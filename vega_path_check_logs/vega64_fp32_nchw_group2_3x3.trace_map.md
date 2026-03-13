@@ -1,7 +1,7 @@
 # TRACE MAP TEMPLATE
 
 - case_id: vega64_fp32_nchw_group2_3x3
-- status: need_more_cases
+- status: fallback_confirmed / fallback_not_confirmed / need_more_cases
 
 ## 1. Observed Lines
 
@@ -22,11 +22,11 @@
 
 - [ ] fallback_confirmed
 - [ ] fallback_not_confirmed
-- [x] need_more_cases
+- [ ] need_more_cases
 
 ## 4. Notes
 
-- solver selected: ConvBinWinogradRxSf2x3
-- kernel selected: miopenSp3AsmConv_v21_1_3_gfx9_fp32_f2x3_stride1
-- dot4 instruction present: not checked in this case
-- additional comments: group=2 case showed multiple Not applicable / Skipped lines before Winograd selection
+- solver selected:
+- kernel selected:
+- dot4 instruction present:
+- additional comments:

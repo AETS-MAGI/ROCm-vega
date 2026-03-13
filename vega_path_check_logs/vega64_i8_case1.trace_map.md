@@ -1,7 +1,7 @@
 # TRACE MAP TEMPLATE
 
 - case_id: vega64_i8_case1
-- status: need_more_cases
+- status: fallback_confirmed / fallback_not_confirmed / need_more_cases
 
 ## 1. Observed Lines
 
@@ -22,11 +22,11 @@
 
 - [ ] fallback_confirmed
 - [ ] fallback_not_confirmed
-- [x] need_more_cases
+- [ ] need_more_cases
 
 ## 4. Notes
 
-- solver selected: ConvDirectNaiveConvFwd
-- kernel selected: naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t
-- dot4 instruction present: not checked (disassembly not done yet)
-- additional comments: smaller INT8 shape reproduced same direct-naive selection pattern on gfx900
+- solver selected:
+- kernel selected:
+- dot4 instruction present:
+- additional comments:

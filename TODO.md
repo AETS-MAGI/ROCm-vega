@@ -154,17 +154,17 @@
 - [x] 実行時 environment を保存する
 
 ### 5.3 命令確認
-- [ ] HSACO を抽出する
-- [ ] `llvm-objdump` で逆アセンブルする
-- [ ] `v_dot4_*` の有無を確認する
-- [ ] `mul/add/mac/mad` 系の代替積和命令列を確認する
+- [x] HSACO を抽出する
+- [x] `llvm-objdump` で逆アセンブルする
+- [x] `v_dot4_*` の有無を確認する
+- [x] `mul/add/mac/mad` 系の代替積和命令列を確認する
 - [ ] gfx900 と比較世代で差分を取る
 
 ### 5.4 重点確認項目
 - [ ] `ConvAsmImplicitGemmV4R1Dynamic*` が本当に選ばれるか確認する
 - [ ] `ConvMlirIgemm*` が実際に落ちるか確認する
 - [ ] DLOPS 系がどの条件で通るか確認する
-- [ ] dot4 非対応時に代替経路へ落ちるか確認する
+- [x] dot4 非対応時に代替経路へ落ちるか確認する
 
 ### 成果物
 - [ ] `trace_map_dynamic.md`

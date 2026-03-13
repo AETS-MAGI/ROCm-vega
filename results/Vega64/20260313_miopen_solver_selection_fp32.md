@@ -65,6 +65,13 @@ bash run_vega_path_case.sh vega64_fp32_nchw_1x1_fwd_n32 -- \
 - solver: `ConvDirectNaiveConvFwd`
 - kernel: `naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t`
 
+7. INT8 追加スイープ（非 naive 探索）
+- `vega64_int8_3x3_s1_n32_c64_k64`: `ConvDirectNaiveConvFwd`
+- `vega64_int8_3x3_s2_n32_c64_k128`: `ConvDirectNaiveConvFwd`
+- `vega64_int8_1x1_group2_n32_c64_k64`: `ConvDirectNaiveConvFwd`
+- `vega64_int8_1x1_n16_c128_k128`: `ConvDirectNaiveConvFwd`
+- 追加した範囲では naive 以外の INT8 solver は観測できなかった
+
 ## 根拠リンク（ログ）
 
 - /home/limonene/vega_path_check_logs/vega64_fp32_nchw_3x3_fwd_n32.log
@@ -85,14 +92,57 @@ bash run_vega_path_case.sh vega64_fp32_nchw_1x1_fwd_n32 -- \
 - /home/limonene/vega_path_check_logs/vega64_i8_case1.log
 - /home/limonene/vega_path_check_logs/vega64_i8_case1.solver_extract.log
 - /home/limonene/vega_path_check_logs/vega64_i8_case1.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_int8_3x3_s1_n32_c64_k64.log
+- /home/limonene/vega_path_check_logs/vega64_int8_3x3_s1_n32_c64_k64.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_int8_3x3_s1_n32_c64_k64.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_int8_3x3_s2_n32_c64_k128.log
+- /home/limonene/vega_path_check_logs/vega64_int8_3x3_s2_n32_c64_k128.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_int8_3x3_s2_n32_c64_k128.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_int8_1x1_group2_n32_c64_k64.log
+- /home/limonene/vega_path_check_logs/vega64_int8_1x1_group2_n32_c64_k64.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_int8_1x1_group2_n32_c64_k64.trace_map.md
+- /home/limonene/vega_path_check_logs/vega64_int8_1x1_n16_c128_k128.log
+- /home/limonene/vega_path_check_logs/vega64_int8_1x1_n16_c128_k128.solver_extract.log
+- /home/limonene/vega_path_check_logs/vega64_int8_1x1_n16_c128_k128.trace_map.md
 
 ## 判定
 
 - status: `need_more_cases`
-- 理由: solver 選択の実測は進んだが、dot4 命令有無の逆アセンブル確認が未実施。
+- 理由: dot4 有無の一次確認は実施済みだが、naive 以外の INT8 kernel や比較GPUとの突合が未実施。
+
+## 逆アセンブル追記（INT8）
+
+- 対象DB: `~/.cache/miopen/3.5.1.5b515cf1bca-dirty/gfx900_64.ukdb`
+- `kern_db` から `naive_conv.cpp.o` (INT8条件行) を抽出
+- 抽出blobは bzip2 圧縮で、展開後は `ELF 64-bit ... elf64-amdgpu`
+- `llvm-objdump -d --triple=amdgcn` で逆アセンブル
+
+実行メモ:
+
+```bash
+sqlite3 "$DB" "SELECT writefile('/tmp/miopen_extract/naive_conv_int8.cpp.o.bz2', kernel_blob) FROM kern_db WHERE kernel_name='naive_conv.cpp.o' AND instr(kernel_args,'MIOPEN_USE_INT8=1')>0 LIMIT 1;"
+bzip2 -dc /tmp/miopen_extract/naive_conv_int8.cpp.o.bz2 > /tmp/miopen_extract/naive_conv_int8.cpp.o
+/opt/rocm/llvm/bin/llvm-objdump -d --triple=amdgcn /tmp/miopen_extract/naive_conv_int8.cpp.o > /tmp/miopen_extract/naive_conv_int8.cpp.o.s
+rg -n "v_dot4_i32_i8|v_dot4c_i32_i8|sdot4|sudot4" /tmp/miopen_extract/naive_conv_int8.cpp.o.s
+```
+
+観測:
+
+- INT8対象シンボル `naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t` を確認
+- `v_dot4_i32_i8` / `v_dot4c_i32_i8` / `sdot4` / `sudot4` は未検出
+- `v_mul*` / `v_add*` 系命令は検出
+
+暫定解釈:
+
+- 今回取得できた INT8 naive kernel では dot4 系命令は使われていない。
+- dot4 非依存の代替積和経路候補として整合的。
 
 ## 次アクション
 
-1. INT8 ケースの hsaco を抽出し、dot4 / 非dot4 命令列を逆アセンブルで確認する。
-2. `ConvAsmImplicitGemmV4R1Dynamic*` が `Not applicable` になる条件を shape と dtype で切り分ける。
+1. `ConvAsmImplicitGemmV4R1Dynamic*` が `Not applicable` になる条件を shape と dtype で切り分ける。
+2. INT8 で naive 以外の kernel が選ばれるケースを探索し、同様に逆アセンブル比較する。
 3. 可能なら比較 GPU で同一ケースを実行し、solver 差分を取る。
+
+補足:
+
+- 追加スイープでも INT8 はすべて `ConvDirectNaiveConvFwd` だったため、次は入力レイアウトや問題サイズの軸を広げる必要がある。

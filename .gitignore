@@ -1,1 +1,6 @@
 sync_vega-logs.sh
+tmp_salvage.sh
+
+# compiled binaries in salvage (large, not useful in git)
+tmp_salvage/**/*.o
+tmp_salvage/**/*.bz2

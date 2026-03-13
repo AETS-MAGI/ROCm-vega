@@ -1,7 +1,7 @@
 # TRACE MAP TEMPLATE
 
 - case_id: vega64_int8_nchw_1x1_fwd_n32
-- status: need_more_cases
+- status: fallback_confirmed / fallback_not_confirmed / need_more_cases
 
 ## 1. Observed Lines
 
@@ -22,11 +22,11 @@
 
 - [ ] fallback_confirmed
 - [ ] fallback_not_confirmed
-- [x] need_more_cases
+- [ ] need_more_cases
 
 ## 4. Notes
 
-- solver selected: ConvDirectNaiveConvFwd
-- kernel selected: naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t
-- dot4 instruction present: not checked (disassembly not done yet)
-- additional comments: ConvAsmImplicitGemmV4R1Dynamic* reported Not applicable and ConvMlirIgemm* was skipped/non-dynamic in search logs
+- solver selected:
+- kernel selected:
+- dot4 instruction present:
+- additional comments:
