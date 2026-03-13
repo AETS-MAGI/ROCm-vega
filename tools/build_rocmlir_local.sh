@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -lt 1 ]]; then
+  cat <<'USAGE'
+Usage:
+  build_rocmlir_local.sh <rocmlir-source-dir>
+
+Optional environment variables:
+  ROCMLIR_BUILD_ROOT=/tmp/rocmlir-build
+  ROCMLIR_PREFIX=$HOME/local/rocmlir
+  ROCM_PATH=/opt/rocm
+  CMAKE_BUILD_TYPE=Release
+  CMAKE_GENERATOR=Ninja
+  BUILD_FAT_LIBROCKCOMPILER=On
+  MLIR_INCLUDE_INTEGRATION_TESTS=Off
+  ROCMLIR_DRIVER_PR_E2E_TEST_ENABLED=0
+  ROCMLIR_BUILD_TUNING_DRIVER=Off
+  EXTRA_CMAKE_ARGS="..."
+
+Example:
+  ROCMLIR_PREFIX=$HOME/local/rocmlir \
+  bash ./tools/build_rocmlir_local.sh \
+  /path/to/rocMLIR
+USAGE
+  exit 1
+fi
+
+SRC_DIR="$1"
+if [[ ! -d "$SRC_DIR" ]]; then
+  echo "error: source dir not found: $SRC_DIR" >&2
+  exit 1
+fi
+
+ROCM_PATH="${ROCM_PATH:-/opt/rocm}"
+ROCMLIR_BUILD_ROOT="${ROCMLIR_BUILD_ROOT:-/tmp/rocmlir-build}"
+ROCMLIR_PREFIX="${ROCMLIR_PREFIX:-$HOME/local/rocmlir}"
+CMAKE_BUILD_TYPE="${CMAKE_BUILD_TYPE:-Release}"
+CMAKE_GENERATOR="${CMAKE_GENERATOR:-Ninja}"
+BUILD_FAT_LIBROCKCOMPILER="${BUILD_FAT_LIBROCKCOMPILER:-On}"
+MLIR_INCLUDE_INTEGRATION_TESTS="${MLIR_INCLUDE_INTEGRATION_TESTS:-Off}"
+ROCMLIR_DRIVER_PR_E2E_TEST_ENABLED="${ROCMLIR_DRIVER_PR_E2E_TEST_ENABLED:-0}"
+ROCMLIR_BUILD_TUNING_DRIVER="${ROCMLIR_BUILD_TUNING_DRIVER:-Off}"
+EXTRA_CMAKE_ARGS="${EXTRA_CMAKE_ARGS:-}"
+
+mkdir -p "$ROCMLIR_BUILD_ROOT" "$ROCMLIR_PREFIX"
+cd "$ROCMLIR_BUILD_ROOT"
+
+cmake -G "$CMAKE_GENERATOR" \
+  -DCMAKE_BUILD_TYPE="$CMAKE_BUILD_TYPE" \
+  -DCMAKE_C_COMPILER="$ROCM_PATH/llvm/bin/clang" \
+  -DCMAKE_CXX_COMPILER="$ROCM_PATH/llvm/bin/clang++" \
+  -DCMAKE_INSTALL_PREFIX="$ROCMLIR_PREFIX" \
+  -DBUILD_FAT_LIBROCKCOMPILER="$BUILD_FAT_LIBROCKCOMPILER" \
+  -DMLIR_INCLUDE_INTEGRATION_TESTS="$MLIR_INCLUDE_INTEGRATION_TESTS" \
+  -DROCMLIR_DRIVER_PR_E2E_TEST_ENABLED="$ROCMLIR_DRIVER_PR_E2E_TEST_ENABLED" \
+  -DROCMLIR_BUILD_TUNING_DRIVER="$ROCMLIR_BUILD_TUNING_DRIVER" \
+  $EXTRA_CMAKE_ARGS \
+  "$SRC_DIR"
+
+cmake --build . -j"$(nproc)"
+cmake --build . --target install
+
+echo "done: local rocMLIR installed"
+echo "  build:  $ROCMLIR_BUILD_ROOT"
+echo "  prefix: $ROCMLIR_PREFIX"
+echo "  config: $ROCMLIR_PREFIX/lib/cmake/rocMLIR"

@@ -11,7 +11,23 @@
 
 - ROCm 実行環境は既存の `/opt/rocm` を使用
 - MIOpen ソースツリーを手元に持っている
+- rocMLIR ソースツリーを手元に持っている
 - この調査ディレクトリで `run_vega_path_case.sh` が実行できる
+
+## 0. rocMLIR をローカルに install
+
+`/opt/rocm` に `rocMLIRConfig.cmake` が無い環境では先にこの手順を実施する。
+
+```bash
+cd /home/limonene/ROCm-project/tank/lab_notebook/notes/vega_investigations
+
+ROCMLIR_PREFIX=$HOME/local/rocmlir \
+bash ./tools/build_rocmlir_local.sh \
+  /path/to/rocMLIR
+```
+
+期待する生成物:
+- `$ROCMLIR_PREFIX/lib/cmake/rocMLIR/rocMLIRConfig.cmake`
 
 ## 1. ローカルDebug版をビルド
 
@@ -19,6 +35,7 @@
 cd /home/limonene/ROCm-project/tank/lab_notebook/notes/vega_investigations
 
 MIOPEN_PREFIX=$HOME/local/miopen-debug \
+ROCMLIR_PREFIX=$HOME/local/rocmlir \
 bash ./tools/build_miopen_debug_local.sh \
   /path/to/rocm-libraries/projects/miopen
 ```
@@ -27,6 +44,7 @@ bash ./tools/build_miopen_debug_local.sh \
 - デフォルトは `Debug` ビルド
 - `BUILD_DEV=On` で DB/キャッシュの切り分けがしやすい
 - MLIR連携は `-DMIOPEN_USE_MLIR=On` のまま
+- `ROCMLIR_PREFIX` を渡すと自動で `rocMLIR_DIR=$ROCMLIR_PREFIX/lib/cmake/rocMLIR` を探索
 
 ## 2. ローカルMIOpenでケース再現
 

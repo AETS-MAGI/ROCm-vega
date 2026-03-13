@@ -13,6 +13,7 @@
 - 逆アセンブル手順: disassemble_rocm.md
 - 実行補助スクリプト: run_vega_path_case.sh
 - MIIRトレース補助: run_vega_path_case_miir_trace.sh
+- ローカルrocMLIRビルド: tools/build_rocmlir_local.sh
 - ローカルMIOpen差し替え実行: tools/run_case_with_local_miopen.sh
 - ローカルDebug版MIOpenビルド: tools/build_miopen_debug_local.sh
 - 再ビルド手順メモ: miopen_debug_rebuild_plan.md

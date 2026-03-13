@@ -180,9 +180,13 @@
 - 同形状3x3で `ConvHipImplicitGemmForwardV4R5Xdlops` を FP16/BFP16 に強制すると、両者とも `Code object build failed` -> `rc=0x7`（`__EXIT_CODE=7`）。
 
 次アクション(2026-03-13):
+- [x] `rocMLIR_DIR` 欠落で MIOpen configure が停止する原因を確認（`Could NOT find rocMLIR`）
+- [x] rocMLIR先行ビルド導線を追加 (`tools/build_rocmlir_local.sh`)
+- [x] MIOpenビルドに `ROCMLIR_PREFIX` / `rocMLIR_DIR` を渡せるよう更新 (`tools/build_miopen_debug_local.sh`)
 - [x] ローカルDebug版MIOpenのビルド手順を固定 (`miopen_debug_rebuild_plan.md`)
 - [x] ローカルprefix向けビルドスクリプトを追加 (`tools/build_miopen_debug_local.sh`)
 - [x] ローカルMIOpen差し替え実行ラッパーを追加 (`tools/run_case_with_local_miopen.sh`)
+- [ ] ローカルrocMLIRを install して `rocMLIRConfig.cmake` の生成を確認
 - [ ] ローカルDebug版MIOpenで `vega64_int8_force_mlir_fwd` を再実行してログ採取
 - [ ] `src/mlir_build.cpp` 一時ログパッチで `handle` と `Miir*` 戻り値を採取
 - [ ] `miirCreateHandle` の `nullptr` 分岐を runtime 観測で最終確定
