@@ -179,6 +179,14 @@
 - 同形状3x3で `ConvHipImplicitGemmFwdXdlops` を FP16/BFP16 に強制すると、両者とも assertion abort（`__EXIT_CODE=134`）。
 - 同形状3x3で `ConvHipImplicitGemmForwardV4R5Xdlops` を FP16/BFP16 に強制すると、両者とも `Code object build failed` -> `rc=0x7`（`__EXIT_CODE=7`）。
 
+次アクション(2026-03-13):
+- [x] ローカルDebug版MIOpenのビルド手順を固定 (`miopen_debug_rebuild_plan.md`)
+- [x] ローカルprefix向けビルドスクリプトを追加 (`tools/build_miopen_debug_local.sh`)
+- [x] ローカルMIOpen差し替え実行ラッパーを追加 (`tools/run_case_with_local_miopen.sh`)
+- [ ] ローカルDebug版MIOpenで `vega64_int8_force_mlir_fwd` を再実行してログ採取
+- [ ] `src/mlir_build.cpp` 一時ログパッチで `handle` と `Miir*` 戻り値を採取
+- [ ] `miirCreateHandle` の `nullptr` 分岐を runtime 観測で最終確定
+
 ### 成果物
 - [x] `trace_map_dynamic.md`
 - [x] `solver_observation_log.md`
