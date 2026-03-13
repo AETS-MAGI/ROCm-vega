@@ -107,6 +107,12 @@ bash run_vega_path_case.sh vega64_fp32_nchw_1x1_fwd_n32 -- \
 - 結果: 全件 `not applicable to the current problem` + `RunForwardGPU() FAILED, rc = 0x3`
 - 解釈: 今回の shape/layout/group 範囲では DLOPS 成立条件に到達できなかった。
 
+12. INT8 強制DLOPSグリッド（search=1 + C/K極値）
+- 対象solver: `ConvCkIgemmFwdV6r1DlopsNchw`
+- ケース: 8件（`-s 1`、NCHW/NHWC、1x1/3x3、C/K=128/256、stride1/2、g=1/2）
+- 結果: 全件 `not applicable to the current problem` + `RunForwardGPU() FAILED, rc = 0x3`
+- 解釈: `-s 1` と C/K極値を入れても DLOPS 成立条件に到達できず、現状は適用不可が一貫。
+
 ## 根拠リンク（ログ）
 
 - /home/limonene/vega_path_check_logs/vega64_fp32_nchw_3x3_fwd_n32.log
@@ -164,6 +170,14 @@ bash run_vega_path_case.sh vega64_fp32_nchw_1x1_fwd_n32 -- \
 - /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_nchw_3x3_n32_c64_k64_g2.log
 - /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_nhwc_1x1_n16_c64_k64_g1.log
 - /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_nhwc_3x3_n16_c64_k64_g1.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_s1_nchw_1x1_n1_c128_k128.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_s1_nchw_1x1_n1_c256_k256.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_s1_nchw_3x3_n1_c128_k128.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_s1_nchw_3x3_n1_c128_k128_s2.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_s1_nchw_3x3_n32_c128_k128.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_s1_nchw_3x3_n32_c128_k128_g2.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_s1_nhwc_1x1_n16_c128_k128.log
+- /home/limonene/vega_path_check_logs/vega64_int8_force_dlops_s1_nhwc_3x3_n16_c128_k128.log
 
 ## 判定
 

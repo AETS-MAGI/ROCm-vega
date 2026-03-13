@@ -171,6 +171,7 @@
 - `-S ConvMlirIgemmFwd` の強制実行で `MIIR_INVALID_PARAM` と `RunForwardGPU() FAILED, rc = 0x7` を確認。
 - `-S ConvCkIgemmFwdV6r1DlopsNchw` の強制実行で `not applicable to the current problem` と `RunForwardGPU() FAILED, rc = 0x3` を確認。
 - `ConvCkIgemmFwdV6r1DlopsNchw` の強制グリッド7ケース（NCHW/NHWC, 1x1/3x3, n=1/16/32, g=1/2）でも全件 `not applicable`（rc=0x3）。
+- `ConvCkIgemmFwdV6r1DlopsNchw` の強制グリッド8ケース（`-s 1`, C/K=128/256, stride1/2, g=1/2）でも全件 `not applicable`（rc=0x3）。
 
 ### 成果物
 - [x] `trace_map_dynamic.md`

@@ -98,3 +98,12 @@
   - `The supplied solution id ... is not applicable to the current problem`
   - `RunForwardGPU() FAILED, rc = 0x3`
 - 解釈: 少なくとも今回の形状・layout・group範囲では DLOPS成立条件に到達していない。
+
+## 10. 強制DLOPSグリッド search=1 (追加)
+
+- 対象solver: `ConvCkIgemmFwdV6r1DlopsNchw`
+- 実施: 8ケース（`-s 1`, C/K=128/256, NCHW/NHWC, 1x1/3x3, stride1/2, g=1/2）
+- 結果: 全ケースで
+  - `The supplied solution id ... is not applicable to the current problem`
+  - `RunForwardGPU() FAILED, rc = 0x3`
+- 解釈: search有効化とC/K極値を加えても適用不可は不変。次は別DLOPS solver familyの切り分けが必要。

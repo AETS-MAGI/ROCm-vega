@@ -33,6 +33,7 @@ Vega64(gfx900) 実機で、実行時にどの solver / kernel に落ちるかを
   - `GetForwardSolutionWorkspaceSize` まで進行
   - `not applicable to the current problem` -> `RunForwardGPU() FAILED, rc = 0x3`
   - 追加グリッド7ケース（NCHW/NHWC, 1x1/3x3, n=1/16/32, g=1/2）でも全件 `not applicable`
+  - 追加グリッド8ケース（`-s 1`, C/K=128/256, stride1/2, g=1/2）でも全件 `not applicable`
 
 ## 3. 補助観測
 
