@@ -46,8 +46,15 @@ CMAKE_BUILD_TYPE="${CMAKE_BUILD_TYPE:-Debug}"
 CMAKE_GENERATOR="${CMAKE_GENERATOR:-Ninja}"
 EXTRA_CMAKE_ARGS="${EXTRA_CMAKE_ARGS:-}"
 
-if [[ -z "${rocMLIR_DIR:-}" && -n "$ROCMLIR_PREFIX" && -d "$ROCMLIR_PREFIX/lib/cmake/rocMLIR" ]]; then
-  rocMLIR_DIR="$ROCMLIR_PREFIX/lib/cmake/rocMLIR"
+if [[ -z "${rocMLIR_DIR:-}" && -n "$ROCMLIR_PREFIX" ]]; then
+  for _rocmlir_cmake_dir in \
+    "$ROCMLIR_PREFIX/lib/cmake/rocMLIR" \
+    "$ROCMLIR_PREFIX/lib/cmake/rocmlir"; do
+    if [[ -d "$_rocmlir_cmake_dir" ]]; then
+      rocMLIR_DIR="$_rocmlir_cmake_dir"
+      break
+    fi
+  done
 fi
 
 if [[ -x "$ROCM_PATH/llvm/bin/clang++" ]]; then
