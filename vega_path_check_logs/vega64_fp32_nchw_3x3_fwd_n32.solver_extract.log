@@ -1,0 +1,3 @@
+186:MIOpen(HIP): Info [FindSolutionImpl] ConvBinWinograd3x3U (not searchable)
+196:MIOpen(HIP): Info2 [LoadBinary] Successfully loaded binary for: "conv_3x3_wheel_alpha_v7_0_3b.s.o"; args: -Wa,-defsym,ROCM_METADATA_VERSION=5 -mcpu=gfx900
+199:MIOpen(HIP): Info2 [SetAsFound1_0] Solver ConvBinWinograd3x3U registered as find 1.0 best for miopenConvolutionFwdAlgoWinograd in 64x56x56x3x3x64x56x56x32xNCHWxFP32x1x1x1x1x1x1x1xFxDefault

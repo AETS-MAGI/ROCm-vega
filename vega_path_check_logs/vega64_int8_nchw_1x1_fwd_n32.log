@@ -1,0 +1,620 @@
+MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -F 1 -t 1
+MIOpen(HIP): Info [get_device_name] Raw device name: gfx900:xnack-
+MIOpen(HIP): Info [Handle] stream: 0x559e1d530390, device_id: 0
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateConvolutionDescriptor(miopenConvolutionDescriptor_t *){
+MIOpen(HIP): 	convDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): Info [] MIOPEN_FIND_MODE = DYNAMIC_HYBRID(5)
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 3
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 32 64 56 56 }
+MIOpen(HIP): 	stride.values = { 200704 3136 56 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 3
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 64 64 1 1 }
+MIOpen(HIP): 	stride.values = { 64 1 1 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenInitConvolutionNdDescriptor(miopenConvolutionDescriptor_t, int, const int *, const int *, const int *, miopenConvolutionMode_t){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	spatialDim = 2
+MIOpen(HIP): 	pads = { 0 0 }
+MIOpen(HIP): 	strides = { 1 1 }
+MIOpen(HIP): 	dilations = { 1 1 }
+MIOpen(HIP): 	c_mode = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetConvolutionGroupCount(miopenConvolutionDescriptor_t, int){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	groupCount = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetConvolutionNdForwardOutputDim(miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, int *, int *){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	inputTensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	filterDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 3
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 32 64 56 56 }
+MIOpen(HIP): 	stride.values = { 200704 3136 56 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	n = 1601467759
+MIOpen(HIP): 	c = 1953718627
+MIOpen(HIP): 	h = 1887007839
+MIOpen(HIP): 	w = 655461
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	vectorLength = 140735851931960
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): 	n = -2132237480
+MIOpen(HIP): 	c = 32521
+MIOpen(HIP): 	h = 56
+MIOpen(HIP): 	w = 56
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): 	vectorLength = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	n = -2132237480
+MIOpen(HIP): 	c = 32521
+MIOpen(HIP): 	h = 1
+MIOpen(HIP): 	w = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	vectorLength = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenConvolutionForwardGetWorkSpaceSize(miopenHandle_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, const miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, size_t *){
+MIOpen(HIP): 	handle = stream: 0x559e1d530390, device_id: 0
+MIOpen(HIP): 	wDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): 	xDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	yDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): Info [AmdRocmMetadataVersionDetect] ROCm MD version AMDHSA_COv3, HIP version 7.2.26043, MIOpen version 3.5.1.5b515cf1bca-dirty
+MIOpen(HIP): Info2 [GetWorkSpaceSize] 
+MIOpen(HIP): Info [GetSolutions] 
+MIOpen(HIP): Info [IsNetworkedFilesystem] Filesystem type at '"/home/limonene/.config/miopen/"' is: 0x9123683e '<Unknown magic>'
+MIOpen(HIP): Info2 [GetLibPath] Lib Path: "/opt/rocm/lib/libMIOpen.so.1.0"
+MIOpen(HIP): Info2 [GetInstalledPathFile] Found exact find database file: "/opt/rocm/share/miopen/db/gfx900_64.HIP.fdb.txt"
+MIOpen(HIP): Info [Measure] ReadonlyRamDb::Prefetch time: 39.3569 ms
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info [Measure] RamDb::Prefetch time: 0.011852 ms
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.537386
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.537386
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [ValidateUnsafe] DB file is older than cache: 558478731805337, 558509799825897
+MIOpen(HIP): Info2 [FindRecordUnsafe] Looking for key 64-56-56-1x1-64-56-56-32-0x0-1x1-1x1-0-NCHW-INT8-F in cache for file "/home/limonene/.config/miopen/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt"
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.537386
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.537386
+MIOpen(HIP): Info2 [FindRecord] Looking for key 64-56-56-1x1-64-56-56-32-0x0-1x1-1x1-0-NCHW-INT8-F in file "/opt/rocm/share/miopen/db/gfx900_64.HIP.fdb.txt"
+MIOpen(HIP): Info2 [Measure] Db::FindRecord time: 0.17354 ms
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /tmp/miopen-lockfiles/:memory:gfx900.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /tmp/miopen-lockfiles/:memory:gfx900.lock.fslock
+MIOpen(HIP): Info2 [FindRecordUnsafe] Looking for key 64-56-56-1x1-64-56-56-32-0x0-1x1-1x1-0-NCHW-INT8-F in cache for file ":memory:gfx900"
+MIOpen(HIP): Info2 [unlock] Unlock < /tmp/miopen-lockfiles/:memory:gfx900.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /tmp/miopen-lockfiles/:memory:gfx900.lock.fslock.abyss-hbmx.537386
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /tmp/miopen-lockfiles/:memory:gfx900.lock.fslock.abyss-hbmx.537386
+MIOpen(HIP): Info2 [IsProblemSupported] TunaNet Inapplicable: Unsupported data type
+MIOpen(HIP): Info2 [GetSolutionsFallback] Using WTI Fallback
+MIOpen(HIP): Info2 [GetSolutionsFallback] ConvDirectNaiveConvFwd Estimated WTI = 0.01
+MIOpen(HIP): Info2 [GetSolutionsFallback] maxSolutionCount = 1, available = 1
+MIOpen(HIP): Info2 [GetSolutionsFallback] id: 85, algo: 1, time: 1000, ws: 0, name: ConvDirectNaiveConvFwd
+MIOpen(HIP): Info2 [GetWorkspaceSizes] fft: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] GemmFwd1x1_0_1: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] GemmFwd1x1_0_1_int8: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] GemmFwd1x1_0_2: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] GemmFwdRest: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] GemmBwd1x1_stride1: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] GemmBwd1x1_stride2: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] GemmBwdRest: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] GemmWrw1x1_stride1: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] GemmWrwUniversal: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsm3x3U: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsm1x1U: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsm1x1UV2: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsm5x10u2v2f1: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsm7x7c3h224w224k64u2v2p3q3f1: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsm5x10u2v2b1: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvOclDirectFwd11x11: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvOclDirectFwdGen: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvOclDirectFwd1x1: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvOclDirectFwd: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvDirectNaiveConvFwd: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvDirectNaiveConvBwd: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvDirectNaiveConvWrw: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmForwardV4R5Xdlops: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmForwardV4R4Xdlops: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmForwardV4R4Xdlops_Padded_Gemm: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmBwdDataV4R1Xdlops: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmBwdDataV1R1Xdlops: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmV4R1Fwd: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmV4R4Fwd: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMlirIgemmFwdXdlops: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMlirIgemmFwd: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMlirIgemmBwdXdlops: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMlirIgemmBwd: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmBwdDataV1R1: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmBwdDataV4R1: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmV4R1DynamicFwd_1x1: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmV4R1DynamicFwd: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmV4R1DynamicBwd: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmGTCDynamicFwdXdlops: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmGTCDynamicBwdXdlops: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmGTCDynamicFwdXdlopsNHWC: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmGTCDynamicBwdXdlopsNHWC: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvCkIgemmFwdV6r1DlopsNchw: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmFwdXdlops: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmBwdXdlops: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmGroupFwdXdlops: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmGroupBwdXdlops: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemm3DGroupFwdXdlops: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemm3DGroupBwdXdlops: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmGTCDynamicFwdDlopsNCHWC: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvBinWinograd3x3U: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvBinWinogradRxSf3x2: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvBinWinogradRxSf2x3: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvBinWinogradRxSf2x3g1: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvBinWinogradRxS: Skipped (no workspace required)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd<2-3>: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd<3-3>: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd<4-3>: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd<5-3>: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd<6-3>: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd_xdlops<2-3>: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd_xdlops<3-3>: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd_xdlops<4-3>: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd_xdlops<5-3>: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd_xdlops<6-3>: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvWinoFuryRxS<2-3>: Not applicable
+MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvWinoRageRxS<2-3>: Skipped (no workspace required)
+MIOpen(HIP): Info [GetWorkSpaceSize] 0
+PRNG seed: 12345678
+MIOpen(HIP): MIOpenDriver Info2 [GPUMem] hipMalloc 6422528 at 0x7f0848600000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [GPUMem] hipMalloc 4096 at 0x7f0850400000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [GPUMem] hipMalloc 25690112 at 0x7f0845800000 Ok
+Timestamp: 2026-03-13 02:08:32 UTC; Host Name: abyss-hbmx; Operating System: Linux 6.18.16-1-lts; ROCm: 7.2.26043; MIOpen Driver: 3.5.1; CPU Vendor: AMD; CPU Model: 1 x Ryzen Threadripper; RAM Size: 62 GB; GPU Model: 1 x AMD Radeon RX Vega; AMDGPU Driver: 0.0.0
+MIOpen(HIP): MIOpenDriver Info2 [DebugPrintWorkspaceDev] ptr=0 size=0
+MIOpen(HIP): miopenStatus_t miopenFindConvolutionForwardAlgorithm(miopenHandle_t, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, void *, const int, int *, miopenConvAlgoPerf_t *, void *, size_t, bool){
+MIOpen(HIP): 	handle = stream: 0x559e1d530390, device_id: 0
+MIOpen(HIP): 	xDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f0848600000
+MIOpen(HIP): 	wDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f0850400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	yDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f0845800000
+MIOpen(HIP): 	requestAlgoCount = 2
+MIOpen(HIP): 	returnedAlgoCount = 32767
+MIOpen(HIP): 	perfResults = 
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): 	exhaustiveSearch = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdFindConvolution] ./bin/MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [FindConvFwdAlgorithm] requestAlgoCount = 2, workspace = 0
+MIOpen(HIP): Info [GetSolutions] 
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [ValidateUnsafe] DB file is older than cache: 558478731805337, 558509799825897
+MIOpen(HIP): Info2 [FindRecordUnsafe] Looking for key 64-56-56-1x1-64-56-56-32-0x0-1x1-1x1-0-NCHW-INT8-F in cache for file "/home/limonene/.config/miopen/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt"
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.537386
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.537386
+MIOpen(HIP): Info2 [FindRecord] Looking for key 64-56-56-1x1-64-56-56-32-0x0-1x1-1x1-0-NCHW-INT8-F in file "/opt/rocm/share/miopen/db/gfx900_64.HIP.fdb.txt"
+MIOpen(HIP): Info2 [Measure] Db::FindRecord time: 0.215029 ms
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /tmp/miopen-lockfiles/:memory:gfx900.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /tmp/miopen-lockfiles/:memory:gfx900.lock.fslock
+MIOpen(HIP): Info2 [FindRecordUnsafe] Looking for key 64-56-56-1x1-64-56-56-32-0x0-1x1-1x1-0-NCHW-INT8-F in cache for file ":memory:gfx900"
+MIOpen(HIP): Info2 [unlock] Unlock < /tmp/miopen-lockfiles/:memory:gfx900.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /tmp/miopen-lockfiles/:memory:gfx900.lock.fslock.abyss-hbmx.537386
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /tmp/miopen-lockfiles/:memory:gfx900.lock.fslock.abyss-hbmx.537386
+MIOpen(HIP): Info2 [IsProblemSupported] TunaNet Inapplicable: Unsupported data type
+MIOpen(HIP): Info2 [GetSolutionsFallback] Using WTI Fallback
+MIOpen(HIP): Info2 [GetSolutionsFallback] ConvDirectNaiveConvFwd Estimated WTI = 0.01
+MIOpen(HIP): Info2 [GetSolutionsFallback] maxSolutionCount = 1, available = 1
+MIOpen(HIP): Info2 [GetSolutionsFallback] id: 85, algo: 1, time: 1000, ws: 0, name: ConvDirectNaiveConvFwd
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [ValidateUnsafe] DB file is older than cache: 558478731805337, 558509799825897
+MIOpen(HIP): Info2 [FindRecordUnsafe] Looking for key 64-56-56-1x1-64-56-56-32-0x0-1x1-1x1-0-NCHW-INT8-F in cache for file "/home/limonene/.config/miopen/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt"
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.537386
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.537386
+MIOpen(HIP): Info2 [Measure] Db::FindRecord time: 0.147821 ms
+MIOpen(HIP): Info [TryLoad] Find-db regenerating.
+MIOpen(HIP): Info [FindConvolution] Find Start: 64-56-56-1x1-64-56-56-32-0x0-1x1-1x1-0-NCHW-INT8-F, findMode: DYNAMIC_HYBRID(5)
+MIOpen(HIP): Info2 [Find] Starting find for miopenConvolutionFwdAlgoWinograd
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvBinWinograd3x3U: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvBinWinogradRxSf3x2: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvBinWinogradRxSf2x3: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvBinWinogradRxSf2x3g1: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvBinWinogradRxS: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd<2-3>: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd<3-3>: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd<4-3>: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd<5-3>: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd<6-3>: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd_xdlops<2-3>: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd_xdlops<3-3>: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd_xdlops<4-3>: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd_xdlops<5-3>: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd_xdlops<6-3>: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvWinoFuryRxS<2-3>: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvWinoRageRxS<2-3>: Not applicable
+MIOpen(HIP): Info2 [Find] Starting find for miopenConvolutionFwdAlgoDirect
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsm3x3U: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsm1x1U: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsm1x1UV2: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsm5x10u2v2f1: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsm7x7c3h224w224k64u2v2p3q3f1: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsm5x10u2v2b1: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvOclDirectFwd11x11: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvOclDirectFwdGen: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvOclDirectFwd1x1: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvOclDirectFwd: Skipped (non-dynamic)
+MIOpen(HIP): Info [FindSolutionImpl] ConvDirectNaiveConvFwd (not searchable)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvDirectNaiveConvFwd: Success.
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvDirectNaiveConvBwd: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvDirectNaiveConvWrw: Not applicable
+MIOpen(HIP): Info2 [Find] Starting find for miopenConvolutionFwdAlgoImplicitGEMM
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmForwardV4R5Xdlops: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmForwardV4R4Xdlops: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmForwardV4R4Xdlops_Padded_Gemm: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmBwdDataV4R1Xdlops: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmBwdDataV1R1Xdlops: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmV4R1Fwd: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmV4R4Fwd: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMlirIgemmFwdXdlops: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMlirIgemmFwd: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMlirIgemmBwdXdlops: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMlirIgemmBwd: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmBwdDataV1R1: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmBwdDataV4R1: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmV4R1DynamicFwd_1x1: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmV4R1DynamicFwd: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmV4R1DynamicBwd: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmGTCDynamicFwdXdlops: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmGTCDynamicBwdXdlops: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmGTCDynamicFwdXdlopsNHWC: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmGTCDynamicBwdXdlopsNHWC: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvCkIgemmFwdV6r1DlopsNchw: Skipped (non-dynamic)
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmFwdXdlops: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmBwdXdlops: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmGroupFwdXdlops: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmGroupBwdXdlops: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemm3DGroupFwdXdlops: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemm3DGroupBwdXdlops: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmGTCDynamicFwdDlopsNCHWC: Not applicable
+MIOpen(HIP): Info2 [Find] Starting find for miopenConvolutionFwdAlgoGEMM
+MIOpen(HIP): Info2 [SearchForAllSolutions] GemmFwd1x1_0_1: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] GemmFwd1x1_0_1_int8: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] GemmFwd1x1_0_2: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] GemmFwdRest: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] GemmBwd1x1_stride1: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] GemmBwd1x1_stride2: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] GemmBwdRest: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] GemmWrw1x1_stride1: Not applicable
+MIOpen(HIP): Info2 [SearchForAllSolutions] GemmWrwUniversal: Not applicable
+MIOpen(HIP): Info2 [Find] Starting find for miopenConvolutionFwdAlgoFFT
+MIOpen(HIP): Info2 [SearchForAllSolutions] fft: Skipped (non-dynamic)
+MIOpen(HIP): Info [IsNetworkedFilesystem] Filesystem type at '"/home/limonene/.cache/miopen/3.5.1.5b515cf1bca-dirty"' is: 0x9123683e '<Unknown magic>'
+MIOpen(HIP): Info2 [SQLiteBase] Initializing system database file ""
+MIOpen(HIP): Info [KernDb] database not present
+MIOpen(HIP): Info2 [SQLiteBase] Initializing user database file "/home/limonene/.cache/miopen/3.5.1.5b515cf1bca-dirty/gfx900_64.ukdb"
+MIOpen(HIP): Info2 [KernDb] Database created successfully
+MIOpen(HIP): Info2 [LoadBinary] Loading binary for: "naive_conv.cpp.o"; args:  -DMIOPEN_USE_FP16=0 -DMIOPEN_USE_FP16x4=0 -DMIOPEN_USE_FP16x8=0 -DMIOPEN_USE_FP32=0 -DMIOPEN_USE_INT8=1 -DMIOPEN_USE_BFP16=0 -DMIOPEN_USE_INT32=0 -DMIOPEN_USE_RNE_BFLOAT16=1 -DMIOPEN_FP8_IEEE_EXPONENT_BIAS=0 -DMIOPEN_FP8_CLIPPING=1 -mcpu=gfx900
+MIOpen(HIP): Info2 [Prepare] SELECT kernel_blob, kernel_hash, uncompressed_size FROM kern_db WHERE (kernel_name = 'naive_conv.cpp.o') AND (kernel_args = ' -DMIOPEN_USE_FP16=0 -DMIOPEN_USE_FP16x4=0 -DMIOPEN_USE_FP16x8=0 -DMIOPEN_USE_FP32=0 -DMIOPEN_USE_INT8=1 -DMIOPEN_USE_BFP16=0 -DMIOPEN_USE_INT32=0 -DMIOPEN_USE_RNE_BFLOAT16=1 -DMIOPEN_FP8_IEEE_EXPONENT_BIAS=0 -DMIOPEN_FP8_CLIPPING=1 -mcpu=gfx900');
+MIOpen(HIP): Info2 [Measure] Db::FindRecord time: 11.4394 ms
+MIOpen(HIP): Info2 [LoadBinary] Successfully loaded binary for: "naive_conv.cpp.o"; args:  -DMIOPEN_USE_FP16=0 -DMIOPEN_USE_FP16x4=0 -DMIOPEN_USE_FP16x8=0 -DMIOPEN_USE_FP32=0 -DMIOPEN_USE_INT8=1 -DMIOPEN_USE_BFP16=0 -DMIOPEN_USE_INT32=0 -DMIOPEN_USE_RNE_BFLOAT16=1 -DMIOPEN_FP8_IEEE_EXPONENT_BIAS=0 -DMIOPEN_FP8_CLIPPING=1 -mcpu=gfx900
+MIOpen(HIP): Info2 [PrepareInvoker] Preparing kernel: naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): Info [EvaluateInvokers] ConvDirectNaiveConvFwd: naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t: 4.87333 < 3.40282e+38
+MIOpen(HIP): Info2 [Register] Invoker registered for algorithm 64x56x56x1x1x64x56x56x32xNCHWxINT8x0x0x1x1x1x1x1xFxDefault and solver ConvDirectNaiveConvFwd
+MIOpen(HIP): Info2 [SetAsFound1_0] Solver ConvDirectNaiveConvFwd registered as find 1.0 best for miopenConvolutionFwdAlgoDirect in 64x56x56x1x1x64x56x56x32xNCHWxINT8x0x0x1x1x1x1x1xFxDefault
+MIOpen(HIP): Info [EvaluateInvokers] Selected: ConvDirectNaiveConvFwd: naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t: 4.87333, workspace_sz = 0
+MIOpen(HIP): Info [FindConvolution] Find Ended: 64-56-56-1x1-64-56-56-32-0x0-1x1-1x1-0-NCHW-INT8-F
+MIOpen(HIP): Info2 [SetValues] 64-56-56-1x1-64-56-56-32-0x0-1x1-1x1-0-NCHW-INT8-F, content inserted: ConvDirectNaiveConvFwd:4.87333,0,miopenConvolutionFwdAlgoDirect
+MIOpen(HIP): Info2 [StoreRecord] Trying to store record at key 64-56-56-1x1-64-56-56-32-0x0-1x1-1x1-0-NCHW-INT8-F in cache for file "/home/limonene/.config/miopen/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt"
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [StoreRecordUnsafe] Storing record: 64-56-56-1x1-64-56-56-32-0x0-1x1-1x1-0-NCHW-INT8-F
+MIOpen(HIP): Info2 [FindRecordUnsafe] Looking for key 64-56-56-1x1-64-56-56-32-0x0-1x1-1x1-0-NCHW-INT8-F in file "/home/limonene/.config/miopen/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt"
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.537386
+MIOpen(HIP): Info2 [UpdateDbModificationTime] Updating db modification time for "/home/limonene/.config/miopen/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt"
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.537386
+MIOpen(HIP): Info2 [Measure] Db::StoreRecord time: 0.400071 ms
+MIOpen(HIP): Info [FindConvolution] miopenConvolutionFwdAlgoDirect	4.87333	0
+MIOpen(HIP): Info [FillFindReturnParameters] FW Chosen Algorithm: ConvDirectNaiveConvFwd , 0, 4.87333
+MIOpen(HIP): MIOpenDriver Info2 [DebugPrintWorkspaceDev] ptr=0 size=0
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x559e1d530390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7fff9e7628b4
+MIOpen(HIP): 	xDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f0848600000
+MIOpen(HIP): 	wDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f0850400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7fff9e7628b8
+MIOpen(HIP): 	yDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f0845800000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x1x1x64x56x56x32xNCHWxINT8x0x0x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoDirect
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x559e1d530390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7fff9e7628b4
+MIOpen(HIP): 	xDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f0848600000
+MIOpen(HIP): 	wDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f0850400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7fff9e7628b8
+MIOpen(HIP): 	yDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f0845800000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x1x1x64x56x56x32xNCHWxINT8x0x0x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoDirect
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x559e1d530390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7fff9e7628b4
+MIOpen(HIP): 	xDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f0848600000
+MIOpen(HIP): 	wDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f0850400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7fff9e7628b8
+MIOpen(HIP): 	yDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f0845800000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x1x1x64x56x56x32xNCHWxINT8x0x0x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoDirect
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x559e1d530390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7fff9e7628b4
+MIOpen(HIP): 	xDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f0848600000
+MIOpen(HIP): 	wDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f0850400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7fff9e7628b8
+MIOpen(HIP): 	yDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f0845800000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x1x1x64x56x56x32xNCHWxINT8x0x0x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoDirect
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x559e1d530390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7fff9e7628b4
+MIOpen(HIP): 	xDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f0848600000
+MIOpen(HIP): 	wDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f0850400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7fff9e7628b8
+MIOpen(HIP): 	yDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f0845800000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x1x1x64x56x56x32xNCHWxINT8x0x0x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoDirect
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x559e1d530390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7fff9e7628b4
+MIOpen(HIP): 	xDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f0848600000
+MIOpen(HIP): 	wDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f0850400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7fff9e7628b8
+MIOpen(HIP): 	yDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f0845800000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x1x1x64x56x56x32xNCHWxINT8x0x0x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoDirect
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x559e1d530390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7fff9e7628b4
+MIOpen(HIP): 	xDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f0848600000
+MIOpen(HIP): 	wDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f0850400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7fff9e7628b8
+MIOpen(HIP): 	yDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f0845800000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x1x1x64x56x56x32xNCHWxINT8x0x0x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoDirect
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x559e1d530390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7fff9e7628b4
+MIOpen(HIP): 	xDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f0848600000
+MIOpen(HIP): 	wDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f0850400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7fff9e7628b8
+MIOpen(HIP): 	yDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f0845800000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x1x1x64x56x56x32xNCHWxINT8x0x0x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoDirect
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x559e1d530390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7fff9e7628b4
+MIOpen(HIP): 	xDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f0848600000
+MIOpen(HIP): 	wDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f0850400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7fff9e7628b8
+MIOpen(HIP): 	yDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f0845800000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x1x1x64x56x56x32xNCHWxINT8x0x0x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoDirect
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x559e1d530390, device_id: 0
+MIOpen(HIP): 	alpha = 0x7fff9e7628b4
+MIOpen(HIP): 	xDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f0848600000
+MIOpen(HIP): 	wDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f0850400000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7fff9e7628b8
+MIOpen(HIP): 	yDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f0845800000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): Info2 [GetInvoker] Returning an invoker for problem 64x56x56x1x1x64x56x56x32xNCHWxINT8x0x0x1x1x1x1x1xFxDefault and algorithm miopenConvolutionFwdAlgoDirect
+MIOpen(HIP): Info2 [run] kernel_name = naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t, global_work_dim = { 524288, 1, 1 }, local_work_dim = { 256, 1, 1 }
+MIOpen Forward Conv. Algorithm: 1, Solution: 85/ConvDirectNaiveConvFwd
+GPU Kernel Time Forward Conv. Elapsed: 3.575348 ms (average)
+stats: name, n, c, ho, wo, y, x, k, flopCnt, bytesRead, bytesWritten, GFLOPs, GB/s, timeMs
+stats: fwd-conv1x1u1, 32, 64, 56, 56, 1, 1, 64, 822083584, 6426624, 6422528, 230, 4, 3.575348
+Forward Convolution Verifies OK on GPU reference (0 < 1.5e-06)
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyConvolutionDescriptor(miopenConvolutionDescriptor_t){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyConvolutionDescriptor(miopenConvolutionDescriptor_t){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): }
+MIOpen(HIP): MIOpenDriver Info2 [~GPUMem] hipFree 25690112 at 0x7f0845800000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [~GPUMem] hipFree 4096 at 0x7f0850400000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [~GPUMem] hipFree 6422528 at 0x7f0848600000 Ok

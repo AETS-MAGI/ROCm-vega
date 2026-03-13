@@ -1,0 +1,3 @@
+186:MIOpen(HIP): Info [FindSolutionImpl] ConvAsm1x1U
+205:MIOpen(HIP): Info [FindSolutionImpl] Perf Db: record not found for: ConvAsm1x1U
+233:MIOpen(HIP): Info2 [SetAsFound1_0] Solver ConvAsm1x1U registered as find 1.0 best for miopenConvolutionFwdAlgoDirect in 64x56x56x1x1x64x56x56x32xNCHWxFP32x0x0x1x1x1x1x1xFxDefault
