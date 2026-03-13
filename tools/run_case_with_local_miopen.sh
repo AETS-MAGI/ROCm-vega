@@ -7,7 +7,7 @@ Usage:
   run_case_with_local_miopen.sh <miopen-prefix> <case_id> -- <command...>
 
 Example:
-  ./tools/run_case_with_local_miopen.sh $HOME/local/miopen-debug vega64_int8_local_dbg -- \
+  bash ./tools/run_case_with_local_miopen.sh $HOME/local/miopen-debug vega64_int8_local_dbg -- \
     MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 \
     -S ConvMlirIgemmFwd -F 1 -t 1
 USAGE
