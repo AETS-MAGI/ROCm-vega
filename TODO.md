@@ -180,6 +180,9 @@
 - 同形状3x3で `ConvHipImplicitGemmForwardV4R5Xdlops` を FP16/BFP16 に強制すると、両者とも `Code object build failed` -> `rc=0x7`（`__EXIT_CODE=7`）。
 
 次アクション(2026-03-13):
+- [x] `pybind11` 依存を導入（`sudo pacman -S --needed --noconfirm pybind11`）
+- [x] rocMLIR configure で `Found pybind11` を確認
+- [ ] rocMLIR build/install を最後まで完走（直近試行は割り込みで `EXIT:130`）
 - [x] `rocMLIR_DIR` 欠落で MIOpen configure が停止する原因を確認（`Could NOT find rocMLIR`）
 - [x] rocMLIR先行ビルド導線を追加 (`tools/build_rocmlir_local.sh`)
 - [x] MIOpenビルドに `ROCMLIR_PREFIX` / `rocMLIR_DIR` を渡せるよう更新 (`tools/build_miopen_debug_local.sh`)
