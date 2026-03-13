@@ -1,6 +1,6 @@
 # Vega/gfx900 推論経路・DP4A代替経路 調査メモ（生コード根拠）
 
-更新日: 2026-03-12
+更新日: 2026-03-13
 対象: docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo 配下
 
 ## 1. 結論サマリ
@@ -38,6 +38,28 @@
 
 観測ポイント:
 - gfx900ではMLIR iGEMMが候補から外れ、他ソルバ（ASM/DLOPS/非MLIR）が相対的に使われやすくなる。
+
+#### 2.2.1 除外の根拠コミット（git blame 確定）code_verified
+
+- 除外コミット: `2407d2f556c7635de3f4b3f009681bdd92ba82e2`
+- 日付: 2021-12-22 / 作者: Zhuoran Yin (zhuoryin@amd.com)
+- コミットメッセージ: `[MLIR] Disable gfx900 from non-xdlops solver (#1328)`
+- FWD/BWD/WRW 全3ファイルが同一コミットで同時に除外された。
+
+各ファイルに付いているコメント（元コミット時点から存在）:
+```cpp
+// Refer to https://github.com/ROCmSoftwarePlatform/llvm-project-private/issues/389
+```
+（2023年の URL修正コミット b0f912e が `ROCmSoftwarePlatform` → `ROCm` に組織名を書き換えたのみ）
+
+**重要**: `#389` は `llvm-project-private`（AMDの非公開LLVMリポジトリ）のissueであり、
+公開リポジトリ（MIOpen #389、rocMLIR #389）とは**全くの別物**。
+内容は外部からは読めないが、MLIR コンパイラバックエンド側の gfx900 制約と推測される。
+
+次の掘り下げ候補:
+- MIOpen 本体の PR #1328 のレビューコメント（GitHub）に追加情報の可能性
+- 公開版 `llvm-project` での gfx900 / MLIR 関連 issue・コミットとの照合
+- `MiirIsConfigApplicable` 内部の制約確認（ライブラリ側に直接制限がないか）
 
 ### 2.3 MIOpenソルバ登録上の残存経路
 
