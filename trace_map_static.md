@@ -28,6 +28,17 @@
 含意:
 - `-S` 強制実行時に `solver_extract.log` で見える solver 名と ID は、上記 switch に直接対応する。
 
+### 1.3 `ConvMlirIgemmFwd` の適用条件（MIOpen前段 gate）
+
+- 対象: `rocm-libraries/projects/miopen/src/solver/conv/conv_mlir_igemm_fwd.cpp`
+- 観測:
+  - `ConvMlirIgemmFwd::IsApplicable()` に `gfx900` の明示拒否がある
+    - `if(StartsWith(device_name, "gfx900")) return false;`
+  - コメントで `https://github.com/ROCm/llvm-project-private/issues/389` 参照あり
+- 含意:
+  - Vega64 (`gfx900`) では、通常の solver 列挙経路では `ConvMlirIgemmFwd` は候補に残らない。
+  - `-S 98` のような強制経路でのみ実行に進むため、失敗は「未サポート経路の強制実行」として扱うのが妥当。
+
 ---
 
 ## 2. MLIRビルド境界（MIIR）
@@ -125,10 +136,15 @@
   - dtype: `INT8` であり `bf16` ではない
   - 結果: RockEnabled 単独では reject 根拠を確認できない
 
+- MIOpen前段 gate との照合:
+  - `ConvMlirIgemmFwd::IsApplicable()` は `gfx900` を明示的に reject
+  - 最小再現ログでは本来候補外の solver (`id=98`) を強制実行
+
 含意:
-- 当該 `MIIR_INVALID_PARAM` は RockEnabled ではなく、`miirCreateHandle` の他分岐
-  （`parseConvConfig` / `isApplicable` / `getKernelCount` / `getWorkspaceSize` / `genConvModule`）
-  または後段の pipeline 条件に起因している可能性が高い。
+- 当該ケースはまず「MIOpenの適用条件で非対応な solver を強制実行している」ことが一次原因。
+- `miirCreateHandle` の `nullptr` 分岐については、Fwd/INT8 のコード経路上
+  `getKernelCount` と `getWorkspaceSize` は失敗しにくいため、実質的には
+  `parseConvConfig` または `genConvModule` 側の失敗が優先候補。
 
 ---
 

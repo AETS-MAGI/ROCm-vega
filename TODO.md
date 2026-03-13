@@ -341,9 +341,11 @@
 - [x] 失敗モード4分類（`rc=0x3` / `rc=0x7` / `MIIR_INVALID_PARAM` / `EXIT=134`）を trace_map ヘッダ化する
 - [x] `convGenerator.isApplicable()` の実装位置を特定し、gfx900 の arch gate 条件を列挙する
 - [x] `RockEnabled` の layout/dtype gate と動的失敗ケース（`vega64_int8_force_mlir_fwd`）の対応を 1:1 で照合する
-- [ ] `miirCreateHandle` 内の失敗分岐（`getKernelCount` / `getWorkspaceSize` / `genConvModule`）のどこで `nullptr` になるかを特定する
+- [x] `ConvMlirIgemmFwd::IsApplicable()` の `gfx900` 明示拒否（issue #389 コメント付き）を確認する
+- [ ] `miirCreateHandle` 内の `nullptr` 分岐を最終確定する（現状有力: `parseConvConfig` または `genConvModule`）
 
 補足:
 - `rocMLIR` は作業ツリー展開済み（`mlir/tools/rocmlir-lib/{Miir.h, rocmlir-lib.cpp}` を確認）。
 - `MIIR_INVALID_PARAM` 最小再現ケースは `vega64_int8_force_mlir_fwd`（`vega_path_check_logs/vega64_int8_force_mlir_fwd.log`）で固定。
 - `Code object build failed` は `hipoc_program.cpp` の `BuildCodeObjectInMemory` にて、拡張子分岐後 `binary.empty()` 判定で throw される。
+- `ConvMlirIgemmFwd` は通常経路では `gfx900` を `IsApplicable()` で reject するため、`-S 98` 強制実行は未サポート経路の検証になっている。
