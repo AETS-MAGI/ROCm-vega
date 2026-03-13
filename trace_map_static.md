@@ -54,6 +54,50 @@
 - `Code object build failed` は `.mlir` 経路でも発生し得るが、
   "MLIR lowering失敗" と "HIP/OCLコンパイル失敗" をログと拡張子で分離して読む必要がある。
 
+### 2.3 rocMLIR 側 MIIR API 実装アンカー
+
+- 対象:
+  - `rocMLIR/mlir/tools/rocmlir-lib/Miir.h`
+  - `rocMLIR/mlir/tools/rocmlir-lib/rocmlir-lib.cpp`
+- 観測:
+  - `Miir.h` で `MiirStatus`（`MIIR_SUCCESS`, `MIIR_INVALID_PARAM`, `MIIR_INVALID_MODULE`, `MIIR_BUILD_FAILURE`）を定義
+  - `rocmlir-lib.cpp` で以下の C API を実装
+    - `miirCreateHandle`
+    - `miirLowerTuningParams`
+    - `miirLowerBin`
+    - `miirBufferGet`
+    - `miirGetExecutionDims`
+    - `miirDestroyHandle`
+  - `miirCreateHandle` は `parseConvConfig` / `isApplicable` / `RockEnabled` 失敗時に `nullptr` を返す
+  - `miirLowerTuningParams` / `miirLowerBin` は pass 実行結果を `MIIR_SUCCESS` または `MIIR_BUILD_FAILURE` で返す
+
+含意:
+- MIOpen の `mlir_build.cpp::check_miir_error` で見える `MIIR_INVALID_PARAM` は、
+  rocMLIR 側 API が返すステータス値を直接反映している。
+- `Code object build failed` のうち `.mlir` 経路は、`miirLowerBin` と `miirBufferGet` の結果が
+  MIOpen 側 `binary.empty()` 判定に渡る連鎖として説明できる。
+
+### 2.4 rocMLIR 側の事前 gate 条件（候補）
+
+- 対象: `rocMLIR/mlir/tools/rocmlir-lib/rocmlir-lib.cpp`
+- 観測:
+  - `miirCreateHandle` 内で以下の順に失敗判定し、失敗時は `nullptr` を返す
+    1. `convGenerator.parseConvConfig(...)`
+    2. `convGenerator.isApplicable()`
+    3. `RockEnabled(config)`
+  - `RockEnabled(config)` は以下を要求
+    - layout が許可集合に含まれること
+      - `(ngchw, gkcyx, ngkhw)`
+      - `(nhwgc, gkyxc, nhwgk)`
+      - `(ngc01, gkc01, ngk01)`
+      - `(n01gc, gk01c, n01gk)`
+    - `conf.inputDataTypeStr != "bf16"`（bf16入力は拒否）
+
+含意:
+- MIOpen 側で `MIIR_INVALID_PARAM` が観測されるケースの一部は、
+  rocMLIR の handle 作成段階（parse/applicability/layout/dtype gate）で既に弾かれている可能性がある。
+- gfx900 特有の拒否条件は、`convGenerator.isApplicable()` 側の詳細（arch判定）を次段で追う必要がある。
+
 ---
 
 ## 3. 失敗シグネチャ別の静的アンカー
@@ -87,6 +131,6 @@
 ## 5. 現状ステータス
 
 - 2026-03-13 時点で、MIOpen 側の MLIR 接続点と solver id 80/114/128 は静的固定済み。
-- `rocMLIR` 本体は未展開（`.git` のみ確認）なので、rocMLIR 側の関数境界は次フェーズで追記する。
+- rocMLIR 側の MIIR C API 実装アンカー（`Miir.h` / `rocmlir-lib.cpp`）を追記済み。
 - `MIIR_INVALID_PARAM` の最小再現ケースは `vega64_int8_force_mlir_fwd` に固定済み
   （ログ: `vega_path_check_logs/vega64_int8_force_mlir_fwd.log`）。

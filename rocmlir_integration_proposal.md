@@ -14,7 +14,7 @@
 
 ## 1. 現状整理（2026-03-13 時点）
 
-- `rocMLIR` リポジトリは `.git` のみ確認でき、ソースツリー未展開。
+- `rocMLIR` は作業ツリー展開済み（`mlir/tools/rocmlir-lib/Miir.h`, `rocmlir-lib.cpp` を確認）。
 - MIOpen 側の接続点は特定済み。
   - `rocm-libraries/projects/miopen/src/mlir_build.cpp`（`MIIR_INVALID_PARAM`）
   - `rocm-libraries/projects/miopen/src/hipoc/hipoc_program.cpp`（`Code object build failed`）
@@ -48,7 +48,7 @@
 
 ## 3. 実行計画（3フェーズ）
 
-## フェーズA: 接続点固定（rocMLIR未展開でも実施可）
+## フェーズA: 接続点固定（完了）
 
 1. MIOpen 側のアンカー関数を固定する。
    - `mlir_build.cpp`: MIIRステータス変換
@@ -61,11 +61,16 @@
 - `trace_map_static.md` への「MLIR接続点」節追加
 - `solver_architecture_map.md` への solver id 対応追記
 
-## フェーズB: rocMLIR展開後の結線確認
+## フェーズB: rocMLIR展開後の結線確認（進行中）
 
 1. `rocMLIR` 側で MIOpen から呼ばれる API / エントリを特定する。
 2. gfx900 で拒否される条件（arch gate, dtype gate, intrinsic gate）を列挙する。
 3. 条件ごとに「MIOpen前段で弾くべきか」「rocMLIR内で graceful fallback すべきか」を分類する。
+
+進捗メモ (2026-03-13):
+- `rocmlir-lib` の MIIR C API 実装（`miirCreateHandle`, `miirLowerTuningParams`, `miirLowerBin`, `miirBufferGet`）を確認。
+- `miirCreateHandle` の初期 gate として `parseConvConfig` / `isApplicable` / `RockEnabled` を確認。
+- `RockEnabled` で layout 制限と `bf16` 拒否（`inputDataTypeStr != "bf16"`）を確認。
 
 成果物:
 - `gfx900_related_nodes.md` への `rocMLIR` 節追加
