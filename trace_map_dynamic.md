@@ -95,3 +95,16 @@ Vega64(gfx900) 実機で、実行時にどの solver / kernel に落ちるかを
 1. INT8 の shape 範囲をさらに拡大（N/K/C の極端値、dilation/pad/stride組み合わせ）。
 2. 即時モード (`-S`) による候補solver単体実行可否を確認。
 3. 比較GPUで同一ケースを実行して solver 差分を取る。
+
+## 6. ローカルDebug再現トラック（2026-03-13 追記）
+
+- 目的:
+  - system MIOpen ではなくローカルDebug版MIOpenを優先利用し、`ConvMlirIgemmFwd` 強制ケースの失敗点を内部観測へ接続する。
+- 進捗:
+  - WD-Black上に build/prefix を切る導線を確立。
+  - `HALF_INCLUDE_DIR-NOTFOUND` は `-DHALF_INCLUDE_DIR=/usr/include` で解消。
+  - configure 停滞要因の `git describe` は `-DGIT=/bin/false -DGit_EXECUTABLE=/bin/false` で回避。
+  - `frugally-deep` 必須エラーは AI関連オプションOFFで回避。
+- 現在ステータス:
+  - `tmp/miopen_debug_build_20260313_215209_wdblack.log` で Debug ビルド継続中。
+  - ビルド完了後に `tools/run_case_with_local_miopen.sh` で `ConvMlirIgemmFwd` 強制再現へ進む。

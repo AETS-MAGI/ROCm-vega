@@ -176,3 +176,17 @@
 - 結果: FP16同様に `Code object build failed` -> `rc=0x7` (`__EXIT_CODE=7`)
 
 - 解釈: FwdXdlops/V4R5Xdlops の失敗様式は FP16/BFP16 でもINT8と同型で、dtypeよりsolver実装系側の制約が支配的な可能性が高い。
+
+## 14. ローカルDebug版MIOpen再ビルド（WD-Black再試行）
+
+- 目的:
+  - `ConvMlirIgemmFwd` 強制ケースをローカルDebug版MIOpenで再現し、`MIIR_INVALID_PARAM` 前後の分岐観測に進む。
+- 実行メモ:
+  - WD-Black を `/home/limonene/ROCm-project/WD-Black` にマウントし、build/prefix を同デバイスへ移動。
+  - 初回WD-Black試行 (`miopen_debug_build_20260313_213006_wdblack.log`) は `git describe` 起因で configure 停滞。
+  - `EXTRA_CMAKE_ARGS` に `-DGIT=/bin/false -DGit_EXECUTABLE=/bin/false` を追加して停滞回避。
+  - 次試行で `frugally-deep` 必須エラーを観測し、`-DMIOPEN_ENABLE_AI_IMMED_MODE_FALLBACK=Off -DMIOPEN_ENABLE_AI_KERNEL_TUNING=Off` を追加。
+  - 現在の有効試行: `tmp/miopen_debug_build_20260313_215209_wdblack.log`。
+- 現状:
+  - configure は前進しており、`HALF_INCLUDE_DIR` は `/usr/include` で解決済み。
+  - 完了待ちのため、ローカルprefixを使った `ConvMlirIgemmFwd` 再現はこのビルド完了後に実施。

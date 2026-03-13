@@ -194,6 +194,13 @@
 - [ ] `src/mlir_build.cpp` 一時ログパッチで `handle` と `Miir*` 戻り値を採取
 - [ ] `miirCreateHandle` の `nullptr` 分岐を runtime 観測で最終確定
 
+  補足(2026-03-13, WD-Black再試行):
+  - [x] WD-Black を `/home/limonene/ROCm-project/WD-Black` にマウントしてビルド先をローカルNVMe化
+  - [x] `HALF_INCLUDE_DIR-NOTFOUND` を回避（`HALF_INCLUDE_DIR=/usr/include`）
+  - [x] configure 停滞（`git describe`）を回避（`-DGIT=/bin/false -DGit_EXECUTABLE=/bin/false`）
+  - [x] `frugally-deep` 必須エラーを回避（`MIOPEN_ENABLE_AI_*` をOff）
+  - [ ] `tmp/miopen_debug_build_20260313_215209_wdblack.log` の完走確認（現在進行中）
+
 ### 成果物
 - [x] `trace_map_dynamic.md`
 - [x] `solver_observation_log.md`
