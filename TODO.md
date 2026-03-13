@@ -342,6 +342,10 @@
 - [x] `convGenerator.isApplicable()` の実装位置を特定し、gfx900 の arch gate 条件を列挙する
 - [x] `RockEnabled` の layout/dtype gate と動的失敗ケース（`vega64_int8_force_mlir_fwd`）の対応を 1:1 で照合する
 - [x] `ConvMlirIgemmFwd::IsApplicable()` の `gfx900` 明示拒否（issue #389 コメント付き）を確認する
+- [x] 実ランタイム向け MIIR トレースラッパを作成する
+  - [x] `run_vega_path_case_miir_trace.sh`
+  - [x] `tools/miir_preload_trace.c`
+- [x] `vega64_int8_force_mlir_fwd` でトレース実行し、`[MIIR_TRACE]` が出ないことを確認する
 - [ ] `miirCreateHandle` 内の `nullptr` 分岐を最終確定する（現状有力: `parseConvConfig`。ただし `/opt/rocm` 実ランタイム差分を要確認）
 
 補足:
@@ -350,3 +354,5 @@
 - `Code object build failed` は `hipoc_program.cpp` の `BuildCodeObjectInMemory` にて、拡張子分岐後 `binary.empty()` 判定で throw される。
 - `ConvMlirIgemmFwd` は通常経路では `gfx900` を `IsApplicable()` で reject するため、`-S 98` 強制実行は未サポート経路の検証になっている。
 - 参照ソース（`ROCm_AMD_Repo`）と実行実体（`/opt/rocm`）の差分可能性があるため、`nullptr` 分岐の最終確定はランタイム側の追加トレースで閉じる。
+- `LD_PRELOAD` での C API フックでは MIIR 呼び出しを捕捉できなかった（`vega64_int8_force_mlir_fwd_trace.log` に `[MIIR_TRACE]` 行なし）。
+- `libMIOpen.so.1.0` には `miopen::Miir*` ラッパが `GLOBAL DEFAULT` で存在するため、次手は `/opt/rocm` 実体への直接計測（再ビルド or 専用デバッグ版）で分岐を取る。
