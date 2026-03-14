@@ -9,6 +9,7 @@
 - `IsMlirSupportedHardware()` には gfx900 が含まれる一方、`ConvMlirIgemmFwd/Bwd/Wrw::IsApplicable()` 側で後段除外される二重構造を確認済み。
 - MLIR 強制実行では `boost::optional::get()` assertion crash まで再現し、MLIR 経路が gfx900 で実用不能であることを実機で確認済み。
 - MIOpen debug build は CIFS を避けて WD-Black NVMe 上で成功し、gfx900 向け最小構成（MLIR/CK/AI機能OFF）のビルド導線を確立済み。
+- `ROCm/CHANGELOG` と MIOpen commit history から、`gfx900` が一括削除ではなく「追加 -> private issue 起因 disable -> 既定 build からの後退 -> legacy/fallback 残存」という層状変遷を辿ったことを整理済み。
 - 現時点の最重要未解決事項は、INT8 非 naive solver の自然選択条件の発見。
 
 ---
@@ -500,6 +501,30 @@ private issue のため本文は外部から読めない。
 
 ---
 
+## Phase 5 | GitHub 履歴調査（MIOpen / ROCm changelog）
+
+### [完了] `gfx900` の layered retreat を履歴から整理
+
+**何をやったか**
+
+- `MIOpen` の `git blame` / commit metadata を再確認
+- `ROCm/CHANGELOG.md` の component ごとの `gfx900` 記述を release block 単位で整理
+- 現行ソースに残る `gfx900` 経路と、過去の build policy 変更を突き合わせた
+
+**わかったこと**
+
+- `MIOpen` の MLIR iGEMM `gfx900` 除外は、AMD 社員の commit `2407d2f`（2021-12-22）で意図的に導入された
+- 根拠参照先は `llvm-project-private#389` であり、公開 GitHub だけでは理由本文に到達できない
+- `ROCm 5.5.0` block の `Tensile (4.36.0)`、`ROCm 6.2.0` block の `rocSOLVER (3.26.0)` では追加系記述がある一方、
+  `ROCm 7.0.0` block の `hipCUB (4.0.0)` では `gfx900` が既定 build 対象から外れている
+- したがって、ROCm における `gfx900` は「ある日一括で死んだ」のではなく、component ごとに時間差をもって legacy 化したと読むのが自然
+
+**成果物**
+
+- `rocm-github-investigate.md`
+
+---
+
 ## 作成した成果物ファイル一覧
 
 ### ドキュメント
@@ -507,6 +532,7 @@ private issue のため本文は外部から読めない。
 | ファイル | 状態 | 内容 |
 |---|---|---|
 | `vega-rocm.md` | 継続更新 | 主推論経路調査本体（真実源） |
+| `rocm-github-investigate.md` | 完了 | GitHub 履歴 / changelog / 現行コードから見た変遷整理 |
 | `facts.md` | 継続更新 | 確定した事実（code/runtime_verified 分類） |
 | `hypothesis.md` | 継続更新 | 仮説・解釈・検証進捗 |
 | `TODO.md` | 継続更新 | タスクリスト |
@@ -551,7 +577,7 @@ private issue のため本文は外部から読めない。
 | ~~MIOpen debug ビルド~~ | **完了** | WD-Black NVMe 上でビルド成功（2026-03-14） |
 | ~~`miirCreateHandle` の nullptr 分岐確定~~ | **代替確認済** | システムMIOpenでMLIR強制実行→Perf DB不在→boost::optional crash |
 | MLIR 有効 Debug ビルド | 未着手 | rocMLIR を再ビルドすれば可能だが、強制実行テストで失敗メカニズムは確定済み |
-| INT8 非 naive solver 自然選択 | 未達成 | 全形状で `ConvDirectNaiveConvFwd` のみ選択中 |
+| INT8 非 naive solver 自然選択 | 探索完了（未達成確定） | 既存 + 2026-03-15 追加6ケース（`-s 1`）でも全件 `ConvDirectNaiveConvFwd` |
 | MIOpen PR #1328 レビューコメント確認 | **完了** | PR本文/コメント取得済み。private #389 の直接本文は公開情報では補完不可 |
 | 公開 llvm-project での gfx900 MLIR 痕跡探索 | **完了（限定）** | 直接相関する公開issueは未発見。関連薄いPR `#95292`（gfx900例示）は確認 |
 

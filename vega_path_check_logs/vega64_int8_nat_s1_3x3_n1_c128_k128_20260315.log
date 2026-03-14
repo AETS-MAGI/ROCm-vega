@@ -1,0 +1,366 @@
+MIOpenDriver convint8 -n 1 -c 128 -H 56 -W 56 -k 128 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -F 1 -t 1 -s 1
+MIOpen(HIP): Info [get_device_name] Raw device name: gfx900:xnack-
+MIOpen(HIP): Info [Handle] stream: 0x560f4bae45d0, device_id: 0
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateConvolutionDescriptor(miopenConvolutionDescriptor_t *){
+MIOpen(HIP): 	convDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): Info [] MIOPEN_FIND_MODE = DYNAMIC_HYBRID(5)
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 3
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 1 128 56 56 }
+MIOpen(HIP): 	stride.values = { 401408 3136 56 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 3
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 128 128 3 3 }
+MIOpen(HIP): 	stride.values = { 1152 9 3 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenInitConvolutionNdDescriptor(miopenConvolutionDescriptor_t, int, const int *, const int *, const int *, miopenConvolutionMode_t){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	spatialDim = 2
+MIOpen(HIP): 	pads = { 1 1 }
+MIOpen(HIP): 	strides = { 1 1 }
+MIOpen(HIP): 	dilations = { 1 1 }
+MIOpen(HIP): 	c_mode = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetConvolutionGroupCount(miopenConvolutionDescriptor_t, int){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	groupCount = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetConvolutionNdForwardOutputDim(miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, int *, int *){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	inputTensorDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	filterDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 3
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 1 128 56 56 }
+MIOpen(HIP): 	stride.values = { 401408 3136 56 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	n = 1601467759
+MIOpen(HIP): 	c = 1953718627
+MIOpen(HIP): 	h = 1887007839
+MIOpen(HIP): 	w = 101
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	vectorLength = 140723501651320
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): 	n = 1
+MIOpen(HIP): 	c = 128
+MIOpen(HIP): 	h = -1101803809
+MIOpen(HIP): 	w = 32764
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): 	vectorLength = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	n = 128
+MIOpen(HIP): 	c = 128
+MIOpen(HIP): 	h = -1101803809
+MIOpen(HIP): 	w = 32764
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	vectorLength = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenConvolutionForwardGetWorkSpaceSize(miopenHandle_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, const miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, size_t *){
+MIOpen(HIP): 	handle = stream: 0x560f4bae45d0, device_id: 0
+MIOpen(HIP): 	wDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): 	xDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	yDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): Info [AmdRocmMetadataVersionDetect] ROCm MD version AMDHSA_COv3, HIP version 7.2.26043, MIOpen version 3.5.1.
+MIOpen(HIP): Info [GetSolutions] 
+MIOpen(HIP): Info [IsNetworkedFilesystem] Filesystem type at '"/home/limonene/.config/miopen/"' is: 0x9123683e '<Unknown magic>'
+MIOpen(HIP): Info [Measure] ReadonlyRamDb::Prefetch time: 92.7537 ms
+MIOpen(HIP): Info [Measure] RamDb::Prefetch time: 0.023536 ms
+MIOpen(HIP): Info [GetWorkSpaceSize] 0
+PRNG seed: 12345678
+Timestamp: 2026-03-14 19:14:59 UTC; Host Name: abyss-hbmx; Operating System: Linux 6.18.16-1-lts; ROCm: 7.2.26043; MIOpen Driver: 3.5.1; CPU Vendor: AMD; CPU Model: 1 x Ryzen Threadripper; RAM Size: 62 GB; GPU Model: 1 x AMD Radeon RX Vega; AMDGPU Driver: 0.0.0
+MIOpen(HIP): miopenStatus_t miopenFindConvolutionForwardAlgorithm(miopenHandle_t, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, void *, const int, int *, miopenConvAlgoPerf_t *, void *, size_t, bool){
+MIOpen(HIP): 	handle = stream: 0x560f4bae45d0, device_id: 0
+MIOpen(HIP): 	xDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f3fcc400000
+MIOpen(HIP): 	wDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f3fcc462000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	yDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f3ebd200000
+MIOpen(HIP): 	requestAlgoCount = 2
+MIOpen(HIP): 	returnedAlgoCount = 32764
+MIOpen(HIP): 	perfResults = 
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): 	exhaustiveSearch = 1
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdFindConvolution] ./bin/MIOpenDriver convint8 -n 1 -c 128 -H 56 -W 56 -k 128 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [FindConvFwdAlgorithm] requestAlgoCount = 2, workspace = 0
+MIOpen(HIP): Info [GetSolutions] 
+MIOpen(HIP): Info [TryLoad] Find-db regenerating.
+MIOpen(HIP): Info [FindConvolution] Find Start: 128-56-56-3x3-128-56-56-1-1x1-1x1-1x1-0-NCHW-INT8-F, findMode: DYNAMIC_HYBRID(5)
+MIOpen(HIP): Info [FindSolutionImpl] ConvDirectNaiveConvFwd (not searchable)
+MIOpen(HIP): Info [IsNetworkedFilesystem] Filesystem type at '"/home/limonene/.cache/miopen/3.5.1."' is: 0x9123683e '<Unknown magic>'
+MIOpen(HIP): Info [KernDb] database not present
+MIOpen(HIP): Info [EvaluateInvokers] ConvDirectNaiveConvFwd: naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t: 7.79668 < 3.40282e+38
+MIOpen(HIP): Info [EvaluateInvokers] Selected: ConvDirectNaiveConvFwd: naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t: 7.79668, workspace_sz = 0
+MIOpen(HIP): Info [FindConvolution] Find Ended: 128-56-56-3x3-128-56-56-1-1x1-1x1-1x1-0-NCHW-INT8-F
+MIOpen(HIP): Info [FindConvolution] miopenConvolutionFwdAlgoDirect	7.79668	0
+MIOpen(HIP): Info [FillFindReturnParameters] FW Chosen Algorithm: ConvDirectNaiveConvFwd , 0, 7.79668
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x560f4bae45d0, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffcbe53d4f4
+MIOpen(HIP): 	xDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f3fcc400000
+MIOpen(HIP): 	wDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f3fcc462000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7ffcbe53d4f8
+MIOpen(HIP): 	yDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f3ebd200000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 1 -c 128 -H 56 -W 56 -k 128 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x560f4bae45d0, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffcbe53d4f4
+MIOpen(HIP): 	xDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f3fcc400000
+MIOpen(HIP): 	wDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f3fcc462000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7ffcbe53d4f8
+MIOpen(HIP): 	yDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f3ebd200000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 1 -c 128 -H 56 -W 56 -k 128 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x560f4bae45d0, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffcbe53d4f4
+MIOpen(HIP): 	xDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f3fcc400000
+MIOpen(HIP): 	wDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f3fcc462000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7ffcbe53d4f8
+MIOpen(HIP): 	yDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f3ebd200000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 1 -c 128 -H 56 -W 56 -k 128 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x560f4bae45d0, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffcbe53d4f4
+MIOpen(HIP): 	xDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f3fcc400000
+MIOpen(HIP): 	wDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f3fcc462000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7ffcbe53d4f8
+MIOpen(HIP): 	yDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f3ebd200000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 1 -c 128 -H 56 -W 56 -k 128 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x560f4bae45d0, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffcbe53d4f4
+MIOpen(HIP): 	xDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f3fcc400000
+MIOpen(HIP): 	wDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f3fcc462000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7ffcbe53d4f8
+MIOpen(HIP): 	yDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f3ebd200000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 1 -c 128 -H 56 -W 56 -k 128 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x560f4bae45d0, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffcbe53d4f4
+MIOpen(HIP): 	xDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f3fcc400000
+MIOpen(HIP): 	wDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f3fcc462000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7ffcbe53d4f8
+MIOpen(HIP): 	yDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f3ebd200000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 1 -c 128 -H 56 -W 56 -k 128 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x560f4bae45d0, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffcbe53d4f4
+MIOpen(HIP): 	xDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f3fcc400000
+MIOpen(HIP): 	wDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f3fcc462000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7ffcbe53d4f8
+MIOpen(HIP): 	yDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f3ebd200000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 1 -c 128 -H 56 -W 56 -k 128 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x560f4bae45d0, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffcbe53d4f4
+MIOpen(HIP): 	xDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f3fcc400000
+MIOpen(HIP): 	wDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f3fcc462000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7ffcbe53d4f8
+MIOpen(HIP): 	yDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f3ebd200000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 1 -c 128 -H 56 -W 56 -k 128 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x560f4bae45d0, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffcbe53d4f4
+MIOpen(HIP): 	xDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f3fcc400000
+MIOpen(HIP): 	wDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f3fcc462000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7ffcbe53d4f8
+MIOpen(HIP): 	yDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f3ebd200000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 1 -c 128 -H 56 -W 56 -k 128 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen(HIP): miopenStatus_t miopenConvolutionForward(miopenHandle_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenTensorDescriptor_t, const void *, const miopenConvolutionDescriptor_t, miopenConvFwdAlgorithm_t, const void *, const miopenTensorDescriptor_t, void *, void *, size_t){
+MIOpen(HIP): 	handle = stream: 0x560f4bae45d0, device_id: 0
+MIOpen(HIP): 	alpha = 0x7ffcbe53d4f4
+MIOpen(HIP): 	xDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	x = 0x7f3fcc400000
+MIOpen(HIP): 	wDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): 	w = 0x7f3fcc462000
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	algo = 1
+MIOpen(HIP): 	beta = 0x7ffcbe53d4f8
+MIOpen(HIP): 	yDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	y = 0x7f3ebd200000
+MIOpen(HIP): 	workSpace = nullptr
+MIOpen(HIP): 	workSpaceSize = 0
+MIOpen(HIP): }
+MIOpen(HIP): Command [LogCmdConvolution] ./bin/MIOpenDriver convint8 -n 1 -c 128 -H 56 -W 56 -k 128 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -l 1 -j 1 -m conv -g 1 -F 1 -t 1
+MIOpen(HIP): Info [ConvolutionForward] algo = 1, workspace = 0
+MIOpen Forward Conv. Algorithm: 1, Solution: 85/ConvDirectNaiveConvFwd
+GPU Kernel Time Forward Conv. Elapsed: 7.045764 ms (average)
+stats: name, n, c, ho, wo, y, x, k, flopCnt, bytesRead, bytesWritten, GFLOPs, GB/s, timeMs
+stats: fwd-conv3x3u1, 1, 128, 56, 56, 3, 3, 128, 924844032, 548864, 401408, 131, 0, 7.045764
+Forward Convolution Verifies OK on GPU reference (0 < 1.5e-06)
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {128, 128, 3, 3}, {1152, 9, 3, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {1, 128, 56, 56}, {401408, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyConvolutionDescriptor(miopenConvolutionDescriptor_t){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {1, 1}, {1, 1}, {1, 1}, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyConvolutionDescriptor(miopenConvolutionDescriptor_t){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): }

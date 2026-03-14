@@ -1,0 +1,8 @@
+timestamp=2026-03-15T04:17:35+09:00
+hostname=abyss-hbmx
+pwd=/home/limonene/ROCm-project
+case_id=vega64_int8_nat_s1_1x1_g2_n32_c128_k128_20260315
+command=/opt/rocm/bin/MIOpenDriver convint8 -n 32 -c 128 -H 56 -W 56 -k 128 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -g 2 -F 1 -t 1 -s 1
+MIOPEN_ENABLE_LOGGING=1
+MIOPEN_ENABLE_LOGGING_CMD=1
+MIOPEN_LOG_LEVEL=6

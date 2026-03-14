@@ -1,6 +1,6 @@
 # Vega/gfx900 推論経路・DP4A代替経路 調査メモ（生コード根拠）
 
-更新日: 2026-03-14
+更新日: 2026-03-15
 対象: docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo 配下 + 実機 Vega64/gfx900
 
 ## 1. 結論サマリ
@@ -13,6 +13,7 @@
 - DP4A相当（v_dot4_i32_i8）が使えない場合の代替計算（要素積和ループ）実装が存在し、DP4Aエミュレーション相当の挙動候補として有力。
 - TensileのISA能力テーブルでも gfx900 相当 (9,0,0) は dot4系capabilityがFalseになっており、旧世代経路に落ちる設計が確認できる。
 - MIOpen debug build は gfx900 向けに成功済み（MLIR/CK/AI機能OFF構成）。ビルド導線は確立されている。
+- GitHub 履歴 / changelog / PR・issue 側の変遷整理は `rocm-github-investigate.md` に分離した。
 
 ## 2. 主要な計算経路（今回の主眼）
 
@@ -1053,4 +1054,3 @@ INT8 では全形状で `ConvDirectNaiveConvFwd` のみが選択される（非 
 - [x] dot4代替経路の証跡
 - [x] 維持・管理・補充メカニズムのコード証跡
 - [ ] 実機ケースの `fallback_confirmed` を最低1件確定
-

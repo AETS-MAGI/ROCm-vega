@@ -1,6 +1,6 @@
 # Vega(gfx900) / MIOpen / rocMLIR 調査 facts
 
-更新日: 2026-03-14
+更新日: 2026-03-15
 
 ## 1. この文書の目的
 
@@ -84,6 +84,21 @@
 - `Disable` という動詞は `Remove` より「一時的/バグ回避的な無効化」ニュアンスが強いが、
   private issue の内容が外部から確認不可のため「設計判断 vs バグ回避」は断定不可
 
+### 4.6 ROCm GitHub 履歴側で確定した事実（history_verified）
+
+- `ROCm/CHANGELOG.md` の `ROCm 5.5.0` block にある `Tensile (4.36.0)` では、
+  `Add gfx900:xnack-, gfx1032, gfx1034, gfx1035` という追加系記述がある。
+- `ROCm/CHANGELOG.md` の `ROCm 6.2.0` block にある `rocSOLVER (3.26.0)` では、
+  `Added gfx900 to default build targets.` という既定 build target 拡張がある。
+- `ROCm/CHANGELOG.md` の `ROCm 7.0.0` block にある `hipCUB (4.0.0)` では、
+  `gfx803` / `gfx900` が no longer built by default とされ、`AMDGPU_TARGETS` 明示指定が必要になる。
+
+ここから言える最小限の事実:
+
+- `gfx900` は ROCm 全体で一括に切られたのではなく、component ごとに
+  「追加・既定化」と「既定からの後退」が混在している。
+- build policy と runtime / source 上の残存経路は同期していない。
+
 ---
 
 ## 5. runtime 観測で確定した事実
@@ -142,6 +157,8 @@
 - `rocmlir_integration_proposal.md`
 - `README.md`
 - `TODO.md`
+- `hypothesis.md`
+- `rocm-github-investigate.md`
 
 ---
 
@@ -198,6 +215,7 @@
 - [x] XDLops 強制: build 失敗 / assertion abort
 - [x] MLIR iGEMM `-S` 強制で `IsApplicable` バイパス → `CompileSolution` → `GetInvoker` まで到達 → Perf DB 不在 → `boost::optional::get()` assert crash（INT8/FP32 両方）
 - [x] ローカル Debug MIOpen (MLIR=Off) ビルド成功、FP32 conv 正常動作確認
+- [x] INT8 自然選択の追加6ケース（2026-03-15, `-s 1`）でも全件 `ConvDirectNaiveConvFwd`（Solution 85）を確認
 
 ### 確定済み（build_verified）
 
@@ -215,57 +233,58 @@
 | ~~MIOpen debug ビルド~~ | **完了**（WD-Black NVMe, 2026-03-14） |
 | ~~`miirCreateHandle` の `nullptr` 分岐最終確定~~ | 代替確認済み（システム MIOpen で失敗メカニズム確定） |
 | MLIR 有効 Debug ビルド | 未着手（rocMLIR 再ビルドが前提。失敗メカニズムは確定済みのため優先度低） |
-| INT8 非 naive solver 自然選択 | 未達成（全形状で `ConvDirectNaiveConvFwd` のみ） |
-| MIOpen PR #1328 レビューコメント | 未確認（GitHub: `ROCm/MIOpen/pull/1328`） |
-| 公開 `llvm-project` での同系統 issue 照合 | 未着手 |
+| INT8 非 naive solver 自然選択 | 探索完了（未達成確定: 既存 + 追加6ケースでも `ConvDirectNaiveConvFwd` のみ） |
+| MIOpen PR #1328 レビューコメント | 確認済み（公開情報では private #389 本文の補完は不可） |
+| 公開 `llvm-project` での同系統 issue 照合 | 実施済み（直接相関する公開issueは未発見） |
 
 ---
 
 ## 9. 未解決事項（詳細）
 
-- **未解決1**: rocMLIR build/install の完走確認
-  - build root を workspace `tmp/` から `/tmp/` に変更した（`noexec` 制約回避）
-  - `rocMLIRConfig.cmake` 生成確認コマンド: `ls tmp/rocmlir-prefix-*/lib/cmake/rocMLIR/rocMLIRConfig.cmake 2>/dev/null`
+- **未解決1**: `MiirIsConfigApplicable` / MLIRライブラリ側の直接制約確認
+  - 現在は MIOpen 側 gate と Perf DB 不在までは確認済み
+  - ただし MLIR ライブラリ内部に arch 固有制約が残っているかは未監査
 
-- **未解決2**: MIOpen debug ビルド成功確認（`rocMLIR_DIR` 解決状態）
-  - `ROCMLIR_PREFIX=<prefix> bash tools/build_miopen_debug_local.sh`
+- **未解決2**: MLIR 有効 Debug build による内部ログ採取
+  - 優先度は低い
+  - 必要になれば rocMLIR を再ビルドし、`mlir_build.cpp` などに一時ログを入れて追跡できる
 
-- **未解決3**: `miirCreateHandle` の `nullptr` 分岐を runtime ログで最終確定
-  - 有力仮説: `parseConvConfig` での失敗
-  - 確定方法: `mlir_build.cpp` に一時ログを追加 → ローカル debug ビルドで再実行
+- **未解決3**: `gfx900` 関連コミットの provenance map 拡張
+  - `2407d2f` は確定済み
+  - ただし他の `gfx900` / fallback / build-target 変更が AMD 起源か外部起源かの全体像は未完成
+
+- **未解決4**: GitHub live 情報の補完
+  - ローカル clone だけでは PR review / issue comment / private issue 本文までは回収できない
+  - 必要なら後段で live GitHub timeline 調査を行う
 
 ---
 
 ## 10. 次に実行すべき最短手順
 
-**パスA（debug ビルド路線）**
+**パスA（仮説検証を進める路線）**
 
 ```bash
-# rocMLIR ビルド完走確認
-ls tmp/rocmlir-prefix-*/lib/cmake/rocMLIR/rocMLIRConfig.cmake
-
-# MIOpen debug 再ビルド
-ROCMLIR_PREFIX=<detached prefix> bash tools/build_miopen_debug_local.sh
-
-# local runtime でケース再実行
-bash tools/run_case_with_local_miopen.sh vega64_int8_force_mlir_fwd_local_dbg
+# MLIRライブラリ側の適用条件確認
+rg -n "MiirIsConfigApplicable|isApplicable|RockEnabled" \
+  tank/docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo/rocMLIR \
+  tank/docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo/rocm-libraries/projects/miopen
 ```
 
-**パスB（履歴・外部調査路線）**
+**パスB（provenance map 拡張路線）**
 
 ```bash
-# MIOpen PR #1328 レビューコメント確認
-gh pr view 1328 --repo ROCm/MIOpen --comments
-
-# 公開 llvm-project での gfx900/MLIR issue 探索
-gh search issues --repo llvm/llvm-project "gfx900 MLIR" --state all
+# gfx900 / vega / fallback 系の起源を広げて確認
+rg -n "gfx900|Vega|fallback|LazyLoadingInit::gfx900" \
+  tank/docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo/rocm-libraries/projects/miopen \
+  tank/docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo/rocm-libraries/projects/rocblas \
+  tank/docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo/00_DEPRECATED/Tensile
 ```
 
-- local runtime でケース再実行
+**パスC（live GitHub 補完路線, 任意）**
 
-  `run_case_with_local_miopen.sh` で `vega64_int8_force_mlir_fwd_local_dbg`
-
-- 必要なら `src/mlir_build.cpp` に一時ログを入れて handle/status を採取
+- PR `#1328` の review / discussion を live で再取得
+- 公開 `llvm-project` 側の cross-reference を追加確認
+- private `#389` は本文取得不可という前提を維持する
 
 ---
 

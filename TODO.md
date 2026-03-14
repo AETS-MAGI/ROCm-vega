@@ -367,10 +367,10 @@
    - 意義: private issue `#389` の内容を外部から最も手早く類推できる手段
    - 工数: 低（コマンド1本 + 読むだけ）
 
-2. **INT8 非 naive solver 自然選択の確認**
-   - 現状: 全形状で `ConvDirectNaiveConvFwd` のみ。naive 以外の条件を探索中。
-   - 意義: `runtime_verified` の INT8 経路確認が残っている
-   - やらないという選択肢: あり（FP32 で `fallback_confirmed` は達成済みのため）
+2. ~~**INT8 非 naive solver 自然選択の確認**~~ → **探索完了（未達成を確定）**
+  - 2026-03-15 追加6ケース（`-s 1`）でも全件 `ConvDirectNaiveConvFwd`（Solution 85）のみ選択。
+  - 現時点では「非 naive が出ない」という結論が `runtime_verified`。
+  - 追加探索を続ける場合は NCHW 以外の layout 制約・別実装ブランチを前提に再設計が必要。
 
 3. ~~**rocMLIR Ninja ビルド完走 → `miirCreateHandle` nullptr 分岐確定**~~ → **解決済み**
    - MLIR=Off で MIOpen debug ビルド成功。システム MIOpen での MLIR 強制実行テストで失敗メカニズム（Perf DB 不在 → boost::optional crash）を確定。
@@ -390,6 +390,9 @@
 
 6. **コミュニティ保守可能範囲の明確化**（Section 7）
    - 意義: Phase 7 の成果物。現状は仮説レベルで成立している。
+
+7. **`MiirIsConfigApplicable` の内部制約の再確認**
+  - 意義: private issue #389 の本文が非公開のため、公開ソースで最も近い境界を追加検証する。
    - やらないという選択肢: 強くあり（現段階では「設計の自然な副産物として生存」が十分な結論）
 
 ### 参照先（クローン済みROCm公式リポジトリ）
