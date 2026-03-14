@@ -533,6 +533,7 @@ private issue のため本文は外部から読めない。
 |---|---|---|
 | `vega-rocm.md` | 継続更新 | 主推論経路調査本体（真実源） |
 | `rocm-github-investigate.md` | 完了 | GitHub 履歴 / changelog / 現行コードから見た変遷整理 |
+| `reveal_hypothesis.md` | 完了 | GitHub 側の一次資料から見た ROCm 一般の設計思想仮説の検証 |
 | `facts.md` | 継続更新 | 確定した事実（code/runtime_verified 分類） |
 | `hypothesis.md` | 継続更新 | 仮説・解釈・検証進捗 |
 | `TODO.md` | 継続更新 | タスクリスト |

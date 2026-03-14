@@ -12,6 +12,7 @@
 - 推論経路トレース本体: vega-rocm.md
 - 仮説整理: hypothesis.md
 - GitHub履歴調査: rocm-github-investigate.md
+- GitHub側から見た一般設計思想検証: reveal_hypothesis.md
 - 逆アセンブル手順: disassemble_rocm.md
 - 実行補助スクリプト: run_vega_path_case.sh
 - MIIRトレース補助: run_vega_path_case_miir_trace.sh

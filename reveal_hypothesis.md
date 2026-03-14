@@ -1,0 +1,342 @@
+# ROCm 一般の設計思想に関する仮説検証メモ（GitHub 側検索）
+
+更新日: 2026-03-15
+対象: ROCm の GitHub repository / changelog / issue / PR / discussion / 現行ソース
+
+## 1. この文書の目的
+
+この文書は、`gfx900` 個別調査から一段引いて、
+**ROCm 一般の設計思想や保守モデルに関する仮説**を GitHub 側の情報で検証するためのメモである。
+
+ここでいう GitHub 側の情報には、次を含む。
+
+- 公開 repository の README / docs / changelog / code comment
+- GitHub issue / PR / discussion の本文
+- ローカル clone から追える commit history
+
+主眼は次の問い:
+
+- ROCm は monolithic な単一政策で動いているのか、それとも component ごとの局所最適なのか
+- fallback / capability / deprecation は偶発的パッチか、設計パターンか
+- support / build / runtime / driver / user space は同じ意味なのか
+- AMD とコミュニティの役割はどの層で分かれるのか
+
+---
+
+## 2. 結論サマリ
+
+- **仮説1: ROCm は layered / modular stack として自己定義している**
+  - **supported**
+  - ROCm README 自体が、drivers / development tools / APIs を含む open-source stack と明記している。
+  - さらに `HIP` を portability substrate とし、`TheRock` で unified CMake build を進めている。
+
+- **仮説2: hardware support は binary ではなく、component ごと・層ごとに分離している**
+  - **strongly supported**
+  - changelog、TheRock issue、support matrix 文脈から、build target / component support / user space / driver space は分離して扱われている。
+
+- **仮説3: capability-based selection と fallback は ROCm の中心設計のひとつ**
+  - **strongly supported**
+  - Tensile docs と code が、individual architecture ID より capability を優先し、fallback catalog を正式概念として持っている。
+  - rocBLAS も hipBLASLt -> Tensile、XF32 -> FP32 の fallback を明示実装している。
+
+- **仮説4: ROCm は duplicated frontend / build knob を減らす方向へ進んでいる**
+  - **supported**
+  - `HIPCC -> AMD Clang`、`AMDGPU_TARGETS -> GPU_TARGETS`、`TheRock unified CMake` は、入口の統合圧力を示す。
+
+- **仮説5: legacy support は削除より staged retreat で進む**
+  - **supported**
+  - `gfx900` のような arch は source/runtime/path から即削除されるのではなく、default build からの後退、component ごとの exclusion、fallback 残存という段階的 legacy 化を辿る。
+
+- **仮説6: public product layer が private backend constraint を吸収することがある**
+  - **partially supported**
+  - `MIOpen` の `gfx900` MLIR disable は strong evidence だが、現時点では一般法則と断言するには事例が少ない。
+
+- **仮説7: “コミュニティ維持か AMD 維持か” の二択は粗すぎる**
+  - **supported as a framing, unresolved as a conclusion**
+  - GitHub 側の材料は、投入主体・維持主体・運用主体・修正可能主体を分けて考える必要性をむしろ強く示している。
+
+---
+
+## 3. 調査範囲と限界
+
+今回強く使った根拠:
+
+- [ROCm/README.md](https://github.com/ROCm/ROCm)
+- `ROCm/CHANGELOG.md`
+- `rocblas/library/src/tensile_host.cpp`
+- `Tensile/Tensile/Component.py`
+- `Tensile/docs/src/conceptual/solution-selection-catalogs.rst`
+- [ROCm/TheRock issue #1414](https://github.com/ROCm/TheRock/issues/1414)
+- [ROCm/TheRock issue #1975](https://github.com/ROCm/TheRock/issues/1975)
+- [ROCm/rocm-install-on-linux issue #648](https://github.com/ROCm/rocm-install-on-linux/issues/648)
+- `MIOpen` の `gfx900` MLIR disable commit `2407d2f`
+
+今回の限界:
+
+- issue / PR 全体を網羅したわけではない
+- private repository 側の議論は見えない
+- maintainer の意図と結果論を完全には分離できない
+- “community がどこまで支えているか” は GitHub issue だけでは不十分
+
+したがって、この文書は
+**ROCm 一般の設計思想を完全に証明するものではなく、
+GitHub 側の一次資料からどこまで強く言えるかを整理したもの**
+として読むべきである。
+
+---
+
+## 4. 仮説別の検証
+
+### 仮説1: ROCm は layered / modular stack として自己定義している
+
+**判定**: supported
+
+**根拠**
+
+- `ROCm/README.md:3-5`
+  - ROCm は drivers / development tools / APIs の collection と明記されている。
+- `ROCm/README.md:12-16`
+  - HIP を portability substrate として位置づけている。
+- `ROCm/README.md:23-25`
+  - `TheRock` を unified CMake build platform として案内している。
+
+**読み取り**
+
+- ROCm は単一ライブラリではなく、最初から多層 stack として自己記述されている。
+- しかも build platform 自体も統合方向に再編されつつあり、stack 全体をまとめて扱う設計圧力がある。
+
+**含意**
+
+- `gfx900` のような個別 arch の生死を評価するときも、
+  単一 repo の yes/no ではなく stack 全体の層ごとに見る必要がある。
+
+---
+
+### 仮説2: hardware support は binary ではなく、component ごと・層ごとに分離している
+
+**判定**: strongly supported
+
+**根拠**
+
+- `ROCm/CHANGELOG.md:2232`
+  - hipCUB 4.0.0 では `gfx803` / `gfx900` が no longer built by default。
+- `ROCm/CHANGELOG.md:4153`
+  - `AMDGPU_TARGETS` から `GPU_TARGETS` への移行。
+- [ROCm/TheRock issue #1414](https://github.com/ROCm/TheRock/issues/1414)
+  - unsupported target なのに hipBLASLt が default architecture で build される問題が議論されている。
+- [ROCm/TheRock issue #1975](https://github.com/ROCm/TheRock/issues/1975)
+  - component に supported GPU architecture が無い場合、super-project 側で除外すべきかが議論されている。
+- [ROCm/rocm-install-on-linux issue #648](https://github.com/ROCm/rocm-install-on-linux/issues/648)
+  - user space (ROCm) と driver version の split を明示すべきという論点が出ている。
+
+**読み取り**
+
+- ROCm における “support” は一枚岩ではない。
+- 少なくとも次が分かれている:
+  - driver support
+  - user-space / ROCm version support
+  - component-level supported GPU targets
+  - default build targets
+  - runtime fallback path の残存
+
+**含意**
+
+- `非対応` という語を一語で使うと誤読しやすい。
+- `gfx900` に限らず、ROCm 一般で support は layer-specific / component-specific に扱うべき。
+
+---
+
+### 仮説3: capability-based selection と fallback は ROCm の中心設計のひとつ
+
+**判定**: strongly supported
+
+**根拠**
+
+- `Tensile/Tensile/Component.py:118-121`
+  - “capability rather than based on individual architecture IDs.”
+- `solution-selection-catalogs.rst:99-117`
+  - fallback child catalog と architecture-specific fallback kernel が正式文書化されている。
+- `rocblas/library/src/tensile_host.cpp:1161-1163`
+  - `No Tensile solution found for XF32, fall back to FP32`
+- `rocblas/library/src/tensile_host.cpp:1232-1239`
+  - `hipBlasLT failed / exception encountered, falling back to tensile`
+
+**読み取り**
+
+- fallback は偶発的な救済コードではなく、docs / catalog / runtime warning にまたがる設計要素。
+- capability-based な選択と fallback catalog を持つことで、
+  “速い最適経路” と “広く通る互換経路” を分離している。
+
+**含意**
+
+- `gfx900` の生存を「情けで残った」と読むより、
+  capability / fallback 設計の副産物として残りやすいと読むほうが ROCm 一般の構造に合う。
+
+---
+
+### 仮説4: ROCm は duplicated frontend / build knob を減らす方向へ進んでいる
+
+**判定**: supported
+
+**根拠**
+
+- `ROCm/CHANGELOG.md:284`
+  - `HIPCC` は deprecated、今後は AMD Clang へ実質統合。
+- `ROCm/CHANGELOG.md:4153`
+  - `AMDGPU_TARGETS` は deprecated、`GPU_TARGETS` を使う方向へ整理。
+- `ROCm/README.md:23-25`
+  - `TheRock` は unified CMake build with bundled dependencies を掲げる。
+
+**読み取り**
+
+- ROCm は機能を増やす一方で、入口や build 変数、toolchain front door を減らす方向にも動いている。
+- これは stack が大きくなるほど、利用者の入口を絞り、内部を整理したい圧力が強くなることを示す。
+
+**含意**
+
+- ROCm 一般の設計思想として、
+  “表の入口は統合し、内部では component autonomy と capability/fallback を使う”
+  という二層構造が見える。
+
+---
+
+### 仮説5: legacy support は staged retreat で進む
+
+**判定**: supported
+
+**根拠**
+
+- `ROCm/CHANGELOG.md:2232`
+  - `gfx803` / `gfx900` は default build から外れる。
+- `ROCm/CHANGELOG.md:284`
+  - `HIPCC` はいきなり削除ではなく deprecated -> symbolic link 予告。
+- `ROCm/CHANGELOG.md:9710`
+  - 一方で新しい arch は default targets へ追加される。
+- `rocm-github-investigate.md` で確認した MIOpen `2407d2f`
+  - MLIR iGEMM では `gfx900` を product code 側で selective disable。
+
+**読み取り**
+
+- ROCm の変更は、全削除よりも
+  `新世代を追加` -> `旧世代を default から後退` -> `個別 component で exclusion` -> `fallback だけ残る`
+  という段階で進みやすい。
+
+**含意**
+
+- `legacy 化` は source deletion ではなく、
+  build / docs / runtime / support matrix の各層で速度差を伴って進む。
+
+---
+
+### 仮説6: public product layer が private backend constraint を吸収することがある
+
+**判定**: partially supported
+
+**根拠**
+
+- `MIOpen` の `gfx900` MLIR disable commit `2407d2f`
+  - public code 側では `gfx900` を disable
+  - 根拠コメントは `llvm-project-private#389`
+
+**読み取り**
+
+- 少なくとも 1 つの強い事例では、
+  backend/compiler 側の問題が product code の gating として表面化している。
+- ただし現時点では、これを ROCm 一般の常習パターンと断言するほど事例は集まっていない。
+
+**含意**
+
+- この仮説は維持するが、一般論として広げすぎない。
+- 現時点では **“少なくとも MIOpen + gfx900 MLIR ではそうだった”** に留めるのが妥当。
+
+---
+
+### 仮説7: “コミュニティ維持か AMD 維持か” の二択は粗すぎる
+
+**判定**: supported as a framing, unresolved as a conclusion
+
+**根拠**
+
+- TheRock issue 群は、support 問題が super-project / component metadata / build matrix の層に分かれていることを示す。
+- `rocm-install-on-linux#648` は、driver と user-space を同一視すると混乱が起きることを示す。
+- `MIOpen 2407d2f` は投入主体の一部が AMD であることを強く示す。
+- しかしこれだけでは、維持主体・運用主体・修正可能主体は決まらない。
+
+**読み取り**
+
+- 少なくとも次は分けるべき:
+  - 投入主体
+  - 維持主体
+  - 運用主体
+  - 修正可能主体
+
+**含意**
+
+- `gfx900` の出来事だけ見て
+  “ROCm はコミュニティ維持ではない”
+  と言い切るのは早い。
+- より正確には、
+  **AMD 起点の重要分岐 + capability/fallback 設計の残存 + コミュニティによる運用・知見共有**
+  の重なりとして捉えるべき。
+
+---
+
+## 5. reveal された設計モデル（暫定）
+
+GitHub 側の材料から見える ROCm 一般の設計モデルを、あえて短くまとめると次のようになる。
+
+1. ROCm は layered open stack として自己定義されている。
+2. build / runtime / support matrix / driver / user space は同じ意味ではない。
+3. component ごとに supported targets と exclusion policy はずれる。
+4. execution path は capability-based selection と fallback で広く支えられる。
+5. 表の入口や build knob は徐々に統合される。
+6. legacy は source から即死するのでなく、段階的に retreat する。
+7. 保守主体は単一ではなく、少なくとも投入・維持・運用・修正可能性に分解して考える必要がある。
+
+---
+
+## 6. まだ言い切れないこと
+
+- ROCm maintainer が明示的に「この思想で設計した」と語っている一次資料はまだ不足している。
+- community がどの層まで実質的に支えているかは、issue / PR / workaround 文書の追加調査が必要。
+- private backend issue が public gating に反映される例が一般的かどうかは未確定。
+- UDNA や将来統合との接続は、構造的推測としては筋がよいが、現時点では直接証拠が薄い。
+
+---
+
+## 7. 現時点の暫定結論
+
+ROCm 一般の設計思想について、GitHub 側の一次資料から比較的強く言えるのは次である。
+
+- ROCm は monolith ではなく layered / modular stack である。
+- support は binary ではなく、component ごと・層ごとに分離している。
+- capability-based selection と fallback は中心的な設計パターンである。
+- stack が広がる一方で、build / compiler / frontend の入口は統合方向に整理されている。
+- legacy support は staged retreat として進みやすい。
+
+したがって、`gfx900` は特殊な例外というより、
+**ROCm が本来持っている layered support / fallback / staged deprecation の構造を可視化しやすい観測点**
+として理解するのが最も自然である。
+
+---
+
+## 8. 追跡に使った主な根拠
+
+### ローカル clone
+
+- `ROCm/README.md:3-25`
+- `ROCm/CHANGELOG.md:2232`
+- `ROCm/CHANGELOG.md:284`
+- `ROCm/CHANGELOG.md:4153`
+- `ROCm/CHANGELOG.md:9710`
+- `Tensile/Tensile/Component.py:118-121`
+- `Tensile/docs/src/conceptual/solution-selection-catalogs.rst:95-117`
+- `rocblas/library/src/tensile_host.cpp:1161-1163`
+- `rocblas/library/src/tensile_host.cpp:1232-1239`
+
+### GitHub issues / discussions
+
+- https://github.com/ROCm/TheRock/issues/1414
+- https://github.com/ROCm/TheRock/issues/1975
+- https://github.com/ROCm/rocm-install-on-linux/issues/648
+- https://github.com/ROCm/MIOpen/commit/2407d2f556c7635de3f4b3f009681bdd92ba82e2
