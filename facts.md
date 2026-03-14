@@ -1,6 +1,6 @@
 # Vega(gfx900) / MIOpen / rocMLIR 調査 facts
 
-更新日: 2026-03-13
+更新日: 2026-03-14
 
 ## 1. この文書の目的
 
@@ -178,7 +178,7 @@
 
 ---
 
-## 8. 現在ステータス（2026-03-13 更新）
+## 8. 現在ステータス（2026-03-14 更新）
 
 ### 確定済み（code_verified）
 
@@ -187,6 +187,8 @@
 - [x] rocBLAS/CK/Tensile の二段フォールバック・dot4代替確認
 - [x] git blame で gfx900 MLIR 除外コミット `2407d2f` を確定（Zhuoran Yin, AMD, 2021-12-22, PR #1328）
 - [x] `#389` が `llvm-project-private`（AMD 社内非公開）の issue であり、公開リポジトリの同番号とは無関係と確定
+- [x] `IsMlirSupportedHardware()` に gfx900 は含まれるが、`ConvMlirIgemm{Fwd,Bwd,Wrw}::IsApplicable()` で後段除外される二重構造を確認
+- [x] gfx900 用の tuning パラメータが Perf DB に不在（`Perf Db: record not found`）
 
 ### 確定済み（runtime_verified）
 
@@ -194,14 +196,25 @@
 - [x] MLIR iGEMM 強制実行: `MIIR_INVALID_PARAM (rc=0x7)`
 - [x] DLOPS グリッド15ケース以上: 全件 `not applicable (rc=0x3)`
 - [x] XDLops 強制: build 失敗 / assertion abort
+- [x] MLIR iGEMM `-S` 強制で `IsApplicable` バイパス → `CompileSolution` → `GetInvoker` まで到達 → Perf DB 不在 → `boost::optional::get()` assert crash（INT8/FP32 両方）
+- [x] ローカル Debug MIOpen (MLIR=Off) ビルド成功、FP32 conv 正常動作確認
+
+### 確定済み（build_verified）
+
+- [x] CIFS マウント上のソースで cmake configure → 12時間以上 D-state ハング
+- [x] WD-Black NVMe ローカル clone → cmake configure 7.5〜9.6秒で完了
+- [x] CK (Composable Kernel) は `v_fmac_f32` 命令を使用 → gfx900 非対応（gfx906+）
+- [x] システム GCC は `--offload-arch=gfx900` を認識しない → `/opt/rocm/llvm/bin/clang++` が必須
+- [x] half 2.2.x では `half_float::detail::expr` 型が削除されている → パッチ必要
 
 ### 未解決・未完了
 
 | 項目 | 状態 |
 |---|---|
-| rocMLIR Ninja ビルド完走 | 未確認（detached 起動後の確認待ち。workspace `noexec` 制約あり → `/tmp/` を build root に変更済み） |
-| MIOpen debug ビルド | `rocMLIRConfig.cmake` 待ちで停止中 |
-| `miirCreateHandle` の `nullptr` 分岐最終確定 | debug ビルド待ち |
+| ~~rocMLIR Ninja ビルド完走~~ | 回避済み（MLIR=Off で MIOpen ビルド成功） |
+| ~~MIOpen debug ビルド~~ | **完了**（WD-Black NVMe, 2026-03-14） |
+| ~~`miirCreateHandle` の `nullptr` 分岐最終確定~~ | 代替確認済み（システム MIOpen で失敗メカニズム確定） |
+| MLIR 有効 Debug ビルド | 未着手（rocMLIR 再ビルドが前提。失敗メカニズムは確定済みのため優先度低） |
 | INT8 非 naive solver 自然選択 | 未達成（全形状で `ConvDirectNaiveConvFwd` のみ） |
 | MIOpen PR #1328 レビューコメント | 未確認（GitHub: `ROCm/MIOpen/pull/1328`） |
 | 公開 `llvm-project` での同系統 issue 照合 | 未着手 |

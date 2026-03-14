@@ -1,6 +1,6 @@
 # Vega/gfx900 調査 ワークログ
 
-更新日: 2026-03-13
+更新日: 2026-03-14
 対象: `/home/limonene/ROCm-project/tank/lab_notebook/notes/vega_investigations/`
 
 このログは「何をやったか・何を見たか・何がわかったか」を時系列で記録する。
@@ -254,6 +254,169 @@ tmp/rocmlir_build_*.log      # ビルドログ
 
 ---
 
+### [完了] CIFS 問題の解決 + NVMe ローカルビルド成功（2026-03-14）
+
+**問題**
+
+前日からの MIOpen cmake configure が 12時間以上経過しても完了しない。
+`ps aux` で確認したところ、PID 653547 (cmake) が State: D（uninterruptible sleep）で CIFS I/O 待ちに張り付いていた。
+
+**根本原因**
+
+調査ソースが CIFS マウント (`//100.67.180.73/tank`) 上にあったため、cmake の大量の `stat()` / `read()` が CIFS を経由し、D-state I/O wait が頻発していた。
+
+**対処**
+
+WD-Black NVMe (btrfs, `/home/limonene/ROCm-project/WD-Black/`) に MIOpen ソースを新規 clone:
+
+```bash
+cd /home/limonene/ROCm-project/WD-Black
+git clone --depth 1 --branch rocm-7.2.0 https://github.com/ROCm/MIOpen.git miopen-src
+```
+
+> **劇的改善**: cmake configure が **7.5秒** で完了（CIFS では 12時間以上未完了）。
+
+**ビルド設定と解決したブロッカー一覧**
+
+| # | ブロッカー | 原因 | 対処 |
+|---|---|---|---|
+| 1 | CIFS 上で cmake configure 12h+ ハング | CIFS I/O の D-state | WD-Black NVMe にソース clone |
+| 2 | rocMLIR prefix 消滅 | `/tmp` 上の前日ビルド成果物が消えていた | `-DMIOPEN_USE_MLIR=Off` で回避 |
+| 3 | `--offload-arch=gfx900` がGCCで未認識 | システムGCCはHIPコンパイル不可 | `-DCMAKE_CXX_COMPILER=/opt/rocm/llvm/bin/clang++` |
+| 4 | CK `v_fmac_f32` がgfx900に存在しない | gfx906+ 専用命令 | `-DMIOPEN_USE_COMPOSABLEKERNEL=Off` |
+| 5 | `half_float::detail::expr` 未定義 | half 2.2.x ではこの型が削除されている | `test/verify.hpp:198` をパッチ |
+
+**最終 cmake 構成**
+
+```bash
+cmake -G Ninja \
+  -DCMAKE_BUILD_TYPE=Debug \
+  -DCMAKE_CXX_COMPILER=/opt/rocm/llvm/bin/clang++ \
+  -DCMAKE_INSTALL_PREFIX="$PREFIX" \
+  -DGPU_TARGETS="gfx900" \
+  -DMIOPEN_BACKEND=HIP \
+  -DMIOPEN_USE_MLIR=Off \
+  -DMIOPEN_USE_COMPOSABLEKERNEL=Off \
+  -DMIOPEN_ENABLE_AI_IMMED_MODE_FALLBACK=Off \
+  -DMIOPEN_ENABLE_AI_KERNEL_TUNING=Off \
+  -DHALF_INCLUDE_DIR=/usr/include \
+  ../miopen-src
+```
+
+**ビルド結果**
+
+- `ninja MIOpen`: 成功（libMIOpen.so ビルド完了）
+- `ninja MIOpenDriver`: 成功
+- `ninja install`: 成功
+- 所要時間: configure 9.6秒 + ビルド数分
+- ビルドディレクトリ: `/home/limonene/ROCm-project/WD-Black/rocm-builds/miopen-debug-build-20260314_135541/`
+- インストール先: `/home/limonene/ROCm-project/WD-Black/rocm-builds/miopen-debug-prefix-20260314_135541/`
+
+**test/verify.hpp パッチ内容**
+
+```cpp
+// 変更前（half 1.x 向け）
+template <class... Ts>
+auto as_double(const half_float::detail::expr<Ts...>& x)
+{
+    return as_double(static_cast<half_float::half>(x));
+}
+
+// 変更後（half 2.2.x 互換）
+template <class T>
+auto as_double(const T& x) -> std::enable_if_t<
+    !std::is_same_v<std::decay_t<T>, half_float::half> &&
+    std::is_convertible_v<T, half_float::half>,
+    double>
+{
+    return as_double(static_cast<half_float::half>(x));
+}
+```
+
+**動作確認**
+
+```bash
+$ LD_LIBRARY_PATH="$PREFIX/lib" $PREFIX/bin/MIOpenDriver --help
+# → 正常にヘルプ出力
+
+$ LD_LIBRARY_PATH="$PREFIX/lib" $PREFIX/bin/MIOpenDriver conv \
+    -n 1 -c 3 -H 32 -W 32 -k 16 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 -F 1
+# → FP32 convolution 正常完了
+```
+
+---
+
+### [完了] MLIR iGEMM 強制実行テスト（システム MIOpen）
+
+MLIR 有効のシステム MIOpen（`/opt/rocm`）を使い、`-S ConvMlirIgemmFwd` を INT8 / FP32 両方で強制実行した。
+
+**INT8 テスト**
+
+```bash
+MIOPEN_ENABLE_LOGGING=1 MIOPEN_LOG_LEVEL=6 \
+  /opt/rocm/bin/MIOpenDriver convint8 \
+  -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 \
+  -S ConvMlirIgemmFwd -F 1 -t 1 2>&1 | tee mlir_force_test.log
+```
+
+結果:
+```
+CompileSolution: ConvMlirIgemmFwd
+GetInvoker: ConvMlirIgemmFwd
+Perf Db: record not found
+MIOpen(HIP): Warning ... boost::optional::get() Assertion ... terminated
+```
+
+**FP32 テスト**
+
+```bash
+MIOPEN_ENABLE_LOGGING=1 MIOPEN_LOG_LEVEL=6 \
+  /opt/rocm/bin/MIOpenDriver conv \
+  -n 1 -c 3 -H 32 -W 32 -k 16 -y 3 -x 3 -p 1 -q 1 -u 1 -v 1 \
+  -S ConvMlirIgemmFwd -F 1 -t 1 2>&1 | tee mlir_force_fp32.log
+```
+
+結果: 同一パターンの `boost::optional::get()` assert クラッシュ。
+
+**わかったこと**
+
+`-S` フラグは `IsApplicable()` のガードをバイパスし `CompileSolution` まで進める。
+しかし gfx900 用の tuning パラメータが Perf DB に存在しないため、
+`boost::optional::get()` で空値アクセスが発生しクラッシュする。
+
+---
+
+### [完了] 二重排除メカニズムのソースコード確定
+
+`mlir_common.hpp` の `IsMlirSupportedHardware()` を直接確認:
+
+```cpp
+// mlir_common.hpp:42-48
+inline bool IsMlirSupportedHardware(const miopen::ConvolutionContext& ctx)
+{
+    const auto device_name = ctx.GetStream().GetDeviceName();
+    return StartsWith(device_name, "gfx900") ||    // ← gfx900 はここで TRUE
+           StartsWith(device_name, "gfx906") ||
+           StartsWith(device_name, "gfx908") ||
+           StartsWith(device_name, "gfx90a") ||
+           StartsWith(device_name, "gfx940") ||
+           StartsWith(device_name, "gfx942") ||
+           StartsWith(device_name, "gfx1030");
+}
+```
+
+一方、`conv_mlir_igemm_fwd.cpp:188`:
+
+```cpp
+if(StartsWith(device_name, "gfx900"))
+    return false;  // ← hardware check の後段で明示除外
+```
+
+**構造**: 「MLIR 対応ハード」リストには gfx900 が含まれるのに、個別 solver の `IsApplicable()` で後段除外。
+この二重構造が「一見 MLIR 対応に見えるが実際は MLIR iGEMM を使えない」という混乱の根源。
+
+---
+
 ## Phase 5 | git blame / provenance 調査
 
 ### [完了] MIOpen MLIR iGEMM gfx900 除外の根拠コミット特定
@@ -336,6 +499,13 @@ private issue のため本文は外部から読めない。
 | `investigation_plan.md` | 参照用 | 調査計画 6層構造・仮説A〜E |
 | `dlops_grid_results_20260313.md` | 結果固定 | DLOPS グリッド探索結果 |
 
+### ログ
+
+| ファイル | 内容 |
+|---|---|
+| `../../../WD-Black/mlir_force_test.log` | INT8 MLIR iGEMM 強制実行ログ（boost::optional crash） |
+| `../../../WD-Black/mlir_force_fp32.log` | FP32 MLIR iGEMM 強制実行ログ（同上） |
+
 ### スクリプト
 
 | ファイル | 内容 |
@@ -355,9 +525,10 @@ private issue のため本文は外部から読めない。
 
 | 項目 | 状態 | 備考 |
 |---|---|---|
-| rocMLIR Ninja ビルド完走 | 未確認 | detached 起動後の確認が必要 |
-| MIOpen debug ビルド | 停止中 | `rocMLIRConfig.cmake` 待ち |
-| `miirCreateHandle` の nullptr 分岐確定 | 未達成 | debug ビルド成功後に再実行 |
+| ~~rocMLIR Ninja ビルド完走~~ | ~~不要化~~ | prefix 消滅のため `-DMIOPEN_USE_MLIR=Off` で回避 |
+| ~~MIOpen debug ビルド~~ | **完了** | WD-Black NVMe 上でビルド成功（2026-03-14） |
+| ~~`miirCreateHandle` の nullptr 分岐確定~~ | **代替確認済** | システムMIOpenでMLIR強制実行→Perf DB不在→boost::optional crash |
+| MLIR 有効 Debug ビルド | 未着手 | rocMLIR を再ビルドすれば可能だが、強制実行テストで失敗メカニズムは確定済み |
 | INT8 非 naive solver 自然選択 | 未達成 | 全形状で `ConvDirectNaiveConvFwd` のみ選択中 |
 | MIOpen PR #1328 レビューコメント確認 | 未着手 | git blame 完了後の次ステップ |
 | 公開 llvm-project での gfx900 MLIR 痕跡探索 | 未着手 | private #389 の外部相関探索 |
