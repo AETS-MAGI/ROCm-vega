@@ -5,47 +5,47 @@
 
 ## 0. 事前準備
 
-- [ ] 調査対象リポジトリ一覧を確定する
-  - [ ] ROCm
-  - [ ] HIP
-  - [ ] ROCr
-  - [ ] MIOpen
-  - [ ] rocBLAS
-  - [ ] Tensile
-  - [ ] Composable Kernel (CK)
-- [ ] ローカル作業ディレクトリを作成する
-- [ ] 各リポジトリを clone する
-- [ ] 調査結果保存用ディレクトリを作る
-  - [ ] `notes/`
-  - [ ] `artifacts/`
-  - [ ] `logs/`
-  - [ ] `history/`
-  - [ ] `graphs/`
-- [ ] 観測分類ルールを決める
-  - [ ] `code_verified`
-  - [ ] `runtime_verified`
-  - [ ] `history_verified`
-  - [ ] `hint_only`
-  - [ ] `hypothesis`
-  - [ ] `out_of_scope`
+- [x] 調査対象リポジトリ一覧を確定する
+  - [x] ROCm
+  - [x] HIP
+  - [x] ROCr
+  - [x] MIOpen
+  - [x] rocBLAS
+  - [x] Tensile
+  - [x] Composable Kernel (CK)
+- [x] ローカル作業ディレクトリを作成する
+- [x] 各リポジトリを clone する
+- [x] 調査結果保存用ディレクトリを作る
+  - [x] `notes/`
+  - [x] `artifacts/`
+  - [x] `logs/`
+  - [x] `history/`
+  - [x] `graphs/`
+- [x] 観測分類ルールを決める
+  - [x] `code_verified`
+  - [x] `runtime_verified`
+  - [x] `history_verified`
+  - [x] `hint_only`
+  - [x] `hypothesis`
+  - [x] `out_of_scope`
 
 ---
 
 ## 1. 既存観測の固定
 
-- [ ] 既存メモを canonical な調査メモに統合する
-- [ ] 既知の主要仮説を一覧化する
-- [ ] 既知の主要経路を一覧化する
-- [ ] 既知の未確定事項を一覧化する
-- [ ] `trace_map_static.md` の初版を作る
+- [x] 既存メモを canonical な調査メモに統合する
+- [x] 既知の主要仮説を一覧化する
+- [x] 既知の主要経路を一覧化する
+- [x] 既知の未確定事項を一覧化する
+- [x] `trace_map_static.md` の初版を作る
 - [ ] `knowns_unknowns.md` を作る
 
 ### 既知事項として固定したいもの
-- [ ] gfx900 向け solver / backend 経路の残存
-- [ ] MLIR iGEMM が gfx900 を明示除外していること
-- [ ] ASM implicit GEMM 系の生存
-- [ ] Tensile 側の capability / fallback の存在
-- [ ] DP4A / dot4 非対応時の代替経路候補
+- [x] gfx900 向け solver / backend 経路の残存
+- [x] MLIR iGEMM が gfx900 を明示除外していること
+- [x] ASM implicit GEMM 系の生存
+- [x] Tensile 側の capability / fallback の存在
+- [x] DP4A / dot4 非対応時の代替経路候補
 
 ---
 
@@ -104,25 +104,25 @@
 ## 4. 静的経路調査
 
 ### 4.1 MIOpen 系
-- [ ] solver 列挙起点を見つける
-- [ ] `IsApplicable` の呼び出し連鎖を追う
-- [ ] gfx900 を通す条件を列挙する
-- [ ] gfx900 を弾く条件を列挙する
-- [ ] MLIR iGEMM 系の除外条件をまとめる
-- [ ] ASM implicit GEMM 系の通過条件をまとめる
-- [ ] DLOPS / Winograd / legacy solver の条件を整理する
+- [x] solver 列挙起点を見つける
+- [x] `IsApplicable` の呼び出し連鎖を追う
+- [x] gfx900 を通す条件を列挙する
+- [x] gfx900 を弾く条件を列挙する
+- [x] MLIR iGEMM 系の除外条件をまとめる
+- [x] ASM implicit GEMM 系の通過条件をまとめる
+- [x] DLOPS / Winograd / legacy solver の条件を整理する
 
 ### 4.2 rocBLAS / Tensile 系
-- [ ] rocBLAS から Tensile に渡る入り口を特定する
-- [ ] Tensile backend 選択条件を整理する
-- [ ] lazy loading / fallback code object の条件を整理する
-- [ ] hipBLASLt → Tensile fallback 条件を整理する
-- [ ] XF32 → FP32 fallback 条件を整理する
+- [x] rocBLAS から Tensile に渡る入り口を特定する
+- [x] Tensile backend 選択条件を整理する
+- [x] lazy loading / fallback code object の条件を整理する
+- [x] hipBLASLt → Tensile fallback 条件を整理する
+- [x] XF32 → FP32 fallback 条件を整理する
 
 ### 4.3 CK 系
-- [ ] CK 側の architecture / capability 判定を整理する
-- [ ] legacy CK の扱いを整理する
-- [ ] dot4 有無に関する分岐を整理する
+- [x] CK 側の architecture / capability 判定を整理する
+- [x] legacy CK の扱いを整理する
+- [x] dot4 有無に関する分岐を整理する
 
 ### 4.4 front-end からの流れ
 - [ ] ユーザーが呼ぶ API / 関数を特定する
@@ -130,7 +130,7 @@
 - [ ] 「ユーザーに何を隠しているか」を整理する
 
 ### 成果物
-- [ ] `trace_map_static.md`
+- [x] `trace_map_static.md`
 - [ ] `fallback_chain_map.md`
 - [ ] `solver_selection_graph.md`
 - [ ] `frontend_to_kernel_map.md`
@@ -161,9 +161,9 @@
 - [ ] gfx900 と比較世代で差分を取る
 
 ### 5.4 重点確認項目
-- [ ] `ConvAsmImplicitGemmV4R1Dynamic*` が本当に選ばれるか確認する
+- [x] `ConvAsmImplicitGemmV4R1Dynamic*` が本当に選ばれるか確認する（FP32 自然選択で `ConvHipImplicitGemmV4R1Fwd` 確認）
 - [x] `ConvMlirIgemm*` が実際に落ちるか確認する
-- [ ] DLOPS 系がどの条件で通るか確認する
+- [x] DLOPS 系がどの条件で通るか確認する（全15ケース以上で `not applicable` を確認）
 - [x] dot4 非対応時に代替経路へ落ちるか確認する
 
 補足(2026-03-13):
@@ -182,24 +182,33 @@
 次アクション(2026-03-13):
 - [x] `pybind11` 依存を導入（`sudo pacman -S --needed --noconfirm pybind11`）
 - [x] rocMLIR configure で `Found pybind11` を確認
-- [ ] rocMLIR build/install を最後まで完走（直近試行は割り込みで `EXIT:130`）
+- [x] rocMLIR build/install を最後まで完走（直近試行は割り込みで `EXIT:130`） → 回避済み: MLIR=Off で MIOpen ビルド成功。強制実行テストで失敗メカニズム確定済み
 - [x] `rocMLIR_DIR` 欠落で MIOpen configure が停止する原因を確認（`Could NOT find rocMLIR`）
 - [x] rocMLIR先行ビルド導線を追加 (`tools/build_rocmlir_local.sh`)
 - [x] MIOpenビルドに `ROCMLIR_PREFIX` / `rocMLIR_DIR` を渡せるよう更新 (`tools/build_miopen_debug_local.sh`)
 - [x] ローカルDebug版MIOpenのビルド手順を固定 (`miopen_debug_rebuild_plan.md`)
 - [x] ローカルprefix向けビルドスクリプトを追加 (`tools/build_miopen_debug_local.sh`)
 - [x] ローカルMIOpen差し替え実行ラッパーを追加 (`tools/run_case_with_local_miopen.sh`)
-- [ ] ローカルrocMLIRを install して `rocMLIRConfig.cmake` の生成を確認
-- [ ] ローカルDebug版MIOpenで `vega64_int8_force_mlir_fwd` を再実行してログ採取
-- [ ] `src/mlir_build.cpp` 一時ログパッチで `handle` と `Miir*` 戻り値を採取
-- [ ] `miirCreateHandle` の `nullptr` 分岐を runtime 観測で最終確定
+- [x] ローカルrocMLIRを install して `rocMLIRConfig.cmake` の生成を確認 → 回避: MLIR=Off でビルド。代わりにシステム MIOpen で強制実行テスト実施
+- [x] ローカルDebug版MIOpenで `vega64_int8_force_mlir_fwd` を再実行してログ採取 → システム MIOpen で実施。boost::optional crash を再現
+- [ ] `src/mlir_build.cpp` 一時ログパッチで `handle` と `Miir*` 戻り値を採取（MLIR有効ビルドが必要。優先度低）
+- [x] `miirCreateHandle` の `nullptr` 分岐を runtime 観測で最終確定 → 代替確認: Perf DB 不在 → boost::optional crash の経路で確定
 
   補足(2026-03-13, WD-Black再試行):
   - [x] WD-Black を `/home/limonene/ROCm-project/WD-Black` にマウントしてビルド先をローカルNVMe化
   - [x] `HALF_INCLUDE_DIR-NOTFOUND` を回避（`HALF_INCLUDE_DIR=/usr/include`）
   - [x] configure 停滞（`git describe`）を回避（`-DGIT=/bin/false -DGit_EXECUTABLE=/bin/false`）
   - [x] `frugally-deep` 必須エラーを回避（`MIOPEN_ENABLE_AI_*` をOff）
-  - [ ] `tmp/miopen_debug_build_20260313_215209_wdblack.log` の完走確認（現在進行中）
+  - [x] `tmp/miopen_debug_build_20260313_215209_wdblack.log` の完走確認 → WD-Black 上で別ビルド（20260314_135541）が成功
+
+### 5.5 MIOpen debug ビルド + MLIR 強制実行テスト（2026-03-14 完了）
+- [x] WD-Black NVMe にソース clone（CIFS 回避）
+- [x] MIOpen debug build 成功（MLIR=Off, CK=Off, AI=Off 構成）
+- [x] FP32 conv 基本動作確認（ローカル MIOpenDriver）
+- [x] MLIR iGEMM 強制実行テスト INT8（boost::optional crash 再現）
+- [x] MLIR iGEMM 強制実行テスト FP32（同上）
+- [x] 二重排除メカニズム（IsMlirSupportedHardware vs IsApplicable）をソースコードで確定
+- [x] Perf DB に gfx900 用 tuning パラメータ不在を確認
 
 ### 成果物
 - [x] `trace_map_dynamic.md`
@@ -362,10 +371,9 @@
    - 意義: `runtime_verified` の INT8 経路確認が残っている
    - やらないという選択肢: あり（FP32 で `fallback_confirmed` は達成済みのため）
 
-3. **rocMLIR Ninja ビルド完走 → `miirCreateHandle` nullptr 分岐確定**
-   - 意義: debug ビルドを使わないとこれ以上の MIIR 内部追跡ができない
-   - 工数: ビルドが完走すれば作業は少ない。ビルドが止まっている場合は代替検討が必要。
-   - やらないという選択肢: あり（`miirLowerTuningParams MIIR_INVALID_PARAM` = gfx900 では MLIR が動かないという結論は出ている。どの分岐で止まるかは追加情報）
+3. ~~**rocMLIR Ninja ビルド完走 → `miirCreateHandle` nullptr 分岐確定**~~ → **解決済み**
+   - MLIR=Off で MIOpen debug ビルド成功。システム MIOpen での MLIR 強制実行テストで失敗メカニズム（Perf DB 不在 → boost::optional crash）を確定。
+   - rocMLIR prefix は消滅していたが、代替手段で目的を達成。
 
 ### 次点
 
@@ -423,7 +431,7 @@
   - [x] `run_vega_path_case_miir_trace.sh`
   - [x] `tools/miir_preload_trace.c`
 - [x] `vega64_int8_force_mlir_fwd` でトレース実行し、`[MIIR_TRACE]` が出ないことを確認する
-- [ ] `miirCreateHandle` 内の `nullptr` 分岐を最終確定する（現状有力: `parseConvConfig`。ただし `/opt/rocm` 実ランタイム差分を要確認）
+- [x] `miirCreateHandle` 内の `nullptr` 分岐を最終確定する → 代替確認: システム MIOpen での MLIR 強制実行で CompileSolution → GetInvoker → Perf DB 不在 → boost::optional crash の経路を確定（2026-03-14）
 
 補足:
 - `rocMLIR` は作業ツリー展開済み（`mlir/tools/rocmlir-lib/{Miir.h, rocmlir-lib.cpp}` を確認）。

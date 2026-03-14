@@ -3,9 +3,27 @@
 更新日: 2026-03-14
 対象: `/home/limonene/ROCm-project/tank/lab_notebook/notes/vega_investigations/`
 
+## 現状サマリ
+
+- gfx900 の MLIR iGEMM 除外は、AMD 社員による明示コミット `2407d2f`（2021-12-22）で導入されたことを確認済み。
+- `IsMlirSupportedHardware()` には gfx900 が含まれる一方、`ConvMlirIgemmFwd/Bwd/Wrw::IsApplicable()` 側で後段除外される二重構造を確認済み。
+- MLIR 強制実行では `boost::optional::get()` assertion crash まで再現し、MLIR 経路が gfx900 で実用不能であることを実機で確認済み。
+- MIOpen debug build は CIFS を避けて WD-Black NVMe 上で成功し、gfx900 向け最小構成（MLIR/CK/AI機能OFF）のビルド導線を確立済み。
+- 現時点の最重要未解決事項は、MIOpen PR #1328 レビュー確認、公開 llvm-project 側での gfx900/MLIR 痕跡探索、INT8 非 naive solver の自然選択条件の発見。
+
+---
+
 このログは「何をやったか・何を見たか・何がわかったか」を時系列で記録する。
 推論・仮説は `tmp/hypothesis.md`、確定した事実は `facts.md` に分離している。
-ここは「作業の流れ」を残す場所。
+知識の集積先は `vega-rocm.md`（推論経路本体）。ここは「作業の流れ」を残す場所。
+
+### ステータスラベル定義
+
+| ラベル | 意味 |
+|---|---|
+| **完了** | そのフェーズの主要問いに答えた |
+| **完了（部分）** | 手段は成立したが、依存待ちまたは次段あり |
+| **未完了** | まだ主要観測なし |
 
 ---
 

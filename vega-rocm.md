@@ -1,14 +1,18 @@
 # Vega/gfx900 推論経路・DP4A代替経路 調査メモ（生コード根拠）
 
-更新日: 2026-03-13
-対象: docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo 配下
+更新日: 2026-03-14
+対象: docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo 配下 + 実機 Vega64/gfx900
 
 ## 1. 結論サマリ
 
 - gfx900（Vega10）向けの推論系/畳み込み系経路は、MIOpenとrocBLAS/Tensileに明確に残存している。
 - MIOpenでは gfx900 を明示許可するASM implicit GEMM系ソルバが残っている一方、MLIR iGEMMは gfx900 を明示的に除外している。
+- MLIR iGEMM の gfx900 除外は AMD 社員による意図的コミット `2407d2f`（2021-12-22）で導入された。参照先は非公開 LLVM issue (`llvm-project-private#389`) であり、MLIR コンパイラバックエンド側の制約と推測される。
+- **二重排除構造**: `IsMlirSupportedHardware()` には gfx900 が含まれる（MLIR 対応ハードと表明）が、個別 solver の `IsApplicable()` で後段除外される。この二重構造が「MLIR 対応に見えるが実際は使えない」混乱の根源。
+- MLIR iGEMM を `-S` フラグで gfx900 に強制実行すると、Perf DB に tuning パラメータが存在しないため `boost::optional::get()` assertion crash する（INT8/FP32 両方で再現済み）。
 - DP4A相当（v_dot4_i32_i8）が使えない場合の代替計算（要素積和ループ）実装が存在し、DP4Aエミュレーション相当の挙動候補として有力。
 - TensileのISA能力テーブルでも gfx900 相当 (9,0,0) は dot4系capabilityがFalseになっており、旧世代経路に落ちる設計が確認できる。
+- MIOpen debug build は gfx900 向けに成功済み（MLIR/CK/AI機能OFF構成）。ビルド導線は確立されている。
 
 ## 2. 主要な計算経路（今回の主眼）
 
@@ -60,6 +64,73 @@
 - MIOpen 本体の PR #1328 のレビューコメント（GitHub）に追加情報の可能性
 - 公開版 `llvm-project` での gfx900 / MLIR 関連 issue・コミットとの照合
 - `MiirIsConfigApplicable` 内部の制約確認（ライブラリ側に直接制限がないか）
+
+#### 2.2.2 二重排除構造の確定 `code_verified`
+
+`IsMlirSupportedHardware()` と `IsApplicable()` の間に矛盾がある。
+
+**第1層: ハードウェアサポート判定（通過する）**
+
+```cpp
+// mlir_common.hpp:42-48
+inline bool IsMlirSupportedHardware(const miopen::ConvolutionContext& ctx)
+{
+    const auto device_name = ctx.GetStream().GetDeviceName();
+    return StartsWith(device_name, "gfx900") ||    // ← gfx900 は TRUE
+           StartsWith(device_name, "gfx906") ||
+           StartsWith(device_name, "gfx908") ||
+           StartsWith(device_name, "gfx90a") ||
+           StartsWith(device_name, "gfx940") ||
+           StartsWith(device_name, "gfx942") ||
+           StartsWith(device_name, "gfx1030");
+}
+```
+
+**第2層: 個別 solver の IsApplicable（ここで除外）**
+
+```cpp
+// conv_mlir_igemm_fwd.cpp:188
+if(StartsWith(device_name, "gfx900"))
+    return false;  // ← hardware check の後段で明示除外
+```
+
+解釈:
+- 「MLIR対応ハード」リストには gfx900 が含まれるが、個別 iGEMM solver 側で後段除外される。
+- この二重構造が「一見 MLIR 対応に見えるが実際は MLIR iGEMM を使えない」という混乱の根源。
+- FWD/BWD/WRW 全3ファイルが同一パターンで除外されている。
+
+#### 2.2.3 MLIR iGEMM 強制実行テスト結果 `runtime_verified`
+
+`-S ConvMlirIgemmFwd` フラグで `IsApplicable()` のガードをバイパスし、gfx900 上で MLIR iGEMM を強制実行した。
+
+**INT8 テスト**（システム MIOpen /opt/rocm 使用）:
+
+```bash
+MIOPEN_ENABLE_LOGGING=1 MIOPEN_LOG_LEVEL=6 \
+  /opt/rocm/bin/MIOpenDriver convint8 \
+  -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 \
+  -S ConvMlirIgemmFwd -F 1 -t 1
+```
+
+結果:
+```
+CompileSolution: ConvMlirIgemmFwd
+GetInvoker: ConvMlirIgemmFwd
+Perf Db: record not found
+MIOpen(HIP): Warning ... boost::optional::get() Assertion ... terminated
+```
+
+**FP32 テスト**: 同一パターンの `boost::optional::get()` assertion crash。
+
+失敗メカニズムの確定:
+1. `-S` フラグが `IsApplicable()` のガードをバイパス
+2. `CompileSolution` → `GetInvoker` まで到達
+3. gfx900 用の tuning パラメータが Perf DB に不在（`record not found`）
+4. `boost::optional::get()` で空値アクセス → assertion crash
+
+含意:
+- MLIR iGEMM は gfx900 で「コード生成自体が不可能」なのではなく、「tuning パラメータが存在しないため実行できない」。
+- IsApplicable の除外は、この Perf DB 不在を未然に防ぐガードとして機能している。
 
 ### 2.3 MIOpenソルバ登録上の残存経路
 
@@ -797,6 +868,70 @@ lab_notebook/notes/vega_investigations/run_vega_path_case.sh int8_case -- \
 - 旧リサーチ文書 `rocm7_2-vega-path_hint.md` のうち、
 	推論経路以外の背景情報は `README.md` に吸収した。
 - 推論経路に関する最終判定は本ファイルを正本として維持する。
+
+## 16. MIOpen gfx900 ビルド実践知見（2026-03-14 確定）
+
+本節は、MIOpen debug build を gfx900 向けに成功させた過程で得られた実践的知見を集約する。
+詳細な時系列は `work_logs.md`、Tips 形式の参照先は `docs/ROCm ビルド Tips.md` を参照。
+
+### 16.1 gfx900 向け MIOpen ビルドの必須構成
+
+以下の無効化フラグの組み合わせが gfx900 では必須:
+
+| フラグ | 理由 |
+|---|---|
+| `-DMIOPEN_USE_MLIR=Off` | rocMLIR ライブラリが `/opt/rocm` に含まれない。ローカルビルドは可能だが、そもそも gfx900 は MLIR iGEMM から除外されているため実用上不要 |
+| `-DMIOPEN_USE_COMPOSABLEKERNEL=Off` | CK のインラインアセンブリが `v_fmac_f32`（gfx906+ 専用命令）を使用。gfx900 にはこの命令が存在しないためコンパイル不可 |
+| `-DCMAKE_CXX_COMPILER=/opt/rocm/llvm/bin/clang++` | HIP コードの `--offload-arch=gfx900` フラグはシステム GCC で認識不可 |
+| `-DMIOPEN_ENABLE_AI_IMMED_MODE_FALLBACK=Off` | frugally-deep/Eigen3 依存の回避 |
+| `-DMIOPEN_ENABLE_AI_KERNEL_TUNING=Off` | 同上 |
+| `-DHALF_INCLUDE_DIR=/usr/include` | Arch 系 half パッケージの検出補助 |
+
+### 16.2 CIFS vs NVMe ローカルのビルド性能差 `build_verified`
+
+| 環境 | cmake configure 時間 | 備考 |
+|---|---|---|
+| CIFS マウント (`//100.67.180.73/tank`) | **12時間以上（未完了）** | cmake プロセスが D-state (uninterruptible sleep) に張り付き |
+| WD-Black NVMe (btrfs ローカル) | **7.5〜9.6秒** | `git clone --depth 1` でソース取得後 |
+
+**比率: 1:5760 以上**。cmake は大量の `stat()`/`read()` を発行するため、ネットワーク I/O がボトルネックになる。
+
+**教訓**: CIFS 上でビルドしない。ソースもビルドディレクトリもローカルに置く。
+
+### 16.3 CK gfx900 非互換の技術的根拠 `code_verified`
+
+CK (Composable Kernel) が gfx900 でコンパイルできない根本原因:
+
+```
+error: invalid instruction, operand has incorrect register class.
+        v_fmac_f32 v[vgpr_c+0], v[vgpr_a+0], v[vgpr_b+0]
+```
+
+- `v_fmac_f32` (fused multiply-accumulate) は GCN5 (gfx906/Vega 7nm) で追加された命令
+- gfx900 (GCN5 初代/Vega 14nm) では `v_mac_f32` のみ利用可能
+- legacy CK は `CK_USE_AMD_V_MAC_F32` マクロで `v_mac_f32` を使う設計だが、現行 MIOpen の CK 統合パスでは legacy CK は使われていない
+- したがって gfx900 では CK を無効にするしかない
+
+### 16.4 gfx900 で実際に動作する solver（自然選択） `runtime_verified`
+
+FP32 conv を自然選択で実行した結果、以下の solver が gfx900 で動作確認済み:
+
+| solver | 条件 |
+|---|---|
+| `ConvBinWinograd3x3U` | 3x3 conv |
+| `ConvAsm1x1U` | 1x1 conv |
+| `ConvHipImplicitGemmV4R1Fwd` | 一般的な conv 形状 |
+
+INT8 では全形状で `ConvDirectNaiveConvFwd` のみが選択される（非 naive solver の自然選択は未達成）。
+
+### 16.5 「やらないと決めたこと」とその理由
+
+| 判断 | 理由 |
+|---|---|
+| LD_PRELOAD での MIIR C API フック | `miir*` C シンボルが `libMIOpen.so` から直接見えない。`miopen::Miir*` ラッパは `GLOBAL DEFAULT` だが C API は内部リンク |
+| MIOpen フォークによる MLIR gfx900 対応 | LLVM コンパイラバックエンドレベルの問題（`llvm-project-private#389`）のため MIOpen 側だけでは修正不可 |
+| CIFS 上でのビルド再試行 | 7.5秒 vs 12時間+ の差が確定しており、再試行の価値なし |
+| rocMLIR ローカルビルドの再実施（現時点） | MLIR 強制実行テストで失敗メカニズムが確定したため、MLIR 有効ビルドの優先度が下がった |
 
 ## 16. Vega推論経路の「維持・管理・補充」メカニズム（コード再監査）
 
