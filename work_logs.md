@@ -10,7 +10,7 @@
 - MLIR 強制実行では `boost::optional::get()` assertion crash まで再現し、MLIR 経路が gfx900 で実用不能であることを実機で確認済み。
 - MIOpen debug build は CIFS を避けて WD-Black NVMe 上で成功し、gfx900 向け最小構成（MLIR/CK/AI機能OFF）のビルド導線を確立済み。
 - `ROCm/CHANGELOG` と MIOpen commit history から、`gfx900` が一括削除ではなく「追加 -> private issue 起因 disable -> 既定 build からの後退 -> legacy/fallback 残存」という層状変遷を辿ったことを整理済み。
-- 現時点の最重要未解決事項は、INT8 非 naive solver の自然選択条件の発見。
+- 現時点の主な未解決事項は、`MiirIsConfigApplicable` を含む MLIR ライブラリ内部制約の確認と、`gfx900` 関連変更の provenance map 拡張。
 
 ---
 
