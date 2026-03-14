@@ -5,11 +5,12 @@ SRC_ROOT="${SRC_ROOT:-/home/limonene/ROCm-project/tank/docs-ref/AMD_reference/AM
 DST_ROOT="${DST_ROOT:-/home/limonene/ROCm-project/WD-Black/ROCm-repos}"
 DELETE_MODE=0
 DRY_RUN=0
+FAST_SEED=0
 
 usage() {
   cat <<'USAGE'
 Usage:
-  sync_rocm_repo_to_wdblack.sh [--dry-run] [--delete]
+  sync_rocm_repo_to_wdblack.sh [--dry-run] [--delete] [--fast-seed]
 
 Description:
   Mirror ROCm_AMD_Repo from CIFS source to WD-Black local storage.
@@ -18,6 +19,7 @@ Description:
 Options:
   --dry-run   Show planned changes without writing.
   --delete    Delete files in destination that are absent in source.
+  --fast-seed One-shot initial copy via tar stream (often faster on CIFS).
   -h, --help  Show this help.
 
 Environment variables:
@@ -26,6 +28,7 @@ Environment variables:
 
 Examples:
   bash ./tools/sync_rocm_repo_to_wdblack.sh
+  bash ./tools/sync_rocm_repo_to_wdblack.sh --fast-seed
   bash ./tools/sync_rocm_repo_to_wdblack.sh --delete
   SRC_ROOT=/path/to/src DST_ROOT=/path/to/dst bash ./tools/sync_rocm_repo_to_wdblack.sh --dry-run
 USAGE
@@ -38,6 +41,9 @@ while [[ $# -gt 0 ]]; do
       ;;
     --delete)
       DELETE_MODE=1
+      ;;
+    --fast-seed)
+      FAST_SEED=1
       ;;
     -h|--help)
       usage
@@ -65,6 +71,16 @@ fi
 
 mkdir -p "$DST_ROOT"
 
+if [[ "$FAST_SEED" -eq 1 && "$DRY_RUN" -eq 1 ]]; then
+  echo "error: --fast-seed and --dry-run cannot be used together" >&2
+  exit 2
+fi
+
+if [[ "$FAST_SEED" -eq 1 && "$DELETE_MODE" -eq 1 ]]; then
+  echo "error: --fast-seed and --delete cannot be used together" >&2
+  exit 2
+fi
+
 if ! command -v rsync >/dev/null 2>&1; then
   echo "error: rsync not found" >&2
   exit 1
@@ -76,6 +92,7 @@ RSYNC_ARGS=(
   --info=stats2,progress2
   --human-readable
   --partial
+  --omit-dir-times
   --mkpath
 )
 
@@ -91,6 +108,19 @@ echo "[sync] source:      $SRC_ROOT"
 echo "[sync] destination: $DST_ROOT"
 echo "[sync] delete:      $DELETE_MODE"
 echo "[sync] dry-run:     $DRY_RUN"
+
+if [[ "$FAST_SEED" -eq 1 ]]; then
+  echo "[sync] mode:        fast-seed (tar stream)"
+  (
+    cd "$SRC_ROOT"
+    tar -cpf - .
+  ) | (
+    cd "$DST_ROOT"
+    tar -xpf -
+  )
+  echo "[sync] done"
+  exit 0
+fi
 
 # Use trailing slashes to sync directory contents.
 rsync "${RSYNC_ARGS[@]}" "$SRC_ROOT/" "$DST_ROOT/"
