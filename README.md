@@ -49,6 +49,9 @@
 ## 監査ルール
 
 - code verified: 生コードで分岐や条件を確認済み。
+- runtime verified: 実機実行やログ採取で動作・失敗モードを確認済み。
+- history verified: `git blame` / `git log` / changelog など履歴情報で確認済み。
+- hypothesis: 観測を踏まえた解釈・推論。未確定を含む。
 - hint only: 参考情報のみでコード未確認。
 - out of scope: この調査の主題外。
 
