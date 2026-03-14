@@ -61,9 +61,12 @@
 内容は外部からは読めないが、MLIR コンパイラバックエンド側の gfx900 制約と推測される。
 
 次の掘り下げ候補:
-- MIOpen 本体の PR #1328 のレビューコメント（GitHub）に追加情報の可能性
-- 公開版 `llvm-project` での gfx900 / MLIR 関連 issue・コミットとの照合
-- `MiirIsConfigApplicable` 内部の制約確認（ライブラリ側に直接制限がないか）
+- [完了] MIOpen 本体の PR #1328 のレビューコメント確認（2026-03-15）
+	- 公開情報としては運用背景（ROCm 5.1 前の調整）は確認できたが、private #389 の本文相当は得られず。
+- [完了（限定）] 公開版 `llvm-project` での gfx900 / MLIR 関連 issue・コミット照合（2026-03-15）
+	- 直接相関する公開issueは未発見。
+	- `#95292`（GPU metadata attributes）に `chip = "gfx900"` の例示はあるが、除外根因との直接接続は確認できない。
+- [未完了] `MiirIsConfigApplicable` 内部の制約確認（ライブラリ側に直接制限がないか）
 
 #### 2.2.2 二重排除構造の確定 `code_verified`
 

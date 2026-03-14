@@ -1,6 +1,6 @@
 # Vega/gfx900 調査 ワークログ
 
-更新日: 2026-03-14
+更新日: 2026-03-15
 対象: `/home/limonene/ROCm-project/tank/lab_notebook/notes/vega_investigations/`
 
 ## 現状サマリ
@@ -9,12 +9,12 @@
 - `IsMlirSupportedHardware()` には gfx900 が含まれる一方、`ConvMlirIgemmFwd/Bwd/Wrw::IsApplicable()` 側で後段除外される二重構造を確認済み。
 - MLIR 強制実行では `boost::optional::get()` assertion crash まで再現し、MLIR 経路が gfx900 で実用不能であることを実機で確認済み。
 - MIOpen debug build は CIFS を避けて WD-Black NVMe 上で成功し、gfx900 向け最小構成（MLIR/CK/AI機能OFF）のビルド導線を確立済み。
-- 現時点の最重要未解決事項は、MIOpen PR #1328 レビュー確認、公開 llvm-project 側での gfx900/MLIR 痕跡探索、INT8 非 naive solver の自然選択条件の発見。
+- 現時点の最重要未解決事項は、INT8 非 naive solver の自然選択条件の発見。
 
 ---
 
 このログは「何をやったか・何を見たか・何がわかったか」を時系列で記録する。
-推論・仮説は `tmp/hypothesis.md`、確定した事実は `facts.md` に分離している。
+推論・仮説は `hypothesis.md`、確定した事実は `facts.md` に分離している。
 知識の集積先は `vega-rocm.md`（推論経路本体）。ここは「作業の流れ」を残す場所。
 
 ### ステータスラベル定義
@@ -476,10 +476,14 @@ git show 2407d2f -- conv_mlir_igemm_bwd.cpp conv_mlir_igemm_wrw.cpp
 - 除外は AMD 社員による意図的コミットであり、コミュニティパッチではない
 - 問題根拠は LLVM/コンパイラバックエンド（AMDGPU codegen）側の制約を示唆（MIOpen/rocMLIR 本体の問題ではない）
 
-**未確認の後続アクション**
+**完了した後続アクション（2026-03-15）**
 
-- MIOpen PR #1328 のレビューコメントを GitHub で確認（追加背景情報の可能性）
-- 公開 `llvm-project` での gfx900 / MLIR 関連コミット・issue 照合
+- MIOpen PR #1328 のレビューコメント確認を完了。
+  - 追加で得られた公開情報は「ROCm 5.1 までに MLIR solver tuning を進める前提の調整PR」という運用背景。
+  - private issue #389 の技術本文は公開されておらず、根因の直接説明は得られず。
+- 公開 `llvm-project` での gfx900 / MLIR 関連コミット・issue 照合を実施。
+  - `gh search issues --repo llvm/llvm-project "gfx900 MLIR"` の open/closed 探索ではヒットなし。
+  - 広め検索では `#95292`（GPU metadata attributes, 例示に `chip = "gfx900"`）を確認したが、除外根因に直結する公開issueは見つからず。
 
 ---
 
@@ -504,7 +508,7 @@ private issue のため本文は外部から読めない。
 |---|---|---|
 | `vega-rocm.md` | 継続更新 | 主推論経路調査本体（真実源） |
 | `facts.md` | 継続更新 | 確定した事実（code/runtime_verified 分類） |
-| `tmp/hypothesis.md` | 継続更新 | 仮説・解釈・検証進捗 |
+| `hypothesis.md` | 継続更新 | 仮説・解釈・検証進捗 |
 | `TODO.md` | 継続更新 | タスクリスト |
 | `trace_map_static.md` | 第1版完了 | 静的結線（solver登録→IsApplicable→MLIR境界） |
 | `trace_map_dynamic.md` | 第1版完了 | 動的失敗シグネチャ対応表 |
@@ -548,8 +552,8 @@ private issue のため本文は外部から読めない。
 | ~~`miirCreateHandle` の nullptr 分岐確定~~ | **代替確認済** | システムMIOpenでMLIR強制実行→Perf DB不在→boost::optional crash |
 | MLIR 有効 Debug ビルド | 未着手 | rocMLIR を再ビルドすれば可能だが、強制実行テストで失敗メカニズムは確定済み |
 | INT8 非 naive solver 自然選択 | 未達成 | 全形状で `ConvDirectNaiveConvFwd` のみ選択中 |
-| MIOpen PR #1328 レビューコメント確認 | 未着手 | git blame 完了後の次ステップ |
-| 公開 llvm-project での gfx900 MLIR 痕跡探索 | 未着手 | private #389 の外部相関探索 |
+| MIOpen PR #1328 レビューコメント確認 | **完了** | PR本文/コメント取得済み。private #389 の直接本文は公開情報では補完不可 |
+| 公開 llvm-project での gfx900 MLIR 痕跡探索 | **完了（限定）** | 直接相関する公開issueは未発見。関連薄いPR `#95292`（gfx900例示）は確認 |
 
 ---
 

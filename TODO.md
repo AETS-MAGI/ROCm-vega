@@ -253,12 +253,13 @@
 
 **最優先**
 
-- [ ] **MIOpen PR #1328 のレビューコメントを確認**（`ROCm/MIOpen/pull/1328`）
+- [x] **MIOpen PR #1328 のレビューコメントを確認**（`ROCm/MIOpen/pull/1328`）
   - 目的: private #389 に替わる追加背景情報の取得
   - コマンド: `gh pr view 1328 --repo ROCm/MIOpen --comments`
-- [ ] 公開 `llvm-project` で gfx900 / MLIR 関連 commit・issue を再探索
+- [x] 公開 `llvm-project` で gfx900 / MLIR 関連 commit・issue を再探索
   - 目的: private #389 と同系統の痕跡が外部に残っていないか確認
-  - コマンド: `gh search issues --repo llvm/llvm-project "gfx900 MLIR" --state all`
+  - コマンド: `gh search issues --repo llvm/llvm-project "gfx900 MLIR" --state open|closed`
+  - 結果: 直接相関する公開issueは未発見（2026-03-15 時点）
 
 **次点**
 
@@ -361,7 +362,7 @@
 
 ### 最優先（まず動く）
 
-1. **MIOpen PR #1328 レビューコメント確認**
+1. ~~**MIOpen PR #1328 レビューコメント確認**~~ → **完了**
    - `gh pr view 1328 --repo ROCm/MIOpen --comments`
    - 意義: private issue `#389` の内容を外部から最も手早く類推できる手段
    - 工数: 低（コマンド1本 + 読むだけ）
@@ -377,8 +378,9 @@
 
 ### 次点
 
-4. **公開 `llvm-project` での gfx900 / MLIR issue 探索**
-   - `gh search issues --repo llvm/llvm-project "gfx900 MLIR" --state all`
+4. ~~**公開 `llvm-project` での gfx900 / MLIR issue 探索**~~ → **実施済み（直接相関なし）**
+  - `gh search issues --repo llvm/llvm-project "gfx900 MLIR" --state open`
+  - `gh search issues --repo llvm/llvm-project "gfx900 MLIR" --state closed`
    - 意義: private #389 の外部相関を探す
 
 5. **クラス構造 / 責務分離の可視化**（`class_map.md` 等）
