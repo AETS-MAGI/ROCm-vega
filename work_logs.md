@@ -1,7 +1,7 @@
 # Vega/gfx900 調査 ワークログ
 
 更新日: 2026-03-15
-対象: `/home/limonene/ROCm-project/tank/lab_notebook/notes/vega_investigations/`
+対象: `/home/limonene/ROCm-project/vega-hbmx-investigations/vega_investigations/`
 
 ## 現状サマリ
 

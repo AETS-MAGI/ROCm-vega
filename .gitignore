@@ -5,3 +5,5 @@ tmp/
 # compiled binaries in salvage (large, not useful in git)
 tmp_salvage/**/*.o
 tmp_salvage/**/*.bz2
+code-workspace.code-workspace
+vega-hbmx-investigations.code-workspace

@@ -15,7 +15,7 @@
 ## 実行コマンド
 
 ```bash
-cd /home/limonene/ROCm-project/tank/lab_notebook/notes/vega_investigations
+cd /home/limonene/ROCm-project/vega-hbmx-investigations/vega_investigations
 bash ./run_vega_path_case_miir_trace.sh vega64_int8_force_mlir_fwd_trace -- \
   MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 \
   -S ConvMlirIgemmFwd -F 1 -t 1
