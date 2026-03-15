@@ -8,11 +8,10 @@
 		}
 	],
 	"settings": {
-		"git.autoRepositoryDetection": false,
-		"git.autorefresh": false,
+		"git.autoRepositoryDetection": true,
+		"git.autorefresh": true,
 		"git.ignoredRepositories": [
-			"/home/limonene/ROCm-project",
-			"/home/limonene/ROCm-project/WD-Black/rocm-builds"
+
 		],
 		"C_Cpp.workspaceParsingPriority": "lowest"
 	}
