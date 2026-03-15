@@ -11,7 +11,7 @@
 - MIOpen debug build は CIFS を避けて WD-Black NVMe 上で成功し、gfx900 向け最小構成（MLIR/CK/AI機能OFF）のビルド導線を確立済み。
 - 2026-03-15 以降、AMD Repository の日常運用正本を WD-Black (`/home/limonene/ROCm-project/WD-Black/ROCm-repos`) に固定し、CIFS 側は取得元として扱う方針に変更。
 - WD-Black 起点運用のために `tools/open_wdblack_rocm_shell.sh` と `tools/sync_rocm_repo_to_wdblack.sh` を整備し、日常操作を定型化。
-- `ROCm/CHANGELOG` と MIOpen commit history から、`gfx900` が一括削除ではなく「追加 -> private issue 起因 disable -> 既定 build からの後退 -> legacy/fallback 残存」という層状変遷を辿ったことを整理済み。
+- 旧 `ROCm/CHANGELOG` と current release note 群、MIOpen commit history から、`gfx900` が一括削除ではなく「追加 -> private issue 起因 disable -> 既定 build からの後退 -> legacy/fallback 残存」という層状変遷を辿ったことを整理済み。
 - WD-Black 上の現行 official clone 再照合により、MIOpen current tree に `gfx900` 用 `WORKAROUND_ISSUE_1204`（`sramecc-` misreport workaround）と `gfx900_56 / gfx900_64` の Find-db / immediate mode docs 記述が残ることを確認。
 - 現時点の主な未解決事項は、`MiirIsConfigApplicable` を含む MLIR ライブラリ内部制約の確認と、`gfx900` 関連変更の provenance map 拡張。
 
@@ -511,7 +511,7 @@ private issue のため本文は外部から読めない。
 **何をやったか**
 
 - `MIOpen` の `git blame` / commit metadata を再確認
-- `ROCm/CHANGELOG.md` の component ごとの `gfx900` 記述を release block 単位で整理
+- 旧 `ROCm/CHANGELOG.md` と current component release note の `gfx900` 記述を release block 単位で整理
 - 現行ソースに残る `gfx900` 経路と、過去の build policy 変更を突き合わせた
 
 **わかったこと**

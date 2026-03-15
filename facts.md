@@ -86,11 +86,13 @@
 
 ### 4.6 ROCm GitHub 履歴側で確定した事実（history_verified）
 
-- `ROCm/CHANGELOG.md` の `ROCm 5.5.0` block にある `Tensile (4.36.0)` では、
+- 以前の clone で回収した `ROCm/CHANGELOG.md` と、現 WD-Black snapshot の
+  `Tensile/CHANGELOG.md` から、次を確認している。
+- `Tensile 4.36.0 for ROCm 5.5.0` では、
   `Add gfx900:xnack-, gfx1032, gfx1034, gfx1035` という追加系記述がある。
-- `ROCm/CHANGELOG.md` の `ROCm 6.2.0` block にある `rocSOLVER (3.26.0)` では、
+- 旧 `ROCm/CHANGELOG.md` の `ROCm 6.2.0` block にある `rocSOLVER (3.26.0)` では、
   `Added gfx900 to default build targets.` という既定 build target 拡張がある。
-- `ROCm/CHANGELOG.md` の `ROCm 7.0.0` block にある `hipCUB (4.0.0)` では、
+- 旧 `ROCm/CHANGELOG.md` の `ROCm 7.0.0` block にある `hipCUB (4.0.0)` では、
   `gfx803` / `gfx900` が no longer built by default とされ、`AMDGPU_TARGETS` 明示指定が必要になる。
 
 ここから言える最小限の事実:
