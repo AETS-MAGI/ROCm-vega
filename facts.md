@@ -120,6 +120,21 @@
   `gfx900` が明示的に扱われていた。
 - したがって `gfx900` の後退は単調な一直線ではなく、solver・docs・metadata で速度差をもって進んでいる。
 
+### 4.8 retired MIOpen branch でも gfx900 痕跡は維持されている（history_verified）
+
+- `00_legacy-repos/MIOpen` の clone 完了後、branch は `develop_deprecated`、HEAD は `06977176a`、repository は non-shallow と確認した。
+- この retired / deprecated branch にも、次が残っている。
+  - `ConvMlirIgemmFwd/Bwd/Wrw` の `gfx900` 明示 reject
+  - `ROCm/llvm-project-private/issues/389` 参照
+  - `WORKAROUND_ISSUE_1204` (`sramecc-` misreport workaround)
+  - `gfx900_56 / gfx900_64` を含む Find-db / immediate mode docs
+- 一方で、`WD-Black/ROCm-repos/MIOpen` 側は `main` の `e5c6ce1` で shallow snapshot である。
+
+ここから言える最小限の事実:
+
+- 少なくとも MIOpen では、repo の retired / deprecated 化は `gfx900` 関連コードや docs の即時削除を意味していない。
+- 現時点で local に比較できる二つの tree は file layout が異なるため、今回の比較は「厳密な年代比較」ではなく、**退役ブランチでも gfx900 痕跡が消えていない**ことの確認として扱うのが正確である。
+
 ---
 
 ## 5. runtime 観測で確定した事実
