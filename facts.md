@@ -303,6 +303,62 @@
 - [x] `IsMlirSupportedHardware()` に gfx900 は含まれるが、`ConvMlirIgemm{Fwd,Bwd,Wrw}::IsApplicable()` で後段除外される二重構造を確認
 - [x] gfx900 用の tuning パラメータが Perf DB に不在（`Perf Db: record not found`）
 
+### 確定済み（shipped_artifact_verified — 2026-03-15）
+
+gfx900 向けのプリコンパイル済み成果物が ROCm 7.2 公式パッケージに含まれて出荷されていることを確認した。
+
+#### MIOpen Performance Database
+
+`/opt/rocm/share/miopen/db/` に以下の gfx900 向けファイルが存在:
+
+| ファイル | 行数 |
+|---|---|
+| `gfx900_56.HIP.fdb.txt` | 64,583 |
+| `gfx900_56.db.txt` | 41,835 |
+| `gfx900_56.OpenCL.fdb.txt` | 1,711 |
+| `gfx900_64.HIP.fdb.txt` | 59,336 |
+| `gfx900_64.OpenCL.fdb.txt` | 1,717 |
+| **合計** | **169,182** |
+
+比較対象（同一 ROCm パッケージ内）:
+
+| アーキ | 合計行数 | 備考 |
+|---|---|---|
+| gfx942 (MI300X) | ~470,000 | 最大 |
+| gfx90a (MI200) | ~327,000 | |
+| gfx906 (MI50) | ~235,000 | |
+| gfx803 (Fiji) | ~113,000 | gfx900 より古い世代にも存在 |
+| gfx1030 (RDNA2) | 111,296 | **gfx900_56 より少ない** |
+| gfx900_56 (Vega56) | 108,129 | |
+| gfx900_64 (Vega64) | 61,053 | |
+| **gfx1100 (RDNA3)** | **なし** | Perf DB 出荷なし |
+| **gfx1200 (RDNA4)** | **なし** | Perf DB 出荷なし |
+
+**含意**: gfx900 の MIOpen Perf DB は gfx1030 (RDNA2) を上回り、gfx1100/gfx1200 (RDNA3/4) には出荷すらされていない。
+
+#### rocBLAS プリコンパイル済みカーネル
+
+`/opt/rocm/lib/rocblas/library/` に gfx900 向けファイルが存在:
+
+| アーキ | .hsaco | .co | .dat | 合計 | うち fallback |
+|---|---|---|---|---|---|
+| gfx900 | 71 | 28 | 29 | **128** | 54 |
+| gfx906 | 71 | 42 | 43 | 156 | — |
+| gfx942 | 55 | 93 | 94 | 242 | — |
+| **gfx1100** | 55 | 20 | 21 | **96** | — |
+| **gfx1030** | 55 | 16 | 17 | **88** | — |
+
+**含意**: gfx900 の rocBLAS プリコンパイル済みカーネル数（128）は gfx1100（96）および gfx1030（88）を上回る。  
+データ型カバレッジ: HH(28), ZZ(17), CC(17), SS(16), HS(16), DD(16), I8I(4), BS(4), BB(4), 4xi8I(4)
+
+#### firmware
+
+`/lib/firmware/amdgpu/vega10_*.bin.zst` : 16 ファイル（ce, me, mec, mec2, pfp, rlc, sdma, sdma1, smc, acg_smc, asd, gpu_info, ip_discovery, sos, uvd, vce）
+
+#### 全体的含意
+
+これらの事実は、gfx900 が単に「コードが残っている」状態ではなく、**AMD のビルド・チューニング・パッケージングパイプラインに gfx900 が組み込まれていること** を示す。Perf DB は architecture-specific なチューニングデータであり、ビルド時に意識的に含める工程が必要である。rocBLAS の .hsaco / .co ファイルは gfx900 ターゲットを指定してコンパイルした成果物である。
+
 ### 確定済み（runtime_verified）
 
 - [x] FP32 自然選択で `ConvBinWinograd3x3U` / `ConvAsm1x1U` / `ConvHipImplicitGemmV4R1Fwd` が動作
