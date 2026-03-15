@@ -923,7 +923,7 @@ PR [#1968](https://github.com/ROCm/MIOpen/pull/1968) (2023-02-06)
 ## 現在のブロッカーと未解決事項
 
 | 項目 | 状態 | 備考 |
-|---|---|---|
+| --- | --- | --- |
 | ~~rocMLIR Ninja ビルド完走~~ | ~~不要化~~ | prefix 消滅のため `-DMIOPEN_USE_MLIR=Off` で回避 |
 | ~~MIOpen debug ビルド~~ | **完了** | WD-Black NVMe 上でビルド成功（2026-03-14） |
 | ~~`miirCreateHandle` の nullptr 分岐確定~~ | **代替確認済** | システムMIOpenでMLIR強制実行→Perf DB不在→boost::optional crash |
@@ -937,7 +937,7 @@ PR [#1968](https://github.com/ROCm/MIOpen/pull/1968) (2023-02-06)
 ## 「やらないと決めたこと」メモ
 
 | 内容 | 理由 |
-|---|---|
+| --- | --- |
 | LD_PRELOAD での MIIR C API フック | `miir*` C シンボルが `libMIOpen.so` から直接見えないため不成立 |
 | `find` / 広範囲 Glob での全ファイル探索 | タイムアウト頻発。直接パス指定・`ls` 段階アプローチに切り替え |
 | MIOpen フォークによる MLIR gfx900 対応 | LLVM コンパイラレベルの問題のため MIOpen 側だけでは修正不可 |
