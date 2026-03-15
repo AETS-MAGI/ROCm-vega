@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+if [[ -z "${SRC_ROOT:-}" ]]; then
+  for _src_candidate in \
+    "/mnt/tank/docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo" \
+    "/home/limonene/ROCm-project/tank/docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo"; do
+    if [[ -d "$_src_candidate" ]]; then
+      SRC_ROOT="$_src_candidate"
+      break
+    fi
+  done
+fi
 SRC_ROOT="${SRC_ROOT:-/home/limonene/ROCm-project/tank/docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo}"
 DST_ROOT="${DST_ROOT:-/home/limonene/ROCm-project/WD-Black/ROCm-repos}"
 DELETE_MODE=0

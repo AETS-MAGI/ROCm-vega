@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "/home/limonene/ROCm-project/vega-hbmx-investigations"
+		},
+		{
+			"path": "/home/limonene/ROCm-project/WD-Black"
+		}
+	],
+	"settings": {
+		"git.autoRepositoryDetection": false,
+		"git.autorefresh": false,
+		"git.ignoredRepositories": [
+			"/home/limonene/ROCm-project"
+		],
+		"C_Cpp.workspaceParsingPriority": "lowest"
+	}
+}

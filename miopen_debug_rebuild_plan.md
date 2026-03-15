@@ -19,7 +19,7 @@
 `/opt/rocm` に `rocMLIRConfig.cmake` が無い環境では先にこの手順を実施する。
 
 ```bash
-cd /home/limonene/ROCm-project/tank/lab_notebook/notes/vega_investigations
+cd /home/limonene/ROCm-project/vega-hbmx-investigations/vega_investigations
 
 ROCMLIR_PREFIX=$HOME/local/rocmlir \
 bash ./tools/build_rocmlir_local.sh \
@@ -32,7 +32,7 @@ bash ./tools/build_rocmlir_local.sh \
 ## 1. ローカルDebug版をビルド
 
 ```bash
-cd /home/limonene/ROCm-project/tank/lab_notebook/notes/vega_investigations
+cd /home/limonene/ROCm-project/vega-hbmx-investigations/vega_investigations
 
 MIOPEN_PREFIX=$HOME/local/miopen-debug \
 ROCMLIR_PREFIX=$HOME/local/rocmlir \
@@ -49,7 +49,7 @@ bash ./tools/build_miopen_debug_local.sh \
 ## 2. ローカルMIOpenでケース再現
 
 ```bash
-cd /home/limonene/ROCm-project/tank/lab_notebook/notes/vega_investigations
+cd /home/limonene/ROCm-project/vega-hbmx-investigations/vega_investigations
 
 bash ./tools/run_case_with_local_miopen.sh \
   $HOME/local/miopen-debug \
