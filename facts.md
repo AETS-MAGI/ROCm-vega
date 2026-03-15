@@ -56,6 +56,9 @@
 - rocMLIR 側:
 - `rocmlir-lib.cpp` の `miirCreateHandle` は失敗時 `nullptr` を返す設計。
 - 代表失敗ポイントは `parseConvConfig`, `isApplicable`, `RockEnabled`, 以降 lower/gen 経路。
+- **重要**: Miir 実装は公開 `ROCm/rocMLIR` リポジトリ（`mlir/tools/rocmlir-lib/rocmlir-lib.cpp`）で追跡可能。
+  従来、`llvm-project-private` 側からしか制約を確認できないと想定していたが、
+  実際には Miir C API の実装は public であり、パイプライン全体を追跡できる。（2026-03-15 確認）
 
 ### 4.4 `RockEnabled` / `isApplicable` の読み取り
 
@@ -81,7 +84,7 @@
 
 **解釈**:
 
-- gfx900 除外は AMD 社員による意図的コミット（コミュニティパッチではない）
+- gfx900 除外は AMD 社員による明示的なコミットであり、少なくとも community patch ではない
 - 問題根拠は LLVM/コンパイラバックエンドレベル（MIOpen や rocMLIR 本体の問題ではない）
 - `Disable` という動詞は `Remove` より「一時的/バグ回避的な無効化」ニュアンスが強いが、
   private issue の内容が外部から確認不可のため「設計判断 vs バグ回避」は断定不可
@@ -99,7 +102,7 @@
 
 ここから言える最小限の事実:
 
-- `gfx900` は ROCm 全体で一括に切られたのではなく、component ごとに
+- `gfx900` は ROCm 全体で一括に後退したのではなく、component ごとに
   「追加・既定化」と「既定からの後退」が混在している。
 - build policy と runtime / source 上の残存経路は同期していない。
 
@@ -334,9 +337,12 @@
 
 ## 9. 未解決事項（詳細）
 
-- **未解決1**: `MiirIsConfigApplicable` / MLIRライブラリ側の直接制約確認
-  - 現在は MIOpen 側 gate と Perf DB 不在までは確認済み
-  - ただし MLIR ライブラリ内部に arch 固有制約が残っているかは未監査
+- **解消済み1**: `MiirIsConfigApplicable` / MLIRライブラリ側の直接制約確認
+  - **2026-03-15 に解消**: 公開 `ROCm/rocMLIR` の `rocmlir-lib.cpp` から全チェーンを追跡済み。
+  - `MiirIsConfigApplicable` → `miirLowerTuningParams(handle)` の `MIIR_SUCCESS` 判定のみ。
+  - `miirCreateHandle`: `parseConvConfig` → `isApplicable` → `RockEnabled`（layout whitelist + bf16 exclusion）の多段検証。失敗時 `nullptr` を返す。
+  - `miirLowerTuningParams`: `rock::buildKernelPipeline`（`ApplicabilityMode::Applicability`）で実行。失敗時 `MIIR_BUILD_FAILURE` を返す。
+  - Miir 側の制約は非公開ではなく、`ROCm/rocMLIR` リポジトリで追跡可能。
 
 - **未解決2**: MLIR 有効 Debug build による内部ログ採取
   - 優先度は低い
