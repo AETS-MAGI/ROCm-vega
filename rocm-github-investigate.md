@@ -264,7 +264,9 @@ internal `SWDEV-303062` に加えて public issue `ROCm/MIOpen#1204` comment を
 - 公開コードには今も「この issue を見よ」という形跡がある
 - しかしその issue 自体は外部から読めない
 
-これは単なる cosmetic fix ではなく、**“理由への参照は残るが、その理由は公開されない” 状態が維持された**ことを意味する。
+これは単なる cosmetic fix ではなく、**”理由への参照は残るが、その理由は公開されない” 状態が維持された**ことを意味する。
+
+> `llvm-project-private#389` への参照は 2023-12-13 時点でも存在するが、issue 本文は外部から参照できない。したがって、ここから言えるのは「公開コード側の gating が非公開 issue を根拠としている」という構造的観測に限られる。原因の詳細や判断経緯は断定しない。
 
 ### 5.5.1 retired / deprecated MIOpen branch でも、その痕跡は残っている
 
@@ -535,21 +537,23 @@ retired 宣言のあるレポジトリでも、`gfx900` 参照は非自明な密
 
 ---
 
-## 6. 今回見えた「事件」
+## 6. 今回見えた主要な分岐点・構造
 
-### 事件1: support 拡張と support 後退が同じ ecosystem 内で共存していた
+### 分岐点1: support 拡張と support 後退が同じ ecosystem 内で共存していた
 
 - 一方では `gfx900` を default build target に追加する component がある
 - 別の時期・別の component では default build から外す
 
 これは「ROCm 全体が同時に Vega を切った」のではなく、**各プロジェクトが別々の事情で扱いを変えていた**ことを示す。
 
-### 事件2: 決定的な無効化理由が private issue に閉じている
+### 分岐点2: 除外理由が private issue に閉じている
 
 - MIOpen の重要 commit は PR 番号 `#1328` を持つ
-- しかし実際の根拠コメントは `llvm-project-private#389`
+- しかし実際の根拠コメントは `llvm-project-private#389` という非公開 issue へのリンクである
 
-このため、公開 GitHub を見ても「何か問題があったらしい」ことは分かるが、**何が問題だったのかは追いきれない**。
+> この issue は非公開であり、本文は外部から確認できない。したがって、ここから言えるのは公開コード側に参照関係と gating の痕跡が存在するという範囲に限られる。
+
+公開 GitHub を見ても「除外の参照先 issue が存在する」ことは分かるが、その issue に書かれた具体的な原因は公開側からは確認できない。
 
 ### 事件3: build policy の後退が runtime 残存経路より先に起きている
 
