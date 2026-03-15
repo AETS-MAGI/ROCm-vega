@@ -41,6 +41,7 @@ AGENTS.md §1.5 に基づき、「AMD がやった」「コミュニティが支
 | P5 | MIOpen MP_bidirectional_winograd (gfx900 workspace limit) | ExtC | AMD(M) 近年補修 | Community | AMD(M) | history_verified |
 | P6 | Tensile fallback / arch parsing | AMD(C) + ExtC | ExtC 補修 + revert 混在 | Community (source-build) | AMD(M) / ExtC | history_verified |
 | P7 | rocMLIR (Miir C API gating) | AMD(M) | AMD(M) | — (gating は自動) | AMD(M) | code_verified |
+| P8 | Shipped artifacts (ROCm 7.2 パッケージ) | AMD(M) (build pipeline) | AMD(M) (build pipeline) | Community | AMD(M) | shipped_artifact_verified |
 
 ---
 
@@ -213,6 +214,38 @@ AGENTS.md §1.5 に基づき、「AMD がやった」「コミュニティが支
 
 ---
 
+### P8: Shipped Artifacts (ROCm 7.2 パッケージ)
+
+#### 投入主体
+- AMD(M): ROCm のビルドパイプラインが、gfx900 向けのプリコンパイル済みカーネル・チューニング済み Perf DB ・ firmware を生成し、パッケージに収録している。
+- MIOpen Perf DB: `gfx900_56` (108,129行) + `gfx900_64` (61,053行) = 合計 169,182行
+- rocBLAS: 128 個のプリコンパイル済みファイル（71 `.hsaco` + 28 `.co` + 29 `.dat`）
+- amdgpu firmware: 16× vega10 blob (`/lib/firmware/amdgpu/`)
+
+#### 維持主体
+- AMD(M): ビルドパイプラインがリリースごとに成果物を再生成する限り、維持され続ける。
+
+#### 運用主体
+- Community: 出荷された Perf DB ・ rocBLAS カーネルは、gfx900 ユーザが MIOpen / rocBLAS を利用する際に透過的に思恵を受ける。
+
+#### 修正可能主体
+- AMD(M): Perf DB チューニング、rocBLAS ビルドターゲット、firmware 収録のすべて。
+
+#### 比較データ（2026-03-15 実測）
+
+| 指標 | gfx900 | gfx1030 (RDNA2) | gfx1100 (RDNA3) | gfx942 (CDNA3) |
+|---|---|---|---|---|
+| MIOpen Perf DB 行数 | 169,182 | 111,296 | **なし** | 470,080 |
+| rocBLAS ファイル数 | 128 | 88 | 96 | 242 |
+
+**Fact**: gfx900 の MIOpen Perf DB 行数は gfx1030 (RDNA2) を上回り、gfx1100 (RDNA3) / gfx1200 (RDNA4) には Perf DB 自体が存在しない。rocBLAS ファイル数でも gfx900 は gfx1100・gfx1030 を上回る。
+
+**Interpretation**: これは「コードがソースツリーに残存している」レベルではなく、AMD のビルド・チューニング・パッケージングのパイプラインに gfx900 が含まれていることを示唆する。
+
+**Open Question**: gfx1100/gfx1200 に MIOpen Perf DB が存在しない理由は未確定。MIOpen がそれらのアーキテクチャに対して異なるチューニング方式を採用している可能性、または統合が未完了の可能性がある。
+
+---
+
 ## 3. 主体分布の読み取り
 
 ### 3.1 投入主体の傾向
@@ -264,6 +297,7 @@ AGENTS.md §1.5 に基づき、「AMD がやった」「コミュニティが支
 | MIOpen ASM カーネル | AMD(M): ISA レベルの修正が必要 |
 | rocMLIR パイプライン | AMD(M): MLIR コンパイラチームの管轄 |
 | llvm-project-private | AMD(M): 非公開リポジトリ、外部からは到達不能 |
+| ビルドパイプライン / 配布 (P8) | AMD(M): Perf DB 生成・rocBLAS ターゲット・firmware 収録 |
 | Tensile fallback logic | AMD(M) + ExtC: Python レベルは外部修正余地あり |
 | Runtime (HSA, KFD) | AMD(M): カーネルモジュール / ROCr 層 |
 | Source-build 設定 | ExtC / Community: CMake / Python レベル |
@@ -278,8 +312,7 @@ AGENTS.md §1.5 に基づき、「AMD がやった」「コミュニティが支
 2. **Evgenii Averin の所属**: `@users.noreply.github.com` のみ。2025年3月にも gfx900 関連コミットがあるが、所属は公開情報から確認できない。
 3. **Kamil Nasyrov の所属**: `@gmail.com` ドメイン。MP_bidir / multipass Winograd の実装者。
 4. **Tensile #1862 revert**: 外部 contributor の fallback 拡張が merge 後に revert された判断の詳細は、PR discussion から推定可能だが、社内判断の裏付けは確認できない。
-5. **「削除コスト由来残存」vs「意図的維持」の境界**: v4r1 / WORKAROUND_ISSUE_1204 が残存しているのは、積極的に維持されているからか、単に削除する動機がないからか。公開情報からはこの区別が困難。
-
+5. **「削除コスト由来残存」vs「意図的維持」の境界**: v4r1 / WORKAROUND_ISSUE_1204 が残存しているのは、積極的に維持されているからか、単に削除する動機がないからか。公開情報からはこの区別が困難。6. **gfx1100/gfx1200 に MIOpen Perf DB が存在しない理由**: MIOpen が異なるチューニング方式を採用している可能性、または統合が未完了の可能性。これにより gfx900 と RDNA 世代の Perf DB 比較には留保が必要。
 ---
 
 ## 本文書が主張しないこと
@@ -295,3 +328,4 @@ AGENTS.md §1.5 に基づき、「AMD がやった」「コミュニティが支
 ## 変更履歴
 
 - 2026-03-15: 初版作成（骨組み + git blame 結果による空欄埋め）
+- 2026-03-15: P8 (Shipped Artifacts) 追加、§3.4 に配布パイプライン行追加、Open Question 6 追加
