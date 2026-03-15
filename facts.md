@@ -170,6 +170,26 @@
 - `develop_deprecated` 上の 2024-2025 の可視変化は、主として file layout / docs format / URL の再編である。
 - `gfx900` support policy を動かした強い中身変更は、現時点では 2021-10-21 と 2021-12-22 に集中して見える。
 
+### 4.10 public PR / issue 文脈から見える `#1231` と `#1328` の違い（history_verified）
+
+- `ROCm/MIOpen#1231`
+  - title: `[WORKAROUND] Enforce "no sramecc feature" for gfx900.`
+  - body は internal `SWDEV-303062` に加え、public issue `ROCm/MIOpen#1204` comment を解決対象として明記
+  - `ROCm/MIOpen#1204` comment thread では、Artem Tamazov が
+    `gfx900` に SRAMECC feature が誤報され、`sramecc-` を付加した target name を COMGR が reject すると説明
+  - PR comment では、Jun Liu が「community users with legacy ASIC」に影響すると述べ、cherry-pick を支持
+- `ROCm/MIOpen#1328`
+  - title: `[MLIR] Disable gfx900 from non-xdlops solver`
+  - body は private `llvm-project-private#389` を根拠に、
+    MLIR commit の release branch bump、`gfx900` non-xdlops solver 無効化、ctest 側無効化、
+    `MIOPEN_TEST_VEGA` の `GFX900/GFX906` 分離を列挙
+  - PR comment では、ROCm 5.1 向け MLIR solver tuning の前に入れる必要があると述べられている
+
+ここから言える最小限の事実:
+
+- `#1231` の public 文脈は比較的開かれており、**driver/runtime 側の target-feature misreport を MIOpen で吸収する defensive workaround** と読める。
+- `#1328` の根本理由は private issue に閉じているが、public 文脈だけでも **ROCm 5.1 release/tuning surface から `gfx900` MLIR non-xdlops を外す release-engineering 判断** だったことまでは確認できる。
+
 ---
 
 ## 5. runtime 観測で確定した事実
