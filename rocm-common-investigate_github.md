@@ -179,7 +179,7 @@
     `official binaries distributed by AMD` 向けではなく
     `users building from source` 向けだと明記されている。
   - commit author email は `Cordell.Bloor@amd.com` であり、
-    GitHub 上の `CONTRIBUTOR` 表示と雇用ラベルが必ずしも一致しない例になっている。
+    §2.2 で述べたとおり GitHub の `authorAssociation` が組織所属を直接表すものではないことを示す具体例となっている。
 - `ROCm/Tensile#1862`
   - title: `Use fallback libraries for archs without optimized logic`
   - author: `GZGavinZhao`
