@@ -13,6 +13,11 @@
   - [x] rocBLAS
   - [x] Tensile
   - [x] Composable Kernel (CK)
+  - [x] retired / legacy repos (`00_legacy-repos`)
+    - [x] ROCR-Runtime
+    - [x] Tensile
+    - [x] MIOpen (metadata only at the moment)
+    - [x] ROCm/vllm (supplementary)
 - [x] ローカル作業ディレクトリを作成する
 - [x] 各リポジトリを clone する
 - [x] 調査結果保存用ディレクトリを作る
@@ -55,6 +60,8 @@
 - [ ] ROCm 全体のレイヤ構造を整理する
 - [ ] ROCr / HIP / MIOpen / rocBLAS / Tensile / CK の責務を一文で定義する
 - [ ] 各コンポーネントが「抽象化」「最適化」「互換性」のどれを主に担当するか整理する
+- [ ] retired repo から current repo への移行先を表にする
+- [ ] repo retirement が build/system consolidation の一部かを検討する
 
 ### 2.2 設計思想の観点で見る
 - [ ] 世代差吸収が capability ベースか、個別分岐ベースかを確認する
@@ -67,6 +74,12 @@
 - [ ] `design_philosophy.md`
 - [ ] `abstraction_layers.md`
 - [ ] `support_model_hypothesis.md`
+
+### 2.3 retired repo archaeology
+- [ ] `ROCR-Runtime -> rocm-systems` の移行意味を整理する
+- [ ] `Tensile -> rocm-libraries` の移行意味を整理する
+- [ ] `ROCm/vllm -> upstream vllm` を ROCm core と分けて位置づける
+- [ ] legacy `MIOpen` clone が展開できたら current tree と差分監査する
 
 ---
 

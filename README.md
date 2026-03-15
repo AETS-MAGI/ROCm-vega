@@ -22,6 +22,30 @@
 - ローカルDebug版MIOpenビルド: tools/build_miopen_debug_local.sh
 - 再ビルド手順メモ: miopen_debug_rebuild_plan.md
 
+## 調査対象ソースセット
+
+- 現行 official clone:
+  - `/home/limonene/ROCm-project/WD-Black/ROCm-repos/`
+- retired / legacy repo 群:
+  - `/home/limonene/ROCm-project/WD-Black/ROCm-repos/00_legacy-repos/`
+
+現時点での一次対象:
+
+- `MIOpen`
+- `Tensile`
+- `ROCR-Runtime`
+
+補助対象:
+
+- `ROCm/vllm`
+  - ROCm 固有 fork / 運用層の歴史としては有益だが、gfx900 推論経路本体とは一段離れるため別枠で扱う。
+
+注意:
+
+- `00_legacy-repos/MIOpen` は現時点では working tree が未展開で、`.git` metadata 中心の調査対象。
+- retired repo の README にある移行先案内 (`rocm-libraries`, `rocm-systems`, upstream 等) は、
+  repo topology 再編の一次資料として扱う。
+
 ## 参考リサーチ吸収メモ（非推論経路）
 
 以下は旧 Gemini リサーチ文書から移した背景メモ。
