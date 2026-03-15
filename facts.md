@@ -135,6 +135,41 @@
 - 少なくとも MIOpen では、repo の retired / deprecated 化は `gfx900` 関連コードや docs の即時削除を意味していない。
 - 現時点で local に比較できる二つの tree は file layout が異なるため、今回の比較は「厳密な年代比較」ではなく、**退役ブランチでも gfx900 痕跡が消えていない**ことの確認として扱うのが正確である。
 
+### 4.9 develop_deprecated での late change は主に layout / docs 再編である（history_verified）
+
+- solver layout 再編:
+  - commit `7b36cef67f3154dc3eff7471e335f5a7111f4b17`
+  - 日付: 2024-05-31
+  - 件名: `[NFC] Move convolution solvers to solver/conv directory (part 1) (#2962)`
+  - `conv_mlir_igemm_*` は `src/solver/` から `src/solver/conv/` へ `R100` rename
+- docs layout 再編:
+  - commit `992a835c210b42d28d33c12ae3c0d245e3b1b6cb`
+  - 日付: 2024-03-22
+  - 件名: `Doc cleanup (#2783)`
+  - `docs/find_and_immediate.md` / `docs/embed.md` を削除し、
+    `docs/how-to/find-and-immediate.rst` / `docs/install/embed.rst` を作成
+- install docs 整形:
+  - commit `5e791ce2c0fa3ac56f672258fb7260fa3c61332a`
+  - 日付: 2025-01-10
+  - 件名: `Refactor and reformat MIOpen index and install docs (#3409)`
+
+`git blame` で確認できる最小限の事実:
+
+- `gfx900` reject 本体 (`if(StartsWith(device_name, "gfx900"))`) は
+  `d1a42ea69ecd2e9db9aa1e70a2873ad108e1a1ba`
+  （2021-12-22, `[MLIR] Disable gfx900 from non-xdlops solver (#1328)`）由来
+- private issue comment 行は
+  `2c1bdc7753b18f19aa510cca29f29b49d4cb91b3`
+  （2023-12-13, URL fix）由来
+- `WORKAROUND_ISSUE_1204` は
+  `8498875aef84878e04c1eabefdf6571514891086`
+  （2021-10-21, `[WORKAROUND] Enforce "no sramecc feature" for gfx900. (#1231)`）由来
+
+ここから言える最小限の事実:
+
+- `develop_deprecated` 上の 2024-2025 の可視変化は、主として file layout / docs format / URL の再編である。
+- `gfx900` support policy を動かした強い中身変更は、現時点では 2021-10-21 と 2021-12-22 に集中して見える。
+
 ---
 
 ## 5. runtime 観測で確定した事実

@@ -235,6 +235,34 @@ WD-Black 上の現行 MIOpen tree を `git blame` で追うと、
 - repo の retirement / migration は、必ずしも arch-specific workaround や legacy docs の即時消去と同義ではない
 - まず先に起きるのは、repo status と file layout の再編であり、arch-specific 痕跡はその後もしばらく残りうる
 
+### 5.5.2 late-phase の MIOpen 変更は、主に layout / docs 再編として現れる
+
+`develop_deprecated` 側で `gfx900` 周辺ファイルの provenance を追うと、後年の目立つ変更は次のように読める。
+
+- `2024-03-22` `992a835c2` `Doc cleanup (#2783)`
+  - `docs/find_and_immediate.md` / `docs/embed.md` を整理し、
+    `docs/how-to/find-and-immediate.rst` / `docs/install/embed.rst` を作る
+- `2024-05-31` `7b36cef67` `[NFC] Move convolution solvers to solver/conv directory (part 1) (#2962)`
+  - `conv_mlir_igemm_*` を含む convolution solver 群を `src/solver/conv/` へ `R100` rename
+- `2025-01-10` `5e791ce2c` `Refactor and reformat MIOpen index and install docs (#3409)`
+  - install docs 上の `gfx900_56` 例を含む表現を整形し直す
+
+一方、`git blame` で実際の `gfx900` 関連行を見ると:
+
+- MLIR solver の `gfx900` reject 本体は
+  `2021-12-22` `d1a42ea69` `[MLIR] Disable gfx900 from non-xdlops solver (#1328)`
+- `WORKAROUND_ISSUE_1204` は
+  `2021-10-21` `8498875ae` `[WORKAROUND] Enforce "no sramecc feature" for gfx900. (#1231)`
+- private issue comment の URL だけは
+  `2023-12-13` `2c1bdc775` により `ROCmSoftwarePlatform -> ROCm` へ修正
+
+読み取り:
+
+- retired / deprecated branch の晩期に見える変化は、主として **layout migration / docs migration / URL polishing** である
+- `gfx900` policy の実質的な中身を動かした強い変更は、少なくとも今見えている範囲では 2021 年の workaround と MLIR disable に集中している
+- したがって、deprecated branch の後年 activity をそのまま「gfx900 を積極維持していた証拠」と読むのは強すぎる
+- より自然なのは、**legacy knowledge を tree 上に残したまま repo を整理していった**とみる読みである
+
 ### 5.6 後年には、少なくとも一部 component で gfx900 は既定ビルド対象から外れた
 
 以前の clone で回収した `ROCm/CHANGELOG.md` の hipCUB 4.0.0 には、次の記述がある。
