@@ -178,7 +178,7 @@ AGENTS.md §1.5 に基づき、「AMD がやった」「コミュニティが支
 - **Gavin Zhao** (`gavinzhaojw@protonmail.com`, ExtC, Gentoo maintainer)
 - PR `#1862` (2024-01-24): optimized logic 不在 arch に対する fallback library 生成
 - → **Revert**: `#1879` (2024-02-06) Koji Nakajima (`nakajee@`, AMD 関連) により revert
-- Interpretation: 外部 contributor の fallback 拡張が一度は merge されたが、AMD 側の判断で revert された。
+- Interpretation: 外部 contributor の fallback 拡張が一度は merge されたが、AMD 関連 contributor により revert された。revert の詳細な判断理由は PR discussion での推定にとどまり、社内決定の裏付けは確認できない（§4 Open Question 4 参照）。
   source-build ユーザにとっては fallback が残る形で利用可能だが、公式パスには乗らなかった。
 
 #### 運用主体

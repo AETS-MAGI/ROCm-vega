@@ -348,9 +348,19 @@
   - 優先度は低い
   - 必要になれば rocMLIR を再ビルドし、`mlir_build.cpp` などに一時ログを入れて追跡できる
 
-- **未解決3**: `gfx900` 関連コミットの provenance map 拡張
-  - `2407d2f` は確定済み
-  - ただし他の `gfx900` / fallback / build-target 変更が AMD 起源か外部起源かの全体像は未完成
+- **解消済み3**: `gfx900` 関連コミットの provenance map 拡張
+  - **2026-03-15 に解消**: `provenance_map.md` として 7経路×4主体のマトリクスを作成。
+  - git blame により各経路の投入主体を確定:
+    - P1 (MLIR除外): AMD(M) Zhuoran Yin `d1a42ea69e`
+    - P2 (ASM v4r1): AMD(C) carlushuang `947ae38e98` + Shaojie WANG `f094f46c3`
+    - P3 (Winograd): ExtC Artem Tamazov `4508c92f85` + Vasilii Filippov `765f409f2e`
+    - P4 (WORKAROUND_1204): ExtC Artem Tamazov `8498875aef`
+    - P5 (MP_bidir): ExtC Kamil Nasyrov `412284ab4`
+    - P6 (Tensile): AMD(C) Cory Bloor `41236e39` + ExtC Gavin Zhao `efbe0c0c`
+    - P7 (rocMLIR): AMD(M)
+  - 維持主体: Winograd/MP_bidir は AMD(M) が 2021-2025 に補修、v4r1/WORKAROUND_1204 は削除コスト由来残存。
+  - 運用主体: Community（エンドユーザ）が中心。
+  - 詳細は `provenance_map.md` を参照。
 
 - **未解決4**: GitHub live 情報の補完
   - ローカル clone だけでは PR review / issue comment / private issue 本文までは回収できない
