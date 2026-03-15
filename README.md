@@ -48,6 +48,7 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
 - 事実台帳: `facts.md`
 - 作業ログ: `work_logs.md`
 - GitHub 履歴調査: `rocm-github-investigate.md`
+- ROCm 一般の GitHub 調査: `rocm-common-investigate_github.md`
 - GitHub 側から見た一般設計思想検証: `reveal_hypothesis.md`
 - 仮説整理: `hypothesis.md`
 
