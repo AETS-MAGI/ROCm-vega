@@ -15,6 +15,35 @@
 > それは情けで放置されているのか、設計上自然に残っているのか。
 > これをさらに厳密に調査したい
 
+## 仮説構造マップ
+
+```mermaid
+mindmap
+  root((gfx900 は<br/>なぜ今も<br/>生きているか))
+    仮説 A: 表と設計は別
+      公式サポート終了 ≠ 実行経路消滅
+      4層のサポート構造
+        表のサポート
+        設計上のサポート
+        配布上のサポート
+        運用上のサポート
+    仮説 B: 設計の副産物
+      capability-based フィルタ
+      多段 fallback 設計
+      gfx900 専用ではなく汎用互換
+    仮説 C: 保守主体は層別
+      投入主体: AMD(M) / ExtC
+      維持主体: AMD 補修 / 削除コスト
+      運用主体: Community
+      修正可能主体: 層で異なる
+    仮説 D: RDNA/CDNA 分離は繋ぎ
+      GCN は両系統に先行
+    仮説 E: Layered Retreat
+      一括削除ではない
+      component ごとの時間差後退
+      出荷成果物は最後の層
+```
+
 ---
 
 ## 2. 確度の高い観測（code_verified / history_verified）
@@ -42,6 +71,18 @@
 
 **総括**: gfx900 は「維持（build）・管理（selection）・補充（fallback）・**配布（shipped artifacts）**」の4層で説明でき、しかもその扱いは一括削除ではなく、component ごとの時間差をもった layered retreat として観測される。特に、プリコンパイル済み成果物とチューニングデータの出荷は、ビルドパイプラインに gfx900 が意識的に組み込まれていることを示す。
 
+```mermaid
+graph LR
+  subgraph OBS["gfx900 4層観察モデル"]
+    direction TB
+    L1["🔵 L1: 維持 Build<br/>LLVM target / solver source / Tensile logic"]
+    L2["🟠 L2: 管理 Selection<br/>CMake target list / IsApplicable gate"]
+    L3["🔴 L3: 補充 Fallback<br/>CK reference / Tensile HIP / Naive solver"]
+    L4["🟢 L4: 配布 Ship<br/>rocBLAS 128 files / Perf DB 169K / FW ×16"]
+    L1 --> L2 --> L3 --> L4
+  end
+```
+
 ---
 
 ## 3. 仮説 A: 表のサポートと設計上のサポートは別
@@ -51,6 +92,25 @@
 しかしそれは、ソフトウェア設計上の実行経路が消滅することとは別の話である。
 
 **サポートの多層構造**
+
+```mermaid
+graph TB
+  subgraph LAYERS["サポートの多層構造 — gfx900 の現状"]
+    direction TB
+    S1["<b>表のサポート</b><br/>公式推奨・QA対象"]
+    S2["<b>設計上のサポート</b><br/>capability 判定・fallback"]
+    S3["<b>配布上のサポート</b><br/>Perf DB・rocBLAS・firmware"]
+    S4["<b>運用上のサポート</b><br/>Bug 報告・CI"]
+  end
+  S1 -.-x|"弱い"| X1((" "))
+  S2 ---|"残存"| X2((" "))
+  S3 ---|"gfx1100/1200 より手厚い層あり"| X3((" "))
+  S4 -.-|"確認中"| X4((" "))
+  style X1 fill:#fce4ec,stroke:#b71c1c
+  style X2 fill:#e8f5e9,stroke:#2e7d32
+  style X3 fill:#e8f5e9,stroke:#2e7d32
+  style X4 fill:#fff3e0,stroke:#e65100
+```
 
 | 層 | 定義 | gfx900 の現状 |
 |---|---|---|

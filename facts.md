@@ -359,6 +359,30 @@ gfx900 向けのプリコンパイル済み成果物が ROCm 7.2 公式パッケ
 
 これらの事実は、gfx900 が単に「コードが残っている」状態ではなく、**AMD のビルド・チューニング・パッケージングパイプラインに gfx900 が組み込まれていること** を示す。Perf DB は architecture-specific なチューニングデータであり、ビルド時に意識的に含める工程が必要である。rocBLAS の .hsaco / .co ファイルは gfx900 ターゲットを指定してコンパイルした成果物である。
 
+```mermaid
+---
+config:
+  theme: base
+---
+xychart-beta horizontal
+  title "rocBLAS Pre-compiled Files (ROCm 7.2)"
+  x-axis ["gfx942(MI300)", "gfx906(MI50)", "gfx900(Vega)", "gfx1100(RDNA3)", "gfx1030(RDNA2)"]
+  y-axis "File count" 0 --> 260
+  bar [242, 156, 128, 96, 88]
+```
+
+```mermaid
+---
+config:
+  theme: base
+---
+xychart-beta horizontal
+  title "MIOpen Perf DB Lines (top variant, ROCm 7.2)"
+  x-axis ["gfx942", "gfx908", "gfx90a", "gfx906", "gfx1030", "gfx900_56", "gfx900_64", "gfx1100", "gfx1200"]
+  y-axis "Lines (×1000)" 0 --> 500
+  bar [470, 372, 328, 235, 111, 108, 61, 0, 0]
+```
+
 ### 確定済み（runtime_verified）
 
 - [x] FP32 自然選択で `ConvBinWinograd3x3U` / `ConvAsm1x1U` / `ConvHipImplicitGemmV4R1Fwd` が動作
