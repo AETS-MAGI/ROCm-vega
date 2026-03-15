@@ -607,6 +607,127 @@ private issue のため本文は外部から読めない。
 
 ---
 
+## Layer 6 続き: gfx900 生存経路の provenance 調査（2026-03-15）
+
+**目的**: MLIR以外の gfx900 生存経路（ASM v4r1 dynamic, Winograd, Tensile lazy loading）の出所・導入経緯を GitHub PR/コミット/ソースコードから確定する。
+
+### MIOpen: ASM Implicit GEMM V4R1 Dynamic
+
+**導入**: PR [#166](https://github.com/ROCm/MIOpen/pull/166) (2020-04-19, merged 2020-06-09)
+- 作者: `carlushuang` (CONTRIBUTOR)
+- タイトル: `[dynamic-igemm] add v4r1 dynamic kernel and solver, fwd fp32`
+- 説明: 動的カーネルで compile 時ではなく run-time にインデックスを計算。特定テンソル次元ごとの個別カーネル生成を回避し、カーネル数を劇的に削減。パフォーマンスは 8% 以内の低下（1x1 で 2% 以内）
+- ラベル: `value_high`
+- gfx ターゲット: **`gfx900` / `gfx906` のみ** — `IsApplicable` で明示的に allow
+
+**BWD 追加**: PR [#272](https://github.com/ROCm/MIOpen/pull/272) (2020-06-09, merged 2020-07-27)
+- 作者: `carlushuang`
+- タイトル: `[igemm_dynamic] v4r1 bwd dynamic kernel`
+
+**WRW バグ修正 (Vega20/gfx906)**: Issue [#999](https://github.com/ROCm/MIOpen/issues/999) → PR [#1001](https://github.com/ROCm/MIOpen/pull/1001) (2021-06-22)
+- 作者: `shaojiewang` (CONTRIBUTOR)
+- タイトル: `[vega][fp32]fix vega asm igemmwrw kernel selection bug`
+- 内容: Vega20 FP32 で `ConvAsmImplicitGemmV4R1DynamicWrw` が validation fail (max diff: 4994)
+- ラベル: `bug`, `urgency_high`
+- **意味**: 2021年半ばにおいても Vega 用の ASM implicit GEMM は**積極的にバグ修正されていた**
+
+**gfx908 FP16 追加（v4r1 系とは別の GTC 系）**: PR [#680](https://github.com/ROCm/MIOpen/pull/680) (2021-01-14)
+- 作者: `shaojiewang`
+- `gfx908` 専用。**gfx900 は対象外**
+
+**現状 (rocm-7.2.0 tag)**:
+- `conv_asm_implicit_gemm_v4r1_dynamic.cpp` L293: `if(!(StartsWith(device_name, "gfx900") || StartsWith(device_name, "gfx906")))` → gfx900/gfx906 のみ通過
+- `conv_asm_implicit_gemm_bwd_v4r1_dynamic.cpp` L142: 同上
+- `conv_asm_implicit_gemm_wrw_v4r1_dynamic.cpp` L306: 同上
+- GTC 系 (`conv_asm_implicit_gemm_gtc_*.cpp`): 全て `gfx908` 以降のみ
+
+**解釈**: v4r1 dynamic は gfx900/gfx906「専用」の legacy solver として残存。GTC 系は MFMA/xdlops 必須のため gfx900 は使えない。新旧の明確な分離ライン。
+
+---
+
+### MIOpen: Winograd 系 Solver
+
+**現状 (rocm-7.2.0 tag) の gfx900 許可マップ**:
+
+| ファイル | gfx900 許可条件 |
+|---|---|
+| `conv_bin_wino3x3U.cpp` L63 | gfx803/gfx900/gfx906/gfx908 — FP32 全方向 |
+| `conv_bin_winoRxS.cpp` L260-272 | FP16: gfx906/gfx908 のみ。FP32 WrW: gfx900/gfx906/gfx908。FP32 Fwd/Bwd: gfx803/gfx900/gfx906/gfx908 |
+| `conv_multipass_wino3x3WrW.cpp` L490 | gfx8xx/gfx900/gfx906/gfx908 など。ただし gfx900 は CU 制限（L501: 別条件で reject の可能性あり） |
+| `conv_MP_bidirectional_winograd.cpp` L203 | gfx900/gfx906/gfx908。gfx900 は CU <= 60 で別制約 (L211) |
+| `conv_winoRxS.cpp` L212 | `gfx900` / `gfx906` で v21 variant 向け |
+
+**注目 PR**: PR [#1968](https://github.com/ROCm/MIOpen/pull/1968) (2023-02-06)
+- タイトル: `[Vega20] Workaround for 25% winograd performance drop`
+- 作者: `Slimakanzer`
+- **意味**: 2023年にも Vega20 (gfx906) の winograd パフォーマンス問題に対するワークアラウンドが投入されている。Vega 系への保守行為が比較的最近まで行われていた証拠
+
+**Winograd の gfx900 分類**:
+- これらは MFMA/xdlops を使わない旧来のバイナリ Winograd カーネル
+- gfx900 が明示的に allow されている = design-time に意図的に含めた
+- FP16 は gfx906 以降のみ（gfx900 の FP16 dot product 非対応を反映）
+- FP32 では gfx900 が広く通る
+
+---
+
+### MIOpen PR #1328 (MLIR gfx900 disable) 詳細確認
+
+**PR 本文から判明した追加情報**:
+- 作者: `jerryyin` (MEMBER — AMD 社員)
+- マイルストーン: **ROCm 5.1**
+- 変更内容:
+  1. MLIR commit を ROCm 5.1 release commit に bump
+  2. gfx900 を non-xdlops solver から disable
+  3. gfx900 を ctest から disable (`MIOPEN_TEST_VEGA` → `MIOPEN_TEST_GFX900` / `MIOPEN_TEST_GFX906` に分離)
+  4. `GFX900_DISABLED` フラグを `test_conv_igemm_mlir*` に追加
+
+**意味**: gfx900 disable は「コード上の一行変更」ではなく、テストインフラの分離を含む計画的な切り離しだった。ROCm 5.1 マイルストーンに紐付けられており、リリース計画の一部として実行された。
+
+---
+
+### Tensile: gfx900 の扱い
+
+**PR [#1595](https://github.com/ROCm/Tensile/pull/1595) (2022-09-17)**:
+- 作者: `cgmb` (CONTRIBUTOR — **外部コントリビュータ**)
+- タイトル: `Add gfx900:xnack-, gfx1032, gfx1034, gfx1035`
+- 説明: AMD 公式バイナリには関係ないが、**ソースからビルドするユーザーに有用**
+- `gfx900` と `gfx900:xnack-` の両方を受け入れるようにした
+- **非常に重要**: この PR は gfx900 を「AMD が維持する」のではなく「コミュニティが自分でビルドできるようにする」という方向の貢献
+
+**PR [#1862](https://github.com/ROCm/Tensile/pull/1862) (2024-01-11)**:
+- 作者: `GZGavinZhao` (CONTRIBUTOR — **外部コントリビュータ**)
+- タイトル: `Use fallback libraries for archs without optimized logic`
+- 説明: 最適化ロジックファイルを持たないアーキテクチャでも `--lazy-library-loading` / `--separate-architectures` でライブラリ生成を可能に
+- テスト対象に `gfx900` を含む
+- **意味**: gfx900 は Tensile の lazy loading で「最適化なし fallback」経路としてサポートされている。これは AMD による最適化ではなく、コミュニティ貢献で成立した fallback メカニズム
+
+---
+
+### Composable Kernel (CK): gfx900
+
+- GitHub PR 検索で CK リポジトリに gfx900 関連 PR は **0件**
+- CK は xdlops/MFMA ベースの設計であり、gfx900 は最初から対象外と見られる
+
+---
+
+### Layer 6 調査の暫定まとめ
+
+| 経路 | 導入元 | gfx900 向け保守実績 | 現状 |
+|---|---|---|---|
+| ASM v4r1 dynamic (Fwd/Bwd/Wrw) | AMD contributor (carlushuang, 2020) | Bug fix 2021年 (shaojiewang) | **残存** (gfx900/gfx906 専用) |
+| Winograd (binary) | 初期 MIOpen 時代 | Perf workaround 2023年 (Slimakanzer) | **残存** (FP32 全方向、FP16 は gfx906+) |
+| MLIR iGEMM (non-xdlops) | AMD employee (jerryyin) | **2021-12-22 に disable** (ROCm 5.1) | **除外** (private #389 根拠) |
+| ASM GTC (xdlops) | AMD (shaojiewang, 2021~) | N/A (gfx900 は最初から対象外) | **除外** (gfx908+) |
+| Tensile lazy loading | 外部 contributor (cgmb, GZGavinZhao) | fallback 2024年 | **残存** (最適化なし fallback) |
+| CK iGEMM | N/A | N/A | **除外** (xdlops 前提) |
+
+**新しい読み取り**:
+1. gfx900 生存経路は「AMD が積極的に維持している」のではなく、**初期の設計判断が残存し、一部はコミュニティ貢献で延命されている**
+2. Tensile PR #1595, #1862 は**明確に外部コントリビュータ**によるもの — 「AMD は gfx900 を切りたいが、コミュニティが fallback を補修している」構造が見える
+3. ASM v4r1 dynamic は gfx900/gfx906 **専用**設計であり、新世代に移行する動機がない — 結果として「古い GPU 用の古い solver」がそのまま生き残った
+
+---
+
 ## 現在のブロッカーと未解決事項
 
 | 項目 | 状態 | 備考 |

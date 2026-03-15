@@ -222,6 +222,100 @@ WD-Black 上の現行 MIOpen tree を `git blame` で追うと、
 
 これは非常に重要で、`gfx900` は ROCm 内で「完全に存在しない arch」になったのではなく、**新経路では脱落しつつ、旧経路・fallback・catalog 側に残り続けた**と読める。
 
+### 5.8 Layer 6 補遺: 生存経路ごとの provenance（PR/作者/適用条件）
+
+ここでは、既存の「残っている/消えた」の記述を一段具体化し、
+**どの経路を誰が導入し、誰が補修し、現在どの条件で生きているか**を PR ベースで固定する。
+
+#### 5.8.1 MIOpen: ASM v4r1 dynamic は「gfx900/gfx906 専用 legacy solver」として残存
+
+- 導入 PR: `ROCm/MIOpen#166` (`[dynamic-igemm] add v4r1 dynamic kernel and solver, fwd fp32`, 2020-04-19)
+  - author: `carlushuang` (`CONTRIBUTOR`)
+  - 目的: shape ごとの kernel 乱立を抑えるための dynamic index 計算導入
+- 拡張 PR: `ROCm/MIOpen#272` (`[igemm_dynamic] v4r1 bwd dynamic kernel`, 2020-06-09)
+- Vega 修正 PR: `ROCm/MIOpen#1001` (`[vega][fp32]fix vega asm igemmwrw kernel selection bug`, 2021-06-22)
+  - 発端 issue: `ROCm/MIOpen#999`（Vega20 で `ConvAsmImplicitGemmV4R1DynamicWrw` validation fail）
+
+`rocm-7.2.0` tag 相当の solver 条件（`IsApplicable`）:
+
+- `conv_asm_implicit_gemm_v4r1_dynamic.cpp`: `gfx900` / `gfx906` のみ許可
+- `conv_asm_implicit_gemm_bwd_v4r1_dynamic.cpp`: `gfx900` / `gfx906` のみ許可
+- `conv_asm_implicit_gemm_wrw_v4r1_dynamic.cpp`: `gfx900` / `gfx906` のみ許可
+
+対照的に GTC 系 (`conv_asm_implicit_gemm_gtc_*`) は `gfx908+`（xdlops 前提）で、`gfx900` は通らない。
+
+読み取り:
+
+- `gfx900` は新しい asm 系に追随して残ったのではなく、**v4r1 という旧系が専用条件で生き残った**。
+- 2021 の Vega20 バグ修正が入っているため、少なくとも ROCm 4.x 期には「放置」ではなく局所補修が行われていた。
+
+#### 5.8.2 MIOpen: Winograd 系は FP32 側で gfx900 を広く許可
+
+`rocm-7.2.0` tag 相当で確認した代表例:
+
+- `conv_bin_wino3x3U.cpp`: `gfx803/gfx900/gfx906/gfx908`
+- `conv_bin_winoRxS.cpp`:
+  - FP16: `gfx906/gfx908`
+  - FP32 WrW: `gfx900/gfx906/gfx908`
+  - FP32 Fwd/Bwd: `gfx803/gfx900/gfx906/gfx908`
+- `conv_MP_bidirectional_winograd.cpp`: `gfx900/gfx906/gfx908`（追加制約あり）
+- `conv_winoRxS.cpp`: `gfx900/gfx906` 系条件が残存
+
+関連 PR:
+
+- `ROCm/MIOpen#1968` (`[Vega20] Workaround for 25% winograd performance drop`, 2023-02-06)
+
+読み取り:
+
+- Winograd は MLIR と異なり、**Vega 系を後年まで局所補修しながら維持**していた層がある。
+- ただし FP16 側は `gfx906+` 側に寄るため、`gfx900` の主戦場は FP32 と見るのが自然。
+
+#### 5.8.3 MIOpen: PR #1328 は「テスト分離を含む計画的切り離し」
+
+`ROCm/MIOpen#1328`（ROCm 5.1 milestone）本文から確認できる変更:
+
+- MLIR commit を ROCm 5.1 系へ bump
+- `gfx900` を non-xdlops solver から disable
+- ctest から `gfx900` を disable
+  - `MIOPEN_TEST_VEGA` を `MIOPEN_TEST_GFX900` / `MIOPEN_TEST_GFX906` に分離
+  - `test_conv_igemm_mlir*` に `GFX900_DISABLED` を導入
+
+読み取り:
+
+- これは単なる `IsApplicable` の一行変更ではなく、**CI/test policy まで含む切り離し**。
+- したがって MLIR 経路の `gfx900` 退場は、偶発ではなく release 計画に乗った判断だった。
+
+#### 5.8.4 Tensile: gfx900 残存の一部は外部 contributor による補修
+
+- `ROCm/Tensile#1595` (`Add gfx900:xnack-, gfx1032, gfx1034, gfx1035`, 2022-09-17)
+  - author: `cgmb` (`CONTRIBUTOR`)
+  - PR 本文に「AMD 公式バイナリ向けではなく、source build 利用者向け」の明示あり
+  - `gfx900` / `gfx900:xnack-` の両方を受け付ける方向へ補修
+- `ROCm/Tensile#1862` (`Use fallback libraries for archs without optimized logic`, 2024-01-11)
+  - author: `GZGavinZhao` (`CONTRIBUTOR`)
+  - lazy loading / separate architectures 有効時でも、最適化 logic がない arch 用 fallback library を生成可能化
+  - テスト例の対象に `gfx900` を含む
+
+読み取り:
+
+- `gfx900` の Tensile 側残存は「AMD 本流の最適化継続」というより、
+  **外部 contributor が source-build/fallback 経路を修復して実用性を維持**している側面が強い。
+
+#### 5.8.5 ここまでの provenance まとめ
+
+| 経路 | 導入/主要更新 | 主体 | 現在の `gfx900` 状態 |
+|---|---|---|---|
+| MIOpen MLIR non-xdlops | `#1328` | AMD (`MEMBER`) | disable |
+| MIOpen ASM v4r1 dynamic | `#166`, `#272`, `#1001` | contributor（AMD 関連） | `gfx900/gfx906` 専用で残存 |
+| MIOpen Winograd | 複数、近年 `#1968` | contributor（AMD 関連含む） | FP32 側で残存 |
+| Tensile fallback / arch parsing | `#1595`, `#1862` | 外部 contributor | source-build/fallback で残存性強化 |
+
+要点:
+
+- `gfx900` は「全面維持」でも「全面削除」でもない。
+- **新経路（MLIR/GTC）からは外れ、旧経路（v4r1/Winograd）と fallback（Tensile）で残る**。
+- その残り方には、AMD の過去実装 + 後年の外部補修が混在している。
+
 ---
 
 ## 6. 今回見えた「事件」
@@ -308,6 +402,11 @@ WD-Black 上の現行 MIOpen tree を `git blame` で追うと、
 - `Tensile/CHANGELOG.md`
   - `Tensile 4.36.0 for ROCm 5.5.0`: `Add gfx900:xnack-, gfx1032, gfx1034, gfx1035`
 - `MIOpen`
+  - PR `#166`: `[dynamic-igemm] add v4r1 dynamic kernel and solver, fwd fp32`
+  - PR `#272`: `[igemm_dynamic] v4r1 bwd dynamic kernel`
+  - issue `#999` / PR `#1001`: Vega20 `ConvAsmImplicitGemmV4R1DynamicWrw` validation fail と修正
+  - PR `#1968`: `[Vega20] Workaround for 25% winograd performance drop`
+  - PR `#1328`: ROCm 5.1 milestone, `MIOPEN_TEST_GFX900/GFX906` 分離, `GFX900_DISABLED` 導入
   - commit `2407d2f556c7635de3f4b3f009681bdd92ba82e2`
   - subject: `[MLIR] Disable gfx900 from non-xdlops solver (#1328)`
   - comment reference: `llvm-project-private#389`
@@ -318,6 +417,9 @@ WD-Black 上の現行 MIOpen tree を `git blame` で追うと、
   - `doc/src/find_and_immediate.md`: `gfx900 with 64 CUs`, `gfx900 with 56 CUs`
   - commit `b0f912e5244b`
   - private issue 参照の URL org-name 更新
+- `Tensile`
+  - PR `#1595`: `Add gfx900:xnack-, gfx1032, gfx1034, gfx1035`
+  - PR `#1862`: `Use fallback libraries for archs without optimized logic`
 - 現行ソース
   - ASM implicit GEMM の `gfx900` 明示許可
   - MLIR iGEMM の `gfx900` 明示除外
@@ -330,15 +432,14 @@ WD-Black 上の現行 MIOpen tree を `git blame` で追うと、
 
 ローカル clone だけでは、次は確定できていない。
 
-- `ROCm/MIOpen` PR `#1328` の review comment 全文
 - `llvm-project-private#389` の issue 本文
 - 当時の regression 報告や議論の温度感
 - 他 component で `gfx900` が default build から外れた時の詳細な議論
 
 このため、次段のネットワーク付き調査では次をやる価値がある。
 
-- public PR / issue の timeline 回収
-- `#1328` の merge 周辺 discussion の確認
+- public PR / issue の timeline 回収（MIOpen/Tensile/rocBLAS 全体）
+- `#1328` の review threads 全文回収（現在は issue body + metadata まで）
 - `gfx900` / `vega` / `non-xdlops` / `llvm-project-private#389` の cross-reference 探索
 
 ---

@@ -240,11 +240,17 @@
   - 参照 issue: `llvm-project-private/issues/389`（AMD 社内非公開）
 - [x] `conv_mlir_igemm_bwd.cpp` / `conv_mlir_igemm_wrw.cpp` の除外行確認
   - 結果: 全3ファイルが同一コミットで一括除外
-- [ ] `gfx900` 関連行の `git blame` を追加実施（MLIR 以外の箇所）
-- [ ] ASM v4r1 dynamic の gfx900/gfx906 許可行の `git blame`
-- [ ] Winograd / 旧 ASM の gfx900 条件行の `git blame`
-- [ ] `dot4` / `dp4a` 関連行の `git blame`
-- [ ] `IsApplicable` 重要箇所の `git blame`（主要 solver）
+- [x] `gfx900` 関連行の `git blame` を追加実施（MLIR 以外の箇所）
+  - ASM v4r1 dynamic: PR #166 (carlushuang, 2020) で導入。gfx900/gfx906 専用設計
+  - Winograd: 初期 MIOpen 時代から。FP32 で gfx900 明示許可
+- [x] ASM v4r1 dynamic の gfx900/gfx906 許可行の `git blame`
+  - PR #166 (Fwd), #272 (Bwd), Bug fix #1001 (Wrw, 2021)
+- [x] Winograd / 旧 ASM の gfx900 条件行の `git blame`
+  - 6 ファイルで gfx900 許可確認。FP16 は gfx906+、FP32 は gfx900 通過
+- [x] `dot4` / `dp4a` 関連行の `git blame`
+  - MIOpen 内に dot4/dp4a 直接参照なし（Tensile/CK 側の概念）
+- [x] `IsApplicable` 重要箇所の `git blame`（主要 solver）
+  - GTC 系: 全て gfx908+ only. v4r1: gfx900/gfx906 only. Winograd: gfx803~gfx908
 
 ### 6.2 commit 意図調査
 
@@ -252,15 +258,17 @@
   - 意図分類: **バグ回避（疑い）** / 設計判断（確定不可）
   - 動詞 `Disable`（= `Remove` / `Drop` より一時的ニュアンス）
   - 参照先が private であるため true reason は外部確認不可
-- [ ] 他の gfx900 関連コミットの diff を読む
-- [ ] commit を意図別に分類する
-  - [ ] 互換維持
-  - [ ] fallback 追加
-  - [ ] 最適化追加
-  - [ ] バグ修正
-  - [ ] ビルド修正
-  - [ ] 削除 / 切り離し
-  - [ ] 不明
+- [x] 他の gfx900 関連コミットの diff を読む
+  - PR #166 (v4r1 追加), #272 (bwd 追加), #1001 (wrw バグ修正), #1328 (MLIR disable)
+  - Tensile: #1595 (gfx900:xnack- 追加, 外部), #1862 (fallback library, 外部)
+- [x] commit を意図別に分類する
+  - [x] 互換維持: Tensile #1595 (gfx900:xnack- accept)
+  - [x] fallback 追加: Tensile #1862 (lazy loading fallback)
+  - [x] 最適化追加: PR #166, #272 (v4r1 dynamic)
+  - [x] バグ修正: PR #1001 (vega wrw validation fail)
+  - [x] ビルド修正: N/A
+  - [x] 削除 / 切り離し: PR #1328 (MLIR gfx900 disable)
+  - [x] 不明: N/A
 
 ### 6.3 GitHub 調査
 
@@ -277,19 +285,34 @@
 **次点**
 
 - [ ] `MiirIsConfigApplicable` の内部チェックを掘る（MLIR ライブラリ側の直接制限）
-- [ ] `gh search prs` で gfx900 関連 PR を探す（MIOpen / rocBLAS / Tensile）
-- [ ] PR レビューコメントを読む（主要な gfx900 生存経路の変更点）
-- [ ] maintainer の stance を整理する
-- [ ] author が AMD 社員か外部貢献かを可能な範囲で分類する（MLIR 除外以外も）
+- [x] `gh search prs` で gfx900 関連 PR を探す（MIOpen / rocBLAS / Tensile）
+  - MIOpen: 25+ PR (v4r1 追加/修正, Winograd, MLIR disable)
+  - Tensile: 51 PR (gfx900:xnack- 追加, fallback library, etc.)
+  - rocBLAS: 44 PR (logic files, known_bugs, architecture splits)
+  - CK: 0件 (xdlops 前提のため gfx900 は対象外)
+- [x] PR レビューコメントを読む（主要な gfx900 生存経路の変更点）
+  - PR #1328: ROCm 5.1 マイルストーン。テストインフラ分離を含む計画的切り離し
+- [x] maintainer の stance を整理する
+  - AMD: MLIR disable、GTC は gfx908+ 専用。古い solver は放置（積極維持ではない）
+  - 外部: Tensile fallback / gfx900:xnack- を補修
+- [x] author が AMD 社員か外部貢献かを可能な範囲で分類する（MLIR 除外以外も）
+  - ASM v4r1: carlushuang, shaojiewang (CONTRIBUTOR — AMD 関連の可能性高)
+  - MLIR disable: jerryyin (MEMBER — AMD 社員確定)
+  - Tensile fallback: cgmb, GZGavinZhao (CONTRIBUTOR — 外部)
 
 ### 6.4 見たい問い
 
 - [x] gfx900 MLIR 除外は AMD 本流起源か → **Yes（AMD 社員 Zhuoran Yin）**
-- [ ] 他の gfx900 生存経路（ASM v4r1 dynamic 等）の出所確認
-- [ ] コミュニティ補修が入っているか
+- [x] 他の gfx900 生存経路（ASM v4r1 dynamic 等）の出所確認
+  - v4r1: AMD contributor (2020), Winograd: 初期MIOpen, Tensile: 外部 contributor (2022-2024)
+- [x] コミュニティ補修が入っているか
+  - **Yes**: Tensile #1595, #1862 は明確に外部コントリビュータ
 - [ ] 削除提案があったか
-- [ ] 明示的な legacy support 意図があったか
-- [ ] 「残置」なのか「積極維持」なのか
+- [x] 明示的な legacy support 意図があったか
+  - Tensile #1595 の PR 本文: 「AMD公式バイナリには関係ないが、ソースビルドユーザーに有用」
+- [x] 「残置」なのか「積極維持」なのか
+  - ASM v4r1/Winograd: 残置（AMD による最近の保守は 2023 Winograd perf W/A が最後）
+  - Tensile fallback: コミュニティによる積極補修
 
 ### 成果物
 
