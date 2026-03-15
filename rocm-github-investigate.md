@@ -555,21 +555,21 @@ retired 宣言のあるレポジトリでも、`gfx900` 参照は非自明な密
 
 公開 GitHub を見ても「除外の参照先 issue が存在する」ことは分かるが、その issue に書かれた具体的な原因は公開側からは確認できない。
 
-### 事件3: build policy の後退が runtime 残存経路より先に起きている
+### 分岐点3: build policy の後退が runtime 残存経路より先に起きている
 
 - 既定 build からは外れる
 - しかし runtime 側の fallback や lazy loading は残る
 
 このズレが、「Vega はもうダメと言われるのに、実際には一部 workload はまだ動く」という今日の奇妙な状態を作っている。
 
-### 事件4: public-facing な support 表記と solver 実態がずれている
+### 分岐点4: public-facing な support 表記と solver 実態がずれている
 
 - MLIR support hardware には `gfx900` が見える
 - 実 solver は `gfx900` を reject する
 
 これは documentation / code / runtime の三者が一致していない例であり、利用者が最も混乱しやすいパターン。
 
-### 事件5: retired repo の案内先が stack の再編方向を露出している
+### 分岐点5: retired repo の案内先が stack の再編方向を示している
 
 - `00_legacy-repos/ROCR-Runtime/README.md`
   - retired を明記し、移行先として `ROCm/rocm-systems` を案内
