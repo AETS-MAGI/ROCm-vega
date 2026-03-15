@@ -330,12 +330,12 @@
 - [x] solver registry の保守可能性を整理する → `support_boundary.md` §2
 - [x] fallback logic の保守可能性を整理する → `support_boundary.md` §2
 - [x] capability table の保守可能性を整理する → `support_boundary.md` §2
-- [ ] build system / CI の保守可能性を整理する
+- [x] build system / CI の保守可能性を整理する → `support_boundary.md` §2b
 
 ### 7.2 コミュニティが握りにくい層の整理
 - [x] カーネルモードドライバ境界を整理する → `support_boundary.md` §2
 - [x] firmware / microcode 境界を整理する → `support_boundary.md` §2 + P8 shipped artifacts
-- [ ] QA / 製品保証 / リリース判定の境界を整理する
+- [x] QA / 製品保証 / リリース判定の境界を整理する → `support_boundary.md` §2c
 
 ### 7.3 実質サポートとしての整理
 - [x] 「コミュニティにより成立する実質サポート」を定義する → `support_boundary.md` §3
@@ -352,8 +352,8 @@
 
 ### 成果物
 - [x] `support_boundary.md`
-- [ ] `community_maintainable_layers.md`
-- [ ] `non_community_layers.md`
+- [x] `community_maintainable_layers.md` → `support_boundary.md` §2.1 に統合
+- [x] `non_community_layers.md` → `support_boundary.md` §2.2 + §2c に統合
 
 ---
 
