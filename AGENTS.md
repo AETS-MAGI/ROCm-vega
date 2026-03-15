@@ -143,20 +143,29 @@ Agent はあくまで補助者であり、最終決定者ではない。
 
 文書修正時は、次の順で作業すること。
 
-1. **高露出 public 文書**
-   - `hypothesis.html`
-   - `rocm-history.html`
-   - `reveal-hypothesis.html`
-   - `solver-trace.html`
-
-2. **上位 investigation 文書**
+1. **上位 investigation 文書**（技術的主張の根拠を持つ文書）
    - `rocm-github-investigate.md`
    - `reveal_hypothesis.md`
    - `hypothesis.md`
    - `facts.md`
 
-3. **narrative / essay 系**
+2. **高露出 public HTML 文書**（AMD 技術者が参照する可能性が高い順）
+   - `solver-trace.html`
+   - `rocm-history.html`
+   - `reveal-hypothesis.html`
+   - `presentation_advanced_en-jp.html`
+   - `experiment-history.html`
+
+3. **補助 HTML 文書**
+   - `hypothesis.html`（ナビリストには掲載されていない補助ページ）
+   - `code-tracing.html`
+
+4. **narrative / essay 系**
    - 技術主張ではなく、個人史・寓話・一般向け説明であることを明示する
+   - `general-audience.html` / `vega-story_for-child.html` / `essay.html` など
+
+**注意**: investigation 文書（.md）を修正したら、対応する公開 HTML に同内容の修正を反映すること。
+MD と HTML の間で表現が乖離しないよう、変更はセットで管理する。
 
 ---
 
@@ -164,6 +173,10 @@ Agent はあくまで補助者であり、最終決定者ではない。
 
 必要に応じて、各文書の冒頭または末尾に以下を置くこと。
 
+日本語:
 > 本メモは、公開一次資料およびローカル clone から観測可能な範囲を整理したものであり、非公開 issue や社内意思決定の内容を断定するものではない。
+
+英語:
+> This document organizes observations from publicly available sources and local repository clones only. It does not assert the contents of private issues or internal decision-making processes.
 
 ---
