@@ -165,7 +165,6 @@ xychart-beta horizontal
 - media: uvd, vce
 - device info: gpu_info, ip_discovery
 
-
 **Fact**: vega10 firmware は Linux カーネルの `linux-firmware` パッケージ経由で出荷されており、ROCm パッケージとは独立した配布チャネルである。
 
 ### 1.4 ランタイム認識
