@@ -32,6 +32,66 @@ AGENTS.md §1.5 に基づき、「AMD がやった」「コミュニティが支
 
 ## 1. Provenance 総括表
 
+### 投入・維持・運用の主体フロー
+
+```mermaid
+flowchart LR
+  subgraph INS["投入主体"]
+    style INS fill:#e3f2fd,stroke:#1565c0
+    AMD_M["AMD(M)"]
+    AMD_C["AMD(C)"]
+    ExtC["ExtC"]
+  end
+  subgraph PATHS["gfx900 生存経路"]
+    style PATHS fill:#fff9c4,stroke:#f9a825
+    P1["P1: MLIR iGEMM 除外"]
+    P2["P2: ASM v4r1 dynamic"]
+    P3["P3: Winograd FP32"]
+    P4["P4: WORKAROUND sramecc"]
+    P5["P5: MP_bidir workspace"]
+    P6["P6: Tensile fallback"]
+    P7["P7: rocMLIR gating"]
+    P8["P8: Shipped artifacts"]
+  end
+  subgraph MAINT["維持主体"]
+    style MAINT fill:#e8f5e9,stroke:#2e7d32
+    M_AMD["AMD(M) 補修"]
+    M_COST["削除コスト由来残存"]
+    M_EXT["ExtC 補修<br/>+ revert 混在"]
+    M_PIPE["Build pipeline"]
+  end
+  AMD_M --> P1 & P7 & P8
+  AMD_C --> P2 & P6
+  ExtC --> P3 & P4 & P5
+  P1 -.->|"disable 済み"| M_COST
+  P2 --> M_COST
+  P2 --> M_AMD
+  P3 --> M_AMD
+  P4 --> M_COST
+  P5 --> M_AMD
+  P6 --> M_EXT
+  P7 --> M_AMD
+  P8 --> M_PIPE
+```
+
+### 経路と修正可能性のマトリクス
+
+```mermaid
+graph TB
+  subgraph MODIFY["修正可能性"]
+    style MODIFY fill:#f3e5f5,stroke:#7b1fa2
+    EXT_OK["外部修正余地あり<br/>CMake / Python / Solver 登録"]
+    AMD_ONLY["AMD(M) のみ<br/>ISA kernel / MLIR pipeline /<br/>llvm-project-private / firmware"]
+    PHYSICAL["物理的不可能<br/>MFMA 不在 / dot4 不在"]
+  end
+  P2_m["P2: ASM v4r1"] --> AMD_ONLY
+  P3_m["P3: Winograd"] --> AMD_ONLY
+  P6_m["P6: Tensile"] --> EXT_OK
+  P7_m["P7: rocMLIR"] --> AMD_ONLY
+  P8_m["P8: Shipped artifacts"] --> AMD_ONLY
+  HW["gfx900 HW constraint"] --> PHYSICAL
+```
+
 | # | 経路 | 投入主体 | 維持主体 | 運用主体 | 修正可能主体 | 確度 |
 |---|---|---|---|---|---|---|
 | P1 | MIOpen MLIR iGEMM non-xdlops **除外** | AMD(M) | — (disable 済み) | — | AMD(M) | code_verified |
