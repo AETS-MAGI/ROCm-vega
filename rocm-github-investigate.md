@@ -594,7 +594,8 @@ retired 宣言のあるレポジトリでも、`gfx900` 参照は非自明な密
 このため、次段のネットワーク付き調査では次をやる価値がある。
 
 - public PR / issue の timeline 回収（MIOpen/Tensile/rocBLAS 全体）
-- `#1328` の review threads 全文回収（現在は issue body + metadata まで）
+- `#1328` の review threads は回収済み（review thread comments は 0 件）。
+  ただし review 本文は `APPROVED` 2 件（うち 1 件は `LGTM!`）で技術背景は限定的。
 - `gfx900` / `vega` / `non-xdlops` / `llvm-project-private#389` の cross-reference 探索
 
 ---

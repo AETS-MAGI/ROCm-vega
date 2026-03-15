@@ -825,6 +825,37 @@ private issue のため本文は外部から読めない。
 - `00_legacy-repos` は単なる旧版保管ではなく、退役宣言後の技術痕跡を確認できる forensic 層。
 - Vega/gfx900 の provenance を補完する上で、現行 monorepo と併読すべき一次証拠群。
 
+### Layer 6 追補: PR #1328 review 実データ + MiirIsConfigApplicable 経路（2026-03-15）
+
+#### PR #1328 review 実データ
+
+- `get_reviews`: APPROVED x2
+  - `JehandadKhan` (2021-12-10)
+  - `atamazov` (2021-12-12, `LGTM!`)
+- `get_review_comments`: review thread comments は 0 件
+- `get_comments`: issue comments は 2 件（release timing 調整の内容）
+
+**解釈**:
+
+- PR #1328 は technical deep discussion が公開 thread に残っていない。
+- private #389 を参照する構造と合わせ、公開情報だけでは root cause の深掘りが難しい状態は継続。
+
+#### MiirIsConfigApplicable の経路確認（legacy MIOpen）
+
+- `src/mlir_build.cpp`
+  - `MiirIsConfigApplicable(params)` は `miirLowerTuningParams(handle)` の `MIIR_SUCCESS` 判定のみ
+  - `MIIR_INVALID_PARAM` などの詳細理由は Miir ライブラリ内部に閉じる
+- `src/solver/conv/conv_mlir_igemm_{fwd,bwd,wrw}.cpp`
+  - solver `IsApplicable()` 末尾で `MiirIsConfigApplicable(...)` を呼ぶ
+  - その前段に `IsMlirSupportedHardware()` と `gfx900` 明示 reject がある
+- `src/include/miopen/solver/mlir_common.hpp`
+  - `IsMlirSupportedHardware()` は `gfx900` を含む
+
+**解釈**:
+
+- 失敗判定は「MIOpen 前段条件（hardware + explicit reject）」と「Miir 後段条件（tuning params valid）」の二層。
+- `MiirIsConfigApplicable` の実際の制約式を確定するには、Miir 側ソース（非公開）への到達が必要。
+
 ## 現在のブロッカーと未解決事項
 
 | 項目 | 状態 | 備考 |
