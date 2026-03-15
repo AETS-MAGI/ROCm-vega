@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "/home/limonene/ROCm-project/WD-Black"
+		},
+		{
+			"path": "../../vega-hbmx-pages"
 		}
 	],
 	"settings": {
