@@ -3,6 +3,28 @@
 このディレクトリは、`gfx900` / Vega を入口にしつつ、
 ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う investigation notebook です。
 
+## 0. 現時点の調査状態（2026-03-15）
+
+「gfx900 がなぜ半分死んで半分生きているか」の構造把握はほぼ完了。根本の見えない部分だけが細く残っている段階。
+
+### 確定済み
+
+- MLIR iGEMM 除外: commit `2407d2f`（Zhuoran Yin, AMD, 2021-12-22）で明示 disable。`IsMlirSupportedHardware()` には gfx900 が残るのに個別 solver 側で後段除外される二重構造も code_verified。
+- 実機: MLIR 強制実行で CompileSolution → GetInvoker まで進むが Perf DB 不在 → `boost::optional::get()` assertion crash。gfx900 での MLIR 経路が実用不能は runtime_verified。
+- FP32 自然選択: `ConvBinWinograd3x3U` / `ConvAsm1x1U` / `ConvHipImplicitGemmV4R1Fwd` が動作確認済み（旧経路・fallback 側は生きている）。
+- INT8: 追加探索でも自然選択は全件 `ConvDirectNaiveConvFwd` のみ。非 naive INT8 solver の自然選択は未達成確定寄り。
+- rocMLIR: public `ROCm/rocMLIR` で `miirCreateHandle` → `parseConvConfig` → `isApplicable` → `RockEnabled` まで追跡可能と確認。
+- ビルド: CIFS 回避、WD-Black NVMe 上で MIOpen debug build 成功（MLIR=Off, CK=Off, AI=Off 構成）。
+- 文書: MD/HTML 全体の中立化（ディスクレーマー・Non-claims・Fact/Interpretation/Open Question）完了。
+
+### 残タスク
+
+1. MLIR 有効 Debug build での内部ログ採取（失敗メカニズム自体は固まっているため優先度低）
+2. `provenance_map.md` の拡張（誰が入れたかの先に「誰が残し・運用し・直せるか」を地図化する）
+3. `MIIR_BUILD_FAILURE` を出す具体ケースの実機再現（現在は `MIIR_INVALID_PARAM` と Perf DB crash まで確認済み）
+
+---
+
 ## 1. 運用方針
 
 - 推論経路の最終判定は生コードを真実源とする。
@@ -51,6 +73,7 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
 - ROCm 一般の GitHub 調査: `rocm-common-investigate_github.md`
 - GitHub 側から見た一般設計思想検証: `reveal_hypothesis.md`
 - 仮説整理: `hypothesis.md`
+- 経路別主体 Provenance Map: `provenance_map.md`
 
 ### 実行・ビルド補助
 

@@ -316,7 +316,7 @@
 
 ### 成果物
 
-- [ ] `provenance_map.md`
+- [x] `provenance_map.md`
 - [ ] `gfx900_history_timeline.md`
 - [ ] `support_intent_notes.md`
 - [ ] `community_vs_vendor_matrix.md`
@@ -452,6 +452,31 @@
 7. 将来シナリオ整理
 8. 再統合仮説の評価
 9. 最終まとめ文書の作成
+
+---
+
+## 12. 残タスク（2026-03-15 時点）
+
+構造把握はほぼ完了。以下の3件のみが未着手 / 未完了。
+
+### 優先度: 低
+
+- [ ] **MLIR 有効 Debug build での内部ログ採取**
+  - `src/mlir_build.cpp` の一時ログパッチで `handle` / `Miir*` 戻り値を採取する
+  - 失敗メカニズム（Perf DB 不在 → boost::optional crash）はすでに runtime_verified のため必須ではない
+  - MLIR 有効ビルドが前提（現行 debug build は MLIR=Off）
+
+### 優先度: 中
+
+- [ ] **`provenance_map.md` の拡張**
+  - 現行版（2026-03-15 初版）は P1–P7 の骨格を記載済み
+  - 次段階: 「誰が残し・運用し・直せるか」の地図をより詳細化する（特に P2/P3 の維持主体と外部修正余地）
+  - Section 7（境界層調査）の成果物 `support_boundary.md` / `community_maintainable_layers.md` と統合する可能性あり
+
+- [ ] **`MIIR_BUILD_FAILURE` を出す具体ケースの実機再現**
+  - 現在確認済み: `MIIR_INVALID_PARAM`（rc=0x7）、Perf DB 不在 → `boost::optional::get()` assertion crash
+  - 次の failure mode: `MIIR_BUILD_FAILURE` を実際に出す入力ケースを設計する
+  - `rocmlir-lib.cpp` の `buildKernelPipeline` (BuildMode) が返す条件を静的に先に確認する
 
 ---
 
