@@ -326,24 +326,32 @@
 ## 7. 境界層調査
 
 ### 7.1 コミュニティが握れる層の整理
-- [ ] userspace library の保守可能性を整理する
-- [ ] solver registry の保守可能性を整理する
-- [ ] fallback logic の保守可能性を整理する
-- [ ] capability table の保守可能性を整理する
+- [x] userspace library の保守可能性を整理する → `support_boundary.md` §2
+- [x] solver registry の保守可能性を整理する → `support_boundary.md` §2
+- [x] fallback logic の保守可能性を整理する → `support_boundary.md` §2
+- [x] capability table の保守可能性を整理する → `support_boundary.md` §2
 - [ ] build system / CI の保守可能性を整理する
 
 ### 7.2 コミュニティが握りにくい層の整理
-- [ ] カーネルモードドライバ境界を整理する
-- [ ] firmware / microcode 境界を整理する
+- [x] カーネルモードドライバ境界を整理する → `support_boundary.md` §2
+- [x] firmware / microcode 境界を整理する → `support_boundary.md` §2 + P8 shipped artifacts
 - [ ] QA / 製品保証 / リリース判定の境界を整理する
 
 ### 7.3 実質サポートとしての整理
-- [ ] 「コミュニティにより成立する実質サポート」を定義する
-- [ ] 「コミュニティだけでは成立しない部分」を定義する
-- [ ] 境界を越えるために必要な条件を整理する
+- [x] 「コミュニティにより成立する実質サポート」を定義する → `support_boundary.md` §3
+- [x] 「コミュニティだけでは成立しない部分」を定義する → `support_boundary.md` §2-3
+- [x] 境界を越えるために必要な条件を整理する → `support_boundary.md` §4
+
+### 7.4 出荷成果物調査（2026-03-15 追加）
+- [x] MIOpen Perf DB のアーキテクチャ別行数を実測
+- [x] rocBLAS プリコンパイル済みファイルのアーキテクチャ別比較
+- [x] firmware blob の確認
+- [x] 3層モデル→4層モデルへの拡張（配布層追加）
+- [x] facts.md / hypothesis.md / provenance_map.md への反映
+- [x] HTML 同期（solver-trace / reveal-hypothesis / rocm-history / presentation）
 
 ### 成果物
-- [ ] `support_boundary.md`
+- [x] `support_boundary.md`
 - [ ] `community_maintainable_layers.md`
 - [ ] `non_community_layers.md`
 
