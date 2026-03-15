@@ -312,7 +312,7 @@ gfx900 向けのプリコンパイル済み成果物が ROCm 7.2 公式パッケ
 `/opt/rocm/share/miopen/db/` に以下の gfx900 向けファイルが存在:
 
 | ファイル | 行数 |
-|---|---|
+| --- | --- |
 | `gfx900_56.HIP.fdb.txt` | 64,583 |
 | `gfx900_56.db.txt` | 41,835 |
 | `gfx900_56.OpenCL.fdb.txt` | 1,711 |
@@ -323,7 +323,7 @@ gfx900 向けのプリコンパイル済み成果物が ROCm 7.2 公式パッケ
 比較対象（同一 ROCm パッケージ内）:
 
 | アーキ | 合計行数 | 備考 |
-|---|---|---|
+| --- | --- | --- |
 | gfx942 (MI300X) | ~470,000 | 最大 |
 | gfx90a (MI200) | ~327,000 | |
 | gfx906 (MI50) | ~235,000 | |
@@ -341,7 +341,7 @@ gfx900 向けのプリコンパイル済み成果物が ROCm 7.2 公式パッケ
 `/opt/rocm/lib/rocblas/library/` に gfx900 向けファイルが存在:
 
 | アーキ | .hsaco | .co | .dat | 合計 | うち fallback |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | gfx900 | 71 | 28 | 29 | **128** | 54 |
 | gfx906 | 71 | 42 | 43 | 156 | — |
 | gfx942 | 55 | 93 | 94 | 242 | — |
@@ -404,7 +404,7 @@ xychart-beta horizontal
 ### 未解決・未完了
 
 | 項目 | 状態 |
-|---|---|
+| --- | --- |
 | ~~rocMLIR Ninja ビルド完走~~ | 回避済み（MLIR=Off で MIOpen ビルド成功） |
 | ~~MIOpen debug ビルド~~ | **完了**（WD-Black NVMe, 2026-03-14） |
 | ~~`miirCreateHandle` の `nullptr` 分岐最終確定~~ | 代替確認済み（システム MIOpen で失敗メカニズム確定） |
@@ -450,7 +450,7 @@ xychart-beta horizontal
 
 ## 10. 次に実行すべき最短手順
 
-**パスA（仮説検証を進める路線）**
+### パスA（仮説検証を進める路線）
 
 ```bash
 # MLIRライブラリ側の適用条件確認
@@ -459,7 +459,7 @@ rg -n "MiirIsConfigApplicable|isApplicable|RockEnabled" \
   tank/docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo/rocm-libraries/projects/miopen
 ```
 
-**パスB（provenance map 拡張路線）**
+### パスB（provenance map 拡張路線）
 
 ```bash
 # gfx900 / vega / fallback 系の起源を広げて確認
@@ -469,7 +469,7 @@ rg -n "gfx900|Vega|fallback|LazyLoadingInit::gfx900" \
   tank/docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo/00_DEPRECATED/Tensile
 ```
 
-**パスC（live GitHub 補完路線, 任意）**
+### パスC（live GitHub 補完路線, 任意）
 
 - PR `#1328` の review / discussion を live で再取得
 - 公開 `llvm-project` 側の cross-reference を追加確認
