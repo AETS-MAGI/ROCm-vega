@@ -1,13 +1,16 @@
 {
 	"folders": [
 		{
-			"path": "/home/limonene/ROCm-project/vega-hbmx-investigations"
+			"name": "vega-hbmx-investigations",
+			"path": ".."
 		},
 		{
-			"path": "/home/limonene/ROCm-project/WD-Black"
-		},
-		{
+			"name": "vega-hbmx-pages",
 			"path": "../../vega-hbmx-pages"
+		},
+		{
+			"name": "WD-Black",
+			"path": "../../WD-Black"
 		}
 	],
 	"settings": {
