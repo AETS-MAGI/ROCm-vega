@@ -23,8 +23,8 @@
 - GPU: AMD Radeon RX Vega (gfx900)
 - 主対象 runtime: `/opt/rocm/lib/libMIOpen.so.1.0`
 - 参照ソース:
-- `tank/docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo/rocm-libraries/projects/miopen`
-- `tank/docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo/rocMLIR`
+- `/home/limonene/ROCm-project/WD-Black/ROCm-repos/MIOpen`
+- `/home/limonene/ROCm-project/WD-Black/ROCm-repos/rocMLIR`
 - 重要前提:
 - 参照ソースと `/opt/rocm` 実体は完全一致とは限らない。
 - この調査ディレクトリでは実行ビットが効かない挙動があるため、補助スクリプトは `bash ./tools/...` で実行する。
@@ -98,6 +98,25 @@
 - `gfx900` は ROCm 全体で一括に切られたのではなく、component ごとに
   「追加・既定化」と「既定からの後退」が混在している。
 - build policy と runtime / source 上の残存経路は同期していない。
+
+### 4.7 2022-10-05 時点でも MIOpen の別層では gfx900 が明示的に扱われていた（history_verified）
+
+- `MIOpen/src/target_properties.cpp` には
+  `#define WORKAROUND_ISSUE_1204 1 // ROCm may incorrectly report "sramecc-" for gfx900.`
+  があり、`gfx900` だけ `sramecc_reported` を空にして誤報を runtime 側で吸収する。
+- この行は `git blame` 上で commit `e5c6ce1b61233392ca8660f426fd018709c395cc`
+  （Jehandad Khan, 2022-10-05, subject: `v2.18.0 release notes`）由来。
+- 同じ commit 由来で、
+  `MIOpen/doc/src/embed.md` は `gfx906_60;gfx900_56` および
+  `-DMIOPEN_EMBED_DB=gfx900_56` を例示し、
+  `MIOpen/doc/src/find_and_immediate.md` は system Find-Db populated architecture として
+  `gfx900 with 64 CUs` / `gfx900 with 56 CUs` を列挙している。
+
+ここから言える最小限の事実:
+
+- 2021-12-22 の MLIR iGEMM 除外後も、MIOpen の別層（runtime metadata / DB docs / immediate mode docs）では
+  `gfx900` が明示的に扱われていた。
+- したがって `gfx900` の後退は単調な一直線ではなく、solver・docs・metadata で速度差をもって進んでいる。
 
 ---
 
