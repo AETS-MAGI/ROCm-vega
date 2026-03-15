@@ -750,6 +750,43 @@ private issue のため本文は外部から読めない。
 
 ---
 
+### Layer 6 追加: 00_legacy-repos 横断調査（2026-03-15）
+
+**調査対象**: `/home/limonene/ROCm-project/WD-Black/ROCm-repos/00_legacy-repos`
+
+**対象 repo**: `MIOpen`, `ROCR-Runtime`, `Tensile`, `vllm`
+
+#### retired marker の commit provenance
+
+- `MIOpen`: `5123480a6` (`Migrating MIOpen`) — README で `ROCm/rocm-libraries` へ誘導
+- `ROCR-Runtime`: `ba56a24c` (`Deprecation README message`) — `ROCm/rocm-systems` へ誘導
+- `Tensile`: `c5c24022` (`Updating readme to highlight deprecation`) — `ROCm/rocm-libraries` へ誘導
+- `ROCm/vllm`: `eb9d4de9eb` (`Deprecation notice`) — `vllm-project/vllm` へ誘導
+
+#### gfx900 残存量（legacy snapshot）
+
+- `MIOpen`: 136 行
+- `ROCR-Runtime`: 25 行
+- `Tensile`: 411 行
+- `vllm`: 0 行
+
+#### 代表的な残存証拠
+
+- `MIOpen`
+  - `conv_asm_implicit_gemm_v4r1_dynamic.cpp`: `gfx900/gfx906` allow
+  - `conv_mlir_igemm_fwd.cpp`: `gfx900` reject
+  - `target_properties.cpp`: `WORKAROUND_ISSUE_1204` (`sramecc-` misreport)
+- `ROCR-Runtime`
+  - `runtime/hsa-runtime/core/runtime/isa.cpp`: `gfx900`, `gfx900:xnack-`, `gfx900:xnack+`
+- `Tensile`
+  - `CHANGELOG.md`: `Add gfx900:xnack-, gfx1032, gfx1034, gfx1035`
+  - `Tensile/Source/lib/include/Tensile/AMDGPU.hpp`: `gfx900` enum/parser 残存
+
+**解釈**:
+
+- `00_legacy-repos` は単なる旧版保管ではなく、退役宣言後の技術痕跡を確認できる forensic 層。
+- Vega/gfx900 の provenance を補完する上で、現行 monorepo と併読すべき一次証拠群。
+
 ## 現在のブロッカーと未解決事項
 
 | 項目 | 状態 | 備考 |
