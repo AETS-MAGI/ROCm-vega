@@ -456,51 +456,109 @@
    - MLIR=Off で MIOpen debug ビルド成功。システム MIOpen での MLIR 強制実行テストで失敗メカニズム（Perf DB 不在 → boost::optional crash）を確定。
    - rocMLIR prefix は消滅していたが、代替手段で目的を達成。
 
-### 優先度つき着手順の次点
+### 優先度つき着手順の次点（2026-03-17 再優先順位）
 
-1. ~~**公開 `llvm-project` での gfx900 / MLIR issue 探索**~~ → **実施済み（直接相関なし）**
+1. **`design_philosophy.md` + `abstraction_layers.md` を先に作る**
 
-   - `gh search issues --repo llvm/llvm-project "gfx900 MLIR" --state open`
-   - `gh search issues --repo llvm/llvm-project "gfx900 MLIR" --state closed`
-   - 意義: private #389 の外部相関を探す
+   - 根拠は `ROCm/README.md`, `ROCm/docs/what-is-rocm.rst`, `TheRock/README.md`,
+     `TheRock/cmake/therock_subproject.cmake`, `TheRock/cmake/therock_amdgpu_targets.cmake`,
+     `rocm-systems/README.md` を主とする
+   - 意義: 既存の 4層モデル（維持 / 管理 / 補充 / 配布）に対して、
+     ROCm 全体の build / integration / component topology 側の一次根拠を固定する
+   - 工数: 中
 
-1. **クラス構造 / 責務分離の可視化**（`class_map.md` 等）
+1. **`fallback_chain_map.md` + `gfx900_related_nodes.md` を作る**
 
-   - 意義: 仮説B（capability-based 設計の副産物）の構造的証拠を整理
-   - 工数: 高（コード全体を読む必要あり）
-   - やらないという選択肢: 強くあり（仮説Bはすでにコードで十分支持されている）
+   - 既存の `trace_map_static.md`, `trace_map_dynamic.md`, `support_boundary.md`,
+     `provenance_map.md`, `facts.md` の内容を cross-component で再配置する
+   - MIOpen / rocBLAS / Tensile / CK / TheRock の `GPU_TARGETS` / fallback / gating を
+     一枚の地図にする
+   - 意義: 追加ログなしで「なぜ gfx900 が半分死に半分生きるか」の構造を最短で可視化できる
 
-1. **コミュニティ保守可能範囲の明確化**（Section 7）
+1. **`final_hypothesis.md` を早期に書き始める（Phase 8-9 を同時消化）**
 
-   - 意義: Phase 7 の成果物。現状は仮説レベルで成立している。
+   - 現状の `facts.md`, `hypothesis.md`, `reveal_hypothesis.md`, `support_boundary.md`,
+     `provenance_map.md` を材料に、まず「今すぐ書ける範囲」を試す
+   - 不足が見えた箇所だけを次段で補う
+   - 意義: 「書くための書き物を増やす」ことを避け、最終問いに必要な穴だけを露出させる
 
-1. **`MiirIsConfigApplicable` の内部制約の再確認**
+1. **`community_vs_vendor_matrix.md` + `gfx900_history_timeline.md` を中優先度で補完**
 
-   - 意義: private issue #389 の本文が非公開のため、公開ソースで最も近い境界を追加検証する。
-   - やらないという選択肢: 強くあり（現段階では「設計の自然な副産物として生存」が十分な結論）
+   - `provenance_map.md` と `rocm-github-investigate.md` の橋渡しとして使う
+   - 意義: 投入主体 / 維持主体 / 運用主体 / 修正可能主体の時間差を明確にする
 
-### 参照先（クローン済みROCm公式リポジトリ）
+1. **`provenance_map.md` を拡張**
 
-- root: `/home/limonene/ROCm-project/tank/docs-ref/AMD_reference/AMD_Official/ROCm_AMD_Repo`
+   - P2/P3 の維持主体、外部修正余地、TheRock 側 `EXCLUDE_TARGET_PROJECTS` との対応を追加
+   - 意義: Section 7 と最終結論の接続を強くする
+
+1. **`support_model_hypothesis.md` は必要なら作る**
+
+   - `design_philosophy.md` と `final_hypothesis.md` の間に中間整理が必要な場合のみ着手
+   - やらないという選択肢: あり
+
+1. **`class_map.md` / `solver_architecture_map.md` / `device_capability_flow.md` は中優先度で進める**
+
+   - ただし、最初から ROCm 全域の exhaustive な class archaeology はやらない
+   - まずは `MIOpen` の convolution 経路に限定し、
+     `Handle -> TargetProperties -> ConvolutionContext -> solver registry -> solution`
+     の軽量 map を作る
+   - 意義: `final_hypothesis.md` の補強と、fallback / gating の責務分離を視覚化する
+   - 工数が膨らむ場合は repo-wide 拡張を止め、MIOpen 局所図で打ち切る
+
+1. **Runtime/Systems 層の新規スコープ追加は当面やらない**
+
+   - `HIP -> CLR -> ROCr -> HSA/KFD` は ROCm 全体構造の説明には有益だが、
+     今回の中心問い「なぜ gfx900 が生きているか」に対しては周辺的
+   - `final_hypothesis.md` で不足が出たときだけ限定的に戻る
+
+1. **`MiirIsConfigApplicable` の内部制約の再確認は optional**
+
+   - private issue #389 の本文は公開側から見えないため、追加で掘る場合も
+     public code の境界説明に留める
+   - やらないという選択肢: 強くあり
+
+### 参照先（クローン済み ROCm 公式リポジトリ）
+
+- root: `/home/limonene/ROCm-project/WD-Black/ROCm-repos`
 - 主要調査対象（現行系）:
-  - `rocm-libraries/projects/miopen/src/solver/conv/conv_ck_igemm_fwd_v6r1_dlops_nchw.cpp`
-  - `rocm-libraries/projects/miopen/src/solver/conv/conv_hip_implicit_gemm_fwd_xdlops.cpp`
-  - `rocm-libraries/projects/miopen/src/solver/conv/conv_hip_implicit_gemm_fwd_v4r5_xdlops.cpp`
-  - `rocm-libraries/projects/miopen/src/hipoc/hipoc_program.cpp` （`Code object build failed`）
-  - `rocm-libraries/projects/miopen/src/mlir_build.cpp` （`MIIR_INVALID_PARAM`）
-  - `rocm-libraries/projects/miopen/src/fin/fin_interface.cpp` （solver id 80/114/128）
-  - `rocm-libraries/projects/miopen/src/include/miopen/conv/solvers.hpp`
+  - `MIOpen/src/solver/conv_mlir_igemm_fwd.cpp`
+  - `MIOpen/src/solver/conv_ck_igemm_fwd_v6r1_dlops_nchw.cpp`
+  - `MIOpen/src/solver/conv_hip_implicit_gemm_fwd_xdlops.cpp`
+  - `MIOpen/src/solver/conv_hip_implicit_gemm_fwd_v4r5_xdlops.cpp`
+  - `MIOpen/src/hipoc/hipoc_program.cpp` （`Code object build failed`）
+  - `MIOpen/src/mlir_build.cpp` （`MIIR_INVALID_PARAM`）
+  - `MIOpen/src/convolution_api.cpp` （front-end API -> solution / immediate）
+  - `MIOpen/src/include/miopen/conv/context.hpp`
+  - `rocBLAS/CMakeLists.txt`
+  - `rocBLAS/docs/what-is-rocblas.rst`
+  - `Tensile/Tensile/Component.py`
+  - `Tensile/docs/src/conceptual/solution-selection-catalogs.rst`
+  - `TheRock/cmake/therock_amdgpu_targets.cmake`
+  - `TheRock/cmake/therock_subproject.cmake`
+  - `ROCm/README.md`
+  - `ROCm/docs/what-is-rocm.rst`
+  - `rocm-systems/README.md`
 - 補助参照:
-  - `rocm-libraries/projects/miopen/docs/reference/env_variables.rst`
-  - `rocm-libraries/projects/miopen/docs/how-to/debug-log.rst`
+  - `MIOpen/doc/src/find_and_immediate.md`
+  - `MIOpen/doc/src/perfdatabase.md`
+  - `rocm-systems/projects/hip/docs/how-to/hip_runtime_api.rst`
+  - `rocm-systems/projects/hip/docs/understand/programming_model.rst`
+- 注記:
+  - 現ローカル clone では `rocm-libraries/projects/miopen/` は存在せず、
+    MIOpen standalone repo (`WD-Black/ROCm-repos/MIOpen`) を investigation の現行 root として使う
+  - `rocm-libraries` worktree は mass-deleted 状態に見えるため、修復されるまで一次根拠には使わない
 - 履歴比較用（旧実装）:
-  - `00_DEPRECATED/MIOpen/src/...`（同名solver実装・旧registry・旧test）
+  - `00_legacy-repos/MIOpen/src/...`
+  - `00_legacy-repos/Tensile/...`
+  - `00_legacy-repos/ROCR-Runtime/...`
 
 ### その次
 
-1. 将来シナリオ整理
-1. 再統合仮説の評価
-1. 最終まとめ文書の作成
+1. `future_support_paths.md`
+1. `natural_maintenance_scenarios.md`
+1. `what_can_be_extended.md`
+1. `what_cannot_be_extended.md`
 
 ---
 
