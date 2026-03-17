@@ -2,9 +2,14 @@
 
 ## 「本当の意味でのサポート」を読むための実行タスク一覧
 
+> **二層化ステータス（2026-03-17 方針転換）**
+> - 🔴 **Active**: §8（含意層整理）、§9（最終問い）、§10（着手順）、§12（残タスク）
+> - 🟡 **On-demand**: §2（思想層）、§3（構造層）— `final_hypothesis.md` 執筆中に不足が出たら戻る
+> - 🟢 **Archived**: §0, §1, §4, §5, §6, §7, §11 — 完了済み。履歴として保存
+
 ---
 
-## 0. 事前準備
+## 0. 事前準備 *(Archived)*
 
 - [x] 調査対象リポジトリ一覧を確定する
   - [x] ROCm
@@ -56,7 +61,7 @@
 
 ---
 
-## 2. 思想層調査
+## 2. 思想層調査 *(On-demand — final_hypothesis 執筆中に不足が出たら戻る)*
 
 ### 2.1 ROCm 全体思想の把握
 
@@ -89,7 +94,7 @@
 
 ---
 
-## 3. 構造層調査
+## 3. 構造層調査 *(On-demand — final_hypothesis 執筆中に不足が出たら戻る)*
 
 ### 3.1 型・責務の洗い出し
 
@@ -390,22 +395,22 @@
 
 ### 8.1 将来シナリオ
 
-- [ ] 現状の設計で自然に残る層を整理する
-- [ ] 消えるならどの層から消えやすいか整理する
-- [ ] 再統合の観点から重要な接点を整理する
-- [ ] コミュニティが押さえるべき層を整理する
+- [/] 現状の設計で自然に残る層を整理する
+- [/] 消えるならどの層から消えやすいか整理する
+- [/] 再統合の観点から重要な接点を整理する
+- [/] コミュニティが押さえるべき層を整理する
 
 ### 8.2 仮説評価
 
-- [ ] gfx900 生存は偶然か副産物かを評価する
-- [ ] 抽象化の筋が再統合に有利かを評価する
-- [ ] 「表のサポート」と「本当の意味でのサポート」の違いを文章化する
+- [/] gfx900 生存は偶然か副産物かを評価する
+- [/] 抽象化の筋が再統合に有利かを評価する
+- [/] 「表のサポート」と「本当の意味でのサポート」の違いを文章化する
 
 ### 8.3 まとめ
 
-- [ ] 研究仮説の最終版を作る
-- [ ] 観測 / 解釈 / 留保 を分けて書く
-- [ ] 反証可能な形で結論を書く
+- [/] 研究仮説の最終版を作る
+- [/] 観測 / 解釈 / 留保 を分けて書く
+- [/] 反証可能な形で結論を書く
 
 ### 含意層整理の成果物
 
@@ -413,17 +418,17 @@
 - [ ] `natural_maintenance_scenarios.md`
 - [ ] `what_can_be_extended.md`
 - [ ] `what_cannot_be_extended.md`
-- [ ] `final_hypothesis.md`
+- [/] `final_hypothesis.md`
 
 ---
 
 ## 9. 最終的に答える問い
 
-- [ ] Vega / gfx900 はなぜ今も生きているのか
-- [ ] ROCm は何をどうサポートしているのか
-- [ ] 「サポート終了」とは何を意味するのか
-- [ ] コミュニティはどこまで実質サポートを成立させられるか
-- [ ] 将来の再統合 / 共通化に対して、現構造は何を意味するか
+- [/] Vega / gfx900 はなぜ今も生きているのか
+- [/] ROCm は何をどうサポートしているのか
+- [/] 「サポート終了」とは何を意味するのか
+- [/] コミュニティはどこまで実質サポートを成立させられるか
+- [/] 将来の再統合 / 共通化に対して、現構造は何を意味するか
 
 ---
 
@@ -456,66 +461,58 @@
    - MLIR=Off で MIOpen debug ビルド成功。システム MIOpen での MLIR 強制実行テストで失敗メカニズム（Perf DB 不在 → boost::optional crash）を確定。
    - rocMLIR prefix は消滅していたが、代替手段で目的を達成。
 
-### 優先度つき着手順の次点（2026-03-17 再優先順位）
+### 着手順（2026-03-17 方針転換）
 
-1. **`design_philosophy.md` + `abstraction_layers.md` を先に作る**
+#### 最優先（いまの証拠でどこまで書けるか試す）
 
-   - 根拠は `ROCm/README.md`, `ROCm/docs/what-is-rocm.rst`, `TheRock/README.md`,
-     `TheRock/cmake/therock_subproject.cmake`, `TheRock/cmake/therock_amdgpu_targets.cmake`,
-     `rocm-systems/README.md` を主とする
-   - 意義: 既存の 4層モデル（維持 / 管理 / 補充 / 配布）に対して、
-     ROCm 全体の build / integration / component topology 側の一次根拠を固定する
-   - 工数: 中
+1. **`final_hypothesis.md` を着手する（Phase 8-9 同時消化）** → **着手済み**
 
-1. **`fallback_chain_map.md` + `gfx900_related_nodes.md` を作る**
-
-   - 既存の `trace_map_static.md`, `trace_map_dynamic.md`, `support_boundary.md`,
-     `provenance_map.md`, `facts.md` の内容を cross-component で再配置する
-   - MIOpen / rocBLAS / Tensile / CK / TheRock の `GPU_TARGETS` / fallback / gating を
-     一枚の地図にする
-   - 意義: 追加ログなしで「なぜ gfx900 が半分死に半分生きるか」の構造を最短で可視化できる
-
-1. **`final_hypothesis.md` を早期に書き始める（Phase 8-9 を同時消化）**
-
-   - 現状の `facts.md`, `hypothesis.md`, `reveal_hypothesis.md`, `support_boundary.md`,
-     `provenance_map.md` を材料に、まず「今すぐ書ける範囲」を試す
+   - 既存の `facts.md`, `hypothesis.md`, `reveal_hypothesis.md`, `support_boundary.md`,
+     `provenance_map.md` を材料に、「今すぐ書ける範囲」をまず試す
    - 不足が見えた箇所だけを次段で補う
-   - 意義: 「書くための書き物を増やす」ことを避け、最終問いに必要な穴だけを露出させる
+   - 意義: 追加調査の前に統合叙述を行い、穴を露出させる
 
-1. **`community_vs_vendor_matrix.md` + `gfx900_history_timeline.md` を中優先度で補完**
+#### 直近の補助タスク
 
-   - `provenance_map.md` と `rocm-github-investigate.md` の橋渡しとして使う
-   - 意義: 投入主体 / 維持主体 / 運用主体 / 修正可能主体の時間差を明確にする
+1. **Perf DB 比較の RDNA tuning mechanism 差異留保を明示する**
+
+   - gfx1100/1200 に Perf DB がない理由として、MIOpen がこれらの世代で異なるチューニング方式
+     （CK-based / AI-driven tuning 等）を採用している可能性を留保として明示
+   - 対象: `facts.md` §4.6、`support_boundary.md` §1.1
+   - 意義: 出荷成果物比較の前提条件を明確化
+
+1. **主要事実の canonical reference 整理**
+
+   - commit `2407d2f`、`llvm-project-private#389`、4層モデル等の頻出事実を一箇所で定義し、
+     他文書からはリンク参照に切り替える
+   - 意義: 文書間重複を減らし、外部読者の読了コストを下げる
+
+#### On-demand（final_hypothesis 執筆中に不足が出たら戻る）
+
+1. **`design_philosophy.md` + `abstraction_layers.md`**
+   - ROCm 全体の build / integration / component topology の一次根拠を固定する
+
+1. **`fallback_chain_map.md` + `gfx900_related_nodes.md`**
+   - cross-component での fallback / gating を一枚の地図にする
 
 1. **`provenance_map.md` を拡張**
+   - P2/P3 の維持主体、外部修正余地、TheRock 側対応を追加
 
-   - P2/P3 の維持主体、外部修正余地、TheRock 側 `EXCLUDE_TARGET_PROJECTS` との対応を追加
-   - 意義: Section 7 と最終結論の接続を強くする
+1. **`community_vs_vendor_matrix.md` + `gfx900_history_timeline.md`**
+   - 投入 / 維持 / 運用 / 修正可能主体の時間差を明確にする
 
-1. **`support_model_hypothesis.md` は必要なら作る**
+1. **`class_map.md` / `solver_architecture_map.md` / `device_capability_flow.md`**
+   - MIOpen convolution 経路に限定した軽量 map を優先。exhaustive にしない
 
-   - `design_philosophy.md` と `final_hypothesis.md` の間に中間整理が必要な場合のみ着手
-   - やらないという選択肢: あり
+1. **`support_model_hypothesis.md`**
+   - `design_philosophy.md` と `final_hypothesis.md` の中間整理が必要な場合のみ
 
-1. **`class_map.md` / `solver_architecture_map.md` / `device_capability_flow.md` は中優先度で進める**
+#### 当面やらない
 
-   - ただし、最初から ROCm 全域の exhaustive な class archaeology はやらない
-   - まずは `MIOpen` の convolution 経路に限定し、
-     `Handle -> TargetProperties -> ConvolutionContext -> solver registry -> solution`
-     の軽量 map を作る
-   - 意義: `final_hypothesis.md` の補強と、fallback / gating の責務分離を視覚化する
-   - 工数が膨らむ場合は repo-wide 拡張を止め、MIOpen 局所図で打ち切る
-
-1. **Runtime/Systems 層の新規スコープ追加は当面やらない**
-
-   - `HIP -> CLR -> ROCr -> HSA/KFD` は ROCm 全体構造の説明には有益だが、
-     今回の中心問い「なぜ gfx900 が生きているか」に対しては周辺的
+1. **Runtime/Systems 層の新規スコープ追加**
    - `final_hypothesis.md` で不足が出たときだけ限定的に戻る
 
-1. **`MiirIsConfigApplicable` の内部制約の再確認は optional**
-
-   - private issue #389 の本文は公開側から見えないため、追加で掘る場合も
-     public code の境界説明に留める
+1. **`MiirIsConfigApplicable` の内部制約の再確認**
    - やらないという選択肢: 強くあり
 
 ### 参照先（クローン済み ROCm 公式リポジトリ）
@@ -562,32 +559,46 @@
 
 ---
 
-## 12. 残タスク（2026-03-15 時点）
+## 12. 残タスク（2026-03-17 更新）
 
-構造把握はほぼ完了。以下の3件のみが未着手 / 未完了。
+方針転換: `final_hypothesis.md` の着手を最優先とし、書いてみて不足した箇所だけ補強する。
+
+### 優先度: 最高
+
+- [/] **`final_hypothesis.md` の着手**（§8–9 と連動）
+  - 既存の証拠でどこまで書けるかをまず試す
+  - 不足が判明した箇所のみ追加調査する
+
+### 優先度: 高
+
+- [ ] **Perf DB 比較の RDNA tuning mechanism 差異留保を明示**
+  - `facts.md` §4.6、`support_boundary.md` §1.1 に留保を追記
+  - gfx1100/1200 側の MIOpen solver がどのチューニング制御を使っているかの確認を含む
+
+- [ ] **主要事実の canonical reference 整理**
+  - commit `2407d2f`、`llvm-project-private#389`、4層モデル等の定義を一箇所に集約
+  - 他文書はリンク参照に順次切り替え
+
+- [ ] **TODO.md の slim 化**
+  - active / archived の二層化（本更新で実施中）
+  - 完了済みタスクの詳細記述を今後段階的に圧縮
+
+### 優先度: 中（on-demand）
+
+- [ ] **`provenance_map.md` の拡張**
+  - P2/P3 の維持主体と外部修正余地の詳細化
 
 ### 優先度: 低
 
 - [ ] **MLIR 有効 Debug build での内部ログ採取**
-  - `src/mlir_build.cpp` の一時ログパッチで `handle` / `Miir*` 戻り値を採取する
-  - 失敗メカニズム（Perf DB 不在 → boost::optional crash）はすでに runtime_verified のため必須ではない
-  - MLIR 有効ビルドが前提（現行 debug build は MLIR=Off）
-
-### 優先度: 中
-
-- [ ] **`provenance_map.md` の拡張**
-  - 現行版（2026-03-15 初版）は P1–P7 の骨格を記載済み
-  - 次段階: 「誰が残し・運用し・直せるか」の地図をより詳細化する（特に P2/P3 の維持主体と外部修正余地）
-  - Section 7（境界層調査）の成果物 `support_boundary.md` / `community_maintainable_layers.md` と統合する可能性あり
+  - 失敗メカニズムは runtime_verified 済みのため必須ではない
 
 - [ ] **`MIIR_BUILD_FAILURE` を出す具体ケースの実機再現**
-  - 現在確認済み: `MIIR_INVALID_PARAM`（rc=0x7）、Perf DB 不在 → `boost::optional::get()` assertion crash
-  - 次の failure mode: `MIIR_BUILD_FAILURE` を実際に出す入力ケースを設計する
-  - `rocmlir-lib.cpp` の `buildKernelPipeline` (BuildMode) が返す条件を静的に先に確認する
+  - 現在確認済み: `MIIR_INVALID_PARAM`、Perf DB 不在 → boost::optional crash
 
 ---
 
-## 11. rocMLIR 追加フェーズ（提案実行トラック）
+## 11. rocMLIR 追加フェーズ *(Archived)*
 
 - [x] 提案ドキュメント初版を作成する
   - [x] `rocmlir_integration_proposal.md`
