@@ -42,6 +42,8 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
   - 推論経路トレース本体。MIOpen / rocBLAS / CK / Tensile の code path を扱う。
 - `facts.md`
   - code / runtime / history ごとに確認済み事項を固定する fact ledger。
+- `knowns_unknowns.md`
+  - 既知事項と未確定事項だけを 1 枚で引ける canonical 確認表。
 - `work_logs.md`
   - 何を見て、どこまで進んだかの作業時系列。
 
@@ -64,10 +66,24 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
   - integration / runtime / selection / codegen / distribution の層に分けて、`gfx900` 観測点がどこに乗るかを整理する。
 - `community_vs_vendor_matrix.md`
   - 「AMD かコミュニティか」の二分を避け、経路ごとに投入・補修・出荷の分布を表で固定する。
+- `why_rocm_is_flexible.md`
+  - 登録 / 判定 / backend / artifact の分離が、なぜ一括削除ではなく Layered Retreat を生みやすいかを説明する。
 - `fallback_chain_map.md`
   - MIOpen / rocBLAS / Tensile / TheRock にまたがる fallback / gating / selective exclude を一枚で整理する。
 - `gfx900_related_nodes.md`
   - `gfx900` が normalize / gate / select / catalog / ship のどこに現れるかを層別ノードとして固定する。
+- `gfx900_int8_path_inventory.md`
+  - `gfx900` の INT8 convolution で、何が自然選択され、何がどこで止まるかを観測ベースで固定する。
+- `natural_maintenance_scenarios.md`
+  - `gfx900` がどの層で自然に維持されやすく、どの層から崩れやすいかを、主体と接点を含めて整理する。
+- `what_can_be_extended.md`
+  - コミュニティが技術的に修正可能な層を、観測根拠つきで整理する。
+- `what_cannot_be_extended.md`
+  - 物理制約・非公開境界・組織的境界により修正困難な層を整理する。
+- `future_support_paths.md`
+  - 現構造から読める将来経路の含意と、再統合 / 共通化への接点を整理する。
+- `support_meaning_conclusion.md`
+  - 3つの中心問いへの一文回答と横断的結論をまとめた結論ページ。
 
 ### 実行・再現用の補助
 
@@ -84,6 +100,7 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
 
 - 推論経路トレース本体: `vega-rocm.md`
 - 事実台帳: `facts.md`
+- 既知 / 未確定の canonical 表: `knowns_unknowns.md`
 - 作業ログ: `work_logs.md`
 - GitHub 履歴調査: `rocm-github-investigate.md`
 - `gfx900` 履歴年表: `gfx900_history_timeline.md`
@@ -92,8 +109,15 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
 - ROCm 設計傾向の固定: `design_philosophy.md`
 - ROCm 層構造の整理: `abstraction_layers.md`
 - 主体分解 matrix: `community_vs_vendor_matrix.md`
+- ROCm の柔軟性メモ: `why_rocm_is_flexible.md`
 - cross-component fallback 地図: `fallback_chain_map.md`
 - `gfx900` 関連ノード索引: `gfx900_related_nodes.md`
+- `gfx900` INT8 経路インベントリ: `gfx900_int8_path_inventory.md`
+- `gfx900` 自然維持シナリオ: `natural_maintenance_scenarios.md`
+- 技術的に拡張可能な層: `what_can_be_extended.md`
+- 技術的に拡張困難な層: `what_cannot_be_extended.md`
+- 将来経路の含意: `future_support_paths.md`
+- 調査結論ページ: `support_meaning_conclusion.md`
 - 仮説整理: `hypothesis.md`
 - 経路別主体 Provenance Map: `provenance_map.md`
 

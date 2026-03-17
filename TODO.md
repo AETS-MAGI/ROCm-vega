@@ -44,7 +44,7 @@
 - [x] 既知の主要経路を一覧化する
 - [x] 既知の未確定事項を一覧化する
 - [x] `trace_map_static.md` の初版を作る
-- [ ] `knowns_unknowns.md` を作る
+- [x] `knowns_unknowns.md` を作る
 
 ### 既知事項として固定したいもの
 
@@ -117,7 +117,7 @@
 
 ### 構造層調査の成果物
 
-- [ ] `class_map.md`
+- [x] `class_map.md`
 - [ ] `solver_architecture_map.md`
 - [ ] `device_capability_flow.md`
 - [x] `gfx900_related_nodes.md`
@@ -341,9 +341,9 @@
 ### 履歴層調査の成果物
 
 - [x] `provenance_map.md`
-- [ ] `gfx900_history_timeline.md`
+- [x] `gfx900_history_timeline.md`
 - [ ] `support_intent_notes.md`
-- [ ] `community_vs_vendor_matrix.md`
+- [x] `community_vs_vendor_matrix.md`
 
 ---
 
@@ -390,16 +390,16 @@
 
 ### 8.1 将来シナリオ
 
-- [ ] 現状の設計で自然に残る層を整理する
-- [ ] 消えるならどの層から消えやすいか整理する
-- [ ] 再統合の観点から重要な接点を整理する
-- [ ] コミュニティが押さえるべき層を整理する
+- [x] 現状の設計で自然に残る層を整理する → `natural_maintenance_scenarios.md`
+- [x] 消えるならどの層から消えやすいか整理する → `natural_maintenance_scenarios.md`
+- [x] 再統合の観点から重要な接点を整理する → `natural_maintenance_scenarios.md`
+- [x] コミュニティが押さえるべき層を整理する → `natural_maintenance_scenarios.md`
 
 ### 8.2 仮説評価
 
-- [ ] gfx900 生存は偶然か副産物かを評価する
-- [ ] 抽象化の筋が再統合に有利かを評価する
-- [ ] 「表のサポート」と「本当の意味でのサポート」の違いを文章化する
+- [x] gfx900 生存は偶然か副産物かを評価する → `final_hypothesis.md` §2.2, `natural_maintenance_scenarios.md`
+- [x] 抽象化の筋が再統合に有利かを評価する → `why_rocm_is_flexible.md`, `future_support_paths.md`
+- [x] 「表のサポート」と「本当の意味でのサポート」の違いを文章化する → `final_hypothesis.md` §2.1 / §4 Q2, `support_boundary.md`
 
 ### 8.3 まとめ
 
@@ -409,21 +409,22 @@
 
 ### 含意層整理の成果物
 
-- [ ] `future_support_paths.md`
-- [ ] `natural_maintenance_scenarios.md`
-- [ ] `what_can_be_extended.md`
-- [ ] `what_cannot_be_extended.md`
+- [x] `future_support_paths.md`
+- [x] `natural_maintenance_scenarios.md`
+- [x] `what_can_be_extended.md`
+- [x] `what_cannot_be_extended.md`
+- [x] `support_meaning_conclusion.md`（調査全体の結論ページ）
 - [x] `final_hypothesis.md`
 
 ---
 
 ## 9. 最終的に答える問い
 
-- [ ] Vega / gfx900 はなぜ今も生きているのか
-- [ ] ROCm は何をどうサポートしているのか
-- [ ] 「サポート終了」とは何を意味するのか
-- [ ] コミュニティはどこまで実質サポートを成立させられるか
-- [ ] 将来の再統合 / 共通化に対して、現構造は何を意味するか
+- [x] Vega / gfx900 はなぜ今も生きているのか → `final_hypothesis.md` Q1
+- [x] ROCm は何をどうサポートしているのか → `final_hypothesis.md` §2.1 / §4, `support_boundary.md`
+- [x] 「サポート終了」とは何を意味するのか → `final_hypothesis.md` Q2
+- [x] コミュニティはどこまで実質サポートを成立させられるか → `final_hypothesis.md` Q3, `what_can_be_extended.md`, `what_cannot_be_extended.md`
+- [x] 将来の再統合 / 共通化に対して、現構造は何を意味するか → `future_support_paths.md`, `natural_maintenance_scenarios.md`
 
 ---
 
@@ -487,12 +488,12 @@
    - `provenance_map.md` と `rocm-github-investigate.md` の橋渡しとして使う
    - 意義: 投入主体 / 維持主体 / 運用主体 / 修正可能主体の時間差を明確にする
 
-1. **`provenance_map.md` を拡張**
+1. ~~**`provenance_map.md` を拡張**~~ → **完了**
 
    - P2/P3 の維持主体、外部修正余地、TheRock 側 `EXCLUDE_TARGET_PROJECTS` との対応を追加
    - 意義: Section 7 と最終結論の接続を強くする
 
-1. **`final_hypothesis.md` に Mermaid 図 1 枚を必要なら追加する**
+1. ~~**`final_hypothesis.md` に Mermaid 図 1 枚を必要なら追加する**~~ → **補助図追加済み**
 
    - 本文はすでに成立しているため、図は補助的扱いにとどめる
    - 候補は `Layered Retreat` 時系列か、4層モデルの簡略図
@@ -560,34 +561,40 @@
 
 ### その次
 
-1. `future_support_paths.md`
-1. `natural_maintenance_scenarios.md`
-1. `what_can_be_extended.md`
-1. `what_cannot_be_extended.md`
+1. [x] `future_support_paths.md` — 完了（2026-03-17）
+1. [x] `natural_maintenance_scenarios.md` — 完了（2026-03-17）
+1. [x] `what_can_be_extended.md` — 完了（2026-03-17）
+1. [x] `what_cannot_be_extended.md` — 完了（2026-03-17）
 
 ---
 
 ## 12. 残タスク（2026-03-17 時点）
 
-最終結論の骨格はほぼ揃った。残りは「歴史の見せ方」と「主体分解の補強」が中心。
+主要な結論文書と含意層はほぼ揃った。残りは `MIOpen` 構造補助図と optional な MLIR runtime 再確認が中心。
 
 ### 優先度: 高
 
-- [ ] **`why_rocm_is_flexible.md` を作る（概念地図）**
+- [x] **`gfx900_int8_path_inventory.md` を作る（調査記録）**
+  - INT8 経路の「何が観測されたか」を固定する。作業計画は含めない
+  - 列: 経路名 / 状態 / 落ちる位置 / 観測根拠 / 物理制約かソフト制約か / 修正可能主体 / 留保
+  - 作業計画が必要になったら別紙 `gfx900_int8_workplan.md` に切り出す
+  - 完了（2026-03-17）: 9経路を表形式で記録。INT8 自然選択は ConvDirectNaiveConvFwd のみ（runtime_verified, 15+ケース）
+
+- [x] **`why_rocm_is_flexible.md` を作る（概念地図）**
   - `class_map.md` を土台に、ROCm / MIOpen の設計柔軟性の理由を説明する文書
   - 章立て: 登録と適用判定の分離 / capability 判定の共通化 / solver ごとの個別撤退 / backend の疎結合 / shipped artifact と code path の分離 / その結果としての Layered Retreat
   - メンテナー向けの詳細保守地図（`maintenance_structure_map.md`）は別段階。まず概念地図を先に作る
   - `final_hypothesis.md` §2.2 / §5.1 の補強と、調査全体の「なぜ」への回答を担う
 
-- [ ] **`provenance_map.md` を拡張する**
-  - P2/P3 の維持主体、外部修正余地、TheRock 側 `EXCLUDE_TARGET_PROJECTS` との対応を追加する
-  - `community_vs_vendor_matrix.md` から逆参照しやすい書き方へ整える
+- [x] **`provenance_map.md` を拡張する**
+  - P2/P3 の維持主体、外部修正余地、TheRock 側 `EXCLUDE_TARGET_PROJECTS` との対応を追加済み
+  - `community_vs_vendor_matrix.md` から逆参照しやすい書き方へ補強済み
 
 ### 優先度: 中
 
-- [ ] **`final_hypothesis.md` に補助図を 1 枚だけ追加する**
-  - `Layered Retreat` 時系列図か、4層モデル簡略図のどちらか一方
-  - 本文の主張を増やさず、視認性だけを上げる
+- [x] **`final_hypothesis.md` に補助図を 1 枚だけ追加する**
+  - 4層モデルの簡略図を追加済み
+  - 本文の主張を増やさず、視認性だけを上げる方針で反映
 
 - [ ] **`class_map.md` 完了後、必要なら `solver_architecture_map.md` / `device_capability_flow.md` を補う**
   - `MIOpen` convolution 経路に限定し、repo-wide な class archaeology には広げない
