@@ -573,6 +573,12 @@
 
 ### 優先度: 高
 
+- [ ] **`why_rocm_is_flexible.md` を作る（概念地図）**
+  - `class_map.md` を土台に、ROCm / MIOpen の設計柔軟性の理由を説明する文書
+  - 章立て: 登録と適用判定の分離 / capability 判定の共通化 / solver ごとの個別撤退 / backend の疎結合 / shipped artifact と code path の分離 / その結果としての Layered Retreat
+  - メンテナー向けの詳細保守地図（`maintenance_structure_map.md`）は別段階。まず概念地図を先に作る
+  - `final_hypothesis.md` §2.2 / §5.1 の補強と、調査全体の「なぜ」への回答を担う
+
 - [ ] **`provenance_map.md` を拡張する**
   - P2/P3 の維持主体、外部修正余地、TheRock 側 `EXCLUDE_TARGET_PROJECTS` との対応を追加する
   - `community_vs_vendor_matrix.md` から逆参照しやすい書き方へ整える
