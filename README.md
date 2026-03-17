@@ -60,6 +60,10 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
   - `ROCm` / `TheRock` / `rocm-systems` の一次資料から、ROCm をどういう stack と読めるかを固定する。
 - `abstraction_layers.md`
   - integration / runtime / selection / codegen / distribution の層に分けて、`gfx900` 観測点がどこに乗るかを整理する。
+- `fallback_chain_map.md`
+  - MIOpen / rocBLAS / Tensile / TheRock にまたがる fallback / gating / selective exclude を一枚で整理する。
+- `gfx900_related_nodes.md`
+  - `gfx900` が normalize / gate / select / catalog / ship のどこに現れるかを層別ノードとして固定する。
 
 ### 実行・再現用の補助
 
@@ -82,6 +86,8 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
 - GitHub 側から見た一般設計思想検証: `reveal_hypothesis.md`
 - ROCm 設計傾向の固定: `design_philosophy.md`
 - ROCm 層構造の整理: `abstraction_layers.md`
+- cross-component fallback 地図: `fallback_chain_map.md`
+- `gfx900` 関連ノード索引: `gfx900_related_nodes.md`
 - 仮説整理: `hypothesis.md`
 - 経路別主体 Provenance Map: `provenance_map.md`
 

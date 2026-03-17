@@ -120,7 +120,7 @@
 - [ ] `class_map.md`
 - [ ] `solver_architecture_map.md`
 - [ ] `device_capability_flow.md`
-- [ ] `gfx900_related_nodes.md`
+- [x] `gfx900_related_nodes.md`
 
 ---
 
@@ -159,7 +159,7 @@
 ### 静的経路調査の成果物
 
 - [x] `trace_map_static.md`
-- [ ] `fallback_chain_map.md`
+- [x] `fallback_chain_map.md`
 - [ ] `solver_selection_graph.md`
 - [ ] `frontend_to_kernel_map.md`
 - [ ] `dp4a_alternative_path.md`
