@@ -403,9 +403,9 @@
 
 ### 8.3 まとめ
 
-- [ ] 研究仮説の最終版を作る
-- [ ] 観測 / 解釈 / 留保 を分けて書く
-- [ ] 反証可能な形で結論を書く
+- [x] 研究仮説の最終版を作る → `final_hypothesis.md`
+- [x] 観測 / 解釈 / 留保 を分けて書く → `final_hypothesis.md`
+- [x] 反証可能な形で結論を書く → `final_hypothesis.md`
 
 ### 含意層整理の成果物
 
@@ -413,7 +413,7 @@
 - [ ] `natural_maintenance_scenarios.md`
 - [ ] `what_can_be_extended.md`
 - [ ] `what_cannot_be_extended.md`
-- [ ] `final_hypothesis.md`
+- [x] `final_hypothesis.md`
 
 ---
 
@@ -458,7 +458,7 @@
 
 ### 優先度つき着手順の次点（2026-03-17 再優先順位）
 
-1. **`design_philosophy.md` + `abstraction_layers.md` を先に作る**
+1. ~~**`design_philosophy.md` + `abstraction_layers.md` を先に作る**~~ → **完了**
 
    - 根拠は `ROCm/README.md`, `ROCm/docs/what-is-rocm.rst`, `TheRock/README.md`,
      `TheRock/cmake/therock_subproject.cmake`, `TheRock/cmake/therock_amdgpu_targets.cmake`,
@@ -467,7 +467,7 @@
      ROCm 全体の build / integration / component topology 側の一次根拠を固定する
    - 工数: 中
 
-1. **`fallback_chain_map.md` + `gfx900_related_nodes.md` を作る**
+1. ~~**`fallback_chain_map.md` + `gfx900_related_nodes.md` を作る**~~ → **完了**
 
    - 既存の `trace_map_static.md`, `trace_map_dynamic.md`, `support_boundary.md`,
      `provenance_map.md`, `facts.md` の内容を cross-component で再配置する
@@ -475,14 +475,14 @@
      一枚の地図にする
    - 意義: 追加ログなしで「なぜ gfx900 が半分死に半分生きるか」の構造を最短で可視化できる
 
-1. **`final_hypothesis.md` を早期に書き始める（Phase 8-9 を同時消化）**
+1. ~~**`final_hypothesis.md` を早期に書き始める（Phase 8-9 を同時消化）**~~ → **初稿作成 + 軽修正完了**
 
    - 現状の `facts.md`, `hypothesis.md`, `reveal_hypothesis.md`, `support_boundary.md`,
      `provenance_map.md` を材料に、まず「今すぐ書ける範囲」を試す
    - 不足が見えた箇所だけを次段で補う
    - 意義: 「書くための書き物を増やす」ことを避け、最終問いに必要な穴だけを露出させる
 
-1. **`community_vs_vendor_matrix.md` + `gfx900_history_timeline.md` を中優先度で補完**
+1. **`community_vs_vendor_matrix.md` は完了、`gfx900_history_timeline.md` を次に作る**
 
    - `provenance_map.md` と `rocm-github-investigate.md` の橋渡しとして使う
    - 意義: 投入主体 / 維持主体 / 運用主体 / 修正可能主体の時間差を明確にする
@@ -491,6 +491,11 @@
 
    - P2/P3 の維持主体、外部修正余地、TheRock 側 `EXCLUDE_TARGET_PROJECTS` との対応を追加
    - 意義: Section 7 と最終結論の接続を強くする
+
+1. **`final_hypothesis.md` に Mermaid 図 1 枚を必要なら追加する**
+
+   - 本文はすでに成立しているため、図は補助的扱いにとどめる
+   - 候補は `Layered Retreat` 時系列か、4層モデルの簡略図
 
 1. **`support_model_hypothesis.md` は必要なら作る**
 
@@ -562,9 +567,28 @@
 
 ---
 
-## 12. 残タスク（2026-03-15 時点）
+## 12. 残タスク（2026-03-17 時点）
 
-構造把握はほぼ完了。以下の3件のみが未着手 / 未完了。
+最終結論の骨格はほぼ揃った。残りは「歴史の見せ方」と「主体分解の補強」が中心。
+
+### 優先度: 高
+
+- [ ] **`gfx900_history_timeline.md` を作る**
+  - `rocm-github-investigate.md` の時系列と `final_hypothesis.md` の `Layered Retreat` を接続する
+  - 2020-2026 の主要分岐点を図なしでも追える形にする
+
+- [ ] **`provenance_map.md` を拡張する**
+  - P2/P3 の維持主体、外部修正余地、TheRock 側 `EXCLUDE_TARGET_PROJECTS` との対応を追加する
+  - `community_vs_vendor_matrix.md` から逆参照しやすい書き方へ整える
+
+### 優先度: 中
+
+- [ ] **`final_hypothesis.md` に補助図を 1 枚だけ追加する**
+  - `Layered Retreat` 時系列図か、4層モデル簡略図のどちらか一方
+  - 本文の主張を増やさず、視認性だけを上げる
+
+- [ ] **`class_map.md` 完了後、必要なら `solver_architecture_map.md` / `device_capability_flow.md` を補う**
+  - `MIOpen` convolution 経路に限定し、repo-wide な class archaeology には広げない
 
 ### 優先度: 低
 
@@ -572,13 +596,6 @@
   - `src/mlir_build.cpp` の一時ログパッチで `handle` / `Miir*` 戻り値を採取する
   - 失敗メカニズム（Perf DB 不在 → boost::optional crash）はすでに runtime_verified のため必須ではない
   - MLIR 有効ビルドが前提（現行 debug build は MLIR=Off）
-
-### 優先度: 中
-
-- [ ] **`provenance_map.md` の拡張**
-  - 現行版（2026-03-15 初版）は P1–P7 の骨格を記載済み
-  - 次段階: 「誰が残し・運用し・直せるか」の地図をより詳細化する（特に P2/P3 の維持主体と外部修正余地）
-  - Section 7（境界層調査）の成果物 `support_boundary.md` / `community_maintainable_layers.md` と統合する可能性あり
 
 - [ ] **`MIIR_BUILD_FAILURE` を出す具体ケースの実機再現**
   - 現在確認済み: `MIIR_INVALID_PARAM`（rc=0x7）、Perf DB 不在 → `boost::optional::get()` assertion crash
