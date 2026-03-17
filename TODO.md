@@ -60,7 +60,7 @@
 
 ### 2.1 ROCm 全体思想の把握
 
-- [ ] ROCm 全体のレイヤ構造を整理する
+- [x] ROCm 全体のレイヤ構造を整理する
 - [ ] ROCr / HIP / MIOpen / rocBLAS / Tensile / CK の責務を一文で定義する
 - [ ] 各コンポーネントが「抽象化」「最適化」「互換性」のどれを主に担当するか整理する
 - [ ] retired repo から current repo への移行先を表にする
@@ -76,8 +76,8 @@
 
 ### 思想層調査の成果物
 
-- [ ] `design_philosophy.md`
-- [ ] `abstraction_layers.md`
+- [x] `design_philosophy.md`
+- [x] `abstraction_layers.md`
 - [ ] `support_model_hypothesis.md`
 
 ### 2.3 retired repo archaeology

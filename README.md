@@ -54,6 +54,13 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
 - `hypothesis.md`
   - `gfx900` を中心に置いた仮説整理と検証状況。
 
+### ROCm 全体の構造を読む
+
+- `design_philosophy.md`
+  - `ROCm` / `TheRock` / `rocm-systems` の一次資料から、ROCm をどういう stack と読めるかを固定する。
+- `abstraction_layers.md`
+  - integration / runtime / selection / codegen / distribution の層に分けて、`gfx900` 観測点がどこに乗るかを整理する。
+
 ### 実行・再現用の補助
 
 - `disassemble_rocm.md`
@@ -73,6 +80,8 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
 - GitHub 履歴調査: `rocm-github-investigate.md`
 - ROCm 一般の GitHub 調査: `rocm-common-investigate_github.md`
 - GitHub 側から見た一般設計思想検証: `reveal_hypothesis.md`
+- ROCm 設計傾向の固定: `design_philosophy.md`
+- ROCm 層構造の整理: `abstraction_layers.md`
 - 仮説整理: `hypothesis.md`
 - 経路別主体 Provenance Map: `provenance_map.md`
 
