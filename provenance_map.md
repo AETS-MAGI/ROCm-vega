@@ -95,8 +95,8 @@ graph TB
 | # | 経路 | 投入主体 | 維持主体 | 運用主体 | 修正可能主体 | 確度 |
 | --- | --- | --- | --- | --- | --- | --- |
 | P1 | MIOpen MLIR iGEMM non-xdlops **除外** | AMD(M) | — (disable 済み) | — | AMD(M) | code_verified |
-| P2 | MIOpen ASM v4r1 dynamic (`gfx900/gfx906` 専用) | AMD(C) | 削除コスト由来残存 + AMD(M) 補修 | Community | AMD(M) | history_verified |
-| P3 | MIOpen Winograd (FP32) | AMD(C) + ExtC | AMD(C/M) 近年補修 | Community | AMD(M) | history_verified |
+| P2 | MIOpen ASM v4r1 dynamic (`gfx900/gfx906` 専用) | AMD(C) | 削除コスト由来残存 + AMD(M) 補修 | Community | AMD(M) / ExtC（source-build 限定） | history_verified |
+| P3 | MIOpen Winograd (FP32) | AMD(C) + ExtC | AMD(C/M) 近年補修 | Community | AMD(M) 主体 / ExtC 限定 | history_verified |
 | P4 | MIOpen WORKAROUND_ISSUE_1204 (sramecc 誤報吸収) | ExtC | 削除コスト由来残存 | Community | AMD(M) | code_verified |
 | P5 | MIOpen MP_bidirectional_winograd (gfx900 workspace limit) | ExtC | AMD(M) 近年補修 | Community | AMD(M) | history_verified |
 | P6 | Tensile fallback / arch parsing | AMD(C) + ExtC | ExtC 補修 + revert 混在 | Community (source-build) | AMD(M) / ExtC | history_verified |
@@ -159,8 +159,10 @@ graph TB
 
 #### P2 の修正可能主体
 
-- AMD(M): solver 登録変更権限を持つ。
-- 外部からは MIOpen ソースビルド + solver 修正で到達可能だが、CI/CD 経路には乗らない。
+- AMD(M): solver 登録、実バイナリ収録、ASM kernel の差し替えまで含めて制御できる。
+- ExtC / Community: MIOpen ソースビルド前提なら `IsApplicable()` 条件、solver 登録、debug env var による経路調整までは到達可能。
+- Limitation: shipped path に乗る kernel / package として成立させるには、AMD 側の build / release 経路が必要。
+- `community_vs_vendor_matrix.md` の `P2` 行は、この「実用経路としては効くが、公式配布の最終主体は AMD(M)」という境界を要約したもの。
 
 ---
 
@@ -193,8 +195,9 @@ graph TB
 
 #### P3 の修正可能主体
 
-- AMD(M): solver / kernel 両方の修正権限。
-- カーネルが ASM であるため、外部から修正するには ISA レベルの知識が必要。
+- AMD(M): solver / kernel / packaging の全層に到達できる。
+- ExtC / Community: source-build 前提なら applicability 条件や周辺ロジックには触れられるが、実性能に効く Winograd kernel 本体の修正は ISA レベルの知識を要し、実務上の難度が高い。
+- Interpretation: `P3` は「公開 OSS なので原理的には触れる」と「現実に維持可能」は分けて書く必要がある。`community_vs_vendor_matrix.md` の `P3` 行は、この非対称性を表向きに圧縮したものである。
 
 ---
 
@@ -272,6 +275,21 @@ graph TB
 
 - AMD(M): Tensile logic 追加・削除。
 - ExtC: source-build 時の Python レベルでの workaround。
+
+#### P6 と TheRock の対応
+
+- current `TheRock` では、`therock_add_amdgpu_target(gfx900 ...)` により `gfx900` 自体は global target として登録されている。
+- 一方で `EXCLUDE_TARGET_PROJECTS` により、`gfx900` は少なくとも次の sub-project から個別に除外される:
+  - `hipBLASLt`
+  - `hipSPARSELt`
+  - `composable_kernel`
+  - `rocWMMA`
+  - `rocprofiler-compute`
+- `therock_subproject.cmake` の `_therock_filter_project_gpu_targets()` は、これらの除外 target を project ごとに取り除き、
+  「fully supported targets では起きるべきではない」旨の warning を出す。
+- Fact: `gfx900` は TheRock 上で「存在しない target」ではなく、**存在するが project ごとに filter されうる target** として扱われている。
+- Interpretation: これは `P6` の Tensile fallback / arch parsing と同じく、`gfx900` が distribution/build 層で全面消失せず、component ごとに後退する構造と整合する。
+- `community_vs_vendor_matrix.md` では、この層を `P6` と `P8` の間をつなぐ build/distribution 側の観測点として扱っている。
 
 ---
 
@@ -387,14 +405,16 @@ graph TB
 | --- | --- |
 | MIOpen solver 登録 | AMD(M): solver の enable/disable は MIOpen 側の権限 |
 | MIOpen ASM カーネル | AMD(M): ISA レベルの修正が必要 |
+| MIOpen legacy solver 条件（P2/P3） | ExtC / Community: source-build なら限定的に修正可能 |
 | rocMLIR パイプライン | AMD(M): MLIR コンパイラチームの管轄 |
 | llvm-project-private | AMD(M): 非公開リポジトリ、外部からは到達不能 |
 | ビルドパイプライン / 配布 (P8) | AMD(M): Perf DB 生成・rocBLAS ターゲット・firmware 収録 |
 | Tensile fallback logic | AMD(M) + ExtC: Python レベルは外部修正余地あり |
+| TheRock project filter | AMD(M): `EXCLUDE_TARGET_PROJECTS` による per-project target 制御 |
 | Runtime (HSA, KFD) | AMD(M): カーネルモジュール / ROCr 層 |
 | Source-build 設定 | ExtC / Community: CMake / Python レベル |
 
-**Interpretation**: 問題の層ごとに修正可能主体が異なる。userspace（solver 選択、Tensile logic、環境変数）は外部から修正余地があるが、backend 根本対応（`llvm-project-private#389`、ISA カーネル）は AMD 社内にしか到達できない。
+**Interpretation**: 問題の層ごとに修正可能主体が異なる。userspace（solver 選択、Tensile logic、環境変数）は外部から修正余地があるが、backend 根本対応（`llvm-project-private#389`、ISA カーネル、TheRock の build/distribution policy）は AMD 社内にしか到達できない。`community_vs_vendor_matrix.md` はこの表を簡約した public-facing summary として読める。
 
 ---
 
@@ -406,6 +426,7 @@ graph TB
 4. **Tensile #1862 revert**: 外部 contributor の fallback 拡張が merge 後に revert された判断の詳細は、PR discussion から推定可能だが、社内判断の裏付けは確認できない。
 5. **「削除コスト由来残存」vs「意図的維持」の境界**: v4r1 / WORKAROUND_ISSUE_1204 が残存しているのは、積極的に維持されているからか、単に削除する動機がないからか。公開情報からはこの区別が困難。
 6. **gfx1100/gfx1200 に MIOpen Perf DB が存在しない理由**: MIOpen が異なるチューニング方式を採用している可能性、または統合が未完了の可能性。これにより gfx900 と RDNA 世代の Perf DB 比較には留保が必要。
+7. **TheRock issue 本文**: `EXCLUDE_TARGET_PROJECTS` の横に付いた issue 番号は公開だが、各 issue の最終判断が「一時 bringup 制約」なのか「長期 support 境界」なのかは、本メモでは未整理。
 
 ---
 
@@ -423,3 +444,4 @@ graph TB
 
 - 2026-03-15: 初版作成（骨組み + git blame 結果による空欄埋め）
 - 2026-03-15: P8 (Shipped Artifacts) 追加、§3.4 に配布パイプライン行追加、Open Question 6 追加
+- 2026-03-17: P2/P3 の修正可能主体を source-build / packaging 境界つきで補強、P6 に TheRock `EXCLUDE_TARGET_PROJECTS` 対応を追記
