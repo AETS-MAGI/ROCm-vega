@@ -482,7 +482,7 @@
    - 不足が見えた箇所だけを次段で補う
    - 意義: 「書くための書き物を増やす」ことを避け、最終問いに必要な穴だけを露出させる
 
-1. **`community_vs_vendor_matrix.md` は完了、`gfx900_history_timeline.md` を次に作る**
+1. ~~**`community_vs_vendor_matrix.md` は完了、`gfx900_history_timeline.md` を次に作る**~~ → **完了**
 
    - `provenance_map.md` と `rocm-github-investigate.md` の橋渡しとして使う
    - 意義: 投入主体 / 維持主体 / 運用主体 / 修正可能主体の時間差を明確にする
@@ -572,10 +572,6 @@
 最終結論の骨格はほぼ揃った。残りは「歴史の見せ方」と「主体分解の補強」が中心。
 
 ### 優先度: 高
-
-- [ ] **`gfx900_history_timeline.md` を作る**
-  - `rocm-github-investigate.md` の時系列と `final_hypothesis.md` の `Layered Retreat` を接続する
-  - 2020-2026 の主要分岐点を図なしでも追える形にする
 
 - [ ] **`provenance_map.md` を拡張する**
   - P2/P3 の維持主体、外部修正余地、TheRock 側 `EXCLUDE_TARGET_PROJECTS` との対応を追加する

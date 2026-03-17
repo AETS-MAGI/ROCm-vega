@@ -49,6 +49,8 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
 
 - `rocm-github-investigate.md`
   - GitHub 履歴・release block・legacy repo から見る `gfx900` 変遷。
+- `gfx900_history_timeline.md`
+  - `gfx900` の投入・補修・除外・fallback・配布残存を日付つきで追う canonical timeline。
 - `reveal_hypothesis.md`
   - `gfx900` から見えてきた ROCm 一般の設計モデル。
 - `hypothesis.md`
@@ -84,6 +86,7 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
 - 事実台帳: `facts.md`
 - 作業ログ: `work_logs.md`
 - GitHub 履歴調査: `rocm-github-investigate.md`
+- `gfx900` 履歴年表: `gfx900_history_timeline.md`
 - ROCm 一般の GitHub 調査: `rocm-common-investigate_github.md`
 - GitHub 側から見た一般設計思想検証: `reveal_hypothesis.md`
 - ROCm 設計傾向の固定: `design_philosophy.md`
