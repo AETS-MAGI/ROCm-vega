@@ -64,14 +64,24 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
   - `ROCm` / `TheRock` / `rocm-systems` の一次資料から、ROCm をどういう stack と読めるかを固定する。
 - `abstraction_layers.md`
   - integration / runtime / selection / codegen / distribution の層に分けて、`gfx900` 観測点がどこに乗るかを整理する。
+- `support_model_hypothesis.md`
+  - ROCm の support を multi-plane property として読む作業仮説を固定し、repo migration / archive と support 意味を切り分ける。
 - `community_vs_vendor_matrix.md`
   - 「AMD かコミュニティか」の二分を避け、経路ごとに投入・補修・出荷の分布を表で固定する。
+- `support_intent_notes.md`
+  - 公開履歴から support / intent をどこまで読めるか、どこから先は言えないかの境界を固定する。
 - `why_rocm_is_flexible.md`
   - 登録 / 判定 / backend / artifact の分離が、なぜ一括削除ではなく Layered Retreat を生みやすいかを説明する。
 - `fallback_chain_map.md`
   - MIOpen / rocBLAS / Tensile / TheRock にまたがる fallback / gating / selective exclude を一枚で整理する。
 - `gfx900_related_nodes.md`
   - `gfx900` が normalize / gate / select / catalog / ship のどこに現れるかを層別ノードとして固定する。
+- `solver_architecture_map.md`
+  - MIOpen convolution の frontend API から solver search / solution / immediate 実行までの最小構造図。
+- `device_capability_flow.md`
+  - `Handle -> TargetProperties -> ConvolutionContext -> IsApplicable` の capability flow を固定する。
+- `frontend_to_kernel_map.md`
+  - user-visible な Find / Immediate API から hidden layer の solver / backend / kernel compile までを整理する。
 - `gfx900_int8_path_inventory.md`
   - `gfx900` の INT8 convolution で、何が自然選択され、何がどこで止まるかを観測ベースで固定する。
 - `natural_maintenance_scenarios.md`
@@ -108,10 +118,15 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
 - GitHub 側から見た一般設計思想検証: `reveal_hypothesis.md`
 - ROCm 設計傾向の固定: `design_philosophy.md`
 - ROCm 層構造の整理: `abstraction_layers.md`
+- support model 仮説: `support_model_hypothesis.md`
 - 主体分解 matrix: `community_vs_vendor_matrix.md`
+- support / intent の履歴境界: `support_intent_notes.md`
 - ROCm の柔軟性メモ: `why_rocm_is_flexible.md`
 - cross-component fallback 地図: `fallback_chain_map.md`
 - `gfx900` 関連ノード索引: `gfx900_related_nodes.md`
+- solver 構造図: `solver_architecture_map.md`
+- device / capability flow: `device_capability_flow.md`
+- frontend から kernel への地図: `frontend_to_kernel_map.md`
 - `gfx900` INT8 経路インベントリ: `gfx900_int8_path_inventory.md`
 - `gfx900` 自然維持シナリオ: `natural_maintenance_scenarios.md`
 - 技術的に拡張可能な層: `what_can_be_extended.md`
@@ -147,6 +162,10 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
 
 - `/home/limonene/ROCm-project/WD-Black/ROCm-repos/00_legacy-repos/`
 
+### public archive repo 群
+
+- `/home/limonene/ROCm-project/WD-Black/ROCm-repos/00_public-archive/`
+
 ### 現時点での一次対象
 
 - `MIOpen`
@@ -161,6 +180,7 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
 ### 注記
 
 - retired repo の README にある移行先案内（`rocm-libraries`, `rocm-systems`, upstream 等）は、repo topology 再編の一次資料として扱う。
+- public archive repo は、support policy の直接根拠ではなく、repo topology / maintenance location の補助資料として扱う。
 - legacy / retired repo の late activity は、中身の policy 変更と layout/docs 再編を分けて読む。
 
 ## 5. 監査ラベル

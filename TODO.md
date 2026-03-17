@@ -61,24 +61,32 @@
 ### 2.1 ROCm 全体思想の把握
 
 - [x] ROCm 全体のレイヤ構造を整理する
-- [ ] ROCr / HIP / MIOpen / rocBLAS / Tensile / CK の責務を一文で定義する
-- [ ] 各コンポーネントが「抽象化」「最適化」「互換性」のどれを主に担当するか整理する
+- [x] ROCr / HIP / MIOpen / rocBLAS / Tensile / CK の責務を一文で定義する
+  - `support_model_hypothesis.md` に最小責務表を追加
+- [x] 各コンポーネントが「抽象化」「最適化」「互換性」のどれを主に担当するか整理する
+  - `support_model_hypothesis.md` に主に担う性格を整理
 - [ ] retired repo から current repo への移行先を表にする
-- [ ] repo retirement が build/system consolidation の一部かを検討する
+- [x] repo retirement が build/system consolidation の一部かを検討する
+  - `rocm-systems` / `TheRock` / `00_public-archive` を含めて `support_model_hypothesis.md` に反映
 
 ### 2.2 設計思想の観点で見る
 
-- [ ] 世代差吸収が capability ベースか、個別分岐ベースかを確認する
-- [ ] 「速い経路」と「広く通る経路」が分離されているか確認する
-- [ ] backend 切替が一般化されているか確認する
-- [ ] front-end API が hardware-agnostic か確認する
-- [ ] fallback が場当たり対応か設計の一部かを判定する
+- [x] 世代差吸収が capability ベースか、個別分岐ベースかを確認する
+  - `support_model_hypothesis.md` に capability-based core + local gate として整理
+- [x] 「速い経路」と「広く通る経路」が分離されているか確認する
+  - `support_model_hypothesis.md` に optimized path / broad path の非対称性を整理
+- [x] backend 切替が一般化されているか確認する
+  - `support_model_hypothesis.md` に HIP / rocBLAS / MIOpen の backend switching を整理
+- [x] front-end API が hardware-agnostic か確認する
+  - `support_model_hypothesis.md` に HIP / rocBLAS / MIOpen の user-facing surface を整理
+- [x] fallback が場当たり対応か設計の一部かを判定する
+  - `support_model_hypothesis.md` に recurring design pattern として整理
 
 ### 思想層調査の成果物
 
 - [x] `design_philosophy.md`
 - [x] `abstraction_layers.md`
-- [ ] `support_model_hypothesis.md`
+- [x] `support_model_hypothesis.md`
 
 ### 2.3 retired repo archaeology
 
@@ -118,8 +126,8 @@
 ### 構造層調査の成果物
 
 - [x] `class_map.md`
-- [ ] `solver_architecture_map.md`
-- [ ] `device_capability_flow.md`
+- [x] `solver_architecture_map.md`
+- [x] `device_capability_flow.md`
 - [x] `gfx900_related_nodes.md`
 
 ---
@@ -152,16 +160,17 @@
 
 ### 4.4 front-end からの流れ
 
-- [ ] ユーザーが呼ぶ API / 関数を特定する
-- [ ] front-end API から solver/backend 選択までの call chain を図にする
-- [ ] 「ユーザーに何を隠しているか」を整理する
+- [x] ユーザーが呼ぶ API / 関数を特定する
+- [x] front-end API から solver/backend 選択までの call chain を図にする
+- [x] 「ユーザーに何を隠しているか」を整理する
+  - `frontend_to_kernel_map.md` に Find / Immediate の hidden layer を整理
 
 ### 静的経路調査の成果物
 
 - [x] `trace_map_static.md`
 - [x] `fallback_chain_map.md`
 - [ ] `solver_selection_graph.md`
-- [ ] `frontend_to_kernel_map.md`
+- [x] `frontend_to_kernel_map.md`
 - [ ] `dp4a_alternative_path.md`
 
 ---
@@ -331,7 +340,8 @@
   - v4r1: AMD contributor (2020), Winograd: 初期MIOpen, Tensile: 外部 contributor (2022-2024)
 - [x] コミュニティ補修が入っているか
   - **Yes**: Tensile #1595, #1862 は明確に外部コントリビュータ
-- [ ] 削除提案があったか
+- [x] 削除提案があったか
+  - local public clone の履歴確認では、`gfx900` 全体を public に一括削除する proposal は未回収。観測されるのは component ごとの selective disable / layered retreat（`support_intent_notes.md`）。
 - [x] 明示的な legacy support 意図があったか
   - Tensile #1595 の PR 本文: 「AMD公式バイナリには関係ないが、ソースビルドユーザーに有用」
 - [x] 「残置」なのか「積極維持」なのか
@@ -342,7 +352,7 @@
 
 - [x] `provenance_map.md`
 - [x] `gfx900_history_timeline.md`
-- [ ] `support_intent_notes.md`
+- [x] `support_intent_notes.md`
 - [x] `community_vs_vendor_matrix.md`
 
 ---
@@ -498,12 +508,11 @@
    - 本文はすでに成立しているため、図は補助的扱いにとどめる
    - 候補は `Layered Retreat` 時系列か、4層モデルの簡略図
 
-1. **`support_model_hypothesis.md` は必要なら作る**
+1. ~~**`support_model_hypothesis.md` は必要なら作る**~~ → **完了**
 
-   - `design_philosophy.md` と `final_hypothesis.md` の間に中間整理が必要な場合のみ着手
-   - やらないという選択肢: あり
+   - `design_philosophy.md` と `final_hypothesis.md` の間を埋める support model 文書として追加済み
 
-1. **`class_map.md` / `solver_architecture_map.md` / `device_capability_flow.md` は中優先度で進める**
+1. ~~**`class_map.md` / `solver_architecture_map.md` / `device_capability_flow.md` は中優先度で進める**~~ → **完了**
 
    - ただし、最初から ROCm 全域の exhaustive な class archaeology はやらない
    - まずは `MIOpen` の convolution 経路に限定し、
@@ -596,8 +605,8 @@
   - 4層モデルの簡略図を追加済み
   - 本文の主張を増やさず、視認性だけを上げる方針で反映
 
-- [ ] **`class_map.md` 完了後、必要なら `solver_architecture_map.md` / `device_capability_flow.md` を補う**
-  - `MIOpen` convolution 経路に限定し、repo-wide な class archaeology には広げない
+- [x] **`class_map.md` 完了後、必要なら `solver_architecture_map.md` / `device_capability_flow.md` を補う**
+  - `MIOpen` convolution 経路に限定した補助文書として追加済み
 
 ### 優先度: 低
 
