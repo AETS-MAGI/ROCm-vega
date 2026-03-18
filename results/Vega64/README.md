@@ -5,6 +5,7 @@ Vega64 実機の結果を記録する。
 ## 記録一覧
 
 - 20260313_miopen_solver_selection_fp32.md
+- 20260318_gemmfwd1x1_int8_runtime_followup.md
 
 ## 記録項目
 

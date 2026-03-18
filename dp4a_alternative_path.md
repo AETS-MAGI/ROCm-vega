@@ -206,6 +206,44 @@ Interpretation:
   **gfx900 で dot4 asm route を積極的に使う構成**
   は読み取りにくい。
 
+### 4.6 runtime follow-up on Vega64 (2026-03-18)
+
+Vega64 実機で、`GemmFwd1x1_0_1_int8` の source-level candidate が
+実際にどこまで通るかを追加確認した。
+
+実行条件:
+
+- `MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -F 1 -t 1 -i 1`
+- 同条件で `-s 1`
+- 同条件で `-S GemmFwd1x1_0_1_int8`
+- 同条件で `MIOPEN_DEBUG_FIND_ONLY_SOLVER=GemmFwd1x1_0_1_int8`
+  `MIOPEN_FIND_ENFORCE=SEARCH_DB_UPDATE` を付けて `-s 1`
+
+Fact:
+
+- 自然選択では `Solution: 85/ConvDirectNaiveConvFwd` が選ばれ、
+  `naive_conv_ab_nonpacked_fwd_nchw_int8_t_int32_t_int8_t` が実行された。
+- `-s 1` を付けても同条件では `ConvDirectNaiveConvFwd` が選ばれた。
+- `-S GemmFwd1x1_0_1_int8` では symbolic solution id は `89` に解決されるが、
+  `The supplied solution id: GemmFwd1x1_0_1_int8 is not applicable to the current problem`
+  で停止し、`rc = 0x3` を返した。
+- `MIOPEN_DEBUG_FIND_ONLY_SOLVER=GemmFwd1x1_0_1_int8` 付き search では、
+  `GetWorkspaceSizes` と `SearchForAllSolutions` の両方で
+  `GemmFwd1x1_0_1_int8: Not applicable` が記録され、
+  最後に `No suitable algorithm was found` で `rc = 0x7` を返した。
+
+Interpretation:
+
+- source-level には 1x1 INT8 GEMM candidate が存在するが、
+  少なくとも current ROCm 7.2 / MIOpen 3.5.1 の Vega64 実機と
+  今回の `NCHW + INT8 + 1x1 + group=1` 条件では、
+  **practical route としては成立していない**。
+- ここから少なくとも言えるのは、
+  `GemmFwd1x1_0_1_int8` が current installed runtime で
+  search / workspace-size / forced-solution のいずれでも通らなかったことである。
+- ただし、どの追加条件が `Not applicable` の主因かは、
+  current public tree と今回のログだけではまだ切り分けられない。
+
 ---
 
 ## 5. 現時点で少なくとも言えること
@@ -215,6 +253,9 @@ Fact:
 - current `MIOpen` / `Tensile` public tree に literal な `dp4a` path は確認できない。
 - current tree で直接確認できる最も具体的な INT8 alternative candidate は、
   `GemmFwd1x1_0_1_int8` とその下流の `CallGemm` backend である。
+- ただし、Vega64 実機の 1x1 INT8 条件では自然選択・`-s 1` ともに
+  `ConvDirectNaiveConvFwd` に留まり、`GemmFwd1x1_0_1_int8` は
+  forced-solution / only-solver search の両方で `Not applicable` を返した。
 - `gfx900` を含む lower-level hardware list や dot4 intrinsic の存在だけでは、
   current exposed INT8 alternative path の成立を示したことにはならない。
 
@@ -225,12 +266,15 @@ Interpretation:
   を混ぜずに読む必要がある。
 - 「dot4 命令がどこかにある」ことと、
   「current public MIOpen で gfx900 INT8 route が practical に成立する」ことは別問題である。
+- 今回の runtime follow-up は、その差を
+  **source-level candidate はあるが、current runtime では通らない**
+  という形で具体化した。
 
 ---
 
 ## Open Question / Limitation
 
-1. `GemmFwd1x1_0_1_int8` が gfx900 実機でどこまで実際に選択 / 実行されるかは、この文書では確認していない
+1. `GemmFwd1x1_0_1_int8` が今回の 1x1 INT8 条件で `Not applicable` になる主因は、shape 以外の追加条件を含めて未切り分けである
 2. MIOpenTensile / rocBLAS / Tensile 側の gfx900 INT8 catalog / shipped kernels の有無は別途確認が必要
 3. CK については current exposed forward path を見た範囲であり、CK 全体の将来可能性を断定するものではない
 4. `dp4a` という語は convenience label であり、public tree 側の canonical naming ではない
