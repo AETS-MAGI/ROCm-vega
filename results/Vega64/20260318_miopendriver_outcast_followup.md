@@ -144,6 +144,87 @@ Interpretation:
   installed `MIOpenDriver convint8` の cast-flag path は
   同一視できない。
 
+### 4.3 source-level descriptor split
+
+Fact:
+
+- current public standalone
+  `MIOpen/driver/conv_driver.hpp`
+  では、
+  `data_type == miopenInt8 || data_type == miopenInt8x4`
+  のとき
+  `y_type = miopenInt32`
+  を作り、
+  `SetTensorNd(outputTensor, ..., y_type)`
+  に渡している。
+- same current public tree の
+  `src/ocl/convolutionocl.cpp`
+  では、
+  `xDesc.GetType() == miopenInt8`
+  の forward validation は
+  `yDesc.GetType() == miopenInt32 || miopenFloat`
+  を要求し、
+  `miopenInt8x4` は `yDesc.GetType() == miopenInt32`
+  を要求する。
+- same current public tree の
+  `src/include/miopen/conv/problem_description.hpp`
+  では、
+  `ProblemDescription::IsInt8()`
+  は
+  `GetOutDataType() == miopenInt32 || miopenFloat`
+  だけを INT8 problem として扱う。
+- same current public tree の
+  `src/conv/problem_description.cpp`
+  では、
+  `BuildConfKey()` / `Serialize()` の dtype key は
+  `GetInDataType()`, `GetWeightsDataType()`, `GetOutDataType()`
+  だけで構成される。
+- legacy
+  `00_legacy-repos/MIOpen/driver/conv_driver.hpp`
+  では、
+  output tensor は `data_type` のまま作られ、
+  その後 `miopenSetTensorCastType(outputTensor, out_cast_type)`
+  が任意で付く。
+- legacy
+  `00_legacy-repos/MIOpen/src/include/miopen/conv/problem_description.hpp`
+  では、
+  `ProblemDescription::IsInt8()`
+  は
+  `GetOutDataType() == miopenInt32 || miopenInt8 || miopenFloat`
+  を許し、
+  同時に `IsTensorsCasted()` を別フラグで持つ。
+- legacy
+  `00_legacy-repos/MIOpen/src/solver/conv/gemm.cpp`
+  では、
+  `problem.IsTensorsCasted()`
+  が立つと
+  FP8-supported arch 以外では
+  `GEMM not supported with casted tensors on this GPU architecture`
+  で落ちる。
+
+Interpretation:
+
+- current public standalone source では、
+  **direct `y=int32` route は tensor data type 自体を `miopenInt32` にする path**
+  として表現されている。
+- 一方 legacy cast-flag route は、
+  **INT8 tensor に cast metadata を後付けする別 path**
+  として表現されている。
+- したがって、
+  `...INT8INT8INT32-F`
+  と
+  `...INT8-F_coFP32`
+  は
+  同じ route の別表記ではなく、
+  少なくとも source 上は別 problem として扱われている。
+- 今回の direct probe が current source 側と整合し、
+  installed `MIOpenDriver convint8` の cast-flag 振る舞いが
+  legacy source 側と整合することから、
+  現時点での practical blockage は
+  少なくとも solver/backend 不在ではなく、
+  **installed driver 側の descriptor assembly / path provenance**
+  に強く寄っていると読める。
+
 ---
 
 ## 5. 判定
@@ -165,7 +246,13 @@ legacy-style cast flag は存在するが、
 - `../../vega_path_check_logs/vega64_int8_outcastfp32_search_1x1_n32_c64_k64_20260318.log`
 - `../../vega_path_check_logs/vega64_int8_outcastfp32_force_1x1_n32_c64_k64_20260318.log`
 - `/home/limonene/ROCm-project/WD-Black/ROCm-repos/00_legacy-repos/MIOpen/driver/conv_driver.hpp`
+- `/home/limonene/ROCm-project/WD-Black/ROCm-repos/00_legacy-repos/MIOpen/src/include/miopen/conv/problem_description.hpp`
+- `/home/limonene/ROCm-project/WD-Black/ROCm-repos/00_legacy-repos/MIOpen/src/include/miopen/solver/problem_description_interpreter.hpp`
+- `/home/limonene/ROCm-project/WD-Black/ROCm-repos/00_legacy-repos/MIOpen/src/solver/conv/gemm.cpp`
 - `/home/limonene/ROCm-project/WD-Black/ROCm-repos/MIOpen/driver/conv_driver.hpp`
+- `/home/limonene/ROCm-project/WD-Black/ROCm-repos/MIOpen/src/include/miopen/conv/problem_description.hpp`
+- `/home/limonene/ROCm-project/WD-Black/ROCm-repos/MIOpen/src/conv/problem_description.cpp`
+- `/home/limonene/ROCm-project/WD-Black/ROCm-repos/MIOpen/src/ocl/convolutionocl.cpp`
 
 ---
 

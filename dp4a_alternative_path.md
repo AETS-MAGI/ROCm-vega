@@ -456,6 +456,81 @@ Interpretation:
   少なくとも **successful backend dispatch が確認される前段**
   の境界として読むのが安全である。
 
+### 4.12 source-level descriptor split
+
+current source と legacy source を並べると、
+`direct y=int32` route と
+`INT8 + cast metadata` route は
+もともと別 problem として実装されていることが読み取れる。
+
+Fact:
+
+- current public standalone
+  `MIOpen/driver/conv_driver.hpp`
+  は、
+  `data_type == miopenInt8 || data_type == miopenInt8x4`
+  のとき output tensor の `data_type` 自体を
+  `miopenInt32`
+  に切り替える。
+- current public standalone
+  `src/ocl/convolutionocl.cpp`
+  の forward validation も、
+  `x=int8` なら `y=int32 || float`,
+  `x=int8x4` なら `y=int32`
+  を要求する。
+- current public standalone
+  `src/include/miopen/conv/problem_description.hpp`
+  の `ProblemDescription::IsInt8()`
+  は、
+  `GetOutDataType() == miopenInt32 || miopenFloat`
+  を INT8 problem として扱う。
+- current public standalone
+  `src/conv/problem_description.cpp`
+  の key 生成は、
+  `GetInDataType()`, `GetWeightsDataType()`, `GetOutDataType()`
+  だけを使う。
+- legacy
+  `00_legacy-repos/MIOpen/driver/conv_driver.hpp`
+  では、
+  output tensor は `data_type` のまま作られ、
+  `miopenSetTensorCastType(outputTensor, out_cast_type)`
+  が任意で後付けされる。
+- legacy
+  `00_legacy-repos/MIOpen/src/include/miopen/conv/problem_description.hpp`
+  の `ProblemDescription::IsInt8()`
+  は
+  `GetOutDataType() == miopenInt32 || miopenInt8 || miopenFloat`
+  を許し、
+  `IsTensorsCasted()`
+  を別フラグで持つ。
+- legacy
+  `00_legacy-repos/MIOpen/src/solver/conv/gemm.cpp`
+  では、
+  `problem.IsTensorsCasted()`
+  が立つと
+  FP8-supported arch 以外では
+  `GEMM not supported with casted tensors on this GPU architecture`
+  で落ちる。
+
+Interpretation:
+
+- source 上は、
+  `...INT8INT8INT32-F`
+  と
+  `...INT8-F_coFP32`
+  が
+  **同じ route の別表記ではなく、別 problem**
+  として扱われている。
+- current standalone source は
+  direct query / direct immediate / standard Find/Forward probe と整合する。
+- 一方 installed `MIOpenDriver convint8` の cast-flag 振る舞いは、
+  legacy cast-aware path と整合する。
+- したがって、
+  現時点での practical blockage は
+  solver/backend 不在ではなく、
+  **installed driver 側の descriptor assembly / path provenance**
+  に強く寄っていると読むのが安全である。
+
 ---
 
 ## 5. 現時点で少なくとも言えること
@@ -503,6 +578,11 @@ Interpretation:
 - standard Find/Forward probe により、
   direct `y=int32` path は immediate-only ではなく、
   standard C API からも再現できると確認できた。
+- source-level descriptor split を current / legacy tree で比較すると、
+  direct `y=int32` path と
+  `INT8 + cast metadata` path は
+  同じ route の別名ではなく、
+  実装上も別 problem として扱われている。
 
 ---
 
