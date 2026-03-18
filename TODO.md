@@ -171,7 +171,7 @@
 - [x] `fallback_chain_map.md`
 - [x] `solver_selection_graph.md`
 - [x] `frontend_to_kernel_map.md`
-- [ ] `dp4a_alternative_path.md`
+- [x] `dp4a_alternative_path.md`
 
 ---
 

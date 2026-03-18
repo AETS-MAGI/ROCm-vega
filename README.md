@@ -86,6 +86,8 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
   - user-visible な Find / Immediate API から hidden layer の solver / backend / kernel compile までを整理する。
 - `gfx900_int8_path_inventory.md`
   - `gfx900` の INT8 convolution で、何が自然選択され、何がどこで止まるかを観測ベースで固定する。
+- `dp4a_alternative_path.md`
+  - `dp4a` という convenience label で呼ばれがちな INT8 / dot4-adjacent alternative を、solver / backend / lower-level intrinsic / capability table に分けて固定する。
 - `natural_maintenance_scenarios.md`
   - `gfx900` がどの層で自然に維持されやすく、どの層から崩れやすいかを、主体と接点を含めて整理する。
 - `what_can_be_extended.md`
@@ -131,6 +133,7 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
 - solver selection 粗視化図: `solver_selection_graph.md`
 - frontend から kernel への地図: `frontend_to_kernel_map.md`
 - `gfx900` INT8 経路インベントリ: `gfx900_int8_path_inventory.md`
+- `dp4a` 代替経路ノート: `dp4a_alternative_path.md`
 - `gfx900` 自然維持シナリオ: `natural_maintenance_scenarios.md`
 - 技術的に拡張可能な層: `what_can_be_extended.md`
 - 技術的に拡張困難な層: `what_cannot_be_extended.md`
