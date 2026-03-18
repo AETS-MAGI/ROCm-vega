@@ -1,0 +1,19 @@
+rocBLAS info: client (OPENMP) reduced omp_set_num_threads to 30
+rocBLAS info: Using reference library 'cblas'
+rocBLAS version: 5.2.0.
+rocBLAS-commit-hash: 
+Tensile-commit-hash: 
+hipBLASLt: N/A, as rocBLAS was built without hipBLASLt
+Query device success: there are 1 devices
+-------------------------------------------------------------------------------
+Device ID 0 : AMD Radeon RX Vega gfx900:xnack-
+with 8.6 GB memory, max. SCLK 1630 MHz, max. MCLK 945 MHz, memoryBusWidth 256 Bytes, compute capability 9.0
+maxGridDimX 2147483647, sharedMemPerBlock 65.5 KB, maxThreadsPerBlock 1024, warpSize 64
+-------------------------------------------------------------------------------
+
+
+rocBLAS info: Time taken to complete rocBLAS library initialization is 596 milliseconds.
+
+rocBLAS info: maximum library size per device is 0.37539 GB.
+transA,transB,M,N,K,alpha,lda,beta,ldb,ldc,ldd,batch_count,cold_iters,hot_iters,rocblas-Gflops,us,CPU-Gflops,CPU-us,norm_error_1
+N,N,64,100352,64,1,64,0,64,64,64,1, 1, 1, 1570.6, 523.421,3.11249,264124,0

@@ -266,11 +266,18 @@ Fact:
 - current `rocBLAS/library/src/tensile_host.cpp` でも
   `getLazyLoadingArch()` は `gfx900` を `Tensile::LazyLoadingInit::gfx900`
   に写像している。
+- standalone backend probe として、
+  `rocblas-bench -f gemm_ex` の `i8_r/i32_r` case を Vega64/gfx900 で実行すると、
+  少なくとも `128x128x128` と `64x100352x64` の 2 条件で成功し、
+  `norm_error_1 = 0` を返した。
 
 Interpretation:
 
 - 少なくとも backend artifact / lazy-load catalog の層では、
   `gfx900` 向けの INT8-related shipped evidence が 0 とは言えない。
+- さらに standalone rocBLAS GEMM probe により、
+  **backend 単体の INT8 GEMM 実行自体は gfx900 で成立する**
+  ことも確認できる。
 - したがって、今回の `GemmFwd1x1_0_1_int8` runtime follow-up を
   「backend catalog が空だから失敗した」と単純化することはできない。
 - 今回の tested case で観測された `Not applicable` は、
@@ -292,6 +299,8 @@ Fact:
 - current installed rocBLAS / Tensile artifact には
   `gfx900` 向け lazy library と `Type_I8I_HPA ... fallback_gfx900.hsaco`
   が存在する。
+- standalone `rocblas-bench gemm_ex` の `i8_r/i32_r` probe も
+  Vega64/gfx900 で成功している。
 - `gfx900` を含む lower-level hardware list や dot4 intrinsic の存在だけでは、
   current exposed INT8 alternative path の成立を示したことにはならない。
 
@@ -308,6 +317,9 @@ Interpretation:
 - さらに backend artifact follow-up により、
   `solver candidate が今回通らない` ことと
   `backend artifact が存在しない` ことも分けて扱う必要がある。
+- そして standalone backend probe により、
+  `MIOpen conv route が通らない` ことと
+  `gfx900 で INT8 GEMM backend 自体が動かない` ことも同一ではないと確認できた。
 
 ---
 
