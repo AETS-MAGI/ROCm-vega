@@ -280,7 +280,34 @@ Interpretation:
 - ただし、installed driver/binary の差分理由そのものは
   current public tree と今回の probe だけでは断定できない。
 
-### 4.8 backend artifact follow-up
+### 4.8 direct immediate execution probe (`y=int32`)
+
+query だけでなく、
+`x=int8, w=int8, y=int32` の direct immediate path で
+`solution_id = 89` が実行まで通るかも追加確認した。
+
+Fact:
+
+- direct immediate probe では
+  `solution_count = 2`、`id=89` / `id=85` が返った。
+- `workspace_size_89 = 200704`
+- `miopenConvolutionForwardCompileSolution(..., 89)` は成功した。
+- `miopenConvolutionForwardImmediate(..., 89)` も成功した。
+- `x=1`, `w=1` 初期化条件で、
+  先頭 64 要素は少なくとも `64` で一致した。
+
+Interpretation:
+
+- `GemmFwd1x1_0_1_int8` は、
+  **same installed library 上の direct immediate path では実行可能**
+  と確認できる。
+- したがって、今回の閉塞点は
+  `gfx900 では solver 89 が本質的に動かない`
+  という意味ではなく、
+  少なくとも `MIOpenDriver convint8` の tested route と
+  direct immediate route の差に強く寄っている。
+
+### 4.9 backend artifact follow-up
 
 backend 側については、source と installed ROCm artifact の両方を追加確認した。
 
@@ -359,13 +386,15 @@ Interpretation:
 - direct solution-query probe により、
   `GemmFwd1x1_0_1_int8` が current installed library に存在しないわけではなく、
   少なくとも `y=int32` descriptor では露出することも確認できた。
+- direct immediate probe により、
+  `y=int32` descriptor 条件では `CompileSolution` / `ForwardImmediate` まで通ることも確認できた。
 
 ---
 
 ## Open Question / Limitation
 
-1. `MIOpenDriver convint8` の installed path が `y=int8` になる理由、またそれが current public `conv_driver.hpp` とどこで分岐しているかは未確定である
-2. `GemmFwd1x1_0_1_int8` の current MIOpen convolution path が、どの条件なら backend まで到達するかは未確認である
+1. `MIOpenDriver convint8` の installed path が `y=int8` に見える理由、またそれが current public `conv_driver.hpp` とどこで分岐しているかは未確定である
+2. direct immediate で通る `y=int32` path を `MIOpenDriver` / higher-level route からどう再現するかは未確認である
 3. CK については current exposed forward path を見た範囲であり、CK 全体の将来可能性を断定するものではない
 4. `dp4a` という語は convenience label であり、public tree 側の canonical naming ではない
 

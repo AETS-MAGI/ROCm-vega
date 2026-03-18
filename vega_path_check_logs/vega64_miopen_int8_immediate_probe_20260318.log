@@ -1,0 +1,12 @@
+solution_count=2
+returned=2
+solution[0] id=89 algo=0 ws=200704 time=19.5963
+solution[1] id=85 algo=1 ws=0 time=1000
+workspace_size_89=200704
+compile_solution_89=success
+forward_immediate_89=success
+y_host[0]=64
+y_host[1]=64
+y_host[2]=64
+y_host[3]=64
+first64_all_equal_64=true
