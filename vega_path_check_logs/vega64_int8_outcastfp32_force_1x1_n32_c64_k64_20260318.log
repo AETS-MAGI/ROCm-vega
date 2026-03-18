@@ -1,0 +1,206 @@
+MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -F 1 -t 1 -i 1 -S GemmFwd1x1_0_1_int8 --out_cast_type fp32
+MIOpen(HIP): Info [get_device_name] Raw device name: gfx900:xnack-
+MIOpen(HIP): Info [Handle] stream: 0x5646c925e3b0, device_id: 0
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateTensorDescriptor(miopenTensorDescriptor_t *){
+MIOpen(HIP): 	tensorDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenCreateConvolutionDescriptor(miopenConvolutionDescriptor_t *){
+MIOpen(HIP): 	convDesc = 0
+MIOpen(HIP): }
+MIOpen(HIP): Info [] MIOPEN_FIND_MODE = DYNAMIC_HYBRID(5)
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 3
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 32 64 56 56 }
+MIOpen(HIP): 	stride.values = { 200704 3136 56 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 3
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 64 64 1 1 }
+MIOpen(HIP): 	stride.values = { 64 1 1 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenInitConvolutionNdDescriptor(miopenConvolutionDescriptor_t, int, const int *, const int *, const int *, miopenConvolutionMode_t){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	spatialDim = 2
+MIOpen(HIP): 	pads = { 0 0 }
+MIOpen(HIP): 	strides = { 1 1 }
+MIOpen(HIP): 	dilations = { 1 1 }
+MIOpen(HIP): 	c_mode = 0
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetConvolutionGroupCount(miopenConvolutionDescriptor_t, int){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	groupCount = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetConvolutionNdForwardOutputDim(miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, int *, int *){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	inputTensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	filterDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetTensorDescriptorV2(miopenTensorDescriptor_t, miopenDataType_t, int, const size_t *, const size_t *){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): 	dataType = 3
+MIOpen(HIP): 	nbDims = 4
+MIOpen(HIP): 	dim.values = { 32 64 56 56 }
+MIOpen(HIP): 	stride.values = { 200704 3136 56 1 }
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenSetTensorCastType(miopenTensorDescriptor_t, miopenDataType_t){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	cast_type = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	n = 1601467759
+MIOpen(HIP): 	c = 1953718627
+MIOpen(HIP): 	h = 1887007839
+MIOpen(HIP): 	w = 101
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	vectorLength = 140724550911032
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): 	n = 289973080
+MIOpen(HIP): 	c = 32672
+MIOpen(HIP): 	h = 56
+MIOpen(HIP): 	w = 56
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): 	vectorLength = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, cast_type: Other
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGet4dTensorDescriptorLengths(miopenTensorDescriptor_t, int *, int *, int *, int *){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, cast_type: Other
+MIOpen(HIP): 	n = 289973080
+MIOpen(HIP): 	c = 32672
+MIOpen(HIP): 	h = 1
+MIOpen(HIP): 	w = 1
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetTensorDescriptorSize(miopenTensorDescriptor_t, int *){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, cast_type: Other
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenGetNdTensorDescriptorVectorLength(miopenTensorDescriptor_t, std::size_t *){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, cast_type: Other
+MIOpen(HIP): 	vectorLength = 1
+MIOpen(HIP): }
+PRNG seed: 12345678
+MIOpen(HIP): MIOpenDriver Info2 [GPUMem] hipMalloc 6422528 at 0x7f9eddc00000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [GPUMem] hipMalloc 4096 at 0x7f9edc600000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [GPUMem] hipMalloc 25690112 at 0x7f9edaa00000 Ok
+Timestamp: 2026-03-18 10:16:03 UTC; Host Name: abyss-hbmx; Operating System: Linux 6.18.17-1-lts; ROCm: 7.2.26043; MIOpen Driver: 3.5.1; CPU Vendor: AMD; CPU Model: 1 x Ryzen Threadripper; RAM Size: 62 GB; GPU Model: 1 x AMD Radeon RX Vega; AMDGPU Driver: 0.0.0
+MIOpen(HIP): miopenStatus_t miopenConvolutionForwardGetSolutionCount(miopenHandle_t, const miopenTensorDescriptor_t, const miopenTensorDescriptor_t, const miopenConvolutionDescriptor_t, const miopenTensorDescriptor_t, size_t *){
+MIOpen(HIP): 	handle = stream: 0x5646c925e3b0, device_id: 0
+MIOpen(HIP): 	wDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): 	xDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): 	yDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, cast_type: Other
+MIOpen(HIP): }
+MIOpen(HIP): Info [AmdRocmMetadataVersionDetect] ROCm MD version AMDHSA_COv3, HIP version 7.2.26043, MIOpen version 3.5.1.5b515cf1bca-dirty
+MIOpen(HIP): Info [GetSolutionCount] 
+MIOpen(HIP): Info [IsNetworkedFilesystem] Filesystem type at '"/home/limonene/.config/miopen/"' is: 0x9123683e '<Unknown magic>'
+MIOpen(HIP): Info2 [GetLibPath] Lib Path: "/opt/rocm/lib/libMIOpen.so.1.0"
+MIOpen(HIP): Info2 [GetInstalledPathFile] Found exact find database file: "/opt/rocm/share/miopen/db/gfx900_64.HIP.fdb.txt"
+MIOpen(HIP): Info [Measure] ReadonlyRamDb::Prefetch time: 39.5122 ms
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info [Measure] RamDb::Prefetch time: 0.01565 ms
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.686100
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.686100
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.686100
+MIOpen(HIP): Info2 [ValidateUnsafe] DB file is older than cache: 297683725111575, 297683760937966
+MIOpen(HIP): Info2 [FindRecordUnsafe] Looking for key 64-56-56-1x1-64-56-56-32-0x0-1x1-1x1-0-NCHW-INT8-F_coFP32 in cache for file "/home/limonene/.config/miopen/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt"
+MIOpen(HIP): Info2 [unlock] Unlock < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /home/limonene/.config/miopen/miopen-lockfiles/gfx900_64.HIP.3_5_1_5b515cf1bca-dirty.ufdb.txt.lock.fslock.abyss-hbmx.686100
+MIOpen(HIP): Info2 [FindRecord] Looking for key 64-56-56-1x1-64-56-56-32-0x0-1x1-1x1-0-NCHW-INT8-F_coFP32 in file "/opt/rocm/share/miopen/db/gfx900_64.HIP.fdb.txt"
+MIOpen(HIP): Info2 [Measure] Db::FindRecord time: 0.278233 ms
+MIOpen(HIP): Info2 [timed_lock] Attempting Lock < /tmp/miopen-lockfiles/:memory:gfx900.lock.fslock
+MIOpen(HIP): Info2 [timed_lock] Lock < /tmp/miopen-lockfiles/:memory:gfx900.lock.fslock
+MIOpen(HIP): Info2 [FindRecordUnsafe] Looking for key 64-56-56-1x1-64-56-56-32-0x0-1x1-1x1-0-NCHW-INT8-F_coFP32 in cache for file ":memory:gfx900"
+MIOpen(HIP): Info2 [unlock] Unlock < /tmp/miopen-lockfiles/:memory:gfx900.lock.fslock
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Active < /tmp/miopen-lockfiles/:memory:gfx900.lock.fslock.abyss-hbmx.686100
+MIOpen(HIP): Info2 [refresh_lock] Lock Refresh Exit < /tmp/miopen-lockfiles/:memory:gfx900.lock.fslock.abyss-hbmx.686100
+MIOpen(HIP): Info2 [IsProblemSupported] TunaNet Inapplicable: Unsupported data type
+MIOpen(HIP): Info2 [GetSolutionsFallback] Using WTI Fallback
+MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+MIOpen(HIP): Info2 [GetSolutionsFallback] maxSolutionCount = 102, available = 0
+MIOpen(HIP): Info [GetSolutionCountFallback] Requested convolution is not supported or Immediate mode Fallback unsuccessful.
+MIOpen Error: abyss-hbmx:/usr/src/debug/miopen-hip/rocm-libraries/projects/miopen/src/ocl/convolutionocl.cpp:871: Requested convolution is not supported or Immediate mode Fallback unsuccessful.
+RunForwardGPU() FAILED, rc = 0x6
+Forward Convolution FAILED: 1.79769e+308 > 5.55e-05
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, cast_type: Other
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {64, 64, 1, 1}, {64, 1, 1, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {32, 64, 56, 56}, {200704, 3136, 56, 1}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyConvolutionDescriptor(miopenConvolutionDescriptor_t){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyTensorDescriptor(miopenTensorDescriptor_t){
+MIOpen(HIP): 	tensorDesc = {}, {}, packed, 
+MIOpen(HIP): }
+MIOpen(HIP): miopenStatus_t miopenDestroyConvolutionDescriptor(miopenConvolutionDescriptor_t){
+MIOpen(HIP): 	convDesc = conv2d, miopenConvolution, miopenPaddingDefault, {0, 0}, {1, 1}, {1, 1}, 
+MIOpen(HIP): }
+MIOpen(HIP): MIOpenDriver Info2 [~GPUMem] hipFree 25690112 at 0x7f9edaa00000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [~GPUMem] hipFree 4096 at 0x7f9edc600000 Ok
+MIOpen(HIP): MIOpenDriver Info2 [~GPUMem] hipFree 6422528 at 0x7f9eddc00000 Ok
+__EXIT_CODE=6

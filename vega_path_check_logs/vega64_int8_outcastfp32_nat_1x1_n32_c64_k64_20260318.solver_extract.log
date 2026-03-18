@@ -1,0 +1,67 @@
+156:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+157:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+158:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+159:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+160:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+167:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+169:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+171:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+174:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+189:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmForwardV4R5Xdlops: Skipped (no workspace required)
+190:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmForwardV4R4Xdlops: Skipped (no workspace required)
+191:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmForwardV4R4Xdlops_Padded_Gemm: Skipped (no workspace required)
+192:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmBwdDataV4R1Xdlops: Skipped (no workspace required)
+193:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmBwdDataV1R1Xdlops: Skipped (non-dynamic)
+196:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMlirIgemmFwdXdlops: Skipped (no workspace required)
+197:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMlirIgemmFwd: Skipped (no workspace required)
+198:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMlirIgemmBwdXdlops: Skipped (no workspace required)
+199:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMlirIgemmBwd: Skipped (no workspace required)
+202:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmV4R1DynamicFwd_1x1: Skipped (no workspace required)
+203:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmV4R1DynamicFwd: Skipped (no workspace required)
+204:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmV4R1DynamicBwd: Skipped (no workspace required)
+205:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmGTCDynamicFwdXdlops: Skipped (no workspace required)
+206:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmGTCDynamicBwdXdlops: Skipped (no workspace required)
+207:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmGTCDynamicFwdXdlopsNHWC: Not applicable
+208:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmGTCDynamicBwdXdlopsNHWC: Not applicable
+209:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvCkIgemmFwdV6r1DlopsNchw: Skipped (non-dynamic)
+210:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmFwdXdlops: Skipped (no workspace required)
+211:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmBwdXdlops: Skipped (no workspace required)
+212:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmGroupFwdXdlops: Not applicable
+213:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmGroupBwdXdlops: Not applicable
+214:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemm3DGroupFwdXdlops: Not applicable
+215:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemm3DGroupBwdXdlops: Not applicable
+216:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmGTCDynamicFwdDlopsNCHWC: Skipped (no workspace required)
+277:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+278:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+279:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+280:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+281:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+326:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmForwardV4R5Xdlops: Skipped (non-dynamic)
+327:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmForwardV4R4Xdlops: Skipped (non-dynamic)
+328:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmForwardV4R4Xdlops_Padded_Gemm: Skipped (non-dynamic)
+329:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmBwdDataV4R1Xdlops: Skipped (non-dynamic)
+330:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmBwdDataV1R1Xdlops: Skipped (non-dynamic)
+333:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMlirIgemmFwdXdlops: Skipped (non-dynamic)
+334:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMlirIgemmFwd: Skipped (non-dynamic)
+335:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMlirIgemmBwdXdlops: Skipped (non-dynamic)
+336:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMlirIgemmBwd: Skipped (non-dynamic)
+339:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmV4R1DynamicFwd_1x1: Not applicable
+340:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmV4R1DynamicFwd: Not applicable
+341:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmV4R1DynamicBwd: Not applicable
+342:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmGTCDynamicFwdXdlops: Not applicable
+343:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmGTCDynamicBwdXdlops: Not applicable
+344:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmGTCDynamicFwdXdlopsNHWC: Not applicable
+345:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmGTCDynamicBwdXdlopsNHWC: Not applicable
+346:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvCkIgemmFwdV6r1DlopsNchw: Skipped (non-dynamic)
+347:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmFwdXdlops: Not applicable
+348:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmBwdXdlops: Not applicable
+349:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmGroupFwdXdlops: Not applicable
+350:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmGroupBwdXdlops: Not applicable
+351:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemm3DGroupFwdXdlops: Not applicable
+352:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemm3DGroupBwdXdlops: Not applicable
+353:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmGTCDynamicFwdDlopsNCHWC: Not applicable
+359:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+361:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+363:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+365:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture
+367:MIOpen(HIP): Info2 [IsApplicable] GEMM not supported with casted tensors on this GPU architecture

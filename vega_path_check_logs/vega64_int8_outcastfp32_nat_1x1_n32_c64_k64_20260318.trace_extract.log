@@ -1,0 +1,114 @@
+162:MIOpen(HIP): Info2 [GetWorkspaceSizes] fft: Skipped (non-dynamic)
+163:MIOpen(HIP): Info2 [GetWorkspaceSizes] GemmFwd1x1_0_1: Not applicable
+164:MIOpen(HIP): Info2 [GetWorkspaceSizes] GemmFwd1x1_0_1_int8: Not applicable
+165:MIOpen(HIP): Info2 [GetWorkspaceSizes] GemmFwd1x1_0_2: Not applicable
+166:MIOpen(HIP): Info2 [GetWorkspaceSizes] GemmFwdRest: Not applicable
+168:MIOpen(HIP): Info2 [GetWorkspaceSizes] GemmBwd1x1_stride1: Not applicable
+170:MIOpen(HIP): Info2 [GetWorkspaceSizes] GemmBwd1x1_stride2: Not applicable
+172:MIOpen(HIP): Info2 [GetWorkspaceSizes] GemmBwdRest: Not applicable
+175:MIOpen(HIP): Info2 [GetWorkspaceSizes] GemmWrwUniversal: Not applicable
+177:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsm1x1U: Skipped (non-dynamic)
+189:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmForwardV4R5Xdlops: Skipped (no workspace required)
+190:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmForwardV4R4Xdlops: Skipped (no workspace required)
+191:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmForwardV4R4Xdlops_Padded_Gemm: Skipped (no workspace required)
+192:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmBwdDataV4R1Xdlops: Skipped (no workspace required)
+193:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmBwdDataV1R1Xdlops: Skipped (non-dynamic)
+196:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMlirIgemmFwdXdlops: Skipped (no workspace required)
+197:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMlirIgemmFwd: Skipped (no workspace required)
+198:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMlirIgemmBwdXdlops: Skipped (no workspace required)
+199:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMlirIgemmBwd: Skipped (no workspace required)
+200:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmBwdDataV1R1: Skipped (non-dynamic)
+202:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmV4R1DynamicFwd_1x1: Skipped (no workspace required)
+203:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmV4R1DynamicFwd: Skipped (no workspace required)
+204:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmV4R1DynamicBwd: Skipped (no workspace required)
+205:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmGTCDynamicFwdXdlops: Skipped (no workspace required)
+206:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmGTCDynamicBwdXdlops: Skipped (no workspace required)
+207:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmGTCDynamicFwdXdlopsNHWC: Not applicable
+208:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmGTCDynamicBwdXdlopsNHWC: Not applicable
+209:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvCkIgemmFwdV6r1DlopsNchw: Skipped (non-dynamic)
+210:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmFwdXdlops: Skipped (no workspace required)
+211:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmBwdXdlops: Skipped (no workspace required)
+212:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmGroupFwdXdlops: Not applicable
+213:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemmGroupBwdXdlops: Not applicable
+214:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemm3DGroupFwdXdlops: Not applicable
+215:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvHipImplicitGemm3DGroupBwdXdlops: Not applicable
+216:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvAsmImplicitGemmGTCDynamicFwdDlopsNCHWC: Skipped (no workspace required)
+222:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd<2-3>: Not applicable
+223:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd<3-3>: Not applicable
+224:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd<4-3>: Not applicable
+225:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd<5-3>: Not applicable
+226:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd<6-3>: Not applicable
+227:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd_xdlops<2-3>: Skipped (non-dynamic)
+228:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd_xdlops<3-3>: Skipped (non-dynamic)
+229:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd_xdlops<4-3>: Skipped (non-dynamic)
+230:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd_xdlops<5-3>: Skipped (non-dynamic)
+231:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvMPBidirectWinograd_xdlops<6-3>: Skipped (non-dynamic)
+232:MIOpen(HIP): Info2 [GetWorkspaceSizes] ConvWinoFuryRxS<2-3>: Not applicable
+294:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvBinWinograd3x3U: Not applicable
+295:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvBinWinogradRxSf3x2: Not applicable
+296:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvBinWinogradRxSf2x3: Not applicable
+297:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvBinWinogradRxSf2x3g1: Not applicable
+298:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvBinWinogradRxS: Not applicable
+299:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd<2-3>: Not applicable
+300:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd<3-3>: Not applicable
+301:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd<4-3>: Not applicable
+302:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd<5-3>: Not applicable
+303:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd<6-3>: Not applicable
+304:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd_xdlops<2-3>: Skipped (non-dynamic)
+305:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd_xdlops<3-3>: Skipped (non-dynamic)
+306:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd_xdlops<4-3>: Skipped (non-dynamic)
+307:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd_xdlops<5-3>: Skipped (non-dynamic)
+308:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMPBidirectWinograd_xdlops<6-3>: Skipped (non-dynamic)
+309:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvWinoFuryRxS<2-3>: Not applicable
+310:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvWinoRageRxS<2-3>: Not applicable
+312:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsm3x3U: Skipped (non-dynamic)
+313:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsm1x1U: Skipped (non-dynamic)
+314:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsm1x1UV2: Skipped (non-dynamic)
+315:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsm5x10u2v2f1: Skipped (non-dynamic)
+316:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsm7x7c3h224w224k64u2v2p3q3f1: Skipped (non-dynamic)
+317:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsm5x10u2v2b1: Skipped (non-dynamic)
+318:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvOclDirectFwd11x11: Skipped (non-dynamic)
+319:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvOclDirectFwdGen: Skipped (non-dynamic)
+320:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvOclDirectFwd1x1: Skipped (non-dynamic)
+321:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvOclDirectFwd: Skipped (non-dynamic)
+322:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvDirectNaiveConvFwd: Not applicable
+323:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvDirectNaiveConvBwd: Not applicable
+324:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvDirectNaiveConvWrw: Not applicable
+326:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmForwardV4R5Xdlops: Skipped (non-dynamic)
+327:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmForwardV4R4Xdlops: Skipped (non-dynamic)
+328:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmForwardV4R4Xdlops_Padded_Gemm: Skipped (non-dynamic)
+329:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmBwdDataV4R1Xdlops: Skipped (non-dynamic)
+330:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmBwdDataV1R1Xdlops: Skipped (non-dynamic)
+331:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmV4R1Fwd: Skipped (non-dynamic)
+332:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmV4R4Fwd: Skipped (non-dynamic)
+333:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMlirIgemmFwdXdlops: Skipped (non-dynamic)
+334:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMlirIgemmFwd: Skipped (non-dynamic)
+335:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMlirIgemmBwdXdlops: Skipped (non-dynamic)
+336:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvMlirIgemmBwd: Skipped (non-dynamic)
+337:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmBwdDataV1R1: Skipped (non-dynamic)
+338:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmBwdDataV4R1: Skipped (non-dynamic)
+339:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmV4R1DynamicFwd_1x1: Not applicable
+340:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmV4R1DynamicFwd: Not applicable
+341:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmV4R1DynamicBwd: Not applicable
+342:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmGTCDynamicFwdXdlops: Not applicable
+343:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmGTCDynamicBwdXdlops: Not applicable
+344:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmGTCDynamicFwdXdlopsNHWC: Not applicable
+345:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmGTCDynamicBwdXdlopsNHWC: Not applicable
+346:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvCkIgemmFwdV6r1DlopsNchw: Skipped (non-dynamic)
+347:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmFwdXdlops: Not applicable
+348:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmBwdXdlops: Not applicable
+349:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmGroupFwdXdlops: Not applicable
+350:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemmGroupBwdXdlops: Not applicable
+351:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemm3DGroupFwdXdlops: Not applicable
+352:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvHipImplicitGemm3DGroupBwdXdlops: Not applicable
+353:MIOpen(HIP): Info2 [SearchForAllSolutions] ConvAsmImplicitGemmGTCDynamicFwdDlopsNCHWC: Not applicable
+355:MIOpen(HIP): Info2 [SearchForAllSolutions] GemmFwd1x1_0_1: Not applicable
+356:MIOpen(HIP): Info2 [SearchForAllSolutions] GemmFwd1x1_0_1_int8: Not applicable
+357:MIOpen(HIP): Info2 [SearchForAllSolutions] GemmFwd1x1_0_2: Not applicable
+358:MIOpen(HIP): Info2 [SearchForAllSolutions] GemmFwdRest: Not applicable
+360:MIOpen(HIP): Info2 [SearchForAllSolutions] GemmBwd1x1_stride1: Not applicable
+362:MIOpen(HIP): Info2 [SearchForAllSolutions] GemmBwd1x1_stride2: Not applicable
+364:MIOpen(HIP): Info2 [SearchForAllSolutions] GemmBwdRest: Not applicable
+366:MIOpen(HIP): Info2 [SearchForAllSolutions] GemmWrw1x1_stride1: Not applicable
+368:MIOpen(HIP): Info2 [SearchForAllSolutions] GemmWrwUniversal: Not applicable
+370:MIOpen(HIP): Info2 [SearchForAllSolutions] fft: Skipped (non-dynamic)

@@ -307,7 +307,66 @@ Interpretation:
   少なくとも `MIOpenDriver convint8` の tested route と
   direct immediate route の差に強く寄っている。
 
-### 4.9 backend artifact follow-up
+### 4.9 installed `MIOpenDriver` cast-flag follow-up
+
+`MIOpenDriver convint8 --help` には
+legacy-style の
+`--in_cast_type` / `--wei_cast_type` / `--out_cast_type`
+が見える。
+
+このため、cast flag を使えば
+direct `y=int32` path に寄せられるかも追加で確認した。
+
+Fact:
+
+- legacy
+  `00_legacy-repos/MIOpen/driver/conv_driver.hpp`
+  では、
+  `valid_cast_types = {"fp32", "fp16", "bf16", "fp8", "bf8"}`
+  と `DataTypeFromShortString()` の両方が
+  `int32` を受理しない。
+- 同じ legacy source では、
+  output tensor は `data_type` のまま作られ、
+  その後 `miopenSetTensorCastType(outputTensor, out_cast_type)` が任意で付く。
+- current public standalone `MIOpen/driver/conv_driver.hpp` は
+  cast flag 群を持たず、
+  INT8 / INT8x4 時に output tensor の data type 自体を
+  `miopenInt32` に設定する。
+- installed `MIOpenDriver convint8` に
+  `--out_cast_type int32` を与えると、
+  `Invalid value for out_cast_type argument:int32`
+  で parse 段階から失敗した。
+- `--out_cast_type fp32` は受理されるが、
+  runtime log 上の output tensor は
+  `dataType = 3` のままで、
+  `cast_type: Other` が付く形だった。
+- 同じ `fp32` cast log では、
+  problem / db key は
+  `...NCHW-INT8-F_coFP32`
+  に変わっていた。
+- 同条件では、
+  `GEMM not supported with casted tensors on this GPU architecture`
+  が GEMM family に対して繰り返し記録され、
+  `GemmFwd1x1_0_1_int8` も natural / search / forced の全てで
+  practical route にはならなかった。
+
+Interpretation:
+
+- installed `MIOpenDriver` の legacy-style cast flag は、
+  **direct `y=int32` descriptor path の代替ではない**。
+- 少なくとも今回の installed binary では、
+  `--out_cast_type fp32` は
+  output tensor の data type を `int32` に変えるのではなく、
+  `int8 tensor + cast metadata`
+  の別 problem として扱っている。
+- その結果、`...INT8-F_coFP32` という別 key になり、
+  gfx900 では GEMM family が
+  `casted tensors` 理由で落ちる。
+- したがって、
+  direct probe で通った `x=int8, w=int8, y=int32` path と、
+  installed driver の cast-flag path は同一視できない。
+
+### 4.10 backend artifact follow-up
 
 backend 側については、source と installed ROCm artifact の両方を追加確認した。
 
@@ -388,13 +447,16 @@ Interpretation:
   少なくとも `y=int32` descriptor では露出することも確認できた。
 - direct immediate probe により、
   `y=int32` descriptor 条件では `CompileSolution` / `ForwardImmediate` まで通ることも確認できた。
+- cast-flag follow-up により、
+  direct `y=int32` path と
+  installed `MIOpenDriver` の `out_cast_type` path も別問題だと確認できた。
 
 ---
 
 ## Open Question / Limitation
 
 1. `MIOpenDriver convint8` の installed path が `y=int8` に見える理由、またそれが current public `conv_driver.hpp` とどこで分岐しているかは未確定である
-2. direct immediate で通る `y=int32` path を `MIOpenDriver` / higher-level route からどう再現するかは未確認である
+2. direct immediate で通る `y=int32` path を `MIOpenDriver` / higher-level route からどう再現するかは未確認である。少なくとも `out_cast_type=fp32` はその代替にはならなかった
 3. CK については current exposed forward path を見た範囲であり、CK 全体の将来可能性を断定するものではない
 4. `dp4a` という語は convenience label であり、public tree 側の canonical naming ではない
 

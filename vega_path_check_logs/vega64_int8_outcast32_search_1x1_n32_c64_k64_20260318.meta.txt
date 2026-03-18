@@ -1,0 +1,8 @@
+timestamp=2026-03-18T19:21:30+09:00
+hostname=abyss-hbmx
+pwd=/home/limonene/ROCm-project/vega-hbmx-investigations/vega_investigations
+case_id=vega64_int8_outcast32_search_1x1_n32_c64_k64_20260318
+command=bash -lc set +e; MIOpenDriver convint8 -n 32 -c 64 -H 56 -W 56 -k 64 -y 1 -x 1 -p 0 -q 0 -u 1 -v 1 -F 1 -t 1 -i 1 -s 1 --out_cast_type int32; ec=$?; echo __EXIT_CODE=$ec; exit 0
+MIOPEN_ENABLE_LOGGING=1
+MIOPEN_ENABLE_LOGGING_CMD=1
+MIOPEN_LOG_LEVEL=6
