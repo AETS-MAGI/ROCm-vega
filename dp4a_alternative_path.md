@@ -244,7 +244,43 @@ Interpretation:
 - ただし、どの追加条件が `Not applicable` の主因かは、
   current public tree と今回のログだけではまだ切り分けられない。
 
-### 4.7 backend artifact follow-up
+### 4.7 direct solution-query probe (`y=int8` vs `y=int32`)
+
+`MIOpenDriver convint8` から一段切り離して、
+descriptor を直接組む solution query probe も行った。
+
+Fact:
+
+- `x=int8`, `w=int8`, `y=int8` では、
+  `miopenConvolutionForwardGetSolutionCount()` は `1` を返し、
+  `GetSolution()` で見えるのは `id=85` (`ConvDirectNaiveConvFwd`) のみだった。
+- 同条件で `miopenConvolutionForwardGetSolutionWorkspaceSize(..., 89)` は
+  `miopenStatusBadParm (3)` を返した。
+- `x=int8`, `w=int8`, `y=int32` では、
+  `GetSolutionCount()` は `2` を返し、
+  `GetSolution()` は `id=89` (`algo=0`, `ws=200704`) と
+  `id=85` (`algo=1`, `ws=0`) を返した。
+- 同条件で `GetSolutionWorkspaceSize(..., 89)` も成功し、
+  `ws=200704` を返した。
+- 既存の `MIOpenDriver convint8` runtime log では、
+  output tensor descriptor が `dataType = 3` と記録されている。
+- `miopenDataType_t` enum では `3 = miopenInt8`, `2 = miopenInt32` である。
+- 一方、current public `driver/conv_driver.hpp` は
+  INT8 / INT8x4 時の output tensor を `miopenInt32` に設定する実装である。
+
+Interpretation:
+
+- current installed library 上でも、
+  **`y=int32` descriptor なら `GemmFwd1x1_0_1_int8` は visible solution になる**。
+- したがって、今回の `convint8` tested case で見えた `Not applicable` は、
+  少なくとも `gfx900 に INT8 GEMM solver/backend が存在しない` こととは同一ではない。
+- 観測上は、`MIOpenDriver convint8` の output-type path と
+  current public `conv_driver.hpp` の間に差があり、
+  practical blockage は少なくともその差分に強く寄っている。
+- ただし、installed driver/binary の差分理由そのものは
+  current public tree と今回の probe だけでは断定できない。
+
+### 4.8 backend artifact follow-up
 
 backend 側については、source と installed ROCm artifact の両方を追加確認した。
 
@@ -320,12 +356,15 @@ Interpretation:
 - そして standalone backend probe により、
   `MIOpen conv route が通らない` ことと
   `gfx900 で INT8 GEMM backend 自体が動かない` ことも同一ではないと確認できた。
+- direct solution-query probe により、
+  `GemmFwd1x1_0_1_int8` が current installed library に存在しないわけではなく、
+  少なくとも `y=int32` descriptor では露出することも確認できた。
 
 ---
 
 ## Open Question / Limitation
 
-1. `GemmFwd1x1_0_1_int8` が今回の 1x1 INT8 条件で `Not applicable` になる主因は、shape 以外の追加条件を含めて未切り分けである
+1. `MIOpenDriver convint8` の installed path が `y=int8` になる理由、またそれが current public `conv_driver.hpp` とどこで分岐しているかは未確定である
 2. `GemmFwd1x1_0_1_int8` の current MIOpen convolution path が、どの条件なら backend まで到達するかは未確認である
 3. CK については current exposed forward path を見た範囲であり、CK 全体の将来可能性を断定するものではない
 4. `dp4a` という語は convenience label であり、public tree 側の canonical naming ではない

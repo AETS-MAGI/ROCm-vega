@@ -1,0 +1,16 @@
+
+[y=int8]
+GetSolutionCount: miopenStatusSuccess (0), count=1
+GetSolution: miopenStatusSuccess (0), returned=1
+  [0] id=85 algo=1 ws=0 time=1000.00000
+Workspace(id=85): miopenStatusSuccess (0), ws=0
+MIOpen Error: abyss-hbmx:/usr/src/debug/miopen-hip/rocm-libraries/projects/miopen/src/ocl/convolutionocl.cpp:1057: The supplied solution id: GemmFwd1x1_0_1_int8 is not applicable to the current problem
+Workspace(id=89): miopenStatusBadParm (3), ws=0
+
+[y=int32]
+GetSolutionCount: miopenStatusSuccess (0), count=2
+GetSolution: miopenStatusSuccess (0), returned=2
+  [0] id=89 algo=0 ws=200704 time=19.59632
+  [1] id=85 algo=1 ws=0 time=1000.00000
+Workspace(id=85): miopenStatusSuccess (0), ws=0
+Workspace(id=89): miopenStatusSuccess (0), ws=200704
