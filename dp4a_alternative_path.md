@@ -77,7 +77,7 @@ Interpretation:
 | candidate | 層 | current public tree で確認できること | gfx900 での位置づけ | 制約の主型 |
 | --- | --- | --- | --- | --- |
 | `GemmFwd1x1_0_1_int8` | solver | `IsApplicable()` が `1x1`, `pad=0`, `stride=1`, `group=1`, `wDesc.GetType()==miopenInt8`, `workspace>0` を要求する | **最も具体的な INT8 alternative candidate**。ただし形状条件が強い | solver / shape |
-| `CallGemm` -> `CallGemmMIOpenTensile` / rocBLAS | backend | `miopenInt8` / `miopenInt8x4` を受け、`miopen_tensile_type_int8x4` や `rocblas_gemm_flags_pack_int8x4` を使う | **backend level の INT8 path は存在**。ただし gfx900 catalog / shipped evidence は未確認 | backend / catalog |
+| `CallGemm` -> `CallGemmMIOpenTensile` / rocBLAS | backend | `miopenInt8` / `miopenInt8x4` を受け、`miopen_tensile_type_int8x4` や `rocblas_gemm_flags_pack_int8x4` を使う | **backend level の INT8 path は存在**。さらに rocBLAS / Tensile shipped artifact 側には `gfx900` INT8 fallback evidence がある | backend / catalog |
 | MLIR int8 invoker logic | backend / invoker | `mlir_impl_gemm.cpp` は INT8 convolution 時に output cast を扱う | INT8 logic 自体はあるが、`ConvMlirIgemmFwd::IsApplicable()` は `gfx900` を reject するため **gfx900 alternative にはなっていない** | solver-local gate |
 | CK lower-level dot4 pieces | lower-level codegen utility | vendored CK utility headersに `v_dot4_i32_i8` / `__builtin_amdgcn_sdot4` がある | lower-level capability pieces はあるが、そのまま current forward solver path を意味しない | lower-level / implementation |
 | `ConvCkIgemmFwdV6r1DlopsNchw` | exposed solver | `is_ck_supported_hardware()` は `gfx900` を含むが、`IsApplicable()` は `ctx.IsFp32() or ctx.IsFp16()` を要求する | **current exposed forward CK solver は INT8 alternative ではない** | dtype gate |
@@ -244,6 +244,39 @@ Interpretation:
 - ただし、どの追加条件が `Not applicable` の主因かは、
   current public tree と今回のログだけではまだ切り分けられない。
 
+### 4.7 backend artifact follow-up
+
+backend 側については、source と installed ROCm artifact の両方を追加確認した。
+
+Fact:
+
+- `CallGemm` / `CallGemmStridedBatched` の public interface は
+  `GemmBackend_t::miopentensile` を default preferred backend にしている。
+- `enforce_gemm_backend()` は、build option に応じて
+  `miopentensile` または `rocblas` へ backend を正規化する。
+  少なくとも `miopenInt8` / `miopenInt8x4` は
+  `CallGemmMIOpenTensile()` と rocBLAS 側の両方で型分岐を持つ。
+- `CallGemmMIOpenTensile()` は `miopenInt8` / `miopenInt8x4` を
+  `miopen_tensile_type_int8x4` 入力、`miopen_tensile_type_int32` 出力として扱う。
+- current installed ROCm の `/opt/rocm/lib/rocblas/library` には
+  `TensileLibrary_lazy_gfx900.dat` が存在する。
+- 同じ installed directory には
+  `TensileLibrary_Type_I8I_HPA_Contraction_*_fallback_gfx900.hsaco`
+  が複数存在する。
+- current `rocBLAS/library/src/tensile_host.cpp` でも
+  `getLazyLoadingArch()` は `gfx900` を `Tensile::LazyLoadingInit::gfx900`
+  に写像している。
+
+Interpretation:
+
+- 少なくとも backend artifact / lazy-load catalog の層では、
+  `gfx900` 向けの INT8-related shipped evidence が 0 とは言えない。
+- したがって、今回の `GemmFwd1x1_0_1_int8` runtime follow-up を
+  「backend catalog が空だから失敗した」と単純化することはできない。
+- 今回の tested case で観測された `Not applicable` は、
+  少なくとも **successful backend dispatch が確認される前段**
+  の境界として読むのが安全である。
+
 ---
 
 ## 5. 現時点で少なくとも言えること
@@ -256,6 +289,9 @@ Fact:
 - ただし、Vega64 実機の 1x1 INT8 条件では自然選択・`-s 1` ともに
   `ConvDirectNaiveConvFwd` に留まり、`GemmFwd1x1_0_1_int8` は
   forced-solution / only-solver search の両方で `Not applicable` を返した。
+- current installed rocBLAS / Tensile artifact には
+  `gfx900` 向け lazy library と `Type_I8I_HPA ... fallback_gfx900.hsaco`
+  が存在する。
 - `gfx900` を含む lower-level hardware list や dot4 intrinsic の存在だけでは、
   current exposed INT8 alternative path の成立を示したことにはならない。
 
@@ -269,13 +305,16 @@ Interpretation:
 - 今回の runtime follow-up は、その差を
   **source-level candidate はあるが、current runtime では通らない**
   という形で具体化した。
+- さらに backend artifact follow-up により、
+  `solver candidate が今回通らない` ことと
+  `backend artifact が存在しない` ことも分けて扱う必要がある。
 
 ---
 
 ## Open Question / Limitation
 
 1. `GemmFwd1x1_0_1_int8` が今回の 1x1 INT8 条件で `Not applicable` になる主因は、shape 以外の追加条件を含めて未切り分けである
-2. MIOpenTensile / rocBLAS / Tensile 側の gfx900 INT8 catalog / shipped kernels の有無は別途確認が必要
+2. `GemmFwd1x1_0_1_int8` の current MIOpen convolution path が、どの条件なら backend まで到達するかは未確認である
 3. CK については current exposed forward path を見た範囲であり、CK 全体の将来可能性を断定するものではない
 4. `dp4a` という語は convenience label であり、public tree 側の canonical naming ではない
 
