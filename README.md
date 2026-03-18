@@ -80,6 +80,8 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
   - MIOpen convolution の frontend API から solver search / solution / immediate 実行までの最小構造図。
 - `device_capability_flow.md`
   - `Handle -> TargetProperties -> ConvolutionContext -> IsApplicable` の capability flow を固定する。
+- `solver_selection_graph.md`
+  - `GetSolutions` / `GetSolutionsFallback` / `SearchForAllSolutions` を軸に、selection / catalog / backend の分岐点を coarse graph として固定する。
 - `frontend_to_kernel_map.md`
   - user-visible な Find / Immediate API から hidden layer の solver / backend / kernel compile までを整理する。
 - `gfx900_int8_path_inventory.md`
@@ -126,6 +128,7 @@ ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う inve
 - `gfx900` 関連ノード索引: `gfx900_related_nodes.md`
 - solver 構造図: `solver_architecture_map.md`
 - device / capability flow: `device_capability_flow.md`
+- solver selection 粗視化図: `solver_selection_graph.md`
 - frontend から kernel への地図: `frontend_to_kernel_map.md`
 - `gfx900` INT8 経路インベントリ: `gfx900_int8_path_inventory.md`
 - `gfx900` 自然維持シナリオ: `natural_maintenance_scenarios.md`
