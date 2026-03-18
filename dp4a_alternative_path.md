@@ -366,7 +366,57 @@ Interpretation:
   direct probe で通った `x=int8, w=int8, y=int32` path と、
   installed driver の cast-flag path は同一視できない。
 
-### 4.10 backend artifact follow-up
+### 4.10 standard Find/Forward probe (`y=int32`)
+
+direct immediate だけでなく、
+standard の higher-level C API
+
+- `miopenFindConvolutionForwardAlgorithm()`
+- `miopenConvolutionForward()`
+
+でも同じ route が再現できるかを追加確認した。
+
+Fact:
+
+- `x=int8, w=int8, y=int32` descriptor で
+  `miopenConvolutionForwardGetWorkSpaceSize()` は
+  `workspace_size = 200704` を返した。
+- 同条件の log では、
+  problem key は
+  `...NCHW-INT8INT8INT32-F`
+  と記録された。
+- same log の `GetSolutionsFallback` では、
+  `ConvDirectNaiveConvFwd` と `GemmFwd1x1_0_1_int8`
+  の両方が visible candidate として現れた。
+- `miopenFindConvolutionForwardAlgorithm(..., exhaustiveSearch = 0)` は成功し、
+  `returned_algo_count = 2`
+  - `perf[0] algo=GEMM memory=200704`
+  - `perf[1] algo=Direct memory=0`
+  を返した。
+- 同条件の log では、
+  `FW Chosen Algorithm: GemmFwd1x1_0_1_int8`
+  が記録された。
+- `miopenConvolutionForward(algo=GEMM)` は成功した。
+- `miopenConvolutionForward(algo=Direct)` も成功した。
+- どちらも先頭出力は `64` で一致した。
+- `miopenFindConvolutionForwardAlgorithm(..., exhaustiveSearch = 1)` も成功し、
+  `returned_algo_count = 1`
+  - `perf[0] algo=GEMM memory=200704`
+  を返した。
+- 同条件の `miopenConvolutionForward(algo=GEMM)` も成功し、
+  出力は期待どおり `64` で一致した。
+
+Interpretation:
+
+- `y=int32` descriptor を明示できれば、
+  **direct immediate だけでなく standard `Find/Forward` API でも**
+  `GemmFwd1x1_0_1_int8` 側の route は再現できる。
+- したがって、
+  `y=int32` path の成立は immediate-only の特殊経路ではない。
+- 現時点で閉じているのは、
+  少なくとも `MIOpenDriver convint8` / driver-side descriptor assembly 側と読むのが自然である。
+
+### 4.11 backend artifact follow-up
 
 backend 側については、source と installed ROCm artifact の両方を追加確認した。
 
@@ -450,13 +500,16 @@ Interpretation:
 - cast-flag follow-up により、
   direct `y=int32` path と
   installed `MIOpenDriver` の `out_cast_type` path も別問題だと確認できた。
+- standard Find/Forward probe により、
+  direct `y=int32` path は immediate-only ではなく、
+  standard C API からも再現できると確認できた。
 
 ---
 
 ## Open Question / Limitation
 
 1. `MIOpenDriver convint8` の installed path が `y=int8` に見える理由、またそれが current public `conv_driver.hpp` とどこで分岐しているかは未確定である
-2. direct immediate で通る `y=int32` path を `MIOpenDriver` / higher-level route からどう再現するかは未確認である。少なくとも `out_cast_type=fp32` はその代替にはならなかった
+2. direct immediate で通る `y=int32` path は standard `Find/Forward` API からは再現できたが、`MIOpenDriver convint8` からどう再現するかは未確認である。少なくとも `out_cast_type=fp32` はその代替にはならなかった
 3. CK については current exposed forward path を見た範囲であり、CK 全体の将来可能性を断定するものではない
 4. `dp4a` という語は convenience label であり、public tree 側の canonical naming ではない
 

@@ -8,6 +8,7 @@ Vega64 実機の結果を記録する。
 - 20260318_gemmfwd1x1_int8_runtime_followup.md
 - 20260318_miopen_int8_solution_query_probe.md
 - 20260318_miopen_int8_immediate_probe.md
+- 20260318_miopen_int8_find_forward_probe.md
 - 20260318_miopendriver_outcast_followup.md
 - 20260318_rocblas_int8_backend_probe.md
 
