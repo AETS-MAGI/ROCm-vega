@@ -650,6 +650,77 @@ Interpretation:
   上の host-specific provenance であり、
   直ちに AMD 公式 binary 一般へ拡張すべきではない。
 
+### 4.15 `convint8` CLI option-surface follow-up
+
+2026-03-20 に、
+`convint8` CLI が current standalone source の
+direct `y=int32` route を
+どこまで visible にしているかも追加確認した。
+
+Fact:
+
+- current standalone
+  `MIOpen/driver/main.cpp`
+  でも、
+  local `miopen-src/driver/dm_convint8.cpp`
+  でも、
+  `convint8` entrypoint 自体は
+  `new ConvDriver<int8_t, int32_t>()`
+  を返す。
+- したがって、
+  `convint8` entrypoint の template instantiation そのものは
+  current / packaged-cast-aware family で共通している。
+- ただし current standalone
+  `MIOpen/driver/conv_driver.hpp`
+  では、
+  INT8 / INT8x4 時に
+  `y_type = miopenInt32`
+  を計算して
+  `SetTensorNd(outputTensor, ..., y_type)`
+  を呼ぶ。
+- 一方 `miopen-src/driver/conv_driver.hpp`
+  と local `rocm-libraries` git object の
+  `projects/miopen/driver/conv_driver.hpp`
+  では、
+  output tensor は `data_type` のまま作られ、
+  その後
+  `miopenSetTensorCastType(outputTensor, out_cast_type)`
+  が任意で付く。
+- installed
+  `MIOpenDriver convint8 --help`
+  には
+  `--in_cast_type`, `--out_cast_type`, `--wei_cast_type`
+  は出るが、
+  direct output dtype を切り替える obvious option
+  (`--out_data_type` など)
+  は見えない。
+- 実際、
+  `MIOpenDriver convint8 --out_data_type int32 ...`
+  は
+  `Long Name: out_data_type Not Found !`
+  で落ちた。
+- `MIOpenDriver convint8 --out_cast_type int32 ...`
+  も
+  `Invalid value for out_cast_type argument:int32`
+  で parse 段階から失敗した。
+
+Interpretation:
+
+- `ConvDriver<int8_t, int32_t>` という entrypoint 共有だけでは、
+  direct `y=int32` route が CLI 上で expose されることまでは意味しない。
+- current standalone source の direct route は
+  `output descriptor data type = miopenInt32`
+  という表現であり、
+  installed CLI surface に見えている cast flag family とは別層である。
+- 少なくとも tested installed `/opt/rocm/bin/MIOpenDriver` では、
+  current standalone source の direct `y=int32` route を
+  表す obvious CLI syntax は観測されない。
+- したがって current host で practical route が閉じて見える理由は、
+  少なくとも
+  **solver/backend absence ではなく、
+  installed `convint8` CLI の option surface / descriptor assembly**
+  にさらに寄ると読める。
+
 ---
 
 ## 5. 現時点で少なくとも言えること
@@ -716,7 +787,7 @@ Interpretation:
 ## Open Question / Limitation
 
 1. installed `/opt/rocm/bin/MIOpenDriver` は host 上で `miopen-hip 7.2.0-1` に属し、embedded path も `rocm-libraries/projects/miopen` を示すが、exact source commit / exact packaging tree は未確定である
-2. direct immediate で通る `y=int32` path は standard `Find/Forward` API からは再現できたが、`MIOpenDriver convint8` からどう再現するかは未確認である。少なくとも `out_cast_type=fp32` はその代替にはならなかった
+2. direct immediate で通る `y=int32` path は standard `Find/Forward` API からは再現できた。installed `MIOpenDriver convint8` では少なくとも obvious な `out_data_type` knob は見えず、`out_cast_type=int32` も reject されるため、同 route をどう表現するかはなお未確認である
 3. CK については current exposed forward path を見た範囲であり、CK 全体の将来可能性を断定するものではない
 4. `dp4a` という語は convenience label であり、public tree 側の canonical naming ではない
 

@@ -13,6 +13,7 @@ Vega64 実機の結果を記録する。
 - 20260318_rocblas_int8_backend_probe.md
 - 20260319_miopendriver_build_provenance_followup.md
 - 20260320_installed_miopendriver_provenance.md
+- 20260320_convint8_cli_descriptor_boundary.md
 
 ## 記録項目
 

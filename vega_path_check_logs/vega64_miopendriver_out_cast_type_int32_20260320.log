@@ -1,0 +1,4 @@
+MIOpenDriver convint8 --out_cast_type int32 -n 1 -c 1 -H 1 -W 1 -k 1 -y 1 -x 1 -F 1 -V 0
+Invalid value for out_cast_type argument:int32
+ParseCmdLineArgs() FAILED, rc = 1
+__EXIT_CODE=1
