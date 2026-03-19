@@ -582,6 +582,74 @@ Interpretation:
   ここから直ちに installed `/opt/rocm/bin/MIOpenDriver`
   の provenance を断定することはできない。
 
+### 4.14 installed package provenance follow-up
+
+2026-03-20 に、
+普段使っている installed
+`/opt/rocm/bin/MIOpenDriver`
+そのものの provenance も追加確認した。
+
+Fact:
+
+- この host では
+  `pacman -Qo /opt/rocm/bin/MIOpenDriver`
+  が
+  `miopen-hip 7.2.0-1`
+  を返す。
+- `pacman -Qi miopen-hip`
+  には
+  build date `2026-01-30`
+  と
+  packager `Torsten Keßler`
+  が記録されている。
+- installed binary / library の `strings`
+  には
+  `/usr/src/debug/miopen-hip/rocm-libraries/projects/miopen/...`
+  という path が残っている。
+- `/opt/rocm/include/miopen/version.h`
+  と
+  `/opt/rocm/lib/libMIOpen.so`
+  は
+  `MIOpen 3.5.1.5b515cf1bca-dirty`
+  を示す。
+- current public standalone
+  `ROCm-repos/MIOpen`
+  は
+  `rocm_setup_version(VERSION 2.18.0)`
+  かつ
+  `out_cast_type` path を持たない。
+- 一方 local `rocm-libraries` git object の
+  `projects/miopen/driver/conv_driver.hpp`
+  と
+  `miopen-src/driver/conv_driver.hpp`
+  は
+  cast-aware `out_cast_type`
+  path を保持している。
+
+Interpretation:
+
+- 少なくともこの host の installed `MIOpenDriver` は、
+  **current public standalone `ROCm-repos/MIOpen`
+  の直接 build ではない**
+  と読むのが自然である。
+- embedded path と surface behavior は
+  `rocm-libraries/projects/miopen`
+  family に寄る。
+- 一方で configured version `3.5.1.*`
+  は local `miopen-src`
+  に近く、
+  local `rocm-libraries` HEAD (`3.4.0`) とは一致しない。
+- したがって、
+  現時点で最も安全なのは、
+  **installed binary は `rocm-libraries/projects/miopen` 系の
+  cast-aware driver family に寄るが、
+  exact source commit は未確定**
+  と書くことである。
+- また、
+  この観測は Arch package `miopen-hip 7.2.0-1`
+  上の host-specific provenance であり、
+  直ちに AMD 公式 binary 一般へ拡張すべきではない。
+
 ---
 
 ## 5. 現時点で少なくとも言えること
@@ -637,12 +705,17 @@ Interpretation:
 - さらに local debug build provenance follow-up により、
   current public standalone source と local debug `MIOpenDriver` の不一致は、
   少なくとも build provenance の差でも説明できると分かった。
+- 加えて installed package provenance follow-up により、
+  この host の installed `/opt/rocm/bin/MIOpenDriver`
+  も current public standalone clone そのものではなく、
+  `rocm-libraries/projects/miopen`
+  系の cast-aware driver family に寄ると読めるようになった。
 
 ---
 
 ## Open Question / Limitation
 
-1. installed `/opt/rocm/bin/MIOpenDriver` の provenance と、local debug build (`miopen-src@f842c61d`) との関係は未確定である
+1. installed `/opt/rocm/bin/MIOpenDriver` は host 上で `miopen-hip 7.2.0-1` に属し、embedded path も `rocm-libraries/projects/miopen` を示すが、exact source commit / exact packaging tree は未確定である
 2. direct immediate で通る `y=int32` path は standard `Find/Forward` API からは再現できたが、`MIOpenDriver convint8` からどう再現するかは未確認である。少なくとも `out_cast_type=fp32` はその代替にはならなかった
 3. CK については current exposed forward path を見た範囲であり、CK 全体の将来可能性を断定するものではない
 4. `dp4a` という語は convenience label であり、public tree 側の canonical naming ではない
