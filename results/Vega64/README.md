@@ -11,6 +11,7 @@ Vega64 実機の結果を記録する。
 - 20260318_miopen_int8_find_forward_probe.md
 - 20260318_miopendriver_outcast_followup.md
 - 20260318_rocblas_int8_backend_probe.md
+- 20260319_miopendriver_build_provenance_followup.md
 
 ## 記録項目
 

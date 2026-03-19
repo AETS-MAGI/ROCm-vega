@@ -63,6 +63,7 @@ gfx900 (Vega64) における INT8 convolution 経路について、
 - standard `miopenFindConvolutionForwardAlgorithm()` / `miopenConvolutionForward()` probe でも、同じ `x=int8, w=int8, y=int32` 条件で `GEMM` が返り、実行まで成功した
 - installed `MIOpenDriver convint8` の legacy-style `--out_cast_type` を追加確認すると、`int32` は token として受理されず、`fp32` は受理されるが `int8 + cast metadata` の別 path (`...INT8-F_coFP32`) になり、GEMM family は `casted tensors` 理由で落ちた
 - current standalone source では、INT8 driver path は output tensor の `data_type` 自体を `miopenInt32` に切り替える。一方 legacy cast path は `miopenSetTensorCastType()` を後付けし、legacy GEMM は `IsTensorsCasted()` を別境界として扱う
+- さらに local debug build provenance follow-up により、cross-check に使っていた debug `MIOpenDriver` は current public `ROCm-repos/MIOpen` ではなく、別 checkout `miopen-src@f842c61d` からビルドされていたことが確認できた。その checkout は cast-aware `convint8` driver を保持している
 - rocBLAS / Tensile backend 側には、installed ROCm で `gfx900` 向け INT8 fallback artifact (`TensileLibrary_lazy_gfx900.dat`, `Type_I8I_HPA ... fallback_gfx900.hsaco`) が出荷されている
 - standalone `rocblas-bench gemm_ex` の `i8_r/i32_r` probe は Vega64/gfx900 で成功し、backend 単体の INT8 GEMM 実行自体は成立する
 - 物理制約（MFMA / xdlops / dot4 の不在）で除外される経路と、ソフト制約（実装判断・private issue）で除外される経路が混在している
@@ -78,13 +79,14 @@ gfx900 (Vega64) における INT8 convolution 経路について、
 - standard Find/Forward probe により、`y=int32` descriptor の path は immediate-only ではなく、higher-level C API からも到達可能だと確認できた。
 - cast-flag follow-up により、`MIOpenDriver` に legacy-style cast flag が見えることと、その flag で direct `y=int32` path を表現できることも別問題だと分かった。少なくとも `out_cast_type=fp32` は `int8 + cast metadata` の別境界を作る。
 - source-level 比較でも、`INT8INT8INT32` と `INT8-F_coFP32` は同じ route の別名ではなく、direct output-dtype path と cast-metadata path という別 problem として扱われている。
+- 加えて、current public standalone source と local debug `MIOpenDriver` の食い違いは、少なくとも build provenance の差でも説明できる。したがって `MIOpenDriver` の観測を current public `conv_driver.hpp` と 1:1 に重ねるのは安全ではない。
 - 同様に、backend artifact の存在と、current MIOpen convolution path からその backend が実際に使われることも別問題である。今回の観測は、`solver applicability` と `backend artifact presence` を分けて扱う必要を示している。
 - さらに、standalone backend 実行成功により、`MIOpen conv route 未成立` と `gfx900 で INT8 GEMM backend 自体が不成立` も分けて扱う必要がある。
 - 物理制約で除外される経路（Xdlops 系）は原理的に gfx900 で成立しにくい。ソフト / 実装制約で止まっている経路（MLIR iGEMM、ASM v4r1 の INT8 条件）は、実装変更で境界が変わる余地があるが、修正可能主体と公開根拠の範囲に制約がある。
 
 ## Open Question / Limitation
 
-1. **`MIOpenDriver convint8` の output-type path**: installed driver path が `y=int8` に見える理由と、current public `conv_driver.hpp` との差分理由は未確定
+1. **`MIOpenDriver convint8` の output-type path**: installed `/opt/rocm/bin/MIOpenDriver` の provenance と、local debug build (`miopen-src@f842c61d`) / current public `conv_driver.hpp` との関係は未確定
 2. **`MIOpenDriver convint8` から `y=int32` path をどう踏ませるか**: higher-level C API からの再現には成功したが、installed driver からどう再現するかは未確認。少なくとも `out_cast_type=fp32` は代替にならなかった
 3. **MIOpen Perf DB の INT8 エントリ**: gfx900 向け Perf DB 自体は確認済みだが、INT8 の有無は未精査
 4. **ASM v4r1 の自然選択不成立条件**: `Not applicable` の主因が dtype か shape か、あるいは別条件かは未切り分け

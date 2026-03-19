@@ -531,6 +531,57 @@ Interpretation:
   **installed driver 側の descriptor assembly / path provenance**
   に強く寄っていると読むのが安全である。
 
+### 4.13 local debug build provenance follow-up
+
+2026-03-18 まで、
+current public standalone
+`ROCm-repos/MIOpen/driver/conv_driver.hpp`
+と
+local debug `MIOpenDriver`
+の挙動が食い違って見える点が残っていた。
+
+Fact:
+
+- local debug build tree
+  `/home/limonene/ROCm-project/WD-Black/rocm-builds/miopen-debug-build-20260314_135541/CMakeCache.txt`
+  の `MIOpen_SOURCE_DIR` は
+  `/home/limonene/ROCm-project/WD-Black/miopen-src`
+  を指している。
+- 同 build から生成された
+  `.../miopen-debug-prefix-20260314_135541/bin/MIOpenDriver`
+  には、
+  `out_cast_type`, `in_cast_type`, `wei_cast_type`
+  と
+  `/home/limonene/ROCm-project/WD-Black/miopen-src/driver/dm_convint8.cpp`
+  の文字列が残っている。
+- `miopen-src/driver/conv_driver.hpp`
+  には
+  `valid_cast_types`
+  と
+  `miopenSetTensorCastType(outputTensor, out_cast_type)`
+  が残り、
+  output tensor は `data_type` のまま作られる。
+- 一方 current public standalone
+  `ROCm-repos/MIOpen/driver/conv_driver.hpp`
+  では、
+  INT8 / INT8x4 の output tensor は
+  `y_type = miopenInt32`
+  に切り替えられる。
+
+Interpretation:
+
+- local debug `MIOpenDriver` が legacy-style cast flag を出し続けたのは、
+  少なくとも
+  **その binary が current public standalone clone ではなく、
+  別 checkout (`miopen-src@f842c61d`) からビルドされていた**
+  ことで説明できる。
+- したがって、
+  local debug build と current public standalone source の食い違いを、
+  source 読解の失敗だけに還元する必要はない。
+- ただし、
+  ここから直ちに installed `/opt/rocm/bin/MIOpenDriver`
+  の provenance を断定することはできない。
+
 ---
 
 ## 5. 現時点で少なくとも言えること
@@ -583,12 +634,15 @@ Interpretation:
   `INT8 + cast metadata` path は
   同じ route の別名ではなく、
   実装上も別 problem として扱われている。
+- さらに local debug build provenance follow-up により、
+  current public standalone source と local debug `MIOpenDriver` の不一致は、
+  少なくとも build provenance の差でも説明できると分かった。
 
 ---
 
 ## Open Question / Limitation
 
-1. `MIOpenDriver convint8` の installed path が `y=int8` に見える理由、またそれが current public `conv_driver.hpp` とどこで分岐しているかは未確定である
+1. installed `/opt/rocm/bin/MIOpenDriver` の provenance と、local debug build (`miopen-src@f842c61d`) との関係は未確定である
 2. direct immediate で通る `y=int32` path は standard `Find/Forward` API からは再現できたが、`MIOpenDriver convint8` からどう再現するかは未確認である。少なくとも `out_cast_type=fp32` はその代替にはならなかった
 3. CK については current exposed forward path を見た範囲であり、CK 全体の将来可能性を断定するものではない
 4. `dp4a` という語は convenience label であり、public tree 側の canonical naming ではない
