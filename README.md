@@ -3,7 +3,7 @@
 このリポジトリは、`gfx900` / Vega を入口にしつつ、
 ROCm の実行経路・GitHub 履歴・設計モデルを並行して追う investigation notebook です。
 
-## 0. このリポジトリの役割
+## 0. このリポジトリ(ROCm-vega)の役割
 
 このリポジトリは、Vega / `gfx900` 系の観測結果と、その解釈・仮説・一次根拠を整理して残すための investigation repository です。
 `vega-hbmx-experiments` が「実験を回す作業場」なのに対し、こちらは「何が確認できたかを GPU ごと・論点ごとに整理する正本」を担います。
