@@ -512,6 +512,10 @@ PY
 - `2026-03-23_binary-alignment-attempt.md`
 - `2026-03-23_forksame-summary.md`
 - `2026-03-23_forksame-20run-summary.md`
+- `2026-03-23_forksame-thread4-20run-summary.md`
+- `2026-03-23_forksame-coldstart-summary.md`
+- `2026-03-23_forksame-smi-verified-5run-summary.md`
+- `2026-03-23_vega64-initial-path-diff_optimization-hints.md`
 - `mi25_rocm_repeat_20260323_184113.jsonl`
 - `vega64_rocm_repeat_20260323_184113.jsonl`
 - `mi25_rocm_threads16_keepalive10m_repeat_20260323_192700.jsonl`
@@ -520,11 +524,23 @@ PY
 - `vega64_rocm_forksame_repeat_20260323_202017.jsonl`
 - `mi25_rocm_forksame20_repeat_20260323_202220.jsonl`
 - `vega64_rocm_forksame20_repeat_20260323_202220.jsonl`
+- `mi25_rocm_forksame_thread4_20run_20260323_203048.jsonl`
+- `vega64_rocm_forksame_thread4_20run_20260323_203048.jsonl`
+- `mi25_rocm_forksame_coldstart_10run_20260323_203158.jsonl`
+- `vega64_rocm_forksame_coldstart_10run_20260323_203158.jsonl`
+- `mi25_rocm_forksame_smi_verified_5run_20260323_203402.jsonl`
+- `vega64_rocm_forksame_smi_verified_5run_20260323_203402.jsonl`
 - `mi25_forksame_20260323_202017.journal.log`
 - `vega64_forksame_20260323_202017.log`
 - `mi25_usrlocal_rocm_21434_20260323_193323.log`
 - `vega64_usrlocal_rocm_21435_20260323_193323.log`
 - `vega64_forkcopy_rocm_21437_20260323.log`
+- `mi25_forksame_thread4_20run_20260323_203048.smi.log`
+- `vega64_forksame_thread4_20run_20260323_203048.smi.log`
+- `mi25_forksame_coldstart_10run_20260323_203158.smi.log`
+- `vega64_forksame_coldstart_10run_20260323_203158.smi.log`
+- `mi25_forksame_smi_verified_5run_20260323_203402.smi.log`
+- `vega64_forksame_smi_verified_5run_20260323_203402.smi.log`
 
 ---
 
@@ -552,6 +568,9 @@ PY
 | `num_thread=16` + `keep_alive=10m` 5-run | 高 | `1.098x` | 現実運用に近い |
 | `fork/fork`（同系統）5-run | 高 | `1.132x` | 系統そろえ成功 |
 | `fork/fork`（同系統）20-run | 高（分散評価あり） | `1.111x` | 現在の代表値候補 |
+| `fork/fork` + `num_thread=4` 20-run | 高（thread感度試験） | `1.132x` | 低threadで差が拡大 |
+| `fork/fork` + `keep_alive=0s` 10-run | 中（cold-start寄り） | `1.197x` | load影響込みで差が拡大 |
+| `fork/fork` + smi有効採取 5-run | 高（監視再確認） | `1.097x` | warm比較では約1.1xを再確認 |
 
 ### 13.3 現時点の一言結論
 
@@ -560,3 +579,73 @@ PY
 | ROCm 同士で比較できるか | `はい` |
 | 完全同一スタック比較か | `まだ未完`（host差・周辺環境差は残る） |
 | 現時点での実用的な速度差 | Vega64 が **約 1.1x** 優位 |
+| cold-start を含む体感差 | Vega64 が **約 1.2x** まで広がる傾向 |
+
+### 13.4 観測補足（`rocm-smi`）
+
+- MI25 側は `/usr/bin/rocm-smi` で継続取得可能。
+- Vega64 側は `ssh` 非ログイン実行時に `rocm-smi` が PATH に無いため、
+  `rocm-smi: command not found` が出るケースがあった。
+- Vega64 側は `/opt/rocm/bin/rocm-smi` を絶対指定することで再採取できることを確認済み。
+
+---
+
+## 14. Vega64「初期運用一式 vs fork運用」差分確定（2026-03-23 20:57 JST）
+
+背景:
+
+- 「最初の Vega64 側（distro ROCm service）のほうが速かったのでは？」という仮説を検証。
+- Vega64 単独で `11435(distro)` と `21445(fork)` を同条件再測定した。
+
+条件:
+
+- `tinyllama:latest`, `num_thread=16`, `keep_alive=10m`, warm-up後 20-run
+- 合計 4セット（`20260323_204838`, `205542`, `205615`, `205710`）
+
+### 14.1 実測サマリ
+
+| セット | distro (11435) eval_tps median | fork (21445) eval_tps median | median比 (distro/fork) | total_s median 比 (fork/distro) |
+|---|---:|---:|---:|---:|
+| set-1 (`20260323_204838`) | 242.805 | 241.422 | 1.0057x | 1.0633x |
+| set-2 (`20260323_205542`) | 242.106 | 242.193 | 0.9996x | 1.0582x |
+| set-3 (`20260323_205615`) | 241.800 | 242.092 | 0.9988x | 1.0595x |
+| set-4 (`20260323_205710`) | 241.955 | 241.923 | 1.0001x | 1.0571x |
+| pooled 80-run | 242.094 | 241.923 | 1.0007x | 1.0606x |
+
+### 14.2 事実として確定した差分
+
+| 項目 | distro ROCm (11435) | fork ROCm (21445) |
+|---|---|---|
+| serve binary | `/usr/bin/ollama` | `/tmp/ollama-fork-compare/ollama` |
+| runner library path | `/usr/lib/ollama` | `/tmp/ollama-fork-compare/build-gfx900/lib/ollama` |
+| mapped `libggml-hip.so` | `/usr/lib/ollama/libggml-hip.so` | `/tmp/ollama-fork-compare/build-gfx900/lib/ollama/libggml-hip.so` |
+| backend | 両方 `library=ROCm compute=gfx900` | 両方 `library=ROCm compute=gfx900` |
+
+### 14.3 解釈
+
+- `eval_tps`（生成本体）はほぼ同等。
+- ただし `total_duration` は fork 側が一貫して長く、揺れも大きい。
+- したがって「初期運用が有利」に見えた主因は、
+  「生成カーネルの圧倒差」より **周辺オーバーヘッド/安定性差** の可能性が高い。
+
+詳細レポート:
+
+- `2026-03-23_vega64-initial-path-diff_optimization-hints.md`
+
+---
+
+## 15. 公開用サマリ反映（vega-hbmx-pages）
+
+このワークログの要点を、公開閲覧向けページへ反映した。
+
+- 追加ページ:
+  - `vega-hbmx-pages/case-study/mi25-vega64-comparison-case-study.html`
+- 導線更新:
+  - `vega-hbmx-pages/case-study/case-study-index.html`
+  - `vega-hbmx-pages/index.html`
+
+公開ページ側で扱う主軸:
+
+- 主比較の推移（`1.266x -> 1.098x -> 1.111x`）
+- Vega64内経路差分（distro vs fork, pooled 80-run）
+- `eval_tps` と `total_duration` の分離解釈

@@ -1,0 +1,250 @@
+=== 2026-03-23_20:34:02
+WARNING: AMD GPU device(s) is/are in a low-power state. Check power control/runtime_status
+
+
+
+============================ ROCm System Management Interface ============================
+====================================== Temperature =======================================
+GPU[0]		: Temperature (Sensor edge) (C): 32.0
+GPU[0]		: Temperature (Sensor junction) (C): 34.0
+GPU[0]		: Temperature (Sensor memory) (C): 33.0
+GPU[1]		: Temperature (Sensor edge) (C): 35.0
+==========================================================================================
+=================================== % time GPU is busy ===================================
+GPU[0]		: GPU use (%): 0
+GPU[1]		: GPU use (%): 0
+==========================================================================================
+=================================== Current Memory Use ===================================
+GPU[0]		: GPU Memory Allocated (VRAM%): 0
+GPU[0]		: Memory Activity: N/A
+GPU[0]		: Not supported on the given system
+GPU[1]		: GPU Memory Allocated (VRAM%): 1
+GPU[1]		: Memory Activity: N/A
+GPU[1]		: Not supported on the given system
+==========================================================================================
+================================== End of ROCm SMI Log ===================================
+=== 2026-03-23_20:34:04
+WARNING: AMD GPU device(s) is/are in a low-power state. Check power control/runtime_status
+
+
+
+============================ ROCm System Management Interface ============================
+====================================== Temperature =======================================
+GPU[0]		: Temperature (Sensor edge) (C): 33.0
+GPU[0]		: Temperature (Sensor junction) (C): 35.0
+GPU[0]		: Temperature (Sensor memory) (C): 34.0
+GPU[1]		: Temperature (Sensor edge) (C): 34.0
+==========================================================================================
+=================================== % time GPU is busy ===================================
+GPU[0]		: GPU use (%): 88
+GPU[1]		: GPU use (%): 0
+==========================================================================================
+=================================== Current Memory Use ===================================
+GPU[0]		: GPU Memory Allocated (VRAM%): 5
+GPU[0]		: Memory Activity: N/A
+GPU[0]		: Not supported on the given system
+GPU[1]		: GPU Memory Allocated (VRAM%): 1
+GPU[1]		: Memory Activity: N/A
+GPU[1]		: Not supported on the given system
+==========================================================================================
+================================== End of ROCm SMI Log ===================================
+=== 2026-03-23_20:34:05
+WARNING: AMD GPU device(s) is/are in a low-power state. Check power control/runtime_status
+
+
+
+============================ ROCm System Management Interface ============================
+====================================== Temperature =======================================
+GPU[0]		: Temperature (Sensor edge) (C): 38.0
+GPU[0]		: Temperature (Sensor junction) (C): 45.0
+GPU[0]		: Temperature (Sensor memory) (C): 38.0
+GPU[1]		: Temperature (Sensor edge) (C): 34.0
+==========================================================================================
+=================================== % time GPU is busy ===================================
+GPU[0]		: GPU use (%): 0
+GPU[1]		: GPU use (%): 0
+==========================================================================================
+=================================== Current Memory Use ===================================
+GPU[0]		: GPU Memory Allocated (VRAM%): 6
+GPU[0]		: Memory Activity: N/A
+GPU[0]		: Not supported on the given system
+GPU[1]		: GPU Memory Allocated (VRAM%): 1
+GPU[1]		: Memory Activity: N/A
+GPU[1]		: Not supported on the given system
+==========================================================================================
+================================== End of ROCm SMI Log ===================================
+=== 2026-03-23_20:34:06
+WARNING: AMD GPU device(s) is/are in a low-power state. Check power control/runtime_status
+
+
+
+============================ ROCm System Management Interface ============================
+====================================== Temperature =======================================
+GPU[0]		: Temperature (Sensor edge) (C): 36.0
+GPU[0]		: Temperature (Sensor junction) (C): 39.0
+GPU[0]		: Temperature (Sensor memory) (C): 36.0
+GPU[1]		: Temperature (Sensor edge) (C): 33.0
+==========================================================================================
+=================================== % time GPU is busy ===================================
+GPU[0]		: GPU use (%): 0
+GPU[1]		: GPU use (%): 0
+==========================================================================================
+=================================== Current Memory Use ===================================
+GPU[0]		: GPU Memory Allocated (VRAM%): 6
+GPU[0]		: Memory Activity: N/A
+GPU[0]		: Not supported on the given system
+GPU[1]		: GPU Memory Allocated (VRAM%): 1
+GPU[1]		: Memory Activity: N/A
+GPU[1]		: Not supported on the given system
+==========================================================================================
+================================== End of ROCm SMI Log ===================================
+=== 2026-03-23_20:34:07
+WARNING: AMD GPU device(s) is/are in a low-power state. Check power control/runtime_status
+
+
+
+============================ ROCm System Management Interface ============================
+====================================== Temperature =======================================
+GPU[0]		: Temperature (Sensor edge) (C): 41.0
+GPU[0]		: Temperature (Sensor junction) (C): 51.0
+GPU[0]		: Temperature (Sensor memory) (C): 40.0
+GPU[1]		: Temperature (Sensor edge) (C): 33.0
+==========================================================================================
+=================================== % time GPU is busy ===================================
+GPU[0]		: GPU use (%): 0
+GPU[1]		: GPU use (%): 0
+==========================================================================================
+=================================== Current Memory Use ===================================
+GPU[0]		: GPU Memory Allocated (VRAM%): 6
+GPU[0]		: Memory Activity: N/A
+GPU[0]		: Not supported on the given system
+GPU[1]		: GPU Memory Allocated (VRAM%): 1
+GPU[1]		: Memory Activity: N/A
+GPU[1]		: Not supported on the given system
+==========================================================================================
+================================== End of ROCm SMI Log ===================================
+=== 2026-03-23_20:34:08
+WARNING: AMD GPU device(s) is/are in a low-power state. Check power control/runtime_status
+
+
+
+============================ ROCm System Management Interface ============================
+====================================== Temperature =======================================
+GPU[0]		: Temperature (Sensor edge) (C): 44.0
+GPU[0]		: Temperature (Sensor junction) (C): 65.0
+GPU[0]		: Temperature (Sensor memory) (C): 44.0
+GPU[1]		: Temperature (Sensor edge) (C): 33.0
+==========================================================================================
+=================================== % time GPU is busy ===================================
+GPU[0]		: GPU use (%): 87
+GPU[1]		: GPU use (%): 0
+==========================================================================================
+=================================== Current Memory Use ===================================
+GPU[0]		: GPU Memory Allocated (VRAM%): 6
+GPU[0]		: Memory Activity: N/A
+GPU[0]		: Not supported on the given system
+GPU[1]		: GPU Memory Allocated (VRAM%): 1
+GPU[1]		: Memory Activity: N/A
+GPU[1]		: Not supported on the given system
+==========================================================================================
+================================== End of ROCm SMI Log ===================================
+=== 2026-03-23_20:34:09
+WARNING: AMD GPU device(s) is/are in a low-power state. Check power control/runtime_status
+
+
+
+============================ ROCm System Management Interface ============================
+====================================== Temperature =======================================
+GPU[0]		: Temperature (Sensor edge) (C): 43.0
+GPU[0]		: Temperature (Sensor junction) (C): 59.0
+GPU[0]		: Temperature (Sensor memory) (C): 44.0
+GPU[1]		: Temperature (Sensor edge) (C): 42.0
+==========================================================================================
+=================================== % time GPU is busy ===================================
+GPU[0]		: GPU use (%): 89
+GPU[1]		: GPU use (%): 0
+==========================================================================================
+=================================== Current Memory Use ===================================
+GPU[0]		: GPU Memory Allocated (VRAM%): 6
+GPU[0]		: Memory Activity: N/A
+GPU[0]		: Not supported on the given system
+GPU[1]		: GPU Memory Allocated (VRAM%): 1
+GPU[1]		: Memory Activity: N/A
+GPU[1]		: Not supported on the given system
+==========================================================================================
+================================== End of ROCm SMI Log ===================================
+=== 2026-03-23_20:34:10
+WARNING: AMD GPU device(s) is/are in a low-power state. Check power control/runtime_status
+
+
+
+============================ ROCm System Management Interface ============================
+====================================== Temperature =======================================
+GPU[0]		: Temperature (Sensor edge) (C): 42.0
+GPU[0]		: Temperature (Sensor junction) (C): 48.0
+GPU[0]		: Temperature (Sensor memory) (C): 42.0
+GPU[1]		: Temperature (Sensor edge) (C): 40.0
+==========================================================================================
+=================================== % time GPU is busy ===================================
+GPU[0]		: GPU use (%): 0
+GPU[1]		: GPU use (%): 0
+==========================================================================================
+=================================== Current Memory Use ===================================
+GPU[0]		: GPU Memory Allocated (VRAM%): 6
+GPU[0]		: Memory Activity: N/A
+GPU[0]		: Not supported on the given system
+GPU[1]		: GPU Memory Allocated (VRAM%): 1
+GPU[1]		: Memory Activity: N/A
+GPU[1]		: Not supported on the given system
+==========================================================================================
+================================== End of ROCm SMI Log ===================================
+=== 2026-03-23_20:34:12
+WARNING: AMD GPU device(s) is/are in a low-power state. Check power control/runtime_status
+
+
+
+============================ ROCm System Management Interface ============================
+====================================== Temperature =======================================
+GPU[0]		: Temperature (Sensor edge) (C): 45.0
+GPU[0]		: Temperature (Sensor junction) (C): 52.0
+GPU[0]		: Temperature (Sensor memory) (C): 44.0
+GPU[1]		: Temperature (Sensor edge) (C): 39.0
+==========================================================================================
+=================================== % time GPU is busy ===================================
+GPU[0]		: GPU use (%): 0
+GPU[1]		: GPU use (%): 0
+==========================================================================================
+=================================== Current Memory Use ===================================
+GPU[0]		: GPU Memory Allocated (VRAM%): 6
+GPU[0]		: Memory Activity: N/A
+GPU[0]		: Not supported on the given system
+GPU[1]		: GPU Memory Allocated (VRAM%): 1
+GPU[1]		: Memory Activity: N/A
+GPU[1]		: Not supported on the given system
+==========================================================================================
+================================== End of ROCm SMI Log ===================================
+=== 2026-03-23_20:34:13
+WARNING: AMD GPU device(s) is/are in a low-power state. Check power control/runtime_status
+
+
+
+============================ ROCm System Management Interface ============================
+====================================== Temperature =======================================
+GPU[0]		: Temperature (Sensor edge) (C): 47.0
+GPU[0]		: Temperature (Sensor junction) (C): 59.0
+GPU[0]		: Temperature (Sensor memory) (C): 47.0
+GPU[1]		: Temperature (Sensor edge) (C): 37.0
+==========================================================================================
+=================================== % time GPU is busy ===================================
+GPU[0]		: GPU use (%): 0
+GPU[1]		: GPU use (%): 0
+==========================================================================================
+=================================== Current Memory Use ===================================
+GPU[0]		: GPU Memory Allocated (VRAM%): 6
+GPU[0]		: Memory Activity: N/A
+GPU[0]		: Not supported on the given system
+GPU[1]		: GPU Memory Allocated (VRAM%): 1
+GPU[1]		: Memory Activity: N/A
+GPU[1]		: Not supported on the given system
+==========================================================================================
+================================== End of ROCm SMI Log ===================================

@@ -89,3 +89,5 @@ Evidence:
   2. `NumThreads=16` + `keep_alive=10m`: `1.098x`
   3. fork/fork retry (ROCm valid both, 5 runs): `1.132x`
   4. fork/fork extended run (20 runs): `1.111x`
+  5. fork/fork + `num_thread=4` (20 runs): `1.132x`
+  6. fork/fork + cold-start (`keep_alive=0s`, 10 runs): `1.197x`
