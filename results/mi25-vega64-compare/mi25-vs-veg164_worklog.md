@@ -1,6 +1,7 @@
 # MI25 vs Vega64 実験ワークログ（ROCm/Vulkan比較 + ROCm反復）
 
 更新日: 2026-03-23 (Asia/Tokyo)
+追記: 2026-03-23 20:17 JST から `fork/fork` 再試行（`build-gfx900/lib/ollama` 相対配置の検証）を開始
 対象ディレクトリ: `/home/limonene/ROCm-project/vega_investigations/results/mi25-vega64-compare`
 
 ---
@@ -421,12 +422,141 @@ PY
 
 ---
 
-## 10. 関連ファイル
+## 10. バイナリ系統そろえの試行（2026-03-23 19:33-19:39 JST）
+
+目的:
+
+- `local fork vs distro` のコンファウンダを減らすため、MI25/Vega64 のバイナリ系統を揃えて再計測できるか確認。
+
+結果（要約）:
+
+1. 両側 `/usr/local/bin/ollama` 試行:
+   - ROCm ではなく **CPU backend** に落ちたため比較無効。
+2. MI25 fork binary を abyss に持ち込み（`fork/fork`）試行:
+   - abyss 側で **CPU backend** のまま（`library=cpu`）。
+3. abyss の `/usr/bin/ollama` を MI25 へ持ち込み（`distro/distro`）試行:
+   - MI25 側で `GLIBC_2.43` 不足により実行不可。
+
+この時点の結論（暫定）:
+
+- 19:39 時点では即日でのバイナリ系統そろえ比較は難しい、という判断だった。
+- ただしこの後の再試行（Section 11）で `fork/fork` 条件の ROCm 起動に成功した。
+
+詳細ログ:
+
+- `2026-03-23_binary-alignment-attempt.md`
+
+---
+
+## 11. 継続検証（2026-03-23 20:17-20:20 JST, `fork/fork` で再試行）
+
+狙い:
+
+- 同系統バイナリ比較を再チャレンジし、`local fork vs distro` の差を縮める。
+
+実施:
+
+1. MI25 側は既存 fork サービスを使用（`/home/limonene/ROCm-project/ollama-src/ollama`）。
+2. Vega64 側は MI25 の fork バイナリを `/tmp/ollama-fork-compare/ollama` にコピー。
+3. `build-gfx900/lib/ollama` を **バイナリ相対パス**で配置。
+4. `OLLAMA_LIBRARY_PATH=/tmp/ollama-fork-compare/build-gfx900/lib/ollama` を指定して起動（port `21445`）。
+5. SSH tunnel `22445 -> abyss:21445` でローカルから同一 harness で計測。
+6. `num_thread=16`, `keep_alive=10m`, warm-up 1 回除外, 5 runs + 5 runs。
+
+確認できた事実:
+
+- Vega64 側ログで `library=ROCm compute=gfx900` を確認。
+- `load_backend: loaded ROCm backend from /tmp/ollama-fork-compare/build-gfx900/lib/ollama/libggml-hip.so` を確認。
+- `NumThreads:16`, `GPULayers:23` を両側で確認。
+
+集計（`2026-03-23_forksame-summary.md`）:
+
+| Host | eval_tps min | max | mean | median | stdev |
+|---|---:|---:|---:|---:|---:|
+| MI25/ROCm | 208.45 | 224.33 | 216.98 | 219.45 | 6.51 |
+| Vega64/ROCm | 214.66 | 248.77 | 241.58 | 248.50 | 13.47 |
+
+中央値比:
+
+- `Vega64/ROCm ÷ MI25/ROCm = 1.132x`
+
+解釈:
+
+- `NumThreads` 差の除去で `1.266x -> 1.098x` に縮小した後、
+- `fork/fork` 条件に寄せた再試行では `1.132x`。
+- したがって残差は設定だけでなく、ライブラリセット・ホスト差・実行スタック差が混在している可能性が高い。
+
+追加反復（同条件 20 runs + 20 runs, `2026-03-23_forksame-20run-summary.md`）:
+
+| Host | eval_tps min | p10 | median | p90 | max | mean | stdev |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| MI25/ROCm | 220.41 | 221.40 | 222.63 | 223.46 | 223.70 | 222.48 | 0.84 |
+| Vega64/ROCm | 232.17 | 244.34 | 247.43 | 248.65 | 249.05 | 246.12 | 4.67 |
+
+20 runs 中央値比:
+
+- `Vega64/ROCm ÷ MI25/ROCm = 1.111x`
+
+補足:
+
+- 5-run の `1.132x` より 20-run では `1.111x` に収束。
+- 差は依然残るが、振れ幅をならすと 1.1x 前後に落ち着く傾向。
+
+---
+
+## 12. 関連ファイル
 
 - `2026-03-23_tinyllama_quick-compare.md`
 - `2026-03-23_rocm-repeat-summary.md`
 - `2026-03-23_threads16_keepalive10m_summary.md`
+- `2026-03-23_binary-alignment-attempt.md`
+- `2026-03-23_forksame-summary.md`
+- `2026-03-23_forksame-20run-summary.md`
 - `mi25_rocm_repeat_20260323_184113.jsonl`
 - `vega64_rocm_repeat_20260323_184113.jsonl`
 - `mi25_rocm_threads16_keepalive10m_repeat_20260323_192700.jsonl`
 - `vega64_rocm_threads16_keepalive10m_repeat_20260323_192700.jsonl`
+- `mi25_rocm_forksame_repeat_20260323_202017.jsonl`
+- `vega64_rocm_forksame_repeat_20260323_202017.jsonl`
+- `mi25_rocm_forksame20_repeat_20260323_202220.jsonl`
+- `vega64_rocm_forksame20_repeat_20260323_202220.jsonl`
+- `mi25_forksame_20260323_202017.journal.log`
+- `vega64_forksame_20260323_202017.log`
+- `mi25_usrlocal_rocm_21434_20260323_193323.log`
+- `vega64_usrlocal_rocm_21435_20260323_193323.log`
+- `vega64_forkcopy_rocm_21437_20260323.log`
+
+---
+
+## 13. 現状マトリックス（2026-03-23 時点）
+
+### 13.1 実行経路マトリックス
+
+| ノード/比較軸 | サービス/バイナリ系統 | ポート | backend表示 | GPU比較に使えるか | 判定 |
+|---|---|---:|---|---|---|
+| MI25 (`hbmx-mi25`) | 既存 fork ROCm (`ollama-src/ollama`) | `11434` | `library=ROCm` | はい | `OK` |
+| Vega64 (`abyss-hbmx`) | `ollama.service` (Vulkan系) | `11434` | `library=Vulkan` | 限定的 | `限定` |
+| Vega64 (`abyss-hbmx`) | `ollama-rocm.service` (`/usr/bin/ollama`) | `11435` | `library=ROCm` | はい | `OK` |
+| 両側 `/usr/local/bin/ollama` 試行 | usr-local 系そろえ | `21434/21435` | `library=cpu` | いいえ | `NG` |
+| MI25 fork binary を abyss へ持込（初回） | `/tmp/ollama-fork-gfx900-test` | `21437` | `library=cpu` | いいえ | `NG` |
+| abyss `/usr/bin/ollama` を MI25 へ持込 | distro->MI25 | - | 起動不可 (`GLIBC_2.43`) | いいえ | `NG` |
+| `fork/fork` 再試行（相対 `build-gfx900` 配置） | MI25既存fork + abyssコピーfork | `11434/21445` | 両側 `library=ROCm` | はい | `OK` |
+
+### 13.2 速度比較マトリックス
+
+| 比較 | 条件のそろい具合 | 中央値比 (Vega64/MI25) | 判定 |
+|---|---|---:|---|
+| MI25/ROCm vs Vega64/Vulkan（単発） | 低 | 約 `1.06x` | 参考値 |
+| MI25/ROCm vs Vega64/ROCm（単発） | 中 | 約 `1.11x` | 参考値 |
+| ROCm vs ROCm 5-run（初期） | 中（`NumThreads` 不一致） | `1.266x` | コンファウンダ大 |
+| `num_thread=16` + `keep_alive=10m` 5-run | 高 | `1.098x` | 現実運用に近い |
+| `fork/fork`（同系統）5-run | 高 | `1.132x` | 系統そろえ成功 |
+| `fork/fork`（同系統）20-run | 高（分散評価あり） | `1.111x` | 現在の代表値候補 |
+
+### 13.3 現時点の一言結論
+
+| 観点 | 判定 |
+|---|---|
+| ROCm 同士で比較できるか | `はい` |
+| 完全同一スタック比較か | `まだ未完`（host差・周辺環境差は残る） |
+| 現時点での実用的な速度差 | Vega64 が **約 1.1x** 優位 |
