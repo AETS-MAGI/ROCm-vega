@@ -643,6 +643,9 @@ PY
 - 導線更新:
   - `vega-hbmx-pages/case-study/case-study-index.html`
   - `vega-hbmx-pages/index.html`
+- 可視化更新:
+  - 比率推移チャート（Vega64/MI25）
+  - Vega64内経路差分チャート（distro vs fork, pooled 80-run）
 
 公開ページ側で扱う主軸:
 
